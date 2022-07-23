@@ -23,6 +23,7 @@
     height: 100%;
     background: var(--main-color);
     z-index: 100;
+    transition: width 300ms;
 }
 
 .sidebar-brand {
@@ -66,11 +67,40 @@
     padding-right: 1rem;
 }
 
+#nav-toggle:checked + .sidebar {
+    width: 70px;
+}
+#nav-toggle:checked + .sidebar .sidebar-brand,
+#nav-toggle:checked + .sidebar li {
+    padding-left: 1rem;
+    text-align: center;
+}
+
+#nav-toggle:checked + .sidebar li a {
+    padding-left: 0;
+}
+
+#nav-toggle:checked + .sidebar .sidebar-brand h2 span:last-child,
+#nav-toggle:checked + .sidebar li a span:last-child {
+    display: none;
+}
+
+#nav-toggle:checked ~ .main-content {
+    margin-left: 70px;
+}
+
+#nav-toggle:checked ~ .main-content header {
+    width: calc(100% - 70px);
+    left: 70px;
+}
+
 .main-content {
+    transition: margin-left 300ms;
     margin-left: 345px;
 }
 
 header {
+    background: #fff;
     display: flex;
     justify-content: space-between;
     padding: 1rem 1.5rem;
@@ -80,6 +110,11 @@ header {
     width: calc(100% - 345px);
     top: 0;
     z-index: 100;
+    transition: left 300ms;
+}
+
+#nav-toggle {
+    display: none;
 }
 
 header h2 {
@@ -135,41 +170,14 @@ header label span {
 main {
     margin-top: 85px;
     padding: 2rem 1.5rem;
-    background-color: #f1f5f9;
+    background: #f1f5f9;
     min-height: calc(100vh - 90px);
 }
 
-.cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 2rem;
-    margin-top: 1rem;
+#nav-toggle {
+    display: none;
 }
 
-.card-single {
-    display: flex;
-    justify-content: space-between;
-    background: #fff;
-    padding: 2rem;
-    border-radius: 2px;
+@media only screen and (max-width: 1200px) {
+    
 }
-
-.card-single div:last-child span {
-    font-size: 3rem;
-    color: var(--main-color);
-}
-
-.card-single div:first-child span {
-    color: var(--text-grey);
-}
-
-.card-single:last-child {
-    background: var(--main-color);
-}
-
-.card-single:last-child h1,
-.card-single:last-child div:first-child span,
-.card-single:last-child div:last-child span {
-    color: #fff;
-}
-
