@@ -54,7 +54,7 @@
     font-size: 1.1rem;
 }
 
-.sidebar-menu a.active {
+.sidebar-menu a:focus {
     background-color: #fff;
     padding-top: 1rem;
     padding-bottom: 1rem;
