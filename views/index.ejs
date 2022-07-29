@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-widht, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="https://kit.fontawesome.com/071ba0702e.js" crossorigin="anonymous"></script>
@@ -14,54 +15,16 @@
 
 <body>
     <input type="checkbox" id="nav-toggle">
-    <div class="sidebar">
-        <img src="/img/logo-byemotion.png" alt="" width="60px" height="60px">
-        <div class="sidebar-brand">
-        </div>
-        <div class="sidebar-menu">
-            <ul>
-                <li><a href="#" title="Home"><i class="fa-solid fa-house-user"></i></span><span> Home</span></a></li>
-            </ul>
-            <ul>
-                <li><a href="/#" title="Clientes"><i class="fa-solid fa-users"></i></span><span> Clientes</span></a></li>
-            </ul>
-            <ul>
-                <li><a href="/#" title="Serviços"><i class="fa-solid fa-camera-retro"></i><span> Serviços</span></a></li>
-            </ul>
-            <ul>
-                <li><a href="/#" title="Dashboard"><i class="fa-solid fa-chart-pie"></i><span> Dashboard</span></a></li>
-            </ul>
-            <ul>
-                <li><a href="/configurations" title="Configurações"><i class="fa-solid fa-gear"></i><span> Configurações</span></a></li>
-            </ul>
-        </div>
-    </div>
+    <%- include('./inc/sidebar') -%>
     <div class="main-content">
-        <header>
-            <h2>
-                <label for="nav-toggle"> <span class="las la-bars"> </span></label>
-                <%= title %>
-            </h2>
-            <div class="search-wrapper">
-                <span class="las la-search"></span>
-                <input type="search" name="" id="" placeholder="Pesquisar">
-            </div>
-            <div class="user-wrapper">
-                <img src="/img/profile.jpg" width="40px" height="40px" title="foto de perfil" alt="">
-                <div>
-                    <h4>Nome do usuário</h4>
-                    <small>Super Admin</small>
-                </div>
-            </div>
-        </header>
-        <main>
-            <div class="apagar">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil quibusdam, eum voluptatem a neque odio iste
-                fugiat pariatur praesentium, possimus, ea vero eius quos iure reprehenderit dignissimos quo! Consequatur,
-                unde!
-            </div>
-        </main>
+        <%- include('./inc/header') -%>
+        <%- include('./inc/main') -%>
     </div>
+    <script>
+
+        $('#home').click(() => { $('.main').load('/ .main')})
+
+    </script>
 </body>
 
 </html>

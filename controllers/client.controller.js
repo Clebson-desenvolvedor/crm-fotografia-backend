@@ -1,4 +1,5 @@
 const clientModel = require("../model/client.model.js");
+const serviceModel = require("../model/service.model");
 
 async function createClient(req, res, next) {
   try {
