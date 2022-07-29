@@ -4,6 +4,8 @@ const clientRoute = require("./routes/client.route.js");
 const serviceRoute = require("./routes/service.route.js");
 const userRouter = require("./routes/user.route.js");
 const indexRoute = require("./routes/index.route");
+const dashRoute = require("./routes/dash.route");
+const configRoute = require("./routes/config.route");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
@@ -28,6 +30,8 @@ app.use("/clients", clientRoute);
 app.use("/services", serviceRoute);
 app.use("/users", userRouter);
 app.use("/", indexRoute);
+app.use("/dashboard", dashRoute);
+app.use("/configurations", configRoute);
 
 app.use((err, req, res, next) => {
   res.status(400).send({ error: err.message });
