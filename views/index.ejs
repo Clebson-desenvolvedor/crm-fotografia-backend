@@ -1,17 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-widht, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <script src="https://kit.fontawesome.com/071ba0702e.js" crossorigin="anonymous"></script>
-    <title>Home</title>
-</head>
+<%- include('./inc/head') -%>
 
 <body>
     <input type="checkbox" id="nav-toggle">
@@ -21,10 +11,14 @@
         <%- include('./inc/main') -%>
     </div>
     <script>
+        $(document).ready(() => {
 
-        $('#home').click(() => { $('.main').load('/ .main')})
+            $('#clients').click(() => { $('main').load('/clients'); $('.title').text('Meus Clientes')});
+            $('#services').click(() => { $('main').load('/services'); $('.title').text('Meus Serviços') });
+            $('#dashboard').click(() => { $('main').load('/dashboard'); $('.title').text('Dashboard') });
+            $('#configurations').click(() => { $('main').load('/configurations'); $('.title').text('Configurações') });
 
+        });
     </script>
 </body>
-
 </html>

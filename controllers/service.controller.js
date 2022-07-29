@@ -22,11 +22,17 @@ async function createService(req, res, next) {
 
 async function getServices(req, res, next) {
   try {
-    let service = await serviceModel.getServices();
-    if(service.length == 0) {
-      res.send({ mensagem: "Nenhum serviço encontrado. "});
+    let services = await serviceModel.getServices();
+    if(services.length == 0) {
+      res.render('../views/inc/services',{ 
+        mensagem: "Nenhum serviço encontrado. "
+      });
+    } else {
+      res.render('../views/inc/services', {
+        title: 'Meus Serviços',
+        services: services
+      });
     }
-    res.send(await serviceModel.getServices());
   } catch (err) {
     next();
   }

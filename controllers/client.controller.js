@@ -20,7 +20,11 @@ async function createClient(req, res, next) {
 
 async function getClients(req, res, next) {
   try {
-    res.send(await serviceModel.getServices());
+    clients = await clientModel.getClients();
+    res.render('../views/inc/clients',{
+      title: 'clientes',
+      clients: clients
+    })
   } catch (err) {
     next(err);
   }

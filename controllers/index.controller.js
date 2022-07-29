@@ -1,6 +1,7 @@
 function getIndex(req, res, next) {
     res.render("../views/index", {
-        title: 'Home'
+        title: 'Minha Home',
+        description: 'Bem-vinda de volta, Alice 😀'
     })
 }
 
