@@ -1,3 +1,30 @@
-<% clients.forEach(row => { %>
-    <li><%= row.nomecliente %></li>
-<% }) %>
+<div class="cards">
+    <% clients.forEach(row=> { %>
+        <div class="card">
+            <div class="card-img">
+                <img src="/img/profile.jpg" alt="" width="90px" heigth="90px">
+            </div>
+            <div class="card-details">
+                <h3><%= row.nomecliente %></h3>
+                <p><%= row.whatsapp %></p>
+            </div>
+            <div class="card-services">
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-baby"></i>
+                </div>
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-person-pregnant"></i>
+                </div>
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
