@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const pool = mysql.createPool({
     "user": "root",
     "password": "",
-    "database": "crm-fotografia",
+    "database": "fotografia-crm",
     "host": "localhost",
     "port": "3306"
 });
