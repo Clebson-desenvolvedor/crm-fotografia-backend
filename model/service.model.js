@@ -1,6 +1,13 @@
 const mysql = require("./mysql").pool;
 
+
+/**
+ * @desc insere um serviço na base de dados e devolve uma resposta de erro ou sucesso
+ * @param {object} service 
+ * @returns {object}
+ */
 function insertService(service) {
+  // console.log('service.model insertService service', service);
   return new Promise((resolve, reject) => {
     let sql = `INSERT INTO servicos (tiposervico, ambienteservico, dtcadservico, dtevento, preco, statusservico, enderecoevento, numeroendevento, bairroevento, cepevento, cidadeevento, nomebebe, dtnascbebe, nomecrianca, dtnasccrianca, idcliente) 
     values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
@@ -22,8 +29,11 @@ function insertService(service) {
       service.dtnasccrianca,
       service.idcliente,
     ];
+    // console.log('service.model insertService values', values);
     mysql.getConnection((err, conn) => {
       conn.query(sql, values, (err, result) => {
+        // console.log('service.model insertService result', result);
+        console.log('service.model insertService conn.query err', err);
         if(err){
           result = err;
         }  
@@ -34,11 +44,18 @@ function insertService(service) {
   });
 }
 
+/**
+ * @desc pega os serviços da base 
+ * @returns {object}
+ */
 function getServices() {
+  // console.log('service.model getServices');
   return new Promise((resolve, reject) => {
     let sql = `SELECT * FROM servicos`;
     mysql.getConnection((err, conn) => {
       conn.query(sql, (err, result) => {
+        // console.log('service.model getServices result', result);
+        console.log('service.model getServices conn.query err', err);
         if (err) {
           reject(err);
           return;
@@ -50,11 +67,19 @@ function getServices() {
   });
 }
 
+/**
+ * @desc pega um serviço da base através do id passado
+ * @param {number} id 
+ * @returns {object}
+ */
 function getService(id) {
+  // console.log('service.model getService id', id);
   return new Promise((resolve, reject) => {
     let sql = `SELECT * FROM servicos WHERE idservico = ${id}`;
     mysql.getConnection((err, conn) => {
       conn.query(sql, (err, result) => {
+        // console.log('service.model getService result', result);
+        console.log('service.model getService conn.query err', err);
         conn.release();
         if (err) {
           reject(err);
@@ -66,11 +91,19 @@ function getService(id) {
   });
 }
 
+/**
+ * @desc deleta um serviço da base através do id passado
+ * @param {number} id 
+ * @returns {object}
+ */
 function deleteService(id) {
+  // console.log('service.model deleteService id', id);
   return new Promise((resolve, reject) => {
     let sql = `DELETE FROM servicos WHERE idservico = ${id}`;
     mysql.getConnection((err, conn) => {
       conn.query(sql, (err, result) => {
+        // console.log('service.model deleteService result', result);
+        console.log('service.model deleteService conn.query err', err);
         conn.release();
         if (err) {
           reject(err);
@@ -82,7 +115,13 @@ function deleteService(id) {
   });
 }
 
+/**
+ * @desc atualiza um serviço da base passando o próprio serviço como parâmetro
+ * @param {object} service 
+ * @returns {object}
+ */
 function updateService(service) {
+  // console.log('service.model updateService service', service);
   return new Promise((resolve, reject) => {
     let sql = `UPDATE servicos SET 
     tiposervico = '${service.tiposervico}', 
@@ -103,8 +142,11 @@ function updateService(service) {
     idcliente = ${service.idcliente} 
     WHERE idservico = ${service.idservico}`;
 
+    // console.log('service.model updateService sql', sql);
     mysql.getConnection((err, conn) => {
       conn.query(sql, (err, result, field) => {
+        // console.log('service.model updateService result', result);
+        console.log('service.model updateService conn.query err', err);
         conn.release();
         if (err) {
           reject(err);

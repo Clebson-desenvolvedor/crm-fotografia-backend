@@ -1,3 +1,4 @@
+/** Arquivo de configuração com a base de dados */
 const mysql = require("mysql");
 const pool = mysql.createPool({
     "user": "root",
