@@ -56,12 +56,12 @@ function getServices() {
   // console.log('service.model getServices');
   return new Promise((resolve, reject) => {
     try {
-      let sql = `SELECT * FROM servicos`;
+      let sql = `SELECT * FROM tb_servicos`;
       mysql.getConnection((err, conn) => {
         conn.query(sql, (err, result) => {
           // console.log('service.model getServices result', result);
-          console.log('service.model getServices conn.query err', err);
           if (err) {
+            console.log('service.model getServices conn.query err', err);
             reject(err);
             return;
           }

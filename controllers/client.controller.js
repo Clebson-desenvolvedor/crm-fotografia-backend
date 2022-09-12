@@ -32,7 +32,7 @@ async function createClient(req, res, next) {
  * @return {Array}
  */
 async function getClients(req, res, next) {
-  // console.log('client.controller getClients req.body', req.body);
+  // console.log('client.controller getClients');
   try {
     clients = await clientModel.getClients();
     // console.log('client.controller getClients clients', clients);

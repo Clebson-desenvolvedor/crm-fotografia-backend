@@ -208,11 +208,16 @@ main {
 .card-details {
     text-align: center;
     width: 100%;
-    height:50px;
+    height:78px;
+    padding: 5px;
 }
 
 .card-details p {
     font-size: 10px;
+}
+
+.card-details-content {
+    
 }
 
 .card-services {
@@ -228,7 +233,7 @@ main {
     width: 50px;
     height: 50px;
     background-color: #87CEEB;
-    border-radius: 10px;
+    border-radius: 50%;
     margin: 5px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
@@ -236,4 +241,40 @@ main {
 .card-services-icon i {
     color: #fff;
     font-size: 25px;
+}
+
+.clients-panel {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+
+.clients-panel button {
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #87CEFA;
+}
+
+.whatsapp
+.email {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.whatsapp p {
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.whatsapp i {
+    font-size: 20px;
+}
+
+.email i {
+    font-size: 15px;
 }

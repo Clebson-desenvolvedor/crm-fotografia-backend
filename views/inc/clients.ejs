@@ -1,3 +1,7 @@
+<div class="clients-panel">
+    <button title="Cria novo cliente">Novo</button>
+</div>
+<hr>
 <div class="cards">
     <% clients.forEach(row=> { %>
         <div class="card">
@@ -5,8 +9,19 @@
                 <img src="/img/profile.jpg" alt="" width="90px" heigth="90px">
             </div>
             <div class="card-details">
-                <h3><%= row.nomecliente %></h3>
-                <p><%= row.whatsapp %></p>
+                <div class="card-details-content">
+                    <h3><%= row.nome_cliente %></h3>
+                <% if (row.whatsapp_cliente) { %>
+                    <div class="whatsapp">
+                        <p><i class="fa-brands fa-whatsapp"></i> <%= row.whatsapp_cliente %></p>
+                    </div>
+                <% } %>
+                <% if (row.email_cliente) { %>
+                    <div class="email">
+                        <p><i class="fa-regular fa-envelope"></i> <%= row.email_cliente %></p>
+                    </div>
+                <% } %>
+                </div>
             </div>
             <div class="card-services">
                 <div class="card-services-icon">
