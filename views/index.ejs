@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<%- include('./inc/head') -%>
-
-<body>
-    <input type="checkbox" id="nav-toggle">
-    <%- include('./inc/sidebar') -%>
-    <div class="main-content">
-        <%- include('./inc/header') -%>
-        <%- include('./inc/main') -%>
-    </div>
-    <script>
-        $(document).ready(() => {
-
-            $('#clients').click(() => { $('main').load('/clients'); $('.title').text('Meus Clientes')});
-            $('#services').click(() => { $('main').load('/services'); $('.title').text('Meus Serviços') });
-            $('#dashboard').click(() => { $('main').load('/dashboard'); $('.title').text('Dashboard') });
-            $('#configurations').click(() => { $('main').load('/configurations'); $('.title').text('Configurações') });
-
-        });
-    </script>
-</body>
+    <%- include('./inc/head') -%>
+    <body>
+        <input type="checkbox" id="nav-toggle">
+        <%- include('./inc/sidebar') -%>
+            <div class="main-content">
+                <%- include('./inc/header') -%>
+                <%- include('./inc/main') -%>
+            </div>
+        <script>
+            $(document).ready(() => {
+                $('#clients').click(() => { $('main').load('/clients'); $('.title').text('Meus Clientes') });
+                $('#services').click(() => { $('main').load('/services'); $('.title').text('Meus Serviços') });
+                $('#dashboard').click(() => { $('main').load('/dashboard'); $('.title').text('Dashboard') });
+                $('#configurations').click(() => { $('main').load('/configurations'); $('.title').text('Configurações') });
+            });
+        </script>
+    </body>
 </html>
