@@ -10,7 +10,7 @@
     box-sizing: border-box;
     list-style-type: none;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Helvetica', sans-serif;
 }
 
 .sidebar {
@@ -294,14 +294,85 @@ main {
 .modal .content {
     background-color: #fff;
     margin: 5% auto; 
-    padding: 10px;
     border-radius: 5px;
-    width: 70%;
-    height: 500px;
+    width: 60%;
+    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: 'LexendDeca-Regular';
     color: var(--title);
     z-index: 1000;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.modalBtn {
+    cursor: pointer;
+}
+
+.modal-header {
+    color: #fff;
+    width: 100%;
+    background-color: #6495ED;
+    border-radius: 5px 5px 0 0;
+    height: 50px;
+    text-align: center;
+    padding: 5px 8px;
+}
+
+.modal-body {
+    width: 100%;
+}
+
+.modal-body-form {
+    margin: 10px;
+    display: flex;
+}
+
+.data-form {
+    width: 60%;
+}
+
+.data-form div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-name,
+.form-whatsapp,
+.form-email,
+.form-cpf,
+.form-date,
+.form-street,
+.form-number,
+.form-district,
+.form-cep {
+    margin: 10px 0;
+}
+
+form label {
+    padding: 0 5px;
+    font-size: 13px;
+}
+
+.data-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.data-image-upload {
+    border-radius: 50%;
+    width: 222px;
+    height: 222px;
+    background-color: #f0f;
+    margin: 5px;
+}
+
+.modal-footer {
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+    height: 58px;
+    padding: 5px 8px;
 }
