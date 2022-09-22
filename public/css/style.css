@@ -336,6 +336,7 @@ main {
 .data-form div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .form-name,
@@ -355,24 +356,86 @@ form label {
     font-size: 13px;
 }
 
+form input {
+    background-color: #eee;
+    border: 0;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+form input#name {
+    width: 190px;
+}
+
+form input#whatsapp {
+    width: 123px;
+}
+
+form input#street {
+    width: 269px;
+}
+
+form input#number {
+    width: 61px;
+}
+
+form input:focus {
+    border: 1px solid #B0C4DE;
+    outline: none;
+}
+
 .data-image {
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
 }
 
 .data-image-upload {
     border-radius: 50%;
-    width: 222px;
     height: 222px;
-    background-color: #f0f;
     margin: 5px;
+    width: 222px;
+}
+
+.data-image-upload img {
+    height: 200px;
+    position: relative;
+    width: 200px;
 }
 
 .modal-footer {
-    width: 100%;
     border-radius: 0 0 5px 5px;
     height: 58px;
     padding: 5px 8px;
+    width: 100%;
+}
+
+.modal-footer-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px;
+}
+
+.modal-footer button {
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 4px 5px 5px rgb(0 0 0 / 20%);
+    color: #fff;
+    cursor: pointer;
+    height: 30px;
+    padding: 4px;
+}
+
+.modal-footer button#clear-button {
+    background-color: #CD853F;
+}
+
+.modal-footer button#cancel-button {
+    background-color: #8B0000;
+}
+
+.modal-footer button#save-button {
+    background-color: #2E8B57;
+    padding: 0 19px;
 }
