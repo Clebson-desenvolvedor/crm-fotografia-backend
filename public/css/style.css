@@ -417,7 +417,7 @@ form input:focus {
     margin: 6px;
 }
 
-.modal-footer button {
+button {
     border: 0;
     border-radius: 5px;
     box-shadow: 4px 5px 5px rgb(0 0 0 / 20%);

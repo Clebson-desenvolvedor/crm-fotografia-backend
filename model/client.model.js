@@ -6,30 +6,21 @@ const mysql = require("./mysql.js").pool;
  * @returns {Array}
  */
 function insertClient(client) {
-  // console.log('client.model insertClient client', client);
+  console.log('client.model insertClient client', client);
   return new Promise((resolve, reject) => {
     try {
-      const sql =
-        "INSERT INTO clientes (nomecliente, dtnasccliente, dtcadcliente, email, whatsapp, enderecocliente, numeroendcliente, bairrocliente, cepcliente, cidadecliente) VALUES (?,?,?,?,?,?,?,?,?,?)";
-      const values = [
-        client.nomecliente,
-        client.dtnasccliente,
-        client.dtcadcliente,
-        client.email,
-        client.whatsapp,
-        client.enderecocliente,
-        client.numeroendcliente,
-        client.bairrocliente,
-        client.cepcliente,
-        client.cidadecliente,
-      ];
+      const sql = `
+      INSERT INTO tb_clientes 
+      (nome_cliente, whatsapp_cliente, email_cliente, cpf_cliente, dtcad_cliente, foto_cliente) 
+      VALUES (?,?,?,?,?,?)`;
+      const values = [client.nome_cliente, client.whatsapp_cliente, client.email_cliente, client.cpf_cliente, client.dtcad_cliente, client.foto_cliente];
       // console.log('client.model insertClient values', values);
       mysql.getConnection((err, conn) => {
         conn.query(sql, values, (err, result, field) => {
           // console.log('client.model insertClient result', result);
-          console.log('client.model insertClient conn.query err', err);
           conn.release();
           if (err) {
+            console.log('client.model insertClient conn.query err', err);
             reject(err);
             return;
           }

@@ -11,16 +11,12 @@ async function createClient(req, res, next) {
   // console.log('client.controler createClient req.body', req.body);
   try {
     let client = req.body;
-    if (
-      !req.body.nomecliente ||
-      !req.body.dtnasccliente ||
-      !req.body.dtcadcliente
-    ) {
+    if (!req.body.nome_cliente ||!req.body.dtcad_cliente) {
       throw new Error("Alguns campos são obrigatórios. ");
     }
     client = await clientModel.insertClient(client);
     // console.log('client.controler createClient client', client);
-    res.send({ mensagem: "Cadastrado com sucesso!", id: client.insertId });
+    res.render('/clients', { mensagem: "Cadastrado com sucesso!", id: client.insertId });
   } catch (err) {
     console.log('client.controller createClient catch err', err);
     next(err);
