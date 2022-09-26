@@ -6,7 +6,7 @@ const mysql = require("./mysql.js").pool;
  * @returns {Array}
  */
 function insertClient(client) {
-  console.log('client.model insertClient client', client);
+  // console.log('client.model insertClient client', client);
   return new Promise((resolve, reject) => {
     try {
       const sql = `

@@ -11,12 +11,21 @@ async function createClient(req, res, next) {
   // console.log('client.controler createClient req.body', req.body);
   try {
     let client = req.body;
-    if (!req.body.nome_cliente ||!req.body.dtcad_cliente) {
-      throw new Error("Alguns campos são obrigatórios. ");
+    let message = '';
+    let typeMessage = null;
+    if (!client.nome_cliente || !client.dtcad_cliente) {
+      message = 'Alguns campos são obrigatórios. ';
+      typeMessage = 'error';
+      res.render('clientsPage', { message: message, typeMessage: typeMessage });
+      // throw new Error("Alguns campos são obrigatórios. ");
+
+    } else {
+      message = 'Cadastrado com sucesso!';
+      typeMessage = 'success';
+      client = await clientModel.insertClient(client);
+      // console.log('client.controler createClient client', client);
+      res.render('clientsPage', { message: message, typeMessage: typeMessage });
     }
-    client = await clientModel.insertClient(client);
-    // console.log('client.controler createClient client', client);
-    res.render('/clients', { mensagem: "Cadastrado com sucesso!", id: client.insertId });
   } catch (err) {
     console.log('client.controller createClient catch err', err);
     next(err);
@@ -32,9 +41,10 @@ async function getClients(req, res, next) {
   try {
     clients = await clientModel.getClients();
     // console.log('client.controller getClients clients', clients);
-    res.render('../views/inc/clients', {
+    res.render('clientsPage', {
       title: 'clientes',
-      clients: clients
+      clients: clients,
+      response: { message: '', typeMessage: null }
     })
   } catch (err) {
     console.log('client.controller getClients catch err', err);
@@ -73,9 +83,9 @@ async function deleteClient(req, res, next) {
   try {
     let client = await clientModel.deleteClient(req.params.id);
     // console.log('client.controller createClient client', client);
-    if(client.errno == 1451) throw new Error("Não pode apagar um cliente com serviços no nome dele. Por favor, apague primeiro os serviços. ");
-    if(client.affectedRows == 0) throw new Error("Atenção: Você não pode apagar um cliente que não existe. ");
-    res.send({ mensagem: "Cliente apagado com sucesso! "});
+    if (client.errno == 1451) throw new Error("Não pode apagar um cliente com serviços no nome dele. Por favor, apague primeiro os serviços. ");
+    if (client.affectedRows == 0) throw new Error("Atenção: Você não pode apagar um cliente que não existe. ");
+    res.send({ mensagem: "Cliente apagado com sucesso! " });
   } catch (err) {
     console.log('client.controller deleteClient catch err', err);
     next(err);
@@ -100,10 +110,10 @@ async function updateClient(req, res, next) {
     }
     client = await clientModel.updateClient(client);
     // console.log('client.controller updateClient client', client);
-    if(client.affectedRows == 0) {
+    if (client.affectedRows == 0) {
       throw new Error("Ops, parece que você está tentando atualizar um cliente que não existe. ");
     }
-    res.send({ mensagem: "Cliente atualizado com sucesso!"});
+    res.send({ mensagem: "Cliente atualizado com sucesso!" });
   } catch (err) {
     console.log('client.controller updateClient catch err', err);
     next(err);

@@ -1,140 +1,129 @@
-<div class="clients-panel">
-    <button class="modalBtn" title="Cria novo cliente">Novo</button>
-</div>
-<div class="modal">
-    <div class="content">
-        <div class="modal-header">
-            <h1 class="title">Preencha os dados do Novo Cliente</h1>
-        </div>
-        <div class="modal-body">
-            <div class="modal-body-form">
-                <div class="data-form">
-                    <form action="/clients" method="POST" id="form-id">
-                        <div class="data-form-one">
-                            <div class="form-name">
-                                <label for="">Nome</label><input type="text" name="nome_cliente" placeholder="Nome" id="name" required>
+<main>
+    <div class="clients-panel">
+        <button class="modalBtn" title="Cria novo cliente">Novo</button>
+    </div>
+    <div class="modal">
+        <div class="content">
+            <div class="modal-header">
+                <h1 class="title">Preencha os dados do Novo Cliente</h1>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-form">
+                    <div class="data-form">
+                        <form action="/clients" method="POST" id="form-id">
+                            <div class="data-form-one">
+                                <div class="form-name">
+                                    <label for="">Nome</label><input type="text" name="nome_cliente" placeholder="Nome" id="name" required>
+                                </div>
+                                <div class="form-whatsapp">
+                                    <label for="">WhatsApp</label><input type="text" name="whatsapp_cliente" id="whatsapp">
+                                </div>
                             </div>
-                            <div class="form-whatsapp">
-                                <label for="">WhatsApp</label><input type="text" name="whatsapp_cliente" id="whatsapp">
+                            <div class="data-form-two">
+                                <div class="form-email">
+                                    <label for="">E-mail</label><input type="email" name="email_cliente" id="email">
+                                </div>
+                                <div class="form-cpf">
+                                    <label for="">CPF</label><input type="text" name="cpf_cliente" id="cpf">
+                                </div>
                             </div>
-                        </div>
-                        <div class="data-form-two">
-                            <div class="form-email">
-                                <label for="">E-mail</label><input type="email" name="email_cliente" id="email">
+                            <div class="data-form-three">
+                                <div class="form-date">
+                                    <label for="">Data de Cadastro</label><input type="date" name="dtcad_cliente" id="date" required>
+                                </div>
+                                <div class="form-cep">
+                                    <label for="">CEP</label><input type="text" name="ec_cep" id="cep">
+                                </div>
                             </div>
-                            <div class="form-cpf">
-                                <label for="">CPF</label><input type="text" name="cpf_cliente" id="cpf">
+                            <div class="data-form-four">
+                                <div class="form-street">
+                                    <label for="">Logradouro</label><input type="text" name="ec_logradouro" id="street">
+                                </div>
+                                <div class="form-number">
+                                    <label for="">Nº</label><input type="text" name="ec_numero" id="number">
+                                </div>
                             </div>
-                        </div>
-                        <div class="data-form-three">
-                            <div class="form-date">
-                                <label for="">Data de Cadastro</label><input type="date" name="dtcad_cliente" id="date">
+                            <div class="data-form-five">
+                                <div class="form-district">
+                                    <label for="">Bairro</label><input type="text" name="ec_bairro" id="district">
+                                </div>
+                                
                             </div>
-                            <div class="form-cep">
-                                <label for="">CEP</label><input type="text" name="ec_cep" id="cep">
-                            </div>
-                        </div>
-                        <div class="data-form-four">
-                            <div class="form-street">
-                                <label for="">Logradouro</label><input type="text" name="ec_logradouro" id="street">
-                            </div>
-                            <div class="form-number">
-                                <label for="">Nº</label><input type="text" name="ec_numero" id="number">
-                            </div>
-                        </div>
-                        <div class="data-form-five">
-                            <div class="form-district">
-                                <label for="">Bairro</label><input type="text" name="ec_bairro" id="district">
-                            </div>
-                            
-                        </div>
-                    </form>
-                </div>
-                <div class="data-image">
-                    <div class="data-image-upload">
-                        <img src="/img/no-photo.jpg" alt="">
+                        </form>
                     </div>
-                    <input type="file" name="arquivo" id="image">
-                    <label for="">Foto do Cliente</label>
+                    <div class="data-image">
+                        <div class="data-image-upload">
+                            <img src="/img/no-photo.jpg" alt="">
+                        </div>
+                        <input type="file" name="arquivo" id="image">
+                        <label for="">Foto do Cliente</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <hr>
-            <div class="modal-footer-buttons">
-                <div class="clear-cancel">
-                    <button id="clear-button">Limpar formulário</button>
-                    <button id="cancel-button">Cancelar</button>
+            <% if (typeof message == 'string') { %>
+                <div class="teste">
+                   <%= message %>
                 </div>
-                <div class="save">
-                    <button form="form-id" id="save-button">Salvar</button>
+                <% } %>
+            <div class="modal-footer">
+                <hr>
+                <div class="modal-footer-buttons">
+                    <div class="clear-cancel">
+                        <button id="clear-button">Limpar formulário</button>
+                        <button id="cancel-button">Cancelar</button>
+                    </div>
+                    <div class="save">
+                        <button form="form-id" id="save-button">Salvar</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<hr>
-<div class="cards">
-    <% clients.forEach(row=> { %>
-    <div class="card">
-        <div class="card-img">
-            <img src="/img/profile.jpg" alt="" width="90px" heigth="90px">
-        </div>
-        <div class="card-details">
-            <div class="card-details-content">
-                <h3><%= row.nome_cliente %></h3>
-                <% if (row.whatsapp_cliente) { %>
-                <div class="whatsapp">
-                    <p><i class="fa-brands fa-whatsapp"></i>
-                        <%= row.whatsapp_cliente %>
-                    </p>
+    <hr>
+    
+    <div class="cards">
+        <% clients.forEach(row=> { %>
+        <div class="card">
+            <div class="card-img">
+                <img src="/img/profile.jpg" alt="" width="90px" heigth="90px">
+            </div>
+            <div class="card-details">
+                <div class="card-details-content">
+                    <h3><%= row.nome_cliente %></h3>
+                    <% if (row.whatsapp_cliente) { %>
+                    <div class="whatsapp">
+                        <p><i class="fa-brands fa-whatsapp"></i>
+                            <%= row.whatsapp_cliente %>
+                        </p>
+                    </div>
+                    <% } %>
+                    <% if (row.email_cliente) { %>
+                    <div class="email">
+                        <p><i class="fa-regular fa-envelope"></i>
+                            <%= row.email_cliente %>
+                        </p>
+                    </div>
+                    <% } %>
                 </div>
-                <% } %>
-                <% if (row.email_cliente) { %>
-                <div class="email">
-                    <p><i class="fa-regular fa-envelope"></i>
-                        <%= row.email_cliente %>
-                    </p>
+            </div>
+            <div class="card-services">
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-baby"></i>
                 </div>
-                <% } %>
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-person-pregnant"></i>
+                </div>
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div class="card-services-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
             </div>
         </div>
-        <div class="card-services">
-            <div class="card-services-icon">
-                <i class="fa-solid fa-baby"></i>
-            </div>
-            <div class="card-services-icon">
-                <i class="fa-solid fa-person-pregnant"></i>
-            </div>
-            <div class="card-services-icon">
-                <i class="fa-solid fa-users"></i>
-            </div>
-            <div class="card-services-icon">
-                <i class="fa-solid fa-users"></i>
-            </div>
-            <div class="card-services-icon">
-                <i class="fa-solid fa-users"></i>
-            </div>
-        </div>
+        <% }) %>
     </div>
-    <% }) %>
-</div>
-<script>
-    $(document).ready(() => {
-        function switchModal() {
-            console.log('switchMOdal')
-            if ($('.modal').css('display') == 'block') {
-                $('.modal').css('display', 'none')
-            }
-            else {
-                $('.modal').css('display', 'block')
-            }
-        }
-        $('.modalBtn').click(switchModal);
-        window.onclick = function (event) {
-            if (event.target.className == 'modal') {
-                switchModal()
-            }
-        }
-    });
-</script>
+</main>

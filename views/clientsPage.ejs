@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./inc/head') -%>
+    <body>
+        <input type="checkbox" id="nav-toggle">
+        <%- include('./inc/sidebar') -%>
+            <div class="main-content">
+                <%- include('./inc/header') -%>
+                <%- include('./inc/clients') -%>
+            </div>
+        <script>
+            $(document).ready(() => {
+                function switchModal() {
+                    if ($('.modal').css('display') == 'block') {
+                        $('.modal').css('display', 'none');
+                    }
+                    else {
+                        $('.modal').css('display', 'block');
+                    }
+                }
+                $('.modalBtn').click(switchModal);
+                window.onclick = function (event) {
+                    if (event.target.className == 'modal') {
+                        switchModal();
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>
