@@ -18,12 +18,18 @@
                         $('.modal').css('display', 'block');
                     }
                 }
+
                 $('.modalBtn').click(switchModal);
+
                 window.onclick = function (event) {
                     if (event.target.className == 'modal') {
                         switchModal();
                     }
                 }
+                
+                setTimeout(function() {
+                    $('#alert').fadeOut('slow');
+                }, 2000);
             });
         </script>
     </body>

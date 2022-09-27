@@ -439,3 +439,21 @@ button {
     background-color: #2E8B57;
     padding: 0 19px;
 }
+
+.alert-success {
+    position: absolute;
+    left: 40%;
+    background-color: #a9f1b5;
+    color: #17761e;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.alert-error {
+    position: absolute;
+    left: 40%;
+    background-color: #a9f1b5;
+    color: #17761e;
+    border-radius: 5px;
+    padding: 8px;
+}

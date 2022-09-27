@@ -11,20 +11,13 @@ async function createClient(req, res, next) {
   // console.log('client.controler createClient req.body', req.body);
   try {
     let client = req.body;
-    let message = '';
-    let typeMessage = null;
     if (!client.nome_cliente || !client.dtcad_cliente) {
-      message = 'Alguns campos são obrigatórios. ';
-      typeMessage = 'error';
-      res.render('clientsPage', { message: message, typeMessage: typeMessage });
+      res.render('clientsPage', { message: 'Alguns campos são obrigatórios. ', typeMessage: 'error', title: 'Clientes' });
       // throw new Error("Alguns campos são obrigatórios. ");
-
     } else {
-      message = 'Cadastrado com sucesso!';
-      typeMessage = 'success';
       client = await clientModel.insertClient(client);
       // console.log('client.controler createClient client', client);
-      res.render('clientsPage', { message: message, typeMessage: typeMessage });
+      res.render('clientsPage', { message: 'Cadastrado com sucesso!', typeMessage: 'success', title: 'Clientes' });
     }
   } catch (err) {
     console.log('client.controller createClient catch err', err);
@@ -44,7 +37,8 @@ async function getClients(req, res, next) {
     res.render('clientsPage', {
       title: 'clientes',
       clients: clients,
-      response: { message: '', typeMessage: null }
+      message: '',
+      typeMessage: undefined
     })
   } catch (err) {
     console.log('client.controller getClients catch err', err);
