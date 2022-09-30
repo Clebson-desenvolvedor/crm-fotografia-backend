@@ -9,7 +9,12 @@ const serviceModel = require("../model/service.model");
 
 async function createClient(req, res, next) {
   // console.log('client.controler createClient req.body', req.body);
+  // console.log('client.controler createClient req.file', req.file);
   try {
+    req.body.foto_cliente = 'no-photo.jpg';
+    if (req.file) {
+      req.body.foto_cliente = req.file.filename;
+    }
     let client = req.body;
     if (!client.nome_cliente || !client.dtcad_cliente) {
       res.render('clientsPage', { message: 'Alguns campos são obrigatórios. ', typeMessage: 'error', title: 'Clientes' });
