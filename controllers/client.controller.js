@@ -1,5 +1,6 @@
 const clientModel = require("../model/client.model.js");
 const serviceModel = require("../model/service.model");
+const helper = require("../lib/helper")
 
 /**
  * @desc Cria um cliente e retorna uma resposta de sucesso ou falha ao usuário
@@ -8,15 +9,19 @@ const serviceModel = require("../model/service.model");
  */
 
 async function createClient(req, res, next) {
-  // console.log('client.controler createClient req.body', req.body);
+  console.log('client.controler createClient req.body', req.body.dtcad_cliente);
   // console.log('client.controler createClient req.file', req.file);
   try {
     req.body.foto_cliente = 'no-photo.jpg';
     if (req.file) {
       req.body.foto_cliente = req.file.filename;
     }
+
+    if (req.body.dtcad_cliente == '') {
+      req.body.dtcad_cliente = helper.convertToMySql();
+    }
     let client = req.body;
-    if (!client.nome_cliente || !client.dtcad_cliente) {
+    if (!client.nome_cliente) {
       res.render('clientsPage', { message: 'Alguns campos são obrigatórios. ', typeMessage: 'error', title: 'Clientes' });
       // throw new Error("Alguns campos são obrigatórios. ");
     } else {
