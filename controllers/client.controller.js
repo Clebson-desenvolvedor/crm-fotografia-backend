@@ -9,7 +9,7 @@ const helper = require("../lib/helper")
  */
 
 async function createClient(req, res, next) {
-  console.log('client.controler createClient req.body', req.body.dtcad_cliente);
+  // console.log('client.controler createClient req.body', req.body);
   // console.log('client.controler createClient req.file', req.file);
   try {
     req.body.foto_cliente = 'no-photo.jpg';

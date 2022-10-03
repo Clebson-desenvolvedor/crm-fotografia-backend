@@ -9,22 +9,50 @@ function insertClient(client) {
   // console.log('client.model insertClient client', client);
   return new Promise((resolve, reject) => {
     try {
-      const sql = `
+      let sql = `
       INSERT INTO tb_clientes 
       (nome_cliente, whatsapp_cliente, email_cliente, cpf_cliente, dtcad_cliente, foto_cliente) 
-      VALUES (?,?,?,?,?,?)`;
-      const values = [client.nome_cliente, client.whatsapp_cliente, client.email_cliente, client.cpf_cliente, client.dtcad_cliente, client.foto_cliente];
+      VALUES (?,?,?,?,?,?)
+      `;
+
+      let values = [
+        client.nome_cliente, 
+        client.whatsapp_cliente, 
+        client.email_cliente, 
+        client.cpf_cliente, 
+        client.dtcad_cliente, 
+        client.foto_cliente
+      ];
       // console.log('client.model insertClient values', values);
       mysql.getConnection((err, conn) => {
-        conn.query(sql, values, (err, result, field) => {
+        conn.query(sql, values, (err, result) => {
           // console.log('client.model insertClient result', result);
-          conn.release();
           if (err) {
             console.log('client.model insertClient conn.query err', err);
             reject(err);
             return;
           }
-          resolve(result);
+          sql = `
+          INSERT INTO tb_endereco_cliente (ec_logradouro, ec_numero, ec_bairro, ec_cep, tb_endereco_cliente_id_cliente)
+          VALUES (?,?,?,?,?)
+          `;
+
+          values = [
+            client.ec_logradouro,
+            client.ec_numero,
+            client.ec_bairro,
+            client.ec_cep,
+            result.insertId
+          ]
+          conn.query(sql, values, (err, result) => {
+            if (err) {
+              console.log('client.model insertClient conn.query 2 err', err);
+              reject(err);
+              return;
+            }
+            resolve(result);
+            conn.release();
+          })
         });
       });
     } catch (err) {
