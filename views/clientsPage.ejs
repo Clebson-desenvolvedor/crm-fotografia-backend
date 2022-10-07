@@ -11,8 +11,11 @@
         <script>
             $(document).ready(() => {
                 function switchModal() {
+                    console.log('display', $('.modal').css('display'))
                     if ($('.modal').css('display') == 'block') {
                         $('.modal').css('display', 'none');
+                        clearForm();
+
                     }
                     else {
                         $('.modal').css('display', 'block');
@@ -20,6 +23,7 @@
                 }
 
                 $('.modalBtn').click(switchModal);
+                $('#clear-button').click(clearForm);
 
                 window.onclick = function (event) {
                     if (event.target.className == 'modal') {
@@ -27,9 +31,11 @@
                     }
                 }
                 
-                setTimeout(function() {
-                    $('#alert').fadeOut('slow');
-                }, 2000);
+               function clearForm() {
+                $('#form-id').each (function(){
+                    this.reset();
+                }); 
+               }   
             });
         </script>
     </body>
