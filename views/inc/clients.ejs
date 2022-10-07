@@ -90,16 +90,18 @@
                     <h3><%= row.nome_cliente %></h3>
                     <% if (row.whatsapp_cliente) { %>
                     <div class="whatsapp">
-                        <p><i class="fa-brands fa-whatsapp"></i>
-                            <%= row.whatsapp_cliente %>
-                        </p>
+                        <div class="icon-whatsapp">
+                            <p><i class="fa-brands fa-whatsapp"></i></p>
+                        </div>
+                        <p><%= row.whatsapp_cliente %></p>
                     </div>
                     <% } %>
                     <% if (row.email_cliente) { %>
                     <div class="email">
-                        <p><i class="fa-regular fa-envelope"></i>
-                            <%= row.email_cliente %>
-                        </p>
+                        <div class="icon-email">
+                            <p><i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <p><%= row.email_cliente %></p>
                     </div>
                     <% } %>
                 </div>
