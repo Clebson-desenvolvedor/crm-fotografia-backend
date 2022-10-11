@@ -1,15 +1,10 @@
-<div class="clients-panel">
-    <button class="modalBtn" title="Cria novo cliente">Novo</button>
-</div>
-<div class="modal">
+<div class="card-client">
     <div class="content">
-        <div class="modal-header">
-            <h1 class="title">Preencha os dados do Novo Cliente</h1>
-        </div>
         <div class="modal-body">
+           <h3>Dados Pessoais</h3>
             <div class="modal-body-form">
                 <form action="/clients" method="POST" id="form-id" enctype="multipart/form-data">
-                    <div class="data-form">
+                    <div class="data-form-client">
                         <div class="data-form-content">
                             <div class="data-form-one">
                                 <div class="form-name">
@@ -49,7 +44,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="data-form-image">
+                        <div class="data-form-image-client">
                             <div class="data-image-upload">
                                 <img src="/img/no-photo.jpg" alt="">
                             </div>
@@ -60,54 +55,8 @@
                 </form>
             </div>
         </div>
-        <div class="modal-footer">
-            <hr>
-            <div class="modal-footer-buttons">
-                <div class="clear-cancel">
-                    <button id="clear-button">Limpar formulário</button>
-                    <button id="cancel-button">Cancelar</button>
-                </div>
-                <div class="save">
-                    <button form="form-id" id="save-button">Salvar</button>
-                </div>
-            </div>
+        <div class="services-client">
+            <h3>Serviços deste Cliente</h3>
         </div>
     </div>
-</div>
-<hr>
-
-<div class="cards">
-    <% clients.forEach(row=> { %>
-    <a href="/clients/<%= row.id_cliente %>" class="card">
-        <div class="card-img">
-            <div class="circle">
-                <img src="/img/uploads/<%= row.foto_cliente %>">
-            </div>
-        </div>
-        <div class="card-details">
-            <div class="card-details-content">
-                <h3><%= row.nome_cliente %></h3>
-                <% if (row.whatsapp_cliente) { %>
-                <div class="whatsapp">
-                    <div class="icon-whatsapp">
-                        <p><i class="fa-brands fa-whatsapp"></i></p>
-                    </div>
-                    <p><%= row.whatsapp_cliente %></p>
-                </div>
-                <% } %>
-                <% if (row.email_cliente) { %>
-                <div class="email">
-                    <div class="icon-email">
-                        <p><i class="fa-regular fa-envelope"></i>
-                    </div>
-                    <p><%= row.email_cliente %></p>
-                </div>
-                <% } %>
-            </div>
-        </div>
-        <div class="card-services">
-            
-        </div>
-    </a>
-    <% }) %>
 </div>

@@ -69,7 +69,7 @@ function getClients() {
   // console.log('client.model getClients');
   return new Promise((resolve, reject) => {
     try {
-      let sql = "SELECT nome_cliente, email_cliente, whatsapp_cliente, foto_cliente FROM tb_clientes";
+      let sql = "SELECT id_cliente, nome_cliente, email_cliente, whatsapp_cliente, foto_cliente FROM tb_clientes";
       mysql.getConnection((err, conn) => {
         conn.query(sql, (err, result, field) => {
           // console.log('client.model getClients result', result);
@@ -97,18 +97,19 @@ function getClient(id) {
   // console.log('client.model getClient id', id);
   return new Promise((resolve, reject) => {
     try {
-      let sql = `SELECT * FROM clientes WHERE idcliente = ${id}`;
+      let sql = `SELECT * FROM tb_clientes WHERE id_cliente = ${id}`;
       let objClient = {};
       mysql.getConnection((err, conn) => {
         conn.query(sql, (err, result, field) => {
           // console.log('client.model getClient result', result);
-          console.log('client.model getClient conn.query err', err);
           if (err) {
+            console.log('client.model getClient conn.query err', err);
             reject(err);
           } else if (result.length == 0) {
             result = [];
             resolve(result);
           } else {
+            resolve(result)
             objClient = {
               idcliente: result[0].idcliente,
               nomecliente: result[0].nomecliente,
@@ -125,17 +126,17 @@ function getClient(id) {
 
             // console.log('client.model getClient objClient', objClient);
             let sql2 = `SELECT idservico, tiposervico, ambienteservico, dtcadservico, dtevento, preco, statusservico, enderecoevento, numeroendevento, bairroevento, cepevento, cidadeevento, nomebebe, dtnascbebe, nomecrianca FROM servicos INNER JOIN clientes ON servicos.idcliente = clientes.idcliente WHERE clientes.idcliente = ${objClient.idcliente}`;
-            conn.query(sql2, (err, result2) => {
-              // console.log('client.model getClient result2', result2);
-              console.log('client.model getClient conn.query #2 err', err);
-              if (err) {
-                reject(err);
-                return;
-              }
-              objClient.servicos = result2;
-              conn.release();
-              resolve(objClient);
-            });
+            // conn.query(sql2, (err, result2) => {
+            //   // console.log('client.model getClient result2', result2);
+            //   console.log('client.model getClient conn.query #2 err', err);
+            //   if (err) {
+            //     reject(err);
+            //     return;
+            //   }
+            //   objClient.servicos = result2;
+            //   conn.release();
+            //   resolve(objClient);
+            // });
           }
         });
       });

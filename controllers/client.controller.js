@@ -57,7 +57,7 @@ async function getClients(req, res, next) {
 }
 
 /**
- * @desc Pega um cliente pelo id e devolve para o usuári
+ * @desc Pega um cliente pelo id e devolve para o usuário
  * @param {Number} id
  * @return {Array}
  */
@@ -66,11 +66,12 @@ async function getClient(req, res, next) {
   try {
     let client = await clientModel.getClient(req.params.id);
     // console.log('client.controller getClient client', client);
-    if (client.length == 0) {
-      res.send({ mensagem: "Nenhum cliente encontrado" });
-    } else {
-      res.send(client);
-    }
+    res.render('clientPage', {
+      title: client.nome_cliente,
+      clientData: client,
+      message: '',
+      typeMessage: undefined
+    })
   } catch (err) {
     console.log('client.controller getClient catch err', err);
     next(err);
