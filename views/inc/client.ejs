@@ -8,18 +8,18 @@
                         <div class="data-form-content">
                             <div class="data-form-one">
                                 <div class="form-name">
-                                    <label for="">Nome</label><input type="text" name="nome_cliente" placeholder="Nome" id="name" required>
+                                    <label for="">Nome</label><input type="text" name="nome_cliente" placeholder="Nome" id="name" value="<%= clientData[0].nome_cliente %>" required>
                                 </div>
                                 <div class="form-whatsapp">
-                                    <label for="">WhatsApp</label><input type="text" name="whatsapp_cliente" id="whatsapp">
+                                    <label for="">WhatsApp</label><input type="text" name="whatsapp_cliente" id="whatsapp" value="<%= clientData[0].whatsapp_cliente %>">
                                 </div>
                             </div>
                             <div class="data-form-two">
                                 <div class="form-email">
-                                    <label for="">E-mail</label><input type="email" name="email_cliente" id="email">
+                                    <label for="">E-mail</label><input type="email" name="email_cliente" id="email" value="<%= clientData[0].email_cliente %>">
                                 </div>
                                 <div class="form-cpf">
-                                    <label for="">CPF</label><input type="text" name="cpf_cliente" id="cpf">
+                                    <label for="">CPF</label><input type="text" name="cpf_cliente" id="cpf" value="<%= clientData[0].cpf_cliente %>">
                                 </div>
                             </div>
                             <div class="data-form-three">
@@ -27,7 +27,7 @@
                                     <label for="">Data de Cadastro</label><input type="date" name="dtcad_cliente" id="date">
                                 </div>
                                 <div class="form-cep">
-                                    <label for="">CEP</label><input type="text" name="ec_cep" id="cep">
+                                    <label for="">CEP</label><input type="text" name="ec_cep" id="cep" value="<%= clientData[0].cep_cliente %>">
                                 </div>
                             </div>
                             <div class="data-form-four">
@@ -46,7 +46,7 @@
                         </div>
                         <div class="data-form-image-client">
                             <div class="data-image-upload">
-                                <img src="/img/no-photo.jpg" alt="">
+                                <img src="/img/uploads/<%= clientData[0].foto_cliente %>" alt="">
                             </div>
                             <input type="file" name="foto_cliente" id="image">
                             <label for="">Foto do Cliente</label>

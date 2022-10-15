@@ -1,5 +1,5 @@
 :root {
-    --main-color: #FF7F50;
+    --main-color: #191970;
     --color-dark: #1d2231;
     --text-grey: #8390a2;
 }
@@ -22,6 +22,10 @@
     transition: width 300ms;
     width: 345px;
     z-index: 1;
+}
+
+.sidebar img {
+    width: 200px;
 }
 
 .sidebar-brand {
