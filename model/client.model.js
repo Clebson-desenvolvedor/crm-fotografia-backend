@@ -66,13 +66,13 @@ function insertClient(client) {
  * @returns {Array}
  */
 function getClients() {
-  // console.log('client.model getClients');
+  console.log('client.model getClients');
   return new Promise((resolve, reject) => {
     try {
       let sql = "SELECT id_cliente, nome_cliente, email_cliente, whatsapp_cliente, foto_cliente FROM tb_clientes";
       mysql.getConnection((err, conn) => {
         conn.query(sql, (err, result, field) => {
-          // console.log('client.model getClients result', result);
+          console.log('client.model getClients result', result);
           if (err) {
             console.log('client.model getClients conn.query err', err);
             reject(err);

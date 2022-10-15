@@ -5,6 +5,7 @@ const serviceRoute = require("./routes/service.route.js");
 const userRouter = require("./routes/user.route.js");
 const indexRoute = require("./routes/index.route");
 const dashRoute = require("./routes/dash.route");
+const adminRouter = require("./routes/admin");
 const configRoute = require("./routes/config.route");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -32,6 +33,7 @@ app.use("/users", userRouter);
 app.use("/", indexRoute);
 app.use("/dashboard", dashRoute);
 app.use("/configurations", configRoute);
+app.use("/admin", adminRouter);
 
 app.use((err, req, res, next) => {
   res.status(400).send({ error: err.message });

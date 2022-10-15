@@ -4,7 +4,7 @@
 function getIndex(req, res, next) {
     res.render("index", {
         title: 'Minha Home',
-        description: 'Bem-vinda de volta, Alice 😀',
+        description: 'Aqui será a index do site',
         message: '',
         typeMessage: undefined
     })

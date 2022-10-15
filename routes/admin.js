@@ -15,9 +15,9 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post("/", upload.single('foto_cliente'), clientController.createClient);
-router.get("/", clientController.getClients);
-// router.get("/:id", clientController.getClient);
+router.post("/clients", upload.single('foto_cliente'), clientController.createClient);
+router.get("/clients", clientController.getClients);
+router.get("/clients/:id", clientController.getClient);
 // router.delete("/:id", clientController.deleteClient);
 // router.put("/", clientController.updateClient);
 
