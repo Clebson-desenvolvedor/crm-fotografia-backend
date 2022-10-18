@@ -38,11 +38,11 @@ async function getServices(req, res, next) {
     let services = await serviceModel.getServices();
     // console.log('service.controller getServices services', services);
     if(services.length == 0) {
-      res.render('../views/inc/services',{ 
+      res.render('admin/servicesPage', { 
         mensagem: "Nenhum serviço encontrado. "
       });
     } else {
-      res.render('../views/inc/services', {
+      res.render('admin/servicesPage', {
         title: 'Meus Serviços',
         services: services
       });
