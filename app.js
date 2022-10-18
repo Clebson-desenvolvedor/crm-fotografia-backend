@@ -1,7 +1,5 @@
 const express = require("express");
 const app = express();
-const clientRoute = require("./routes/client.route.js");
-const serviceRoute = require("./routes/service.route.js");
 const userRouter = require("./routes/user.route.js");
 const indexRoute = require("./routes/index.route");
 const dashRoute = require("./routes/dash.route");
@@ -27,7 +25,6 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use("/services", serviceRoute);
 app.use("/users", userRouter);
 app.use("/", indexRoute);
 app.use("/dashboard", dashRoute);
