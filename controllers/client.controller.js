@@ -1,6 +1,7 @@
 const clientModel = require("../model/client.model.js");
 const serviceModel = require("../model/service.model");
-const helper = require("../lib/helper")
+const helper = require("../lib/helper");
+const moment = require("moment");
 
 /**
  * @desc Cria um cliente e retorna uma resposta de sucesso ou falha ao usuário
@@ -22,12 +23,16 @@ async function createClient(req, res, next) {
     }
     let client = req.body;
     if (!client.nome_cliente) {
-      res.render('clientsPage', { message: 'Alguns campos são obrigatórios. ', typeMessage: 'error', title: 'Clientes' });
+      res.render('admin/clientsPage', { message: 'Alguns campos são obrigatórios. ', typeMessage: 'error', title: 'Clientes' });
       // throw new Error("Alguns campos são obrigatórios. ");
     } else {
       client = await clientModel.insertClient(client);
       // console.log('client.controler createClient client', client);
-      res.render('clientsPage', { message: 'Cadastrado com sucesso!', typeMessage: 'success', title: 'Clientes' });
+      res.render('admin/clientsPage', {
+        message: 'Cadastrado com sucesso!',
+        typeMessage: 'success', title: 'Clientes',
+        moment: moment
+      });
     }
   } catch (err) {
     console.log('client.controller createClient catch err', err);
@@ -70,7 +75,8 @@ async function getClient(req, res, next) {
       title: client.nome_cliente,
       clientData: client,
       message: '',
-      typeMessage: undefined
+      typeMessage: undefined,
+      moment: moment
     })
   } catch (err) {
     console.log('client.controller getClient catch err', err);

@@ -16,11 +16,11 @@ function insertClient(client) {
       `;
 
       let values = [
-        client.nome_cliente, 
-        client.whatsapp_cliente, 
-        client.email_cliente, 
-        client.cpf_cliente, 
-        client.dtcad_cliente, 
+        client.nome_cliente,
+        client.whatsapp_cliente,
+        client.email_cliente,
+        client.cpf_cliente,
+        client.dtcad_cliente,
         client.foto_cliente
       ];
       // console.log('client.model insertClient values', values);
@@ -72,7 +72,7 @@ function getClients() {
       let sql = "SELECT id_cliente, nome_cliente, email_cliente, whatsapp_cliente, foto_cliente FROM tb_clientes";
       mysql.getConnection((err, conn) => {
         conn.query(sql, (err, result, field) => {
-          console.log('client.model getClients result', result);
+          // console.log('client.model getClients result', result);
           if (err) {
             console.log('client.model getClients conn.query err', err);
             reject(err);
@@ -97,11 +97,14 @@ function getClient(id) {
   // console.log('client.model getClient id', id);
   return new Promise((resolve, reject) => {
     try {
-      let sql = `SELECT * FROM tb_clientes WHERE id_cliente = ${id}`;
+      let sql = `
+      SELECT id_cliente, nome_cliente, DATE_FORMAT(dtcad_cliente, '%d/%m/%Y') AS dtcad_cliente, email_cliente, whatsapp_cliente, cpf_cliente, foto_cliente
+      FROM tb_clientes
+      WHERE id_cliente = ${id}`;
       let objClient = {};
       mysql.getConnection((err, conn) => {
         conn.query(sql, (err, result, field) => {
-          // console.log('client.model getClient result', result);
+        //   console.log('client.model getClient result', result);
           if (err) {
             console.log('client.model getClient conn.query err', err);
             reject(err);
@@ -111,19 +114,12 @@ function getClient(id) {
           } else {
             resolve(result)
             objClient = {
-              idcliente: result[0].idcliente,
-              nomecliente: result[0].nomecliente,
-              dtnasccliente: result[0].dtnasccliente,
-              dtcadcliente: result[0].dtcadcliente,
-              email: result[0].email,
-              whatsapp: result[0].whatsapp,
-              enderecocliente: result[0].enderecocliente,
-              numeroendcliente: result[0].numeroendcliente,
-              bairrocliente: result[0].bairrocliente,
-              cepcliente: result[0].cepcliente,
-              cidadecliente: result[0].cidadecliente,
+              idcliente: result[0].id_cliente,
+              nomecliente: result[0].nome_cliente,
+              dtcadcliente: result[0].dtcad_cliente,
+              email: result[0].email_cliente,
+              whatsapp: result[0].whatsapp_cliente
             };
-
             // console.log('client.model getClient objClient', objClient);
             let sql2 = `SELECT idservico, tiposervico, ambienteservico, dtcadservico, dtevento, preco, statusservico, enderecoevento, numeroendevento, bairroevento, cepevento, cidadeevento, nomebebe, dtnascbebe, nomecrianca FROM servicos INNER JOIN clientes ON servicos.idcliente = clientes.idcliente WHERE clientes.idcliente = ${objClient.idcliente}`;
             // conn.query(sql2, (err, result2) => {
