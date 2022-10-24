@@ -7,10 +7,10 @@ const multer = require("multer");
 const helper = require("../lib/helper")
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
+    destination: function (req, file, cb) {
         cb(null, './public/img/uploads');
     },
-    filename: function(req, file, cb) {
+    filename: function (req, file, cb) {
         cb(null, helper.createNameFile(file.originalname));
     }
 });

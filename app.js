@@ -6,16 +6,15 @@ const dashRoute = require("./routes/dash.route");
 const adminRouter = require("./routes/admin");
 const configRoute = require("./routes/config.route");
 const bodyParser = require("body-parser");
-const cors = require("cors");
 const path = require("path");
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
 });
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -32,7 +31,7 @@ app.use("/configurations", configRoute);
 app.use("/admin", adminRouter);
 
 app.use((err, req, res, next) => {
-  res.status(400).send({ error: err.message });
+    res.status(400).send({ error: err.message });
 });
 
 module.exports = app;

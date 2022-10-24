@@ -6,7 +6,7 @@
 
 * {
     box-sizing: border-box;
-    font-family: 'Helvetica', sans-serif;
+    font-family: "Helvetica", sans-serif;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -103,7 +103,7 @@
 
 header {
     background: #fff;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
     left: 345px;
@@ -188,7 +188,7 @@ main {
 }
 
 .card {
-    background-color: #ADD8E6;
+    background-color: #add8e6;
     border-radius: 5px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     color: inherit;
@@ -214,7 +214,7 @@ main {
     top: 5px;
     width: 100px;
 }
-  
+
 .circle img {
     bottom: 0;
     position: absolute;
@@ -222,7 +222,7 @@ main {
 }
 
 .card-details {
-    height:78px;
+    height: 78px;
     padding: 5px;
     text-align: center;
     width: 100%;
@@ -233,7 +233,6 @@ main {
 }
 
 .card-details-content {
-    
 }
 
 .card-services {
@@ -244,7 +243,7 @@ main {
 
 .card-services-icon {
     align-items: center;
-    background-color: #87CEEB;
+    background-color: #87ceeb;
     border-radius: 50%;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -275,7 +274,7 @@ main {
 }
 
 .clients-panel button {
-    background-color: #87CEFA;
+    background-color: #87cefa;
     border: none;
     border-radius: 5px;
     padding: 5px 15px;
@@ -286,8 +285,8 @@ main {
     align-items: center;
     background-color: #fff;
     border-radius: 50px;
-    display: flex; 
-    justify-content: flex-start; 
+    display: flex;
+    justify-content: flex-start;
     margin: 5px;
     overflow: hidden;
     padding: 1px;
@@ -314,15 +313,15 @@ main {
 }
 
 .modal {
-    background-color: rgba(0,0,0,0.4);
-    display: none; 
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
     height: 100%;
     left: 0;
     overflow: auto;
     position: fixed;
     top: 0;
-    width: 100%; 
-    z-index: 1; 
+    width: 100%;
+    z-index: 1;
 }
 
 .modal .content {
@@ -333,9 +332,9 @@ main {
     color: var(--title);
     display: flex;
     flex-direction: column;
-    font-family: 'LexendDeca-Regular';
+    font-family: "LexendDeca-Regular";
     height: 410px;
-    margin: 5% auto; 
+    margin: 5% auto;
     width: 62%;
     z-index: 1000;
 }
@@ -345,7 +344,7 @@ main {
 }
 
 .modal-header {
-    background-color: #6495ED;
+    background-color: #6495ed;
     border-radius: 5px 5px 0 0;
     color: #fff;
     height: 50px;
@@ -426,7 +425,7 @@ form input#number {
 }
 
 form input:focus {
-    border: 1px solid #B0C4DE;
+    border: 1px solid #b0c4de;
     outline: none;
 }
 
@@ -442,7 +441,7 @@ form input:focus {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 538px
+    width: 538px;
 }
 
 .data-image-upload {
@@ -482,15 +481,15 @@ button {
 }
 
 .modal-footer button#clear-button {
-    background-color: #CD853F;
+    background-color: #cd853f;
 }
 
 .modal-footer button#cancel-button {
-    background-color: #8B0000;
+    background-color: #8b0000;
 }
 
 .modal-footer button#save-button {
-    background-color: #2E8B57;
+    background-color: #2e8b57;
     padding: 0 19px;
 }
 

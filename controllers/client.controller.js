@@ -10,34 +10,34 @@ const moment = require("moment");
  */
 
 async function createClient(req, res, next) {
-  // console.log('client.controler createClient req.body', req.body);
-  // console.log('client.controler createClient req.file', req.file);
-  try {
-    req.body.foto_cliente = 'no-photo.jpg';
-    if (req.file) {
-      req.body.foto_cliente = req.file.filename;
-    }
+    // console.log('client.controler createClient req.body', req.body);
+    // console.log('client.controler createClient req.file', req.file);
+    try {
+        req.body.foto_cliente = 'no-photo.jpg';
+        if (req.file) {
+            req.body.foto_cliente = req.file.filename;
+        }
 
-    if (req.body.dtcad_cliente == '') {
-      req.body.dtcad_cliente = helper.convertToMySql();
+        if (req.body.dtcad_cliente == '') {
+            req.body.dtcad_cliente = helper.convertToMySql();
+        }
+        let client = req.body;
+        if (!client.nome_cliente) {
+            res.render('admin/clientsPage', { message: 'Alguns campos são obrigatórios. ', typeMessage: 'error', title: 'Clientes' });
+            // throw new Error("Alguns campos são obrigatórios. ");
+        } else {
+            client = await clientModel.insertClient(client);
+            // console.log('client.controler createClient client', client);
+            res.render('admin/clientsPage', {
+                message: 'Cadastrado com sucesso!',
+                typeMessage: 'success', title: 'Clientes',
+                moment: moment
+            });
+        }
+    } catch (err) {
+        console.log('client.controller createClient catch err', err);
+        next(err);
     }
-    let client = req.body;
-    if (!client.nome_cliente) {
-      res.render('admin/clientsPage', { message: 'Alguns campos são obrigatórios. ', typeMessage: 'error', title: 'Clientes' });
-      // throw new Error("Alguns campos são obrigatórios. ");
-    } else {
-      client = await clientModel.insertClient(client);
-      // console.log('client.controler createClient client', client);
-      res.render('admin/clientsPage', {
-        message: 'Cadastrado com sucesso!',
-        typeMessage: 'success', title: 'Clientes',
-        moment: moment
-      });
-    }
-  } catch (err) {
-    console.log('client.controller createClient catch err', err);
-    next(err);
-  }
 }
 
 /**
@@ -45,20 +45,20 @@ async function createClient(req, res, next) {
  * @return {Array}
  */
 async function getClients(req, res, next) {
-  // console.log('client.controller getClients');
-  try {
-    clients = await clientModel.getClients();
-    // console.log('client.controller getClients clients', clients);
-    res.render('admin/clientsPage', {
-      title: 'clientes',
-      clients: clients,
-      message: '',
-      typeMessage: undefined
-    })
-  } catch (err) {
-    console.log('client.controller getClients catch err', err);
-    next(err);
-  }
+    // console.log('client.controller getClients');
+    try {
+        clients = await clientModel.getClients();
+        // console.log('client.controller getClients clients', clients);
+        res.render('admin/clientsPage', {
+            title: 'clientes',
+            clients: clients,
+            message: '',
+            typeMessage: undefined
+        })
+    } catch (err) {
+        console.log('client.controller getClients catch err', err);
+        next(err);
+    }
 }
 
 /**
@@ -67,21 +67,21 @@ async function getClients(req, res, next) {
  * @return {Array}
  */
 async function getClient(req, res, next) {
-  // console.log('client.controller getClient req.params.id', req.params.id);
-  try {
-    let client = await clientModel.getClient(req.params.id);
-    // console.log('client.controller getClient client', client);
-    res.render('admin/clientPage', {
-      title: client.nome_cliente,
-      clientData: client,
-      message: '',
-      typeMessage: undefined,
-      moment: moment
-    })
-  } catch (err) {
-    console.log('client.controller getClient catch err', err);
-    next(err);
-  }
+    // console.log('client.controller getClient req.params.id', req.params.id);
+    try {
+        let client = await clientModel.getClient(req.params.id);
+        // console.log('client.controller getClient client', client);
+        res.render('admin/clientPage', {
+            title: client.nome_cliente,
+            clientData: client,
+            message: '',
+            typeMessage: undefined,
+            moment: moment
+        })
+    } catch (err) {
+        console.log('client.controller getClient catch err', err);
+        next(err);
+    }
 }
 
 /**
@@ -90,17 +90,17 @@ async function getClient(req, res, next) {
  * @return {object}
  */
 async function deleteClient(req, res, next) {
-  // console.log('client.controller deleteClient req.params.id', req.params.id);
-  try {
-    let client = await clientModel.deleteClient(req.params.id);
-    // console.log('client.controller createClient client', client);
-    if (client.errno == 1451) throw new Error("Não pode apagar um cliente com serviços no nome dele. Por favor, apague primeiro os serviços. ");
-    if (client.affectedRows == 0) throw new Error("Atenção: Você não pode apagar um cliente que não existe. ");
-    res.send({ mensagem: "Cliente apagado com sucesso! " });
-  } catch (err) {
-    console.log('client.controller deleteClient catch err', err);
-    next(err);
-  }
+    // console.log('client.controller deleteClient req.params.id', req.params.id);
+    try {
+        let client = await clientModel.deleteClient(req.params.id);
+        // console.log('client.controller createClient client', client);
+        if (client.errno == 1451) throw new Error("Não pode apagar um cliente com serviços no nome dele. Por favor, apague primeiro os serviços. ");
+        if (client.affectedRows == 0) throw new Error("Atenção: Você não pode apagar um cliente que não existe. ");
+        res.send({ mensagem: "Cliente apagado com sucesso! " });
+    } catch (err) {
+        console.log('client.controller deleteClient catch err', err);
+        next(err);
+    }
 }
 
 /**
@@ -109,32 +109,32 @@ async function deleteClient(req, res, next) {
  * @return {object}
  */
 async function updateClient(req, res, next) {
-  // console.log('client.controller updateClient req.body', req.body);
-  try {
-    let client = req.body;
-    if (
-      !req.body.nomecliente ||
-      !req.body.dtnasccliente ||
-      !req.body.dtcadcliente
-    ) {
-      throw new Error("Alguns campos são obrigatórios. ");
+    // console.log('client.controller updateClient req.body', req.body);
+    try {
+        let client = req.body;
+        if (
+            !req.body.nomecliente ||
+            !req.body.dtnasccliente ||
+            !req.body.dtcadcliente
+        ) {
+            throw new Error("Alguns campos são obrigatórios. ");
+        }
+        client = await clientModel.updateClient(client);
+        // console.log('client.controller updateClient client', client);
+        if (client.affectedRows == 0) {
+            throw new Error("Ops, parece que você está tentando atualizar um cliente que não existe. ");
+        }
+        res.send({ mensagem: "Cliente atualizado com sucesso!" });
+    } catch (err) {
+        console.log('client.controller updateClient catch err', err);
+        next(err);
     }
-    client = await clientModel.updateClient(client);
-    // console.log('client.controller updateClient client', client);
-    if (client.affectedRows == 0) {
-      throw new Error("Ops, parece que você está tentando atualizar um cliente que não existe. ");
-    }
-    res.send({ mensagem: "Cliente atualizado com sucesso!" });
-  } catch (err) {
-    console.log('client.controller updateClient catch err', err);
-    next(err);
-  }
 }
 
 module.exports = {
-  createClient,
-  getClients,
-  getClient,
-  deleteClient,
-  updateClient,
+    createClient,
+    getClients,
+    getClient,
+    deleteClient,
+    updateClient,
 };
