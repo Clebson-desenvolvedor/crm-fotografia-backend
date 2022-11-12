@@ -19,12 +19,11 @@ const upload = multer({ storage: storage });
 
 router.get("/", indexAdmin.getIndexAdmin)
 
-//rotas para clientes: adim/clients
-router.post("/clients", upload.single('foto_cliente'), clientController.createClient);
+//rotas para clientes: admin/clients
+router.post("/clients", upload.single('foto_cliente'), clientController.createOrUpdateClient);
 router.get("/clients", clientController.getClients);
 router.get("/clients/:id", clientController.getClient);
 // router.delete("/:id", clientController.deleteClient);
-// router.put("/", clientController.updateClient);
 
 //rotad para serviços: admin/services
 router.post("/services", serviceController.createService);

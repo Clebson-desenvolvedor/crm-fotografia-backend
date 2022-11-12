@@ -10,10 +10,14 @@ function insertClient(client) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-      INSERT INTO tb_clientes 
-      (nome_cliente, whatsapp_cliente, email_cliente, cpf_cliente, dtcad_cliente, foto_cliente) 
-      VALUES (?,?,?,?,?,?)
-      `;
+            INSERT INTO tb_clientes (
+                nome_cliente, 
+                whatsapp_cliente, 
+                email_cliente, 
+                cpf_cliente, 
+                dtcad_cliente, 
+                foto_cliente
+            ) VALUES (?,?,?,?,?,?)`;
 
             let values = [
                 client.nome_cliente,
@@ -33,9 +37,13 @@ function insertClient(client) {
                         return;
                     }
                     sql = `
-          INSERT INTO tb_endereco_cliente (ec_logradouro, ec_numero, ec_bairro, ec_cep, tb_endereco_cliente_id_cliente)
-          VALUES (?,?,?,?,?)
-          `;
+                    INSERT INTO tb_endereco_cliente (
+                        ec_logradouro, 
+                        ec_numero, 
+                        ec_bairro, 
+                        ec_cep, 
+                        tb_endereco_cliente_id_cliente
+                    ) VALUES (?,?,?,?,?)`;
 
                     values = [
                         client.ec_logradouro,
@@ -188,24 +196,20 @@ function updateClient(client) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            UPDATE clientes SET 
-            nomecliente = '${client.nomecliente}', 
-            dtnasccliente = '${client.dtnasccliente}', 
-            dtcadcliente = '${client.dtcadcliente}', 
-            email = '${client.email}', 
-            whatsapp = '${client.whatsapp}', 
-            enderecocliente = '${client.enderecocliente}', 
-            numeroendcliente = '${client.numeroendcliente}', 
-            bairrocliente = '${client.bairrocliente}', 
-            cepcliente = '${client.cepcliente}', 
-            cidadecliente = '${client.cidadecliente}' 
-            where idcliente = ${client.idcliente}`;
+            UPDATE tb_clientes SET 
+            nome_cliente = '${client.nome_cliente}', 
+            dtcad_cliente = '${client.dtcad_cliente}', 
+            email_cliente = '${client.email_cliente}', 
+            whatsapp_cliente = '${client.whatsapp_cliente}',
+            cpf_cliente = '${client.cpf_cliente}',
+            foto_cliente = '${client.foto_cliente}'
+            WHERE id_cliente = ${client.id}`;
             // console.log('client.model updateClient sql', sql);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
                     // console.log('client.model updateClient result', result);
-                    console.log('client.model updateClient conn.query err', err);
                     if (err) {
+                        console.log('client.model updateClient conn.query err', err);
                         reject(err);
                         return;
                     }
