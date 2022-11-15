@@ -45,14 +45,15 @@ function insertClient(client) {
                         tb_endereco_cliente_id_cliente
                     ) VALUES (?,?,?,?,?)`;
 
-                    values = [
+                    let values2 = [
                         client.ec_logradouro,
                         client.ec_numero,
                         client.ec_bairro,
                         client.ec_cep,
                         result.insertId
                     ]
-                    conn.query(sql, values, (err, result) => {
+                    // console.log('client.model insertClient values2', values2)
+                    conn.query(sql, values2, (err, result) => {
                         if (err) {
                             console.log('client.model insertClient conn.query 2 err', err);
                             reject(err);
@@ -102,12 +103,26 @@ function getClients() {
  * @returns {object}
  */
 function getClient(id) {
+    console.log('client.model getClient');
     // console.log('client.model getClient id', id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            SELECT id_cliente, nome_cliente, DATE_FORMAT(dtcad_cliente, '%d/%m/%Y') AS dtcad_cliente, email_cliente, whatsapp_cliente, cpf_cliente, foto_cliente
+            SELECT id_cliente,
+            nome_cliente, 
+            DATE_FORMAT(dtcad_cliente, '%d/%m/%y') as dtcad_cliente, 
+            email_cliente,
+            whatsapp_cliente,
+            cpf_cliente,
+            foto_cliente,
+            ec_logradouro,
+            ec_numero,
+            ec_bairro,
+            ec_cep,
+            tb_endereco_cliente_id_cliente
             FROM tb_clientes
+            INNER JOIN tb_endereco_cliente
+            ON id_cliente = tb_endereco_cliente_id_cliente
             WHERE id_cliente = ${id}`;
 
             let objClient = {};
@@ -121,32 +136,25 @@ function getClient(id) {
                         result = [];
                         resolve(result);
                     } else {
-                        resolve(result)
                         objClient = {
                             idcliente: result[0].id_cliente,
                             nomecliente: result[0].nome_cliente,
                             dtcadcliente: result[0].dtcad_cliente,
                             email: result[0].email_cliente,
-                            whatsapp: result[0].whatsapp_cliente
+                            whatsapp: result[0].whatsapp_cliente,
+                            logradouro: result[0].ec_logradouro,
+                            cpf: result[0].cpf_cliente,
+                            numero: result[0].ec_numero,
+                            bairro: result[0].ec_bairro,
+                            cep: result[0].ec_cep,
+                            foto: result[0].foto_cliente
                         };
                         // console.log('client.model getClient objClient', objClient);
-                        let sql2 = `
-                        SELECT idservico, tiposervico, ambienteservico, dtcadservico, dtevento, preco, statusservico, enderecoevento, numeroendevento, bairroevento, cepevento, cidadeevento, nomebebe, dtnascbebe, nomecrianca 
-                        FROM servicos 
-                        INNER JOIN clientes 
-                        ON servicos.idcliente = clientes.idcliente 
-                        WHERE clientes.idcliente = ${objClient.idcliente}`;
-                        // conn.query(sql2, (err, result2) => {
-                        //   // console.log('client.model getClient result2', result2);
-                        //   console.log('client.model getClient conn.query #2 err', err);
-                        //   if (err) {
-                        //     reject(err);
-                        //     return;
-                        //   }
-                        //   objClient.servicos = result2;
-                        //   conn.release();
-                        //   resolve(objClient);
-                        // });
+                        resolve(objClient);
+                        
+                        //em breve aqui implementar a query que busca os serviços por cliente
+                        
+                        
                     }
                 });
             });

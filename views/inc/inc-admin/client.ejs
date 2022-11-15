@@ -1,53 +1,53 @@
 <div class="card-client">
     <div class="content">
         <div class="modal-body">
-           <h3>Dados Pessoais</h3>
+           <h3>Dados Pessoais | <%= clientData.idcliente %></h3>
             <div class="modal-body-form">
                 <form action="/admin/clients" method="POST" id="form-id-update" enctype="multipart/form-data">
                     <div class="data-form-client">
                         <div class="data-form-content">
                             <div class="data-form-one">
-                                <input type="hidden" value="<%= clientData[0].id_cliente %>" name="id">
+                                <input type="hidden" value="<%= clientData.idcliente %>" name="id">
                                 <div class="form-name">
-                                    <label for="">Nome</label><input type="text" name="nome_cliente" placeholder="Nome" id="name" value="<%= clientData[0].nome_cliente %>" required>
+                                    <label for="">Nome</label><input type="text" name="nome_cliente" placeholder="Nome" id="name" value="<%= clientData.nomecliente %>" required>
                                 </div>
                                 <div class="form-whatsapp">
-                                    <label for="">WhatsApp</label><input type="text" name="whatsapp_cliente" id="whatsapp" value="<%= clientData[0].whatsapp_cliente %>">
+                                    <label for="">WhatsApp</label><input type="text" name="whatsapp_cliente" id="whatsapp" value="<%= clientData.whatsapp %>">
                                 </div>
                             </div>
                             <div class="data-form-two">
                                 <div class="form-email">
-                                    <label for="">E-mail</label><input type="email" name="email_cliente" id="email" value="<%= clientData[0].email_cliente %>">
+                                    <label for="">E-mail</label><input type="email" name="email_cliente" id="email" value="<%= clientData.email %>">
                                 </div>
                                 <div class="form-cpf">
-                                    <label for="">CPF</label><input type="text" name="cpf_cliente" id="cpf" value="<%= clientData[0].cpf_cliente %>">
+                                    <label for="">CPF</label><input type="text" name="cpf_cliente" id="cpf" value="<%= clientData.cpf %>">
                                 </div>
                             </div>
                             <div class="data-form-three">
                                 <div class="form-date">
-                                    <label for="">Data de Cadastro</label><input type="text" name="dtcad_cliente" id="date" value="<%= clientData[0].dtcad_cliente %>">
+                                    <label for="">Data de Cadastro</label><input type="text" name="dtcad_cliente" id="date" value="<%= clientData.dtcadcliente %>">
                                 </div>
                                 <div class="form-cep">
-                                    <label for="">CEP</label><input type="text" name="ec_cep" id="cep" value="<%= clientData[0].cep_cliente %>">
+                                    <label for="">CEP</label><input type="text" name="ec_cep" id="cep" value="<%= clientData.cep %>">
                                 </div>
                             </div>
                             <div class="data-form-four">
                                 <div class="form-street">
-                                    <label for="">Logradouro</label><input type="text" name="ec_logradouro" id="street">
+                                    <label for="">Logradouro</label><input type="text" name="ec_logradouro" id="street" value="<%=  clientData.logradouro %>">
                                 </div>
                                 <div class="form-number">
-                                    <label for="">Nº</label><input type="text" name="ec_numero" id="number">
+                                    <label for="">Nº</label><input type="text" name="ec_numero" id="number" value="<%=  clientData.numero %>">
                                 </div>
                             </div>
                             <div class="data-form-five">
                                 <div class="form-district">
-                                    <label for="">Bairro</label><input type="text" name="ec_bairro" id="district">
+                                    <label for="">Bairro</label><input type="text" name="ec_bairro" id="district" value="<%=  clientData.logradouro %>">
                                 </div>
                             </div>
                         </div>
                         <div class="data-form-image-client">
                             <div class="data-image-upload">
-                                <img src="/img/uploads/<%= clientData[0].foto_cliente %>" alt="">
+                                <img src="/img/uploads/<%= clientData.foto %>" alt="">
                             </div>
                             <input type="file" name="foto_cliente" id="image">
                             <label for="">Foto do Cliente</label>
