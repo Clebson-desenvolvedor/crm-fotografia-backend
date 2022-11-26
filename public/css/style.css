@@ -492,10 +492,14 @@ button {
     background-color: #8b0000;
 }
 
-.modal-footer button#save-button,
-.modal-footer button#update-button {
+.modal-footer button#create-client-button,
+.modal-footer button#update-client-button {
     background-color: #2e8b57;
     padding: 0 19px;
+}
+
+.alert {
+    display: block;
 }
 
 .alert-success {
@@ -508,10 +512,15 @@ button {
 }
 
 .alert-error {
-    background-color: #a9f1b5;
+    background-color: #e02821;
     border-radius: 5px;
-    color: #17761e;
+    color: #ffffff;
     left: 40%;
     padding: 8px;
     position: absolute;
+}
+
+.delete-client {
+    padding: 5px;
+    color: #ff0000;
 }

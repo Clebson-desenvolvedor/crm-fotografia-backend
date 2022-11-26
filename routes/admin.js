@@ -23,7 +23,7 @@ router.get("/", indexAdmin.getIndexAdmin)
 router.post("/clients", upload.single('foto_cliente'), clientController.createOrUpdateClient);
 router.get("/clients", clientController.getClients);
 router.get("/clients/:id", clientController.getClient);
-// router.delete("/:id", clientController.deleteClient);
+router.post("/clients/:id", clientController.deleteClient);
 
 //rotad para serviços: admin/services
 router.post("/services", serviceController.createService);

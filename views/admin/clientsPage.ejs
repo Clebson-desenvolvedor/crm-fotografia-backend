@@ -12,6 +12,8 @@
             </div>
         <script>
             $(document).ready(() => {
+
+                //abrir ou fechar modal
                 function switchModal() {
                     if ($('.modal').css('display') == 'block') {
                         $('.modal').css('display', 'none');
@@ -26,6 +28,50 @@
                 $('.modalBtn').click(switchModal);
                 $('#clear-button').click(clearForm);
 
+                //evento de criar um novo cliente
+                $('#create-client-button').click(function(ev) {
+                    $.ajax({
+                        url: `/admin/clients`,
+                        type: 'POST',
+                        data: { 
+                            nome_cliente: $('form input#name')[0].value,
+                            whatsapp_cliente: $('form input#whatsapp')[0].value,
+                            email_cliente: $('form input#email')[0].value,
+                            cpf_cliente: $('form input#cpf')[0].value,
+                            dtcad_cliente: $('form input#date')[0].value,
+                            ec_cep: $('form input#cep')[0].value,
+                            ec_logradouro: $('form input#street')[0].value,
+                            ec_numero: $('form input#number')[0].value,
+                            ec_bairro: $('form input#district')[0].value,
+                            foto_cliente: $('form input#image')[0].value//precisará consertar futuramente, pois não está salvando a imagem selecionada na base
+                         },
+                    }).done(function(data) {
+                        // console.log('data', data);
+                        switchModal();
+                        $('p.alert').text(data.message).addClass('alert-success');
+                        setTimeout(() => {
+                            $('p.alert').fadeOut(500);
+                        }, 3000);
+                    }).fail(function(er) {
+                        console.log(er)
+                    })
+                });
+
+                //evento de deletar um cliente
+                $('a.card .delete-client').click(function(e) {
+                    e.preventDefault();
+                    let id = $(this).parent()[0].attributes[2].nodeValue
+                    $.ajax({
+                        url: `/admin/clients/${id}`,
+                        type: 'POST',
+                        data: { id: id },
+                    }).done(function(data) {
+                        console.log('data', data);
+                    }).fail(function(er) {
+                        console.log(er)
+                    })
+                })
+
                 window.onclick = function (event) {
                     if (event.target.className == 'modal') {
                         switchModal();
@@ -33,7 +79,7 @@
                 }
                 
                function clearForm() {
-                $('#form-id').each (function(){
+                $('form').each (function(){
                     this.reset();
                 }); 
                }   

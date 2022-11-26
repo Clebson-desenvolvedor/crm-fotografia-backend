@@ -171,19 +171,20 @@ function getClient(id) {
  * @returns {Array}
  */
 function deleteClient(id) {
-    // console.log('client.model deleteClient id', id);
+    console.log('client.model deleteClient id', id);
     return new Promise((resolve, reject) => {
         try {
-            let sql = `DELETE FROM clientes where idcliente = ${id}`;
+            let sql = `DELETE FROM tb_clientes WHERE id_cliente = ${id}`;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
                     // console.log('client.model deleteClient result', result);
-                    console.log('client.model deleteClient conn.query err', err);
-                    conn.release();
                     if (err) {
-                        result = err;
+                        console.log('client.model deleteClient conn.query err.sqlMessage: ', err.sqlMessage);
+                        console.log('client.model deleteClient conn.query err.errno:', err.errno);
+                        return resolve(err)
                     }
                     resolve(result);
+                    conn.release();
                 });
             });
         } catch (err) {
@@ -200,6 +201,7 @@ function deleteClient(id) {
  */
 
 function updateClient(client) {
+    console.log('client.model updateClient');
     // console.log('client.model updateClient client', client);
     return new Promise((resolve, reject) => {
         try {

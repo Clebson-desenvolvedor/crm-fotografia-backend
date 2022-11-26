@@ -30,18 +30,13 @@ async function createOrUpdateClient(req, res, next) {
 
         if (client.id) {
             client = await clientModel.updateClient(client);
-            // console.log('client.controler updateClient client', client);
-            res.render('admin/clientsPage', {
-                message: 'Atualizado com sucesso!',
-                typeMessage: 'success', title: 'Clientes',
-            });
+            client = await clientModel.insertClient(client);
+            client.message = 'Atualizado com sucesso!';
+            res.send(client);
         } else {
             client = await clientModel.insertClient(client);
-            // console.log('client.controler createClient client', client);
-            res.render('admin/clientsPage', {
-                message: 'Cadastrado com sucesso!',
-                typeMessage: 'success', title: 'Clientes',
-            });
+            client.message = 'Cadastrado com sucesso!';
+            res.send(client);
         }
     } catch (err) {
         console.log('client.controller createClient catch err', err);
@@ -54,15 +49,13 @@ async function createOrUpdateClient(req, res, next) {
  * @return {Array}
  */
 async function getClients(req, res, next) {
-    // console.log('client.controller getClients');
+    console.log('client.controller getClients');
     try {
         clients = await clientModel.getClients();
         // console.log('client.controller getClients clients', clients);
         res.render('admin/clientsPage', {
             title: 'clientes',
             clients: clients,
-            message: '',
-            typeMessage: undefined
         })
     } catch (err) {
         console.log('client.controller getClients catch err', err);
@@ -99,13 +92,21 @@ async function getClient(req, res, next) {
  * @return {object}
  */
 async function deleteClient(req, res, next) {
-    // console.log('client.controller deleteClient req.params.id', req.params.id);
+    console.log('client.controller deleteClient req.params.id', req.params.id);
     try {
         let client = await clientModel.deleteClient(req.params.id);
         // console.log('client.controller createClient client', client);
-        if (client.errno == 1451) throw new Error("Não pode apagar um cliente com serviços no nome dele. Por favor, apague primeiro os serviços. ");
-        if (client.affectedRows == 0) throw new Error("Atenção: Você não pode apagar um cliente que não existe. ");
-        res.send({ mensagem: "Cliente apagado com sucesso! " });
+        if (client.errno == 1451) {
+            res.send({
+                message: "Não pode apagar um cliente com serviços em seu nome. Por favor, apague primeiro os serviços. ",
+                typeMessage: 'error', 
+                title: 'Clientes',
+            })
+        } else {
+            res.render('admin/clientsPage', { 
+                mensagem: "Cliente apagado com sucesso! " 
+            });
+        }  
     } catch (err) {
         console.log('client.controller deleteClient catch err', err);
         next(err);
