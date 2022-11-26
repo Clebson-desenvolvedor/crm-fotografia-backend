@@ -3,11 +3,11 @@
         <div class="modal-body">
            <h3>Dados Pessoais | <%= clientData.idcliente %></h3>
             <div class="modal-body-form">
-                <form action="/admin/clients" method="POST" id="form-id-update" enctype="multipart/form-data">
+                <form enctype="multipart/form-data">
                     <div class="data-form-client">
                         <div class="data-form-content">
                             <div class="data-form-one">
-                                <input type="hidden" value="<%= clientData.idcliente %>" name="id">
+                                <input type="hidden" value="<%= clientData.idcliente %>" name="id" id="id">
                                 <div class="form-name">
                                     <label for="">Nome</label><input type="text" name="nome_cliente" placeholder="Nome" id="name" value="<%= clientData.nomecliente %>" required>
                                 </div>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="data-form-five">
                                 <div class="form-district">
-                                    <label for="">Bairro</label><input type="text" name="ec_bairro" id="district" value="<%=  clientData.logradouro %>">
+                                    <label for="">Bairro</label><input type="text" name="ec_bairro" id="district" value="<%=  clientData.bairro %>">
                                 </div>
                             </div>
                         </div>
@@ -59,11 +59,8 @@
         <div class="modal-footer">
             <hr>
             <div class="modal-footer-buttons">
-                <div class="clear-cancel">
-                    <button id="cancel-button">Cancelar</button>
-                </div>
                 <div class="save">
-                    <button form="form-id-update" id="update-client-button">Atualizar</button>
+                    <button id="update-client-button">Atualizar</button>
                 </div>
             </div>
         </div>

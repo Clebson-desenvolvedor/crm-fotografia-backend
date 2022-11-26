@@ -13,6 +13,10 @@
         <script>
             $(document).ready(() => {
 
+                if ($('.cards').children().length == 0) {
+                    $('.cards').append('<p>Nenhum Cliente cadastrado aidna.</p>')
+                }
+
                 //abrir ou fechar modal
                 function switchModal() {
                     if ($('.modal').css('display') == 'block') {

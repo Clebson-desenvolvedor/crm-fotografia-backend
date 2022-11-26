@@ -213,7 +213,7 @@ function updateClient(client) {
             whatsapp_cliente = '${client.whatsapp_cliente}',
             cpf_cliente = '${client.cpf_cliente}',
             foto_cliente = '${client.foto_cliente}'
-            WHERE id_cliente = ${client.id}`;
+            WHERE id_cliente = ${client.id_cliente}`;
             // console.log('client.model updateClient sql', sql);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {

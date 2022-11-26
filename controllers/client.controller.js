@@ -28,14 +28,13 @@ async function createOrUpdateClient(req, res, next) {
             client.dtcad_cliente = helper.convertToMySql(client.dtcad_cliente);
         }
 
-        if (client.id) {
+        if (client.id_cliente) {
             client = await clientModel.updateClient(client);
-            client = await clientModel.insertClient(client);
-            client.message = 'Atualizado com sucesso!';
+            client.message = 'Cliente atualizado com sucesso!';
             res.send(client);
         } else {
             client = await clientModel.insertClient(client);
-            client.message = 'Cadastrado com sucesso!';
+            client.message = 'Cliente cadastrado com sucesso!';
             res.send(client);
         }
     } catch (err) {
