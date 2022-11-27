@@ -488,7 +488,8 @@ button {
     background-color: #cd853f;
 }
 
-.modal-footer button#cancel-button {
+.modal-footer button#cancel-button,
+.modal-footer button#delete-client-button {
     background-color: #8b0000;
 }
 

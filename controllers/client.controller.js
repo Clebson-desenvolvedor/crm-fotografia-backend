@@ -102,8 +102,9 @@ async function deleteClient(req, res, next) {
                 title: 'Clientes',
             })
         } else {
-            res.render('admin/clientsPage', { 
-                mensagem: "Cliente apagado com sucesso! " 
+            res.send({  
+                message: "Cliente apagado com sucesso! ",
+                status: "success"
             });
         }  
     } catch (err) {

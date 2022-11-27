@@ -12,6 +12,8 @@
             </div>
         <script>
             $(document).ready(() => {
+
+                //evento para atualizar um cliente
                 $('#update-client-button').click(function(e) {
                     e.preventDefault();
                     $.ajax({
@@ -38,8 +40,27 @@
                         }, 3000);
                     }).fail(function(er) {
                         console.log(er)
+                    });
+                });
+
+                //evento para deletar um cliente
+                $('#delete-client-button').click(function(e) {
+                    id =  $('form input#id')[0].value;
+                    console.log($('form input#id')[0].value)
+                    $.ajax({
+                        url: `/admin/clients/${id}`,
+                        type: 'POST',
+                        data: { id: id },
+                    }).done(function(data) {
+                        console.log('data', data);
+                        $('p.alert').text(data.message).addClass('alert-success');
+                        setTimeout(() => {
+                            $('p.alert').fadeOut(500);
+                        }, 3000);
+                    }).fail(function(er) {
+                        console.log(er)
                     })
-                })
+                });
             });
         </script>
     </body>
