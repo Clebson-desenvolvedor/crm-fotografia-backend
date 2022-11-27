@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const clientController = require("../controllers/client.controller.js");
 const serviceController = require("../controllers/service.controller.js");
+const leadController = require("../controllers/lead.controller.js");
 const indexAdmin = require("../controllers/adminIndex.controller");
 const multer = require("multer");
 const helper = require("../lib/helper")
@@ -32,5 +33,10 @@ router.get("/services/:id", serviceController.getService);
 // router.delete("/:id", clientController.deleteClient);
 // router.put("/", clientController.updateClient);
 
+//rotas para clientes: admin/clients
+router.post("/leads", upload.single('foto_lead'), leadController.createOrUpdateLead);
+router.get("/leads", leadController.getLeads);
+router.get("/leads/:id", leadController.getLead);
+router.post("/leads/:id", leadController.deleteLead);
 
 module.exports = router;
