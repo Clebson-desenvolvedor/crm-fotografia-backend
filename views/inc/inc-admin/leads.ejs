@@ -1,0 +1,103 @@
+<div class="clients-panel">
+    <button class="modalBtn" title="Cria novo Lead">Novo</button>
+</div>
+<div class="modal">
+    <div class="content">
+        <div class="modal-header">
+            <h1 class="title">Preencha os dados do Novo Lead</h1>
+        </div>
+        <div class="modal-body">
+            <div class="modal-body-form">
+                <form enctype="multipart/form-data">
+                    <div class="data-form">
+                        <div class="data-form-content">
+                            <div class="data-form-one">
+                                <div class="form-name">
+                                    <label for="">Nome</label><input type="text" name="nome_lead" id="name" required>
+                                </div>
+                                <div class="form-whatsapp">
+                                    <label for="">WhatsApp</label><input type="text" name="whatsapp_lead" id="whatsapp">
+                                </div>
+                            </div>
+                            <div class="data-form-two">
+                                <div class="form-email">
+                                    <label for="">E-mail</label><input type="email" name="email_lead" id="email">
+                                </div>
+                                <div class="form-date">
+                                    <label for="">Data de Cadastro</label><input type="date" name="dtcad_lead" id="date">
+                                </div>
+                            </div>
+                            <div class="data-form-three">
+                                
+                                <div class="form-origin">
+                                    <label for="">Origem do Lead</label>
+                                    <select name="origin_lead" id="origin" required>
+                                        <option value="">Selecione</option>
+                                        <option value="Indicação">Indicação</option>
+                                        <option value="Facebook">Facebook</option>
+                                        <option value="status do WhatsApp">Status do WhatsApp</option>
+                                        <option value="Instagram">Instagram</option>
+                                        <option value="Site">Site</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-form-image">
+                            <div class="data-image-upload">
+                                <img src="/img/no-photo.jpg" alt="">
+                            </div>
+                            <input type="file" name="foto_lead" id="image">
+                            <label for="">Foto do Lead</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <hr>
+            <div class="modal-footer-buttons">
+                <div class="clear-cancel">
+                    <button id="clear-button">Limpar formulário</button>
+                </div>
+                <div class="save">
+                    <button id="create-lead-button">Criar Lead</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class="cards">
+    <% leads.forEach(row=> { %>
+    <a href="/admin/leads/<%= row.id_lead %>" class="card" lead-id="<%= row.id_lead %>">
+        <p class="delete-client" title="Apagar este Lead"><i class="fa-regular fa-trash-can"></i></p>
+        <div class="card-img">
+            <div class="circle">
+                <img src="/img/uploads/<%= row.foto_lead %>">
+            </div>
+        </div>
+        <div class="card-details">
+            <div class="card-details-content">
+                <h3><%= row.nome_lead %></h3>
+                <% if (row.whatsapp_lead) { %>
+                <div class="whatsapp">
+                    <div class="icon-whatsapp">
+                        <p><i class="fa-brands fa-whatsapp"></i></p>
+                    </div>
+                    <p><%= row.whatsapp_lead %></p>
+                </div>
+                <% } %>
+                <% if (row.email_lead) { %>
+                <div class="email">
+                    <div class="icon-email">
+                        <p><i class="fa-regular fa-envelope"></i>
+                    </div>
+                    <p><%= row.email_lead %></p>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </a>
+    <% }) %>
+</div>

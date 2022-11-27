@@ -1,0 +1,70 @@
+<div class="card-client">
+    <div class="content">
+        <div class="modal-body">
+           <h3>Dados Pessoais | <%= leadData[0].id_lead %></h3>
+            <div class="modal-body-form">
+                <form enctype="multipart/form-data">
+                    <div class="data-form">
+                        <div class="data-form-content">
+                            <div class="data-form-one">
+                                <div class="form-name">
+                                    <label for="">Nome</label><input type="text" name="nome_lead" id="name" value="<%= leadData[0].nome_lead %>" required>
+                                </div>
+                                <div class="form-whatsapp">
+                                    <label for="">WhatsApp</label><input type="text" name="whatsapp_lead" id="whatsapp" value="<%= leadData[0].whatsapp_lead %>">
+                                </div>
+                            </div>
+                            <div class="data-form-two">
+                                <div class="form-email">
+                                    <label for="">E-mail</label><input type="email" name="email_lead" id="email" value="<%= leadData[0].email_lead %>">
+                                </div>
+                                <div class="form-date">
+                                    <label for="">Data de Cadastro</label><input type="date" name="dtcad_lead" id="date" value="<%= leadData[0].dtcad_lead %>">
+                                </div>
+                            </div>
+                            <div class="data-form-three">
+                                
+                                <div class="form-origin">
+                                    <label for="">Origem do Lead</label>
+                                    <select name="origin_lead" id="origin" required>
+                                        <option value="">Selecione</option>
+                                        <option value="Indicação">Indicação</option>
+                                        <option value="Facebook">Facebook</option>
+                                        <option value="status do WhatsApp">Status do WhatsApp</option>
+                                        <option value="Instagram">Instagram</option>
+                                        <option value="Site">Site</option>
+                                    </select>
+                                    <input type="hidden" name="" id="origin-value" value="<%= leadData[0].origin_lead %>">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-form-image">
+                            <div class="data-image-upload">
+                                <img src="/img/<%= leadData[0].foto_lead %>" alt="">
+                            </div>
+                            <input type="file" name="foto_lead" id="image">
+                            <label for="">Foto do Lead</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <hr>
+            <div class="modal-footer-buttons">
+                <div>
+                    <button id="delete-client-button">Apagar</button>
+                </div>
+                <div>
+                    <button id="update-client-button">Atualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('form select#origin option:selected').val($('input#origin-value').val());
+    });
+</script>

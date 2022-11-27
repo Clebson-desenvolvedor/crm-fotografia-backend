@@ -13,27 +13,38 @@ async function createOrUpdateLead(req, res, next) {
     // console.log('lead.controler createOrUpdateLead req.file', req.file);
     try {
         let lead = req.body;
-        
-        if (req.file) {
-            lead.foto_lead = req.file.filename;
-        } else {
-            lead.foto_lead = 'no-photo.jpg';
-        }
-        
-        if (lead.dtcad_lead == '') {
-            lead.dtcad_lead = helper.convertToMySql();
-        } else {
-            lead.dtcad_lead = helper.convertToMySql(lead.dtcad_lead);
-        }
 
-        if (lead.id_lead) {
-            lead = await leadModel.updateLead(lead);
-            lead.message = 'Lead atualizado com sucesso!';
-            res.send(lead);
+        if (lead.nome_lead == '' || lead.origem_lead == '') {
+            res.send({
+                message: 'Alguns campos são obrigatórios',
+                status: 'error'
+            });
         } else {
-            lead = await leadModel.insertLead(lead);
-            lead.message = 'Lead cadastrado com sucesso!';
-            res.send(lead);
+            if (req.file) {
+                lead.foto_lead = req.file.filename;
+            } else {
+                lead.foto_lead = 'no-photo.jpg';
+            }
+            
+            if (lead.dtcad_lead == '') {
+                lead.dtcad_lead = helper.convertToMySql();
+            } else {
+                lead.dtcad_lead = helper.convertToMySql(lead.dtcad_lead);
+            }
+    
+            if (lead.id_lead) {
+                lead = await leadModel.updateLead(lead);
+                res.send({
+                    message: 'Lead atualizado com sucesso!',
+                    status: 'success'
+                });
+            } else {
+                lead = await leadModel.insertLead(lead);
+                res.send({
+                    message: 'Lead cadastrado com sucesso!',
+                    status: 'success'
+                });
+            }
         }
     } catch (err) {
         console.log('lead.controller createOrUpdateLead catch err', err);

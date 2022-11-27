@@ -33,7 +33,7 @@ router.get("/services/:id", serviceController.getService);
 // router.delete("/:id", clientController.deleteClient);
 // router.put("/", clientController.updateClient);
 
-//rotas para clientes: admin/clients
+//rotas para leads: admin/leads
 router.post("/leads", upload.single('foto_lead'), leadController.createOrUpdateLead);
 router.get("/leads", leadController.getLeads);
 router.get("/leads/:id", leadController.getLead);

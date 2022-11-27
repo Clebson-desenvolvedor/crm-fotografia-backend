@@ -88,7 +88,7 @@ function getLead(id) {
             nome_lead, 
             DATE_FORMAT(dtcad_lead, '%d/%m/%y') as dtcad_lead, 
             email_lead,
-            whatsapp_leade,
+            whatsapp_lead,
             foto_lead,
             origem_lead
             FROM tb_leads

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <%- include('../inc/inc-admin/head') -%>
+    <body>
+        <input type="checkbox" id="nav-toggle">
+        <%- include('../inc/inc-admin/sidebar') -%>
+            <div class="main-content">
+                <%- include('../inc/inc-admin/header') -%>
+                <main>
+                    <%- include('../inc/inc-admin/leads') -%>
+                </main>
+            </div>
+        <script>
+            $(document).ready(() => {
+
+                if ($('.cards').children().length == 0) {
+                    $('.cards').append('<p>Nenhum lead cadastrado ainda.</p>')
+                }
+
+                //abrir ou fechar modal
+                function switchModal() {
+                    if ($('.modal').css('display') == 'block') {
+                        $('.modal').css('display', 'none');
+                        clearForm();
+
+                    }
+                    else {
+                        $('.modal').css('display', 'block');
+                    }
+                }
+
+                $('.modalBtn').click(switchModal);
+                $('#clear-button').click(clearForm);
+
+                //evento de criar um novo lead
+                $('#create-lead-button').click(function(ev) {
+                    console.log($('form select#origin')[0].value)
+                    $.ajax({
+                        url: `/admin/leads`,
+                        type: 'POST',
+                        data: { 
+                            nome_lead: $('form input#name')[0].value,
+                            whatsapp_lead: $('form input#whatsapp')[0].value,
+                            email_lead: $('form input#email')[0].value,
+                            dtcad_lead: $('form input#date')[0].value,
+                            foto_lead: $('form input#image')[0].value,//precisará consertar futuramente, pois não está salvando a imagem selecionada na base
+                            origem_lead: $('form select#origin option:selected').val()
+                         },
+                    }).done(function(data) {
+                        // console.log('data', data);
+                        if (data.status == 'error') {
+                            if ($('form input#name')[0].value == '') {
+                                $('form input#name').addClass('input-error');
+                                return false
+                            }
+
+                            if ($('form select#origin option:selected').val() == '') {
+                                $('form select#origin').addClass('input-error');
+                                return false;
+                            }
+                        } else {
+                            switchModal();
+                            $('p.alert').text(data.message).addClass('alert-success');
+                            setTimeout(() => {
+                                $('p.alert').fadeOut(500);
+                            }, 3000);
+                        }
+                        
+                    }).fail(function(er) {
+                        console.log(er)
+                    })
+                });
+
+                //evento para deletar um cliente
+                $('a.card .delete-client').click(function(e) {
+                    e.preventDefault();
+                    let id = $(this).parent()[0].attributes[2].nodeValue;
+                    $.ajax({
+                        url: `/admin/clients/${id}`,
+                        type: 'POST',
+                        data: { id: id },
+                    }).done(function(data) {
+                        console.log('data', data);
+                        $('p.alert').text(data.message).addClass('alert-success');
+                        setTimeout(() => {
+                            $('p.alert').fadeOut(500);
+                        }, 3000);
+                    }).fail(function(er) {
+                        console.log(er);
+                    });
+                });
+
+                window.onclick = function (event) {
+                    if (event.target.className == 'modal') {
+                        switchModal();
+                    }
+                }
+                
+               function clearForm() {
+                $('form').each (function(){
+                    this.reset();
+                }); 
+               }   
+            });
+        </script>
+    </body>
+</html>
