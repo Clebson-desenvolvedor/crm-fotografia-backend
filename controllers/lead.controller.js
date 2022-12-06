@@ -40,10 +40,9 @@ async function createOrUpdateLead(req, res, next) {
                 });
             } else {
                 lead = await leadModel.insertLead(lead);
-                res.send({
-                    message: 'Lead cadastrado com sucesso!',
-                    status: 'success'
-                });
+                lead.message = 'Lead cadastrado com sucesso!';
+                lead.status = 'success';
+                res.send(lead);
             }
         }
     } catch (err) {

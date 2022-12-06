@@ -237,7 +237,24 @@ function updateClient(client) {
                         reject(err);
                         return;
                     }
-                    resolve(result);
+                    sql = `
+                    UPDATE tb_endereco_cliente SET
+                    ec_logradouro = '${client.ec_logradouro}',
+                    ec_numero = '${client.ec_numero}',
+                    ec_bairro = '${client.ec_bairro}',
+                    ec_cep = '${client.ec_cep}'
+                    WHERE tb_endereco_cliente_id_cliente = ${client.id_cliente}`;
+
+                    mysql.getConnection((err, conn) => {
+                        conn.query(sql, (err2, result2, field) => {
+                            if (err2) {
+                                console.log('client.model updateClient conn.query err2', err2);
+                                reject(err);
+                                return;
+                            }
+                            resolve(result2);
+                        });
+                    })
                     conn.release();
                 });
             });
