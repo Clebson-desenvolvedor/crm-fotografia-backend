@@ -17,7 +17,7 @@
                 $('#update-lead-button').click(function(e) {
                     e.preventDefault();
                     $.ajax({
-                        url: '/admin/clients/',
+                        url: '/admin/leads/',
                         type: 'POST',
                         data: {
                             id_lead: $('form input#id')[0].value,
@@ -39,16 +39,14 @@
                     });
                 });
 
-                //evento para deletar um cliente
-                $('#delete-client-button').click(function(e) {
+                //evento para deletar um lead
+                $('#delete-lead-button').click(function(e) {
                     id =  $('form input#id')[0].value;
-                    console.log($('form input#id')[0].value)
                     $.ajax({
-                        url: `/admin/clients/${id}`,
+                        url: `/admin/leads/${id}`,
                         type: 'POST',
                         data: { id: id },
                     }).done(function(data) {
-                        console.log('data', data);
                         $('p.alert').text(data.message).addClass('alert-success');
                         setTimeout(() => {
                             $('p.alert').fadeOut(500);

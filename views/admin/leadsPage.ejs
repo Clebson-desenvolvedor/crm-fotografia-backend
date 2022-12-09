@@ -71,16 +71,15 @@
                     })
                 });
 
-                //evento para deletar um cliente
-                $('a.card .delete-client').click(function(e) {
+                //evento para deletar um lead
+                $('a.card .delete-lead').click(function(e) {
                     e.preventDefault();
                     let id = $(this).parent()[0].attributes[2].nodeValue;
                     $.ajax({
-                        url: `/admin/clients/${id}`,
+                        url: `/admin/leads/${id}`,
                         type: 'POST',
                         data: { id: id },
                     }).done(function(data) {
-                        console.log('data', data);
                         $('p.alert').text(data.message).addClass('alert-success');
                         setTimeout(() => {
                             $('p.alert').fadeOut(500);

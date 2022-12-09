@@ -71,7 +71,7 @@
 <div class="cards">
     <% leads.forEach(row=> { %>
     <a href="/admin/leads/<%= row.id_lead %>" class="card" lead-id="<%= row.id_lead %>">
-        <p class="delete-client" title="Apagar este Lead"><i class="fa-regular fa-trash-can"></i></p>
+        <p class="delete-lead" title="Apagar este Lead"><i class="fa-regular fa-trash-can"></i></p>
         <div class="card-img">
             <div class="circle">
                 <img src="/img/uploads/<%= row.foto_lead %>">

@@ -6,6 +6,7 @@
                 <form enctype="multipart/form-data">
                     <div class="data-form">
                         <div class="data-form-content">
+                            <input type="hidden" id="id" value="<%= leadData[0].id_lead %>">
                             <div class="data-form-one">
                                 <div class="form-name">
                                     <label for="">Nome</label><input type="text" name="nome_lead" id="name" value="<%= leadData[0].nome_lead %>" required>
@@ -30,11 +31,11 @@
                                         <option value="">Selecione</option>
                                         <option value="Indicação">Indicação</option>
                                         <option value="Facebook">Facebook</option>
-                                        <option value="status do WhatsApp">Status do WhatsApp</option>
+                                        <option value="Status do WhatsApp">Status do WhatsApp</option>
                                         <option value="Instagram">Instagram</option>
                                         <option value="Site">Site</option>
                                     </select>
-                                    <input type="text" name="" id="origin-value" value="<%= leadData[0].origem_lead %>">
+                                    <input type="hidden" id="origin-value" value="<%= leadData[0].origem_lead %>">
                                 </div>
                             </div>
                         </div>
@@ -53,10 +54,10 @@
             <hr>
             <div class="modal-footer-buttons">
                 <div>
-                    <button id="delete-client-button">Apagar</button>
+                    <button id="delete-lead-button">Apagar</button>
                 </div>
                 <div>
-                    <button id="update-client-button">Atualizar</button>
+                    <button id="update-lead-button">Atualizar</button>
                 </div>
             </div>
         </div>
@@ -65,9 +66,8 @@
 
 <script>
     $(document).ready(function() {
-        console.log($('input#origin-value').val())
-        console.log($('form select#origin option:selected').val())
         let selected = $('input#origin-value').val()
-        $('select#origin option:selected').val(selected);
+        $('select#origin').val(selected);
+        $('select#origin').select2();
     });
 </script>

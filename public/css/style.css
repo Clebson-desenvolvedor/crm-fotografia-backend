@@ -491,13 +491,15 @@ button {
 }
 
 .modal-footer button#cancel-button,
-.modal-footer button#delete-client-button {
+.modal-footer button#delete-client-button,
+.modal-footer button#delete-lead-button {
     background-color: #8b0000;
 }
 
 .modal-footer button#create-client-button,
 .modal-footer button#update-client-button, 
-.modal-footer button#create-lead-button {
+.modal-footer button#create-lead-button,
+.modal-footer button#update-lead-button {
     background-color: #2e8b57;
     padding: 0 19px;
 }
@@ -524,7 +526,8 @@ button {
     position: absolute;
 }
 
-.delete-client {
+.delete-client,
+.delete-lead {
     color: #ff0000;
     padding: 5px;
 }

@@ -120,7 +120,7 @@ function deleteLead(id) {
     console.log('lead.model deleteLead id', id);
     return new Promise((resolve, reject) => {
         try {
-            let sql = `DELETE FROM tb_lead WHERE id_lead = ${id}`;
+            let sql = `DELETE FROM tb_leads WHERE id_lead = ${id}`;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
                     // console.log('lead.model deleteLead result', result);
@@ -157,7 +157,8 @@ function updateLead(lead) {
             dtcad_lead = '${lead.dtcad_lead}', 
             email_lead = '${lead.email_lead}', 
             whatsapp_lead = '${lead.whatsapp_lead}',
-            foto_lead = '${lead.foto_lead}'
+            foto_lead = '${lead.foto_lead}',
+            origem_lead = '${lead.origem_lead}'
             WHERE id_lead = ${lead.id_lead}`;
             // console.log('lead.model updateLead sql', sql);
             mysql.getConnection((err, conn) => {
