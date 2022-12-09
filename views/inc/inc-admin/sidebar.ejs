@@ -16,8 +16,28 @@
             <li><a href="/admin/dashboard" id="dashboard" title="Dashboard"><i class="fa-solid fa-chart-pie"></i><span> Dashboard</span></a></li>
         </ul>
         <ul>
-            <li><a href="/admin/configurations" id="configurations" title="Configurações"><i class="fa-solid fa-gear"></i><span> Configurações</span></a></li>
+            <li><a href="/admin/configurations" id="configurations" title="Configurações"><i class="fa-solid fa-gear"></i><span> Configurações e Preferências</span></a></li>
         </ul>
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+
+        setTimeout(() => {
+            //pegar cores da configuradas na base
+            $.ajax({
+            url: '/admin/configurations/colors',
+            type: "GET",
+            success: data => {
+                console.log(data)
+                let colors = data
+                $('.sidebar').css('background-color', colors['cor-primaria']);
+                $('main').css('background-color', colors['cor-secundaria']);
+                $('p').css('color', colors['cor-texto']);
+                $('span').css('color', colors['cor-texto']);
+            }
+        });
+        }, 100);
+    });
+</script>

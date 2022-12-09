@@ -5,7 +5,8 @@ const serviceController = require("../controllers/service.controller.js");
 const leadController = require("../controllers/lead.controller.js");
 const indexAdmin = require("../controllers/adminIndex.controller");
 const multer = require("multer");
-const helper = require("../lib/helper")
+const helper = require("../lib/helper");
+const config = require("../configuration/config.js");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -26,7 +27,7 @@ router.get("/clients", clientController.getClients);
 router.get("/clients/:id", clientController.getClient);
 router.post("/clients/:id", clientController.deleteClient);
 
-//rotad para serviços: admin/services
+//rotas para serviços: admin/services
 router.post("/services", serviceController.createService);
 router.get("/services", serviceController.getServices);
 router.get("/services/:id", serviceController.getService);
@@ -38,5 +39,11 @@ router.post("/leads", upload.single('foto_lead'), leadController.createOrUpdateL
 router.get("/leads", leadController.getLeads);
 router.get("/leads/:id", leadController.getLead);
 router.post("/leads/:id", leadController.deleteLead);
+
+//rotas para a configuração: admin/configurations
+router.get("/configurations", config.getConfig);
+
+//trás as cores da base configuradas nas views
+router.get("/configurations/colors", config.getColors);
 
 module.exports = router;
