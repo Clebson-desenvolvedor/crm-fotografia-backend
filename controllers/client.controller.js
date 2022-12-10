@@ -68,9 +68,10 @@ async function getClients(req, res, next) {
  * @return {Array}
  */
 async function getClient(req, res, next) {
-    // console.log('client.controller getClient req.params.id', req.params.id);
+    console.log('client.controller getClient req.params.id', req.params.id);
     try {
         let client = await clientModel.getClient(req.params.id);
+        let servicesClient = await serviceModel.getServices(req.params.id);
         // console.log('client.controller getClient client', client);
         res.render('admin/clientPage', {
             title: client.nome_cliente,

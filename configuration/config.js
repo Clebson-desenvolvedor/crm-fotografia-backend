@@ -22,7 +22,7 @@ async function getColors(req, res, next) {
             let sql = 'SELECT * FROM tb_configuracoes_cores LIMIT 1';
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result) => {
-                    console.log('result', result[0])
+                    // console.log('result[0]', result[0]);
                     if (err) {
                         reject(err);
                         return;

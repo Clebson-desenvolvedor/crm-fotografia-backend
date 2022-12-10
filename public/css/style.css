@@ -360,6 +360,12 @@ main {
     padding: 10px 20px;
 }
 
+.services-client button {
+    margin: 10px;
+    background-color: #2e8b57;
+    padding: 0 19px;
+}
+
 .modal-body-form {
     display: flex;
     margin: 10px;

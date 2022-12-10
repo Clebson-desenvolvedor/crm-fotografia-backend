@@ -34,7 +34,6 @@
 
                 //evento de criar um novo lead
                 $('#create-lead-button').click(function(ev) {
-                    console.log($('form select#origin')[0].value)
                     $.ajax({
                         url: `/admin/leads`,
                         type: 'POST',

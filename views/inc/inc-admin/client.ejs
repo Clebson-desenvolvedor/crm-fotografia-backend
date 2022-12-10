@@ -1,7 +1,7 @@
 <div class="card-client">
     <div class="content">
         <div class="modal-body">
-           <h3>Dados Pessoais | <%= clientData.idcliente %></h3>
+           <h3>Dados Pessoais | ID <%= clientData.idcliente %></h3>
             <div class="modal-body-form">
                 <form enctype="multipart/form-data">
                     <div class="data-form-client">
@@ -69,6 +69,49 @@
         </div>
         <div class="services-client">
             <h3>Serviços deste Cliente</h3>
+            <button id="create-service-client-button" class="modalBtnService">Criar Serviço</button>
+        </div>
+    </div>
+</div>
+
+<!-- modal pra criar um novo serviço -->
+<div class="modal">
+    <div class="content">
+        <div class="modal-header">
+            <h1 class="title">Preencha os dados do Novo Serviço</h1>
+        </div>
+        <div class="modal-body">
+            <div class="modal-body-form">
+                <form>
+                    <div>
+                        <label for="">Selecione o tipo de serviço</label>
+                        <select name="select-service" id="select-service" required>
+                            <option value="">Selecione</option>
+                            <option value="Acompanhamento">Acompanhamento</option>
+                            <option value="Casamento Civil">Casamento Civil</option>
+                            <option value="Casamento na Igreja">Casamento na Igreja</option>
+                            <option value="Ensaio Gestante">Ensaio Gestante</option>
+                            <option value="Ensaio Infantil">Ensaio Infantil</option>
+                            <option value="Newborn">Newborn</option>
+                            <option value="Prewedding">Prewedding</option>
+                        </select>
+                    </div>
+                    <div class="form-service-selected">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <hr>
+            <div class="modal-footer-buttons">
+                <div class="clear-cancel">
+                    <button id="clear-button">Limpar formulário</button>
+                </div>
+                <div class="save">
+                    <button id="create-client-button">Criar</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

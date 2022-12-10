@@ -13,6 +13,26 @@
         <script>
             $(document).ready(() => {
 
+                 //abrir ou fechar modal
+                 function switchModal() {
+                    if ($('.modal').css('display') == 'block') {
+                        $('.modal').css('display', 'none');
+                        clearForm();
+
+                    }
+                    else {
+                        $('.modal').css('display', 'block');
+                    }
+                }
+
+                $('.modalBtnService').click(switchModal);
+
+                window.onclick = function (event) {
+                    if (event.target.className == 'modal') {
+                        switchModal();
+                    }
+                }
+
                 //evento para atualizar um cliente
                 $('#update-client-button').click(function(e) {
                     e.preventDefault();
@@ -60,6 +80,59 @@
                     }).fail(function(er) {
                         console.log(er)
                     })
+                });
+
+                //evento para carregar formulário de um serviço de acordo com o tipo de serviço escolhido
+                $('#select-service').on('change', function() {
+                    let serviceSelected = $('#select-service option:selected').val();
+                    let div = '';
+                    
+                    if(serviceSelected == 'Acompanhamento') {
+                        div =  `
+                            <div>
+                                <h3>Acompanhamento</h3>
+                            <div>
+                        `;
+                    } else if (serviceSelected == 'Casamento Civil') {
+                        div =  `
+                            <div>
+                                <h3>Casamento Civil</h3>
+                            <div>
+                        `;
+                    } else if (serviceSelected == 'Casamento na Igreja') {
+                        div =  `
+                            <div>
+                                <h3>Casamento na Igreja</h3>
+                            <div>
+                        `;
+                    } else if (serviceSelected == 'Ensaio Gestante') {
+                        div =  `
+                            <div>
+                                <h3>Ensaio Gestante</h3>
+                            <div>
+                        `;
+                    } else if (serviceSelected == 'Ensaio Infantil') {
+                        div =  `
+                            <div>
+                                <h3>Ensaio Infantil</h3>
+                            <div>
+                        `;
+                    } else if (serviceSelected == 'Newborn') {
+                        div =  `
+                            <div>
+                                <h3>Newborn</h3>
+                            <div>
+                        `;
+                    } else if (serviceSelected == 'Prewedding') {
+                        div =  `
+                            <div>
+                                <h3>Prewedding</h3>
+                            <div>
+                        `;
+                    }
+
+                    $('.form-service-selected').empty();
+                    $('.form-service-selected').append(div);
                 });
             });
         </script>

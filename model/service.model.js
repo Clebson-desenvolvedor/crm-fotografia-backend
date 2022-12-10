@@ -54,11 +54,14 @@ function insertService(service) {
  * @desc pega os serviços da base 
  * @returns {object}
  */
-function getServices() {
-    // console.log('service.model getServices');
+function getServices(id_client = null) {
+    console.log('service.model getServices');
     return new Promise((resolve, reject) => {
         try {
             let sql = `SELECT * FROM tb_servicos`;
+            if (id_client) {
+                sql += ` WHERE tb_servicos_id_cliente = ${id_client}`;
+            }
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result) => {
                     // console.log('service.model getServices result', result);
