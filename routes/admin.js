@@ -7,6 +7,7 @@ const indexAdmin = require("../controllers/adminIndex.controller");
 const multer = require("multer");
 const helper = require("../lib/helper");
 const config = require("../configuration/config.js");
+const user = require("../controllers/user.controller.js");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -45,5 +46,7 @@ router.get("/configurations", config.getConfig);
 
 //trás as cores da base configuradas nas views
 router.get("/configurations/colors", config.getColors);
+
+router.get("/login", user.login);
 
 module.exports = router;
