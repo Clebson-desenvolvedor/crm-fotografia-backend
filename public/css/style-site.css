@@ -10,28 +10,30 @@ h1 {
     padding-top: 5px;
 }
 
-header {
-    background-color: #fff;
-}
+header { background-color: #fff; }
 
-body > header > div > div.logo-site > a > img {
-    width: 300px;
-}
+body > header > div > div.menu-site > ul li a:hover { color: #989; }
 
-body > header {
-    align-items: center;
+body > header > div > div.logo-site > a > img { width: 300px; }
+
+.social h2 { padding: 0 5px 5px 5px; }
+
+.social-logos img { width: 20px; }
+
+div.profile-about p { font-size: 20px; }
+
+div.profile-photo { margin: 10px; }
+
+div.contact h2 { margin-left: 20px; }
+
+.recent-works {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    position: static;
-    width: 100%;
 }
 
-body > header > div > div.menu-site > ul {
-    list-style-type: none;
-    margin: 0;
-    overflow: hidden;
-    padding: 0;
+.social-logos {
+    display: flex;
+    justify-content: space-around;
 }
 
 body > header > div > div.menu-site > ul li {
@@ -39,16 +41,58 @@ body > header > div > div.menu-site > ul li {
     text-decoration: none;
 }
 
-body > header > div > div.menu-site > ul li a {
-    color: #000;
-    display: inline-block;
-    font-size: 23px;
-    padding: 20px;
-    text-decoration: none;
+div.contact-form {
+    margin: 20px;
+    width: 520px;
 }
 
-body > header > div > div.menu-site > ul li a:hover {
-    color: #989;
+div.profile {
+    align-items: center;
+    display: flex;
+}
+
+footer .developer {
+    position: relative;
+    text-align: center;
+}
+
+.recent-works-photos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.social {
+    margin: auto;
+    text-align: center;
+    width: 200px;
+}
+
+div.main-galery {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-submit input {
+    background-color: #87cefa;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 15px;
+}
+
+.recent-works-content {
+    background-color: #fff;
+    border-radius: 5px;
+    text-align: center;
+    width: 1200px;
+}
+
+body > header > div > div.menu-site > ul {
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
 }
 
 body > header > div.container-site {
@@ -65,6 +109,71 @@ body > header > div.container-site p {
     top: 5px;
 }
 
+div.contact {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+div.photos-galery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    text-align: center;
+}
+
+body > header > div > div.menu-site > ul li a {
+    color: #000;
+    display: inline-block;
+    font-size: 23px;
+    padding: 20px;
+    text-decoration: none;
+}
+
+div.contact-form textarea {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    padding: 0.5rem;
+    width: 510px;
+}
+
+div.profile-photo img {
+    border: 1px solid #aaa;
+    border-radius: 50%;
+    height: 200px;
+    position: relative;
+    width: 200px;
+}
+
+.login-inputs input {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    outline: none;
+    padding: 0.5rem;
+    width: 200px;
+}
+
+.login-screen {
+    background-color: #C5D8FB;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+body > header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: static;
+    width: 100%;
+}
+
 body > main > div.cover {
     background-attachment: fixed;
     background-image: url("/img/photo-cover.jpg");
@@ -74,45 +183,25 @@ body > main > div.cover {
     min-height: 500px; 
 }
 
-.recent-works {
-    display: flex;
-    justify-content: center;
-}
-
-.recent-works-content {
-    background-color: #fff;
+div.contact-form input {
+    border: 1px solid #ccc;
     border-radius: 5px;
-    text-align: center;
-    width: 1200px;
+    height: 100%;
+    margin: 5px;
+    outline: none;
+    padding: 0.5rem;
+    width: 350px;
 }
 
-.recent-works-photos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-body > main > div.recent-works > div > div > img,
-div.photos-galery img {
-    border: 10px solid #fff;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+div.contact-form button {
+    background-color: #1E90FF;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
     cursor: pointer;
-    margin-bottom: 50px;
-    transition: all 0.5s;
-    width: 400px;
-}
-
-div.main-galery {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-}
-
-div.photos-galery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    text-align: center;
+    float: right;
+    margin-right: 5px;
+    padding: 8px 15px;
 }
 
 footer {
@@ -126,127 +215,7 @@ footer {
     width: 100%;
 }
 
-footer .developer {
-    position: relative;
-    text-align: center;
-}
-
-.social {
-    margin: auto;
-    text-align: center;
-    width: 200px;
-}
-
-.social h2 {
-    padding: 0 5px 5px 5px;
-}
-
-.social-logos {
-    display: flex;
-    justify-content: space-around;
-}
-
-.social-logos img {
-    width: 20px;
-}
-
-body > main > div.recent-works > div > div > img:nth-child(1):hover,
-body > main > div.recent-works > div > div > img:nth-child(2):hover,
-body > main > div.recent-works > div > div > img:nth-child(3):hover,
-body > main > div.recent-works > div > div > img:nth-child(4):hover {
-    transform: scale(1.3);
-    -webkit-transform: scale(1.3);
-}
-
-div.profile {
-    align-items: center;
-    display: flex;
-}
-
-div.profile-about p {
-    font-size: 20px;
-}
-
-div.profile-photo {
-    margin: 10px
-}
-
-div.profile-photo img {
-    border: 1px solid #aaa;
-    border-radius: 50%;
-    height: 200px;
-    position: relative;
-    width: 200px;
-}
-
-div.contact h2 {
-    margin-left: 20px;
-}
-
-div.contact {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-}
-
-div.contact-form {
-    margin: 20px;
-    width: 520px;
-}
-
-div.contact-form input {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: 100%;
-    margin: 5px;
-    outline: none;
-    padding: 0.5rem;
-    width: 350px;
-}
-
-div.form-name,
-div.form-phone,
-div.form-email {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-}
-
-div.contact-form textarea {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    outline: none;
-    padding: 0.5rem;
-    width: 510px;
-}
-div.contact-form button {
-    background-color: #1E90FF;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    cursor: pointer;
-    float: right;
-    margin-right: 5px;
-    padding: 8px 15px;
-}
-
-div.contact-form textarea:focus,
-div.contact-form input:focus {
-    border: 1px solid #aaa;
-}
-
-.login-screen {
-    background-color: #C5D8FB;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .login-screen-container {
-    text-align: center;
     background-color: #fff;
     border-radius: 3px;
     display: flex;
@@ -255,23 +224,39 @@ div.contact-form input:focus {
     justify-content: space-around;
     left: 50%;
     position: absolute;
+    text-align: center;
     top: 50%;
     transform: translate(-50%, -50%);
     width: 300px;
 }
 
-.login-inputs input {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 5px;
-    outline: none;
-    padding: 0.5rem;
-    width: 200px;
+div.contact-form input:focus,
+div.contact-form textarea:focus {
+    border: 1px solid #aaa;
 }
 
-.login-submit input {
-    background-color: #87cefa;
-    border: none;
-    border-radius: 2px;
-    padding: 5px 15px;
+body > main > div.recent-works > div > div > img,
+div.photos-galery img {
+    border: 10px solid #fff;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    margin-bottom: 50px;
+    transition: all 0.5s;
+    width: 400px;
+}
+
+div.form-email,
+div.form-name,
+div.form-phone {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+body > main > div.recent-works > div > div > img:nth-child(1):hover,
+body > main > div.recent-works > div > div > img:nth-child(2):hover,
+body > main > div.recent-works > div > div > img:nth-child(3):hover,
+body > main > div.recent-works > div > div > img:nth-child(4):hover {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
 }
