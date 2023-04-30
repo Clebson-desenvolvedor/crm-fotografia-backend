@@ -1,5 +1,9 @@
-<link rel="stylesheet" href="/css/style-site.css">
+<!-- <link rel="stylesheet" href="/css/style-site.css"> -->
+<link rel="stylesheet" href="/css/style.css">
+<title>Login | By Emotion</title>
+<%- include('../inc/inc-admin/head') %>
 <div class="login-screen">
+    <p><a href="/">Voltar para Home</a></p>
     <div class="login-img">
         <img src="/img/logo-byemotion.png" width="200px">
     </div>
@@ -7,9 +11,11 @@
         <h3>Acesso a área restrita</h3>
         <div class="login-inputs">
             <div class="login-email">
+                <i class="fa-solid fa-user"></i>
                 <input type="text" name="" id="login">
             </div>
             <div class="login-pass">
+                <i class="fa-solid fa-lock"></i>
                 <input type="password" name="" id="pass">
             </div>
         </div>
@@ -18,3 +24,9 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        
+    });
+</script>
