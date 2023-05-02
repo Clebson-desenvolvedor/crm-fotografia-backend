@@ -10,7 +10,7 @@ const moment = require("moment");
  */
 
 async function createOrUpdateClient(req, res, next) {
-    console.log('client.controller createOrUpdateClient');
+    console.log("Controller createOrUpdateClient");
     // console.log('client.controler createOrUpdateClient req.body', req.body);
     // console.log('client.controler createOrUpdateClient req.file', req.file);
     try {
@@ -53,7 +53,7 @@ async function getClients(req, res, next) {
         clients = await clientModel.getClients();
         // console.log('client.controller getClients clients', clients);
         res.render('admin/clientsPage', {
-            title: 'clientes',
+            title: 'Clientes',
             clients: clients,
         })
     } catch (err) {

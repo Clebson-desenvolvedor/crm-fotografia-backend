@@ -29,18 +29,19 @@ async function createUser(req, res, next) {
  * @return {object}
  */
 async function loginUser(req, res, next) {
-    // console.log('user.controller loginUser req.body', req.body);
+    // console.log("Controller: loginUser: req.body", req.body);
     try {
         let user = req.body;
-        if (!user.email || !user.senha) throw new Error("Os campos são obrigatórios! ");
-        user = await userModel.loginUser(user);
-        // console.log('user.controller loginUser user', user);
-        if (!user.password || user.length == 0) throw new Error("Erro: E-mail ou senha inválido.");
-        res.send({
-            Mensagem: "Usuário autenticado com sucesso! ",
-            Usuario: req.body.email,
-            Token: user.jwt
-        });
+        if (!user.email || !user.senha) {
+            res.send({ mensagem: "Os campos são obrigatórios. "});
+        } else {
+            user = await userModel.loginUser(user);
+            if (!user[0].senha_usuario || user.length == 0) {
+                res.status(401).send({mensagem: "Falha na autenticação!"});
+            } else {
+                res.status(200).send({mensagem: "Usuário autenticado com Sucesso!", token: user[0].jwt});
+            }
+        }
     } catch (err) {
         console.log('user.controller loginUser catch err', err);
         next(err);

@@ -18,26 +18,31 @@
         <ul>
             <li><a href="/admin/configurations" id="configurations" title="Configurações"><i class="fa-solid fa-gear"></i><span> Configurações e Preferências</span></a></li>
         </ul>
+        <ul>
+            <li><a href="/admin/blog" id="blog" title="Meu Blog"><i class="fa-sharp fa-solid fa-square-rss"></i><span> Meu Blog</span></a></li>
+        </ul>
+        <ul>
+            <li><a href="/admin/contact" id="contact" title="Mensagem que os contatos deixaram através do site"><i class="fa-regular fa-message"></i><span> Contato</span></a></li>
+        </ul>
     </div>
 </div>
 
 <script>
     $(document).ready(function() {
-
         setTimeout(() => {
             //pegar cores da configuradas na base
             $.ajax({
-            url: '/admin/configurations/colors',
-            type: "GET",
-            success: data => {
-                console.log(data)
-                let colors = data
-                $('.sidebar').css('background-color', colors['cor-primaria']);
-                $('main').css('background-color', colors['cor-secundaria']);
-                $('p').css('color', colors['cor-texto']);
-                $('span').css('color', colors['cor-texto']);
-            }
-        });
+                url: '/admin/configurations/colors',
+                type: "GET",
+                success: data => {
+                    // console.log(data)
+                    let colors = data
+                    $('.sidebar').css('background-color', colors['cor-primaria']);
+                    $('main').css('background-color', colors['cor-secundaria']);
+                    $('p').css('color', colors['cor-texto']);
+                    $('span').css('color', colors['cor-texto']);
+                }
+            });
         }, 100);
     });
 </script>

@@ -227,6 +227,7 @@ header label span {
     background-color: #87cefa;
     border: none;
     border-radius: 2px;
+    cursor: pointer;
     padding: 5px 15px;
 }
 

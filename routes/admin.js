@@ -8,6 +8,7 @@ const multer = require("multer");
 const helper = require("../lib/helper");
 const config = require("../configuration/config.js");
 const user = require("../controllers/user.controller.js");
+const login = require("../middleware/login.js");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -24,7 +25,7 @@ router.get("/", indexAdmin.getIndexAdmin)
 
 //rotas para clientes: admin/clients
 router.post("/clients", upload.single('foto_cliente'), clientController.createOrUpdateClient);
-router.get("/clients", clientController.getClients);
+router.get("/clients", login, clientController.getClients);
 router.get("/clients/:id", clientController.getClient);
 router.post("/clients/:id", clientController.deleteClient);
 
@@ -48,5 +49,6 @@ router.get("/configurations", config.getConfig);
 router.get("/configurations/colors", config.getColors);
 
 router.get("/login", user.login);
+router.post("/login", user.loginUser);
 
 module.exports = router;

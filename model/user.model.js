@@ -16,7 +16,7 @@ function insertUser(user) {
                     console.log('user.model insertUser errBc', errBc);
                     res.send(errBc);
                 }
-                let sql = `INSERT INTO usuarios (email, senha) values (?,?)`;
+                let sql = `INSERT INTO tb_usuarios (email_usuario, senha_usuario) values (?,?)`;
                 let values = [user.email, hash];
                 mysql.getConnection((err, conn) => {
                     conn.query(sql, values, (err, result) => {
@@ -42,44 +42,44 @@ function insertUser(user) {
  * @returns {object}
  */
 function loginUser(user) {
-    // console.log('user.model loginUser user', user);
+    // console.log('Model: loginUser: user', user);
     return new Promise((resolve, reject) => {
         try {
-            let query = `select * from usuarios where email = ?`;
-            mysql.getConnection((err, conn) => {
-                if (err) return err;
-                conn.query(query, user.email, (err, result) => {
-                    // console.log('user.model loginUser result', result);
-                    console.log('user.model loginUser conn.query err', err);
+            let query = `SELECT * FROM tb_usuarios WHERE email_usuario = ?`;
+            mysql.getConnection((err_get_users, conn) => {
+                if (err_get_users) return err_get_users;
+                conn.query(query, user.email, (err_user_email, result_get_user) => {
                     conn.release();
-                    if (err) result = err;
-                    if (result.length < 1) {
+                    if (err_user_email) {
+                        console.log('user.model loginUser conn.query err_user_email', err_user_email);
+                        return err_user_email;
+                    }
+
+                    if (result_get_user.length < 1) {
                         resolve(result);
                     } else {
-                        bcrypt.compare(user.senha, result[0].senha, (err, result2) => {
-                            // console.log('user.model loginUser result2', result2);
-                            console.log('user.model loginUser conn.query #2', err);
-                            if (err) return err;
-                            result.password = result2;
-                            if (result.password) {
-                                result.jwt = jwt.sign(
-                                    {
-                                        idusuario: result[0].idusuario,
-                                        email: result[0].email,
+                        bcrypt.compare(user.senha, result_get_user[0].senha_usuario, (err_bcrypt, result_bcrypt) => {
+                            if (err_bcrypt) {
+                                return err_bcrypt;
+                            }
+
+                            if (result_bcrypt) {
+                                result_get_user.jwt = jwt.sign({
+                                        idusuario: result_get_user[0].id_usuario,
+                                        email: result_get_user[0].email_usuario,
                                     },
-                                    process.env.JWT_KEY,
+                                        process.env.JWT_KEY,
                                     {
                                         expiresIn: "1h",
-                                    }
-                                );
+                                    });
                             }
-                            resolve(result);
+                            resolve(result_get_user);
                         });
                     }
                 });
             });
-        } catch (err) {
-            console.log('client.model loginUser catch err', err);
+        } catch (err_catch) {
+            console.log('client.model loginUser catch err', err_catch);
         }
     });
 }
