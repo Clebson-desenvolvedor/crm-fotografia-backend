@@ -10,7 +10,6 @@ const moment = require("moment");
  */
 
 async function createOrUpdateClient(req, res, next) {
-    console.log("Controller createOrUpdateClient");
     // console.log('client.controler createOrUpdateClient req.body', req.body);
     // console.log('client.controler createOrUpdateClient req.file', req.file);
     try {
@@ -48,14 +47,13 @@ async function createOrUpdateClient(req, res, next) {
  * @return {Array}
  */
 async function getClients(req, res, next) {
-    console.log('client.controller getClients');
     try {
         clients = await clientModel.getClients();
         // console.log('client.controller getClients clients', clients);
         res.render('admin/clientsPage', {
             title: 'Clientes',
             clients: clients,
-        })
+        });
     } catch (err) {
         console.log('client.controller getClients catch err', err);
         next(err);
@@ -68,7 +66,6 @@ async function getClients(req, res, next) {
  * @return {Array}
  */
 async function getClient(req, res, next) {
-    console.log('client.controller getClient req.params.id', req.params.id);
     try {
         let client = await clientModel.getClient(req.params.id);
         let servicesClient = await serviceModel.getServices(req.params.id);
@@ -92,7 +89,6 @@ async function getClient(req, res, next) {
  * @return {object}
  */
 async function deleteClient(req, res, next) {
-    console.log('client.controller deleteClient req.params.id', req.params.id);
     try {
         let client = await clientModel.deleteClient(req.params.id);
         // console.log('client.controller createClient client', client);

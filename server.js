@@ -4,4 +4,3 @@ const app = require("./app.js");
 const server = http.createServer(app);
 
 server.listen(port, () => console.log("API iniciada na porta ", port));
-console.log('alteração')

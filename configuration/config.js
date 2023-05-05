@@ -5,7 +5,6 @@ const mysql = require("../model/mysql.js").pool;
  * @param {object} req 
  */
 async function getConfig(req, res, next) {
-    console.log('Configuration getConfig');
     try {
         res.render('admin/configurationPage', {
             
@@ -16,7 +15,6 @@ async function getConfig(req, res, next) {
 }
 
 async function getColors(req, res, next) {
-    console.log('getColors')
     return new Promise((resolve, reject) => {
         try {
             let sql = 'SELECT * FROM tb_configuracoes_cores LIMIT 1';

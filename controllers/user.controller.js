@@ -36,10 +36,12 @@ async function loginUser(req, res, next) {
             res.send({ mensagem: "Os campos são obrigatórios. "});
         } else {
             user = await userModel.loginUser(user);
-            if (!user[0].senha_usuario || user.length == 0) {
+            if (user.length == 0) {
+                res.status(401).send({mensagem: "Falha na autenticação!"});
+            } else if (!user[0].senha_usuario) {
                 res.status(401).send({mensagem: "Falha na autenticação!"});
             } else {
-                res.status(200).send({mensagem: "Usuário autenticado com Sucesso!", token: user[0].jwt});
+                res.status(200).send({mensagem: "Usuário autenticado com Sucesso!", token: user["token"]});
             }
         }
     } catch (err) {

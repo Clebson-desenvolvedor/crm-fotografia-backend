@@ -8,7 +8,6 @@ const helper = require("../lib/helper");
  */
 
 async function createOrUpdateLead(req, res, next) {
-    console.log('lead.controller createOrUpdateLead');
     // console.log('lead.controler createOrUpdateLead req.body', req.body);
     // console.log('lead.controler createOrUpdateLead req.file', req.file);
     try {
@@ -56,7 +55,6 @@ async function createOrUpdateLead(req, res, next) {
  * @return {Array}
  */
 async function getLeads(req, res, next) {
-    console.log('lead.controller getLeads');
     try {
         leads = await leadModel.getLeads();
         // console.log('lead.controller getleads leads', leads);
@@ -96,7 +94,6 @@ async function getLead(req, res, next) {
  * @return {object}
  */
 async function deleteLead(req, res, next) {
-    console.log('lead.controller deleteLead req.params.id', req.params.id);
     try {
         let lead = await leadModel.deleteLead(req.params.id);
         // console.log('lead.controller deleteLead lead', lead);
