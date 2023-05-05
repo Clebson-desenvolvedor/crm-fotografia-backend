@@ -32,6 +32,8 @@ form input#whatsapp { width: 123px; }
 
 header h2 { color: #222; }
 
+span.logout { cursor: pointer; }
+
 #nav-toggle:checked ~ .main-content header {
     left: 70px;
     width: calc(100% - 70px);

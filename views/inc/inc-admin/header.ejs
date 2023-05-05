@@ -7,13 +7,14 @@
         <img src="/img/profile.jpg" width="40px" height="40px" title="foto de perfil" alt="">
         <div>
             <h4>Alice Andrade</h4>
-            <a href=""><span>Sair</span></a>
+            <span class="logout">Sair</span>
         </div>
     </div>
 </header>
 
 <script>
-    $(".user-wrapper").click(function() {
-        
-    })
+    $("span.logout").click(function() {
+        sessionStorage.clear();
+        window.location.assign("/admin/login");
+    });
 </script>

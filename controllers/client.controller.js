@@ -1,7 +1,7 @@
 const clientModel = require("../model/client.model.js");
-const serviceModel = require("../model/service.model");
 const helper = require("../lib/helper");
 const moment = require("moment");
+const serviceModel = require("../model/service.model");
 
 /**
  * @desc Cria um cliente, ou atualiza-o se existir um id como parâmetro no corpo da requisição
@@ -55,7 +55,7 @@ async function getClients(req, res, next) {
             clients: clients,
         });
     } catch (err) {
-        console.log('client.controller getClients catch err', err);
+        console.log('Controller: clients: getClients catch err', err);
         next(err);
     }
 }

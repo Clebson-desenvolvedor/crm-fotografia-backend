@@ -66,7 +66,6 @@ function loginUser(user) {
                             if (result_bcrypt) {
                                 const TOKEN = jwt.sign({id: result_get_user[0].id_usuario}, "segredo", { expiresIn: "1h"});
                                 result_get_user.token = TOKEN;
-                                console.log(result_get_user);
                                 salvaTokenUsuario(result_get_user);
                             }
                             resolve(result_get_user);

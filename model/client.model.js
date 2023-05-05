@@ -75,7 +75,6 @@ function insertClient(client) {
  * @returns {Array}
  */
 function getClients() {
-    console.log('client.model getClients');
     return new Promise((resolve, reject) => {
         try {
             let sql = "SELECT id_cliente, nome_cliente, email_cliente, whatsapp_cliente, foto_cliente FROM tb_clientes";
