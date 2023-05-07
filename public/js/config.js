@@ -5,7 +5,7 @@ $(document).ready(function() {
         url: '/admin/configurations/colors',
         type: "GET",
         success: data => {
-            console.log(data)
+            // console.log(data)
         }
     });
 });

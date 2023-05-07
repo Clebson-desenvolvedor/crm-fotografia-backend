@@ -12,27 +12,6 @@
             </div>
         <script>
             $(document).ready(() => {
-
-                 //abrir ou fechar modal
-                 function switchModal() {
-                    if ($('.modal').css('display') == 'block') {
-                        $('.modal').css('display', 'none');
-                        clearForm();
-
-                    }
-                    else {
-                        $('.modal').css('display', 'block');
-                    }
-                }
-
-                $('.modalBtnService').click(switchModal);
-
-                window.onclick = function (event) {
-                    if (event.target.className == 'modal') {
-                        switchModal();
-                    }
-                }
-
                 //evento para atualizar um cliente
                 $('#update-client-button').click(function(e) {
                     e.preventDefault();

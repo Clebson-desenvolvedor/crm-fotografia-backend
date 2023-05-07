@@ -16,21 +16,6 @@
                     $('.cards').append('<p>Nenhum Cliente cadastrado aidna.</p>')
                 }
 
-                //abrir ou fechar modal
-                function switchModal() {
-                    if ($('.modal').css('display') == 'block') {
-                        $('.modal').css('display', 'none');
-                        clearForm();
-
-                    }
-                    else {
-                        $('.modal').css('display', 'block');
-                    }
-                }
-
-                $('.modalBtn').click(switchModal);
-                $('#clear-button').click(clearForm);
-
                 //evento de criar um novo cliente
                 $('#create-client-button').click(function(ev) {
                     $.ajax({
@@ -69,7 +54,7 @@
                         type: 'POST',
                         data: { id: id },
                     }).done(function(data) {
-                        console.log('data', data);
+                        // console.log('data', data);
                         $('p.alert').text(data.message).addClass('alert-success');
                         setTimeout(() => {
                             $('p.alert').fadeOut(500);
@@ -79,17 +64,7 @@
                     });
                 });
 
-                window.onclick = function (event) {
-                    if (event.target.className == 'modal') {
-                        switchModal();
-                    }
-                }
-                
-               function clearForm() {
-                $('form').each (function(){
-                    this.reset();
-                }); 
-               }   
+                $(".modalBtn").click(switchModal);
             });
         </script>
     </body>
