@@ -49,6 +49,12 @@ span.logout { cursor: pointer; }
     position: absolute;
 }
 
+.colors button {
+    background-color: #2e8b57;
+    float: right;
+    padding: 0 19px;
+}
+
 .data-form {
     display: flex;
     margin: 5px;
@@ -201,6 +207,8 @@ header label span {
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     padding: 10px;
+    position: absolute;
+    width: 75%;
 }
 
 .data-form-image {
@@ -372,7 +380,7 @@ button {
 }
 
 .card {
-    background-color: #add8e6;
+    background-color: #ffffff;
     border-radius: 5px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     color: inherit;
@@ -497,6 +505,17 @@ form select {
     padding: 5px;
 }
 
+.painel-lateral,
+.painel-lateral-texto,
+.painel-lateral-icone,
+.painel-principal-texto {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    width: 300px;
+}
+
 .email,
 .whatsapp {
     align-items: center;
@@ -521,15 +540,6 @@ form select {
 .modal-footer button#delete-client-button,
 .modal-footer button#delete-lead-button {
     background-color: #8b0000;
-}
-
-.colors-primary,
-.colors-secundary,
-.colors-text {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    width: 175px;
 }
 
 .modal-footer button#create-client-button,

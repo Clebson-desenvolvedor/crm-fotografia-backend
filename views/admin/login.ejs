@@ -42,7 +42,7 @@
                     senha: senha
                 },
             }).done(function(data) {
-                console.log(data)
+                // console.log(data)
                 alert(data.mensagem);
                 sessionStorage.setItem("token", data.token);
                 setTimeout(() => {

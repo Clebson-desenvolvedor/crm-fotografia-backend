@@ -47,6 +47,7 @@ router.get("/configurations", config.getConfig);
 
 //trás as cores da base configuradas nas views
 router.get("/configurations/colors", config.getColors);
+router.post("/configurations/colors", config.updateColors);
 
 router.get("/login", user.login);
 router.post("/login", user.loginUser);

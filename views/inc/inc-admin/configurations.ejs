@@ -1,18 +1,49 @@
 <div class="colors">
     <h3>Configurações das cores</h3>
-    <div class="colors-primary">
-        <p>Cor primária:</p>
-        <input type="color" id="color-primary" class="color-input">
-        <label for="color-primary" class="pseudo-color-input"></label>
+    <div class="painel-lateral">
+        <h5>Cor do Painel Lateral</h5>
+        <input type="color" id="cor-painel-lateral" class="color-input" value="#ff00ff">
+        <label for="cor-painel-lateral" class="pseudo-color-input"></label>
     </div>
-    <div class="colors-secundary">
-        <p>Cor secundária:</p>
-        <input type="color" name="" id="color-secundary" class="color-input">
-        <label for="color-secundary" class="pseudo-color-input"></label>
+
+    <div class="painel-lateral-texto">
+        <h5>Cor do Texto do Painel Lateral</h5>
+        <input type="color" id="cor-texto-painel-lateral" class="color-input"></label>
+        <label for="cor-texto-painel-lateral" class="pseudo-color-input">
     </div>
-    <div class="colors-text">
-        <p>Cor do texto:</p>
-        <input type="color" name="" id="color-text" class="color-input">
-        <label for="color-text" class="pseudo-color-input"></label>
+
+    <div class="painel-lateral-icone">
+        <h5>Cor dos Ícones do Painel Lateral</h5>
+        <input type="color" id="cor-icones-painel-lateral" class="color-input"></label>
+        <label for="cor-icones-painel-lateral" class="pseudo-color-input">
     </div>
+
+    <div class="painel-principal-texto">
+        <h5>Cor do Texto do Painel Prncipal</h5>
+        <input type="color" id="cor-texto-painel-principal" class="color-input"></label>
+        <label for="cor-texto-painel-principal" class="pseudo-color-input">
+    </div>
+    <button>Salvar</button>
 </div>
+
+<script>
+
+    /* salva as cores na base de dados */
+    $(".colors button").click(function() {
+        console.log("clicou")
+        $.ajax({
+            url: '/admin/configurations/colors',
+            type: "POST",
+            data: {
+                cor_painel_lateral: $(".colors #cor-painel-lateral").val(),
+                cor_texto_painel_lateral: $(".colors #cor-texto-painel-lateral").val(),
+                cor_icones_painel_lateral: $(".colors #cor-icones-painel-lateral").val(),
+                cor_texto_painel_principal: $(".colors #cor-texto-painel-principal").val()
+            },
+            success: data => {
+                alert(data.mensagem);
+            }
+        });
+    });
+    
+</script>
