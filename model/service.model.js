@@ -55,7 +55,7 @@ function insertService(service) {
  * @returns {object}
  */
 function getServices(id_client = null) {
-    console.log('service.model getServices');
+    // console.log('service.model getServices');
     return new Promise((resolve, reject) => {
         try {
             let sql = `SELECT * FROM tb_servicos`;

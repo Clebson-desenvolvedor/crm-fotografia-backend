@@ -102,7 +102,7 @@ function getClients() {
  * @returns {object}
  */
 function getClient(id) {
-    console.log('client.model getClient');
+    // console.log('client.model getClient');
     // console.log('client.model getClient id', id);
     return new Promise((resolve, reject) => {
         try {
@@ -170,7 +170,7 @@ function getClient(id) {
  * @returns {Array}
  */
 function deleteClient(id) {
-    console.log('client.model deleteClient id', id);
+    // console.log('client.model deleteClient id', id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `DELETE FROM tb_endereco_cliente WHERE tb_endereco_cliente_id_cliente = ${id}`;
@@ -214,7 +214,7 @@ function deleteClient(id) {
  */
 
 function updateClient(client) {
-    console.log('client.model updateClient');
+    // console.log('client.model updateClient');
     // console.log('client.model updateClient client', client);
     return new Promise((resolve, reject) => {
         try {

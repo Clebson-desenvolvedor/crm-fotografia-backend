@@ -32,7 +32,7 @@
     $(".colors button").click(function() {
         console.log("clicou")
         $.ajax({
-            url: '/admin/configurations/colors',
+            url: '/admin/configurations/getColors',
             type: "POST",
             data: {
                 cor_painel_lateral: $(".colors #cor-painel-lateral").val(),

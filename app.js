@@ -1,8 +1,6 @@
 const express = require("express");
 const app = express();
-const userRouter = require("./routes/user.route.js");
 const indexRoute = require("./routes/index.route");
-const dashRoute = require("./routes/dash.route");
 const adminRouter = require("./routes/admin");
 const bodyParser = require("body-parser");
 const path = require("path");
@@ -23,9 +21,7 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-app.use("/users", userRouter);
 app.use("/", indexRoute);
-app.use("/dashboard", dashRoute);
 app.use("/admin", adminRouter);
 
 app.use((err, req, res, next) => {

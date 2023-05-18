@@ -2,7 +2,6 @@
 <html lang="pt-br">
     <%- include('../inc/inc-admin/head') -%>
     <body>
-        <input type="checkbox" id="nav-toggle">
         <%- include('../inc/inc-admin/sidebar') -%>
             <div class="main-content">
                 <%- include('../inc/inc-admin/header') -%>
@@ -15,6 +14,7 @@
                 $('.color-input').on('change', function () {
                     $(this).next('.pseudo-color-input').css('background-color', $(this).val());
                 });
+
             });
         </script>
     </body>

@@ -1,13 +1,14 @@
-<div class="sidebar">
+<input type="checkbox" id="nav-toggle">
+<div class="sidebar" style="background-color:<%= colors.cor_painel_lateral %>;">
     <a href="/admin/"><img src="/img/logo-byemotion.png"></a>
     <div class="sidebar-brand">
     </div>
     <div class="sidebar-menu">
         <ul>
-            <li><a href="/admin/clients" id="clients" title="Clientes"><i class="fa-solid fa-users"></i></span><span> Clientes</span></a></li>
+            <li><a href="/admin/clients" id="clients" title="Clientes"><i class="fa-solid fa-users"></i><span> Clientes</span></a></li>
         </ul>
         <ul>
-            <li><a href="/admin/leads" id="leads" title="Leads"><i class="fa-solid fa-user"></i></span><span> Leads</span></a></li>
+            <li><a href="/admin/leads" id="leads" title="Leads"><i class="fa-solid fa-user"></i><span> Leads</span></a></li>
         </ul>
         <ul>
             <li><a href="/admin/services" id="services" title="Serviços"><i class="fa-solid fa-camera-retro"></i><span> Serviços</span></a></li>
@@ -26,3 +27,8 @@
         </ul>
     </div>
 </div>
+
+<style type="text/css">
+    .sidebar-menu i { color:<%=  colors.cor_icone_painel_lateral %> }
+    a span { color: <%= colors.cor_texto_painel_lateral %> }
+</style>

@@ -24,13 +24,14 @@ function clearForm() {
 }
 
 $(document).ready(function() {
+    console.log("passou")
     setTimeout(() => {
         /* pega cores salvas na base e distribui para respectivas divs */
         $.ajax({
-            url: '/admin/configurations/colors',
+            url: '/admin/configurations/getColors',
             type: "GET",
             success: colors => {
-                // console.log("colors", colors);
+                console.log("colors", colors);
                 $(".sidebar").css("background-color", colors["cor_painel_lateral"]);
                 $(".painel-lateral label").css("background-color",colors["cor_painel_lateral"]);
 

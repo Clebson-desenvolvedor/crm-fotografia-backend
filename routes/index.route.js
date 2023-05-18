@@ -7,6 +7,5 @@ router.get("/galery", indexController.getGalery);
 router.get("/about", indexController.getAbout);
 router.get("/contact", indexController.getContact);
 router.get("/blog", indexController.getBlog);
-router.get("/login", indexController.getLogin);
 
 module.exports = router;

@@ -51,7 +51,7 @@ function insertLead(lead) {
  * @returns {Array}
  */
 function getLeads() {
-    console.log('lead.model getLeads');
+    // console.log('lead.model getLeads');
     return new Promise((resolve, reject) => {
         try {
             let sql = "SELECT id_lead, nome_lead, email_lead, whatsapp_lead, foto_lead FROM tb_leads";
@@ -79,7 +79,7 @@ function getLeads() {
  * @returns {object}
  */
 function getLead(id) {
-    console.log('lead.model getLead');
+    // console.log('lead.model getLead');
     // console.log('lead.model getLead id', id);
     return new Promise((resolve, reject) => {
         try {
@@ -117,7 +117,7 @@ function getLead(id) {
  * @returns {Array}
  */
 function deleteLead(id) {
-    console.log('lead.model deleteLead id', id);
+    // console.log('lead.model deleteLead id', id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `DELETE FROM tb_leads WHERE id_lead = ${id}`;
@@ -147,7 +147,7 @@ function deleteLead(id) {
  */
 
 function updateLead(lead) {
-    console.log('lead.model updateLead');
+    // console.log('lead.model updateLead');
     // console.log('lead.model updatelead lead', lead);
     return new Promise((resolve, reject) => {
         try {

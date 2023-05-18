@@ -2,6 +2,7 @@ const clientModel = require("../model/client.model.js");
 const helper = require("../lib/helper");
 const moment = require("moment");
 const serviceModel = require("../model/service.model");
+const config = require("../model/config.model.js");
 
 /**
  * @desc Cria um cliente, ou atualiza-o se existir um id como parâmetro no corpo da requisição
@@ -48,14 +49,16 @@ async function createOrUpdateClient(req, res, next) {
  */
 async function getClients(req, res, next) {
     try {
-        clients = await clientModel.getClients();
+        let clients = await clientModel.getClients();
+        let colors = await config.getColors();
         // console.log('client.controller getClients clients', clients);
-        res.render('admin/clientsPage', {
-            title: 'Clientes',
+        res.render("admin/clientsPage", {
+            title: "Clientes",
             clients: clients,
+            colors: colors
         });
     } catch (err) {
-        console.log('Controller: clients: getClients catch err', err);
+        console.log("Controller: clients: getClients catch err", err);
         next(err);
     }
 }

@@ -33,18 +33,10 @@ function getBlog(req, res, next) {
     res.render("site/blog")
 }
 
-/**
- * @desc Vai para página de login
- */
-function getLogin(req, res, next) {
-    res.render("site/login")
-}
-
 module.exports = {
     getIndex,
     getGalery,
     getAbout,
     getContact,
-    getBlog,
-    getLogin
+    getBlog
 }

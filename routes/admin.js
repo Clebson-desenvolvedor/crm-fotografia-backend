@@ -3,12 +3,12 @@ const router = express.Router();
 const clientController = require("../controllers/client.controller.js");
 const serviceController = require("../controllers/service.controller.js");
 const leadController = require("../controllers/lead.controller.js");
-const indexAdmin = require("../controllers/adminIndex.controller");
 const multer = require("multer");
 const helper = require("../lib/helper");
-const config = require("../configuration/config.js");
+const configController = require("../controllers/config.controller.js");
 const user = require("../controllers/user.controller.js");
-const { e_admin } = require("../middleware/login.js");
+const { e_admin } = require("../middleware/login.js"); /** Por enquanto não está em uso */
+const dashboardController = require("../controllers/dash.controller.js");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -20,8 +20,6 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-router.get("/", indexAdmin.getIndexAdmin)
 
 //rotas para clientes: admin/clients
 router.post("/clients", upload.single('foto_cliente'), clientController.createOrUpdateClient);
@@ -43,13 +41,14 @@ router.get("/leads/:id", leadController.getLead);
 router.post("/leads/:id", leadController.deleteLead);
 
 //rotas para a configuração: admin/configurations
-router.get("/configurations", config.getConfig);
+router.get("/configurations", configController.getConfig);
 
-//trás as cores da base configuradas nas views
-router.get("/configurations/colors", config.getColors);
-router.post("/configurations/colors", config.updateColors);
-
+// rotas para login
 router.get("/login", user.login);
 router.post("/login", user.loginUser);
+
+// rotas para o dashboard
+router.get("/", dashboardController.getData);
+router.get("/dashboard", dashboardController.getData);
 
 module.exports = router;
