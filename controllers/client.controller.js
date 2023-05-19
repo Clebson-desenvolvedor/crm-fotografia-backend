@@ -72,13 +72,15 @@ async function getClient(req, res, next) {
     try {
         let client = await clientModel.getClient(req.params.id);
         let servicesClient = await serviceModel.getServices(req.params.id);
+        let colors = await config.getColors();
         // console.log('client.controller getClient client', client);
         res.render('admin/clientPage', {
             title: client.nome_cliente,
             clientData: client,
             message: '',
             typeMessage: undefined,
-            moment: moment
+            moment: moment,
+            colors: colors
         })
     } catch (err) {
         console.log('client.controller getClient catch err', err);

@@ -4,7 +4,6 @@
 <div class="modal">
     <div class="content">
         <div class="modal-header">
-            <h1 class="title">Preencha os dados do Novo Cliente</h1>
         </div>
         <div class="modal-body">
             <div class="modal-body-form">
@@ -78,7 +77,6 @@
 <div class="cards">
     <% clients.forEach(row=> { %>
     <a href="/admin/clients/<%= row.id_cliente %>" class="card" client-id="<%= row.id_cliente %>">
-        <p class="delete-client" title="Apagar este cliente"><i class="fa-regular fa-trash-can"></i></p>
         <div class="card-img">
             <div class="circle">
                 <img src="/img/uploads/<%= row.foto_cliente %>">
@@ -86,7 +84,7 @@
         </div>
         <div class="card-details">
             <div class="card-details-content">
-                <h3><%= row.nome_cliente %></h3>
+                <h4><%= row.nome_cliente %></h4>
                 <% if (row.whatsapp_cliente) { %>
                 <div class="whatsapp">
                     <div class="icon-whatsapp">
@@ -95,18 +93,11 @@
                     <p><%= row.whatsapp_cliente %></p>
                 </div>
                 <% } %>
-                <% if (row.email_cliente) { %>
-                <div class="email">
-                    <div class="icon-email">
-                        <p><i class="fa-regular fa-envelope"></i>
-                    </div>
-                    <p><%= row.email_cliente %></p>
-                </div>
-                <% } %>
             </div>
         </div>
         <div class="card-services">
-            
+            <p><%= row.quantidade_servicos %></p>
+            <p>Serviços</p>
         </div>
     </a>
     <% }) %>

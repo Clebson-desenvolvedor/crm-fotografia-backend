@@ -1,5 +1,6 @@
 const leadModel = require("../model/lead.model.js");
 const helper = require("../lib/helper");
+const config = require("../model/config.model.js");
 
 /**
  * @desc Cria um lead, ou atualiza-o se existir um id como parâmetro no corpo da requisição
@@ -57,10 +58,12 @@ async function createOrUpdateLead(req, res, next) {
 async function getLeads(req, res, next) {
     try {
         leads = await leadModel.getLeads();
-        // console.log('lead.controller getleads leads', leads);
+        let colors = await config.getColors();
+        console.log('lead.controller getleads leads', leads);
         res.render('admin/leadsPage', {
             title: 'Leads',
             leads: leads,
+            colors: colors
         })
     } catch (err) {
         console.log('lead.controller getleads catch err', err);
@@ -77,10 +80,12 @@ async function getLead(req, res, next) {
     // console.log('lead.controller getlead req.params.id', req.params.id);
     try {
         let lead = await leadModel.getLead(req.params.id);
+        let colors = await config.getColors();
         // console.log('lead.controller getLead lead', lead);
         res.render('admin/leadPage', {
             title: lead.nome_lead,
             leadData: lead,
+            colors: colors
         });
     } catch (err) {
         console.log('lead.controller getlead catch err', err);

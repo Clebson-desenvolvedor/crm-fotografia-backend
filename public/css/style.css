@@ -13,6 +13,7 @@
 
 .alert { display: block; }
 .card-details p { font-size: 10px; }
+.card-services > p:nth-child(2) { color: #c98989; }
 .email p { font-size: 12px; }
 .input-error { border: 1px solid #ff0000; }
 .modal-body { width: 100%; }
@@ -21,7 +22,6 @@
 .sidebar img { width: 200px; }
 .sidebar-menu { margin-top: 1rem; }
 .user-wrapper h4 { margin-bottom: 0 !important; }
-.whatsapp p { font-size: 15px; }
 
 body { overflow-x: hidden; }
 
@@ -37,6 +37,11 @@ span.logout { cursor: pointer; }
 #nav-toggle:checked ~ .main-content header {
     left: 70px;
     width: calc(100% - 70px);
+}
+
+.card-details-content h4 {
+    color: #ffffff;
+    font-weight: 800;
 }
 
 .card-services-icon i {
@@ -63,6 +68,11 @@ span.logout { cursor: pointer; }
 .data-form-client {
     display: flex;
     width: 90%;
+}
+
+.delete-lead {
+    color: #ff0000;
+    padding: 5px;
 }
 
 .main-content {
@@ -100,6 +110,11 @@ span.logout { cursor: pointer; }
     display: inline-block;
 }
 
+.whatsapp p {
+    font-size: 15px;
+    color: #c98989;
+}
+
 form input:focus {
     border: 1px solid #b0c4de;
     outline: none;
@@ -119,12 +134,6 @@ header label span {
     border: 1px solid #ccc;
     border-radius: 10px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
-.card-services {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
 }
 
 .circle img {
@@ -329,19 +338,8 @@ main {
     width: 100%;
 }
 
-.circle {
-    background-color: #aaa;
-    border-radius: 50%;
-    height: 100px;
-    margin: auto;
-    overflow: hidden;
-    position: relative;
-    top: 5px;
-    width: 100px;
-}
-
 .modal-header {
-    background-color: #6495ed;
+    background-color: #2d3a48;
     border-radius: 5px 5px 0 0;
     color: #fff;
     height: 50px;
@@ -379,8 +377,37 @@ button {
     padding: 4px;
 }
 
-.card {
+.card-services {
+    align-items: center;
     background-color: #ffffff;
+    border-radius: 0 0 5px 5px;
+    bottom: -32px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 80px;
+    justify-content: center;
+    position: relative;
+}
+
+.card-details-origin {
+    align-items: center;
+    background-color: #ffffff;
+    border-radius: 0 0 5px 5px;
+    bottom: -32px;
+    display: flex;
+    height: 80px;
+    justify-content: center;
+    position: relative;
+}
+
+.card-details-origin p {
+    color: #667;
+    font-weight: 600;
+}
+
+.card {
+    background-color: #2d3a48;
     border-radius: 5px;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
     color: inherit;
@@ -411,6 +438,19 @@ button {
     justify-content: center;
     margin: 5px;
     width: 50px;
+}
+
+.circle {
+    background-color: #aaa;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    height: 100px;
+    margin: auto;
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+    top: 5px;
+    width: 100px;
 }
 
 .modal {
@@ -485,12 +525,6 @@ header {
     text-align: center;
 }
 
-.delete-client,
-.delete-lead {
-    color: #ff0000;
-    padding: 5px;
-}
-
 .modal-body h3,
 .services-client h3 {
     color: #444;
@@ -516,13 +550,11 @@ form select {
     width: 300px;
 }
 
-.email,
 .whatsapp {
     align-items: center;
-    background-color: #fff;
-    border-radius: 50px;
     display: flex;
-    justify-content: flex-start;
+    font-weight: 550;
+    justify-content: center;
     margin: 5px;
     overflow: hidden;
     padding: 1px;

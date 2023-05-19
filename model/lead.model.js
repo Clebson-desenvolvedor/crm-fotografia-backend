@@ -54,7 +54,7 @@ function getLeads() {
     // console.log('lead.model getLeads');
     return new Promise((resolve, reject) => {
         try {
-            let sql = "SELECT id_lead, nome_lead, email_lead, whatsapp_lead, foto_lead FROM tb_leads";
+            let sql = "SELECT id_lead, nome_lead, whatsapp_lead, foto_lead, origem_lead FROM tb_leads";
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
                     // console.log('lead.model getLeads result', result);

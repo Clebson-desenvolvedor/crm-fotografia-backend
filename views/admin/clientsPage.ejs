@@ -44,25 +44,6 @@
                     })
                 });
 
-                //evento para deletar um cliente
-                $('a.card .delete-client').click(function(e) {
-                    e.preventDefault();
-                    let id = $(this).parent()[0].attributes[2].nodeValue;
-                    $.ajax({
-                        url: `/admin/clients/${id}`,
-                        type: 'POST',
-                        data: { id: id },
-                    }).done(function(data) {
-                        // console.log('data', data);
-                        $('p.alert').text(data.message).addClass('alert-success');
-                        setTimeout(() => {
-                            $('p.alert').fadeOut(500);
-                        }, 3000);
-                    }).fail(function(er) {
-                        console.log(er);
-                    });
-                });
-
                 $(".modalBtn").click(switchModal);
             });
         </script>

@@ -77,7 +77,18 @@ function insertClient(client) {
 function getClients() {
     return new Promise((resolve, reject) => {
         try {
-            let sql = "SELECT id_cliente, nome_cliente, email_cliente, whatsapp_cliente, foto_cliente FROM tb_clientes";
+            let sql = `
+                SELECT
+                id_cliente,
+                nome_cliente,
+                whatsapp_cliente,
+                foto_cliente,
+                COUNT(tb_servicos_id_cliente) as quantidade_servicos
+                FROM tb_clientes
+                INNER JOIN tb_servicos
+                ON id_cliente = tb_servicos_id_cliente
+                GROUP BY id_cliente
+            `;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
                     // console.log('client.model getClients result', result);
