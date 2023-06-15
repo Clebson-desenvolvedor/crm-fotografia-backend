@@ -54,7 +54,9 @@ async function loginUser(req, res, next) {
  * @desc Renderiza a tela de login
  */
 function login(req, res, next) {
-    res.render("admin/login")
+    res.render("admin/login", {
+        title: "Login | By Emotion"
+    });
 }
 
 module.exports = {
