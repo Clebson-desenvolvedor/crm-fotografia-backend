@@ -59,13 +59,19 @@
                     })
                 });
 
+                /* evento pra abrir a modal de criar serviço e carregar o nome do cliente*/
+                $("#create-service-client-button").click(function() {
+                    $(".modal").css("display", "block");
+                    $(".form-service-selected h2").text($("input#name").val());
+                })
+
                 //evento para carregar formulário de um serviço de acordo com o tipo de serviço escolhido
                 $('#select-service').on('change', function() {
                     let serviceSelected = $('#select-service option:selected').val();
                     let div = '';
                     
                     if(serviceSelected == 'Acompanhamento') {
-                        div =  `
+                        div +=  `
                             <div>
                                 <h3>Acompanhamento</h3>
                             <div>
@@ -108,8 +114,8 @@
                         `;
                     }
 
-                    $('.form-service-selected').empty();
-                    $('.form-service-selected').append(div);
+                    $('.servico-selecionado').empty();
+                    $('.servico-selecionado').append(div);
                 });
             });
         </script>

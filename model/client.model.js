@@ -85,7 +85,7 @@ function getClients() {
                 foto_cliente,
                 COUNT(tb_servicos_id_cliente) as quantidade_servicos
                 FROM tb_clientes
-                INNER JOIN tb_servicos
+                LEFT JOIN tb_servicos
                 ON id_cliente = tb_servicos_id_cliente
                 GROUP BY id_cliente
             `;

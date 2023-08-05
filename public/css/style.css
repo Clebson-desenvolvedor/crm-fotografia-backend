@@ -115,12 +115,14 @@ span.logout { cursor: pointer; }
     color: #c98989;
 }
 
-form input:focus {
+form input:focus,
+.form input:focus {
     border: 1px solid #b0c4de;
     outline: none;
 }
 
-form label {
+form label,
+.form label {
     font-size: 13px;
     padding: 0 5px;
 }
@@ -503,7 +505,7 @@ header {
     display: flex;
     flex-direction: column;
     font-family: "LexendDeca-Regular";
-    height: 410px;
+    height: auto;
     margin: 5% auto;
     width: 62%;
     z-index: 1000;
@@ -532,7 +534,9 @@ header {
 }
 
 form input,
-form select {
+form select,
+.form input,
+.form select {
     background-color: #eee;
     border: 0;
     border-radius: 3px;

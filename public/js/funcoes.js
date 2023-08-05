@@ -22,3 +22,5 @@ function clearForm() {
         this.reset();
     }); 
 }
+
+console.log("carregou")
