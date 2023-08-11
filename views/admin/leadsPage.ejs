@@ -17,8 +17,8 @@
                 }
 
 
-                $('.modalBtn').click(switchModal);
-                $('#clear-button').click(clearForm);
+                $('.modalBtn').click(abreOuFechaModal);
+                $('#clear-button').click(limpaFormulario);
 
                 //evento de criar um novo lead
                 $('#create-lead-button').click(function(ev) {
@@ -46,7 +46,7 @@
                                 return false;
                             }
                         } else {
-                            switchModal();
+                            abreOuFechaModal();
                             $('p.alert').text(data.message).addClass('alert-success');
                             setTimeout(() => {
                                 $('p.alert').fadeOut(500);

@@ -80,8 +80,8 @@
         <div class="modal-header">
         </div>
         <div class="modal-body">
-            <div class="modal-body-form">
-                <form>
+            <div class="modal-body-form modal-servicos">
+                <div id="form-servicos">
                     <div>
                         <label for="">Selecione o tipo de serviço</label>
                         <select name="select-service" id="select-service" required>
@@ -93,19 +93,22 @@
                             <option value="Ensaio Infantil">Ensaio Infantil</option>
                             <option value="Newborn">Newborn</option>
                             <option value="Prewedding">Prewedding</option>
+                            <option value="Festa Infantil">Festa Infantil</option>
+                            <option value="Smash The Cake">Smash The Cake</option>
+                            <option value="Corporativo">Corporativo</option>
+                            <option value="Ensaio Feminino">Ensaio Feminino</option>
+                            <option value="Ensaio Família">Ensaio Família</option>
                         </select>
                     </div>
-                    <div class="form-service-selected">
+                    <form class="form-service-selected">
                         <h2>Cliente</h2>
-                        <div class="servico-selecionado">
-                            selecionou
-                        </div>
+                        <div class="servico-selecionado"></div>
                         <div class="campos-servicos form">
                             <div id="ambiente-servico">
                                 <label for="">Ambiente do Serviço</label>
                                 <select name="ambiente-servico" id="ambiente-servico-id">
-                                    <option value="em-casa">Estúdio</option>
-                                    <option value="fora">Fora</option>
+                                    <option value="Estúdio">Estúdio</option>
+                                    <option value="Fora">Fora</option>
                                 </select>
                             </div>
                 
@@ -131,18 +134,21 @@
                             </div>
                 
                             <div id="nome-bebe">
-                                <label for="">Nome do bebê</label>
+                                <label for="">Nome do Bebê</label>
                                 <input type="text" name="nome-bebe" id="nome-bebe" value="">
                             </div>
                 
                             <div id="dt-nasc-bebe">
-                                <label for="">Data de Nascimento do bebê</label>
+                                <label for="">Data de Nascimento do Bebê</label>
                                 <input type="text" name="dt-nasc-bebe" id="dt-nasc-bebe" value="">
                             </div>
                 
                             <div id="sexo-bebe">
-                                <label for="">Sexo do bebê</label>
-                                <input type="text" name="sexo-bebe" id="sexo-bebe" value="">
+                                <label for="">Sexo do Bebê</label>
+                                <select name="sexo-bebe" id="sexo-bebe-id">
+                                    <option value="M">M</option>
+                                    <option value="F">F</option>
+                                </select>
                             </div>
                 
                             <div id="cenario">
@@ -151,12 +157,12 @@
                             </div>
                 
                             <div id="nomes-noivos">
-                                <label for="">Nome dos noivos</label>
+                                <label for="">Nome dos Noivos</label>
                                 <input type="text" name="nomes-noivos" id="nomes-noivos" value="">
                             </div>
                 
                             <div id="nome-da-crianca">
-                                <label for="">Nome da criança</label>
+                                <label for="">Nome da Criança</label>
                                 <input type="text" name="nome-da-crianca" id="nome-da-crianca" value="">
                             </div>
                 
@@ -164,16 +170,26 @@
                                 <label for="">Data de Nascimento da criança</label>
                                 <input type="text" name="dt-nasc-crianca" id="dt-nasc-crianca" value="">
                             </div>
+
+                            <div id="endereco-evento">
+                                <b>Endereço do Evento</b>
+                            </div>
+
+                            <div id="endereco-evento-dados">
+                                <input type="text" placeholder="Rua, Avenida, etc" name="endereco-evento-logradouro" id="endereco-evento-logradouro" value="">
+                                <input type="text" placeholder="Num" name="endereco-evento-numero" id="endereco-evento-numero" value="">
+                                <input type="text" placeholder="Bairro" name="endereco-evento-bairro" id="endereco-evento-bairro" value="">
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="modal-footer">
             <hr>
             <div class="modal-footer-buttons">
                 <div class="clear-cancel">
-                    <button id="clear-button">Limpar formulário</button>
+                    <button id="clear-button">Limpar Formulário</button>
                 </div>
                 <div class="save">
                     <button id="create-client-button">Criar</button>

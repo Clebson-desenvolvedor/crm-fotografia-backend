@@ -1,26 +1,23 @@
-/** abre ou fecha modal */
- function switchModal() {
+/** Abre ou fecha modal */
+ function abreOuFechaModal() {
     if ($('.modal').css('display') == 'block') {
         $('.modal').css('display', 'none');
-        clearForm();
-
+        limpaFormulario();
     } else {
         $('.modal').css('display', 'block');
     }
 }
 
-/** chama a função modal pra decidir se a abre ou fecha */
+/** Chama a função de abrir ou fechar modal */
 window.onclick = function (event) {
     if (event.target.className == 'modal') {
-        switchModal();
+        abreOuFechaModal();
     }
 }
 
-/** limpa o formulário */
-function clearForm() {
+/** Limpa o formulário através do Id do formulário */
+function limpaFormulario() {
     $('form').each (function(){
         this.reset();
     }); 
 }
-
-console.log("carregou")

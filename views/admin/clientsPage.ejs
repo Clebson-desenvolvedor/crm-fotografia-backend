@@ -34,7 +34,7 @@
                          },
                     }).done(function(data) {
                         // console.log('data', data);
-                        switchModal();
+                        abreOuFechaModal();
                         $('p.alert').text(data.message).addClass('alert-success');
                         setTimeout(() => {
                             $('p.alert').fadeOut(500);
@@ -44,7 +44,7 @@
                     })
                 });
 
-                $(".modalBtn").click(switchModal);
+                $(".modalBtn").click(abreOuFechaModal);
             });
         </script>
     </body>

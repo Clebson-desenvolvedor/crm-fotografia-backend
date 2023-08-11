@@ -536,7 +536,8 @@ header {
 form input,
 form select,
 .form input,
-.form select {
+.form select,
+#select-service {
     background-color: #eee;
     border: 0;
     border-radius: 3px;
@@ -598,3 +599,16 @@ form select,
 .form-whatsapp{
     margin: 10px 0;
 }
+
+.campos-servicos > * {
+    align-items: center;
+    margin-top: 10px;
+    width: 500px;
+    display: none;
+    justify-content: space-between;
+}
+
+.campos-servicos input, select { width: 180px; }
+.campos-servicos input#endereco-evento-logradouro { width: 280px; }
+.campos-servicos input#endereco-evento-numero { width: 40px; }
+.campos-servicos input#endereco-evento-bairro { width: 150px; }
