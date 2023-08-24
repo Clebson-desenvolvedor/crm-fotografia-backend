@@ -612,3 +612,20 @@ form select,
 .campos-servicos input#endereco-evento-logradouro { width: 280px; }
 .campos-servicos input#endereco-evento-numero { width: 40px; }
 .campos-servicos input#endereco-evento-bairro { width: 150px; }
+
+fieldset {
+    border: 1px solid #aaa;
+    padding: 8px;
+}
+
+fieldset legend { padding: 0 8px; }
+
+input#recepcao,
+input#dia-noiva { 
+    width: 20px;
+}
+
+#campos-casamento > * {
+    align-items: center;
+    display: flex;
+}

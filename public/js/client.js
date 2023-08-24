@@ -57,16 +57,39 @@ $(document).ready(() => {
     /* Evento para abrir a modal de criar serviço a partir de um cliente específico e carregar o nome dele */
     $("#create-service-client-button").click(function() {
         $(".modal").css("display", "block");
-        $(".form-service-selected h2").text($("input#name").val());
+        $("#form-service-selected h2").text($("input#name").val());
     })
 
     /* Evento para carregar formulário de um serviço de acordo com o tipo de serviço escolhido */
     $('#select-service').on('change', function() {
         let servico_selecionado = $('#select-service option:selected').val();
         if (servico_selecionado == "Acompanhamento") {
-            carregaCamposAcompanhamento();
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposAcompanhamento);
         } else if (servico_selecionado == "Casamento Civil") {
-            carregaCamposCasamentoCivil();
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposCasamentoCivil);
+        } else if (servico_selecionado == "Casamento na Igreja") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposCasamentoIgreja);
+        }
+    });
+
+    /** Habilitar ou desabilitar os campos do endereço da recepção. */
+    $('#recepcao').on("change", function() {
+        if ($("#recepcao").is(":checked")) {
+            $("#endereco-recepcao").css("display", "flex");
+        } else {
+            $("#endereco-recepcao").css("display", "none");
+        }
+    });
+
+    /** Habilitar ou desabilitar os campos do endereço do Dia da Noiva */
+    $('#dia-noiva').on("change", function() {
+        if ($("#dia-noiva").is(":checked")) {
+            $("#endereco-dia-noiva").css("display", "flex");
+        } else {
+            $("#endereco-dia-noiva").css("display", "none");
         }
     });
 
@@ -74,6 +97,14 @@ $(document).ready(() => {
 
 
 /** Funções */
+
+/** Fecha todos os campos do formulário de serviço */
+function fechaCamposFormulario(callback) {
+    $(".fechar-campo").slideUp(300);
+    setTimeout(() => {
+        callback();
+    }, 320);
+}
 
 function carregaCamposAcompanhamento() {
     $("#ambiente-servico select").val("Estúdio");
@@ -94,5 +125,10 @@ function carregaCamposCasamentoCivil() {
     $("#nomes-noivos").css("display", "flex");
     $("#endereco-evento").css("display", "flex");
     $("#endereco-evento-dados").css("display", "flex");
+}
+
+function carregaCamposCasamentoIgreja() {
+    carregaCamposCasamentoCivil();
+    $("#campos-casamento").css("display", "flex");
 }
 
