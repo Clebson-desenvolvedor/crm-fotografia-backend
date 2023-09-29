@@ -47,7 +47,6 @@ CREATE TABLE IF NOT EXISTS `tb_endereco_cliente` (
   `ec_logradouro` varchar(200) DEFAULT NULL,
   `ec_numero` varchar(8) DEFAULT NULL,
   `ec_bairro` varchar(45) DEFAULT NULL,
-  `ec_cep` char(8) DEFAULT NULL,
   `tb_endereco_cliente_id_cliente` int(11) DEFAULT NULL,
   KEY `fk_tb_endereco_cliente_tb_clientes_idx` (`tb_endereco_cliente_id_cliente`),
   CONSTRAINT `fk_tb_endereco_cliente_tb_clientes` FOREIGN KEY (`tb_endereco_cliente_id_cliente`) REFERENCES `tb_clientes` (`id_cliente`) ON DELETE NO ACTION ON UPDATE NO ACTION

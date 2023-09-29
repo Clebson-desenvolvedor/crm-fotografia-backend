@@ -11,8 +11,8 @@ function insertService(service) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            INSERT INTO servicos (tiposervico, ambienteservico, dtcadservico, dtevento, preco, statusservico, enderecoevento, numeroendevento, bairroevento, cepevento, cidadeevento, nomebebe, dtnascbebe, nomecrianca, dtnasccrianca, idcliente) 
-            values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+            INSERT INTO servicos (tiposervico, ambienteservico, dtcadservico, dtevento, preco, statusservico, enderecoevento, numeroendevento, bairroevento, cidadeevento, nomebebe, dtnascbebe, nomecrianca, dtnasccrianca, idcliente) 
+            values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
             let values = [
                 service.tiposervico,
@@ -24,7 +24,6 @@ function insertService(service) {
                 service.enderecoevento,
                 service.numero,
                 service.bairro,
-                service.cep,
                 service.cidade,
                 service.nomebebe,
                 service.dtnascbebe,
@@ -155,8 +154,7 @@ function updateService(service) {
             statusservico = '${service.statusservico}', 
             enderecoevento = '${service.enderecoevento}', 
             numeroendevento = '${service.numero}', 
-            bairroevento = '${service.bairro}', 
-            cepevento = '${service.cep}', 
+            bairroevento = '${service.bairro}',  
             cidadeevento = '${service.cidade}', 
             nomebebe = '${service.nomebebe}', 
             dtnascbebe = '${service.dtnascbebe}', 

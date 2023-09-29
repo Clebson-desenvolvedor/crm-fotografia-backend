@@ -26,10 +26,9 @@
                             email_cliente: $('form input#email')[0].value,
                             cpf_cliente: $('form input#cpf')[0].value,
                             dtcad_cliente: $('form input#date')[0].value,
-                            ec_cep: $('form input#cep')[0].value,
-                            ec_logradouro: $('form input#street')[0].value,
-                            ec_numero: $('form input#number')[0].value,
-                            ec_bairro: $('form input#district')[0].value,
+                            endereco_logradouro: $('form input#street')[0].value,
+                            endereco_numero: $('form input#number')[0].value,
+                            endereco_bairro: $('form input#district')[0].value,
                             foto_cliente: $('form input#image')[0].value//precisará consertar futuramente, pois não está salvando a imagem selecionada na base
                          },
                     }).done(function(data) {

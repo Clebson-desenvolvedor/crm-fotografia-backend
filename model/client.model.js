@@ -37,20 +37,20 @@ function insertClient(client) {
                         return;
                     }
                     sql = `
-                    INSERT INTO tb_endereco_cliente (
-                        ec_logradouro, 
-                        ec_numero, 
-                        ec_bairro, 
-                        ec_cep, 
-                        tb_endereco_cliente_id_cliente
+                    INSERT INTO tb_endereco (
+                        endereco_logradouro, 
+                        endereco_numero, 
+                        endereco_bairro, 
+                        endereco_cliente_id,
+                        endereco_tipo
                     ) VALUES (?,?,?,?,?)`;
 
                     let values2 = [
-                        client.ec_logradouro,
-                        client.ec_numero,
-                        client.ec_bairro,
-                        client.ec_cep,
-                        result.insertId
+                        client.endereco_logradouro,
+                        client.endereco_numero,
+                        client.endereco_bairro,
+                        result.insertId,
+                        1
                     ]
                     // console.log('client.model insertClient values2', values2)
                     conn.query(sql, values2, (err, result) => {
@@ -125,14 +125,13 @@ function getClient(id) {
             whatsapp_cliente,
             cpf_cliente,
             foto_cliente,
-            ec_logradouro,
-            ec_numero,
-            ec_bairro,
-            ec_cep,
-            tb_endereco_cliente_id_cliente
+            endereco_logradouro,
+            endereco_numero,
+            endereco_bairro,
+            endereco_cliente_id
             FROM tb_clientes
-            INNER JOIN tb_endereco_cliente
-            ON id_cliente = tb_endereco_cliente_id_cliente
+            INNER JOIN tb_endereco
+            ON id_cliente = endereco_cliente_id
             WHERE id_cliente = ${id}`;
 
             let objClient = {};
@@ -152,11 +151,10 @@ function getClient(id) {
                             dtcadcliente: result[0].dtcad_cliente,
                             email: result[0].email_cliente,
                             whatsapp: result[0].whatsapp_cliente,
-                            logradouro: result[0].ec_logradouro,
+                            logradouro: result[0].endereco_logradouro,
                             cpf: result[0].cpf_cliente,
-                            numero: result[0].ec_numero,
-                            bairro: result[0].ec_bairro,
-                            cep: result[0].ec_cep,
+                            numero: result[0].endereco_numero,
+                            bairro: result[0].endereco_bairro,
                             foto: result[0].foto_cliente
                         };
                         // console.log('client.model getClient objClient', objClient);
@@ -184,7 +182,7 @@ function deleteClient(id) {
     // console.log('client.model deleteClient id', id);
     return new Promise((resolve, reject) => {
         try {
-            let sql = `DELETE FROM tb_endereco_cliente WHERE tb_endereco_cliente_id_cliente = ${id}`;
+            let sql = `DELETE FROM tb_endereco WHERE endereco_cliente_id = ${id}`;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
                     // console.log('client.model deleteClient result', result);
@@ -226,7 +224,7 @@ function deleteClient(id) {
 
 function updateClient(client) {
     // console.log('client.model updateClient');
-    // console.log('client.model updateClient client', client);
+    console.log('client.model updateClient client', client);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
@@ -248,12 +246,11 @@ function updateClient(client) {
                         return;
                     }
                     sql = `
-                    UPDATE tb_endereco_cliente SET
-                    ec_logradouro = '${client.ec_logradouro}',
-                    ec_numero = '${client.ec_numero}',
-                    ec_bairro = '${client.ec_bairro}',
-                    ec_cep = '${client.ec_cep}'
-                    WHERE tb_endereco_cliente_id_cliente = ${client.id_cliente}`;
+                    UPDATE tb_endereco SET
+                    endereco_logradouro = '${client.endereco_logradouro}',
+                    endereco_numero = '${client.endereco_numero}',
+                    endereco_bairro = '${client.endereco_bairro}'
+                    WHERE endereco_cliente_id = ${client.id_cliente}`;
 
                     mysql.getConnection((err, conn) => {
                         conn.query(sql, (err2, result2, field) => {
