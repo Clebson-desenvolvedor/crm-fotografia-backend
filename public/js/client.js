@@ -64,13 +64,44 @@ $(document).ready(() => {
         let servico_selecionado = $('#select-service option:selected').val();
         if (servico_selecionado == "Acompanhamento") {
             limpaFormulario("#form-service-selected");
-            fechaCamposFormulario(carregaCamposAcompanhamento);
+            fechaCamposFormulario(carregaCamposServicoBebe);
+            $("#servico-tipo").text(1);
         } else if (servico_selecionado == "Casamento Civil") {
             limpaFormulario("#form-service-selected");
             fechaCamposFormulario(carregaCamposCasamentoCivil);
+            $("#servico-tipo").text(2);
         } else if (servico_selecionado == "Casamento na Igreja") {
             limpaFormulario("#form-service-selected");
             fechaCamposFormulario(carregaCamposCasamentoIgreja);
+            $("#servico-tipo").text(3);
+        } else if (servico_selecionado == "Ensaio Gestante") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposEnsaioGestante);
+            $("#servico-tipo").text(4);
+        } else if (servico_selecionado == "Ensaio Infantil") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposEnsaioInfantil);
+            $("#servico-tipo").text(5);
+        } else if (servico_selecionado == "Newborn") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposServicoBebe);
+            $("#servico-tipo").text(6);
+        } else if (servico_selecionado == "Prewedding") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposPrewedding);
+            $("#servico-tipo").text(7);
+        } else if (servico_selecionado == "Festa Infantil") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposFestaInfantil);
+            $("#servico-tipo").text(8);
+        } else if (servico_selecionado == "Smash The Cake") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposServicoBebe);
+            $("#servico-tipo").text(9);
+        } else if (servico_selecionado == "Corporativo") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposCorporativo);
+            $("#servico-tipo").text(10);
         }
     });
 
@@ -94,7 +125,6 @@ $(document).ready(() => {
 
 });
 
-
 /** Funções */
 
 /** Fecha todos os campos do formulário de serviço */
@@ -105,11 +135,15 @@ function fechaCamposFormulario(callback) {
     }, 320);
 }
 
-function carregaCamposAcompanhamento() {
-    $("#ambiente-servico select").val("Estúdio");
+function carregaCamposPadrao() {
     $("#dt-servico").css("display", "flex");
     $("#preco-total").css("display", "flex");
     $("#status-servico").css("display", "flex");
+}
+
+function carregaCamposServicoBebe() {
+    $("#ambiente-servico select").val("estúdio");
+    carregaCamposPadrao();
     $("#nome-bebe").css("display", "flex");
     $("#dt-nasc-bebe").css("display", "flex");
     $("#sexo-bebe").css("display", "flex");
@@ -117,10 +151,8 @@ function carregaCamposAcompanhamento() {
 }
 
 function carregaCamposCasamentoCivil() {
-    $("#ambiente-servico select").val("Fora");
-    $("#dt-servico").css("display", "flex");
-    $("#preco-total").css("display", "flex");
-    $("#status-servico").css("display", "flex");
+    $("#ambiente-servico select").val("fora");
+    carregaCamposPadrao();
     $("#nomes-noivos").css("display", "flex");
     $("#endereco-evento").css("display", "flex");
     $("#endereco-evento-dados").css("display", "flex");
@@ -129,5 +161,41 @@ function carregaCamposCasamentoCivil() {
 function carregaCamposCasamentoIgreja() {
     carregaCamposCasamentoCivil();
     $("#campos-casamento").css("display", "flex");
+}
+
+function carregaCamposEnsaioGestante() {
+    $("#ambiente-servico select").val("estúdio");
+    carregaCamposPadrao();
+}
+
+function carregaCamposEnsaioInfantil() {
+    $("#ambiente-servico select").val("estúdio");
+    carregaCamposPadrao();
+    $("#nome-da-crianca").css("display", "flex");
+    $("#dt-nasc-crianca").css("display", "flex");
+}
+
+function carregaCamposPrewedding() {
+    $("#ambiente-servico select").val("fora");
+    carregaCamposPadrao();
+    $("#nomes-noivos").css("display", "flex");
+    $("#endereco-evento").css("display", "flex");
+}
+
+function carregaCamposFestaInfantil() {
+    $("#ambiente-servico select").val("fora");
+    carregaCamposPadrao();
+    $("#nome-da-crianca").css("display", "flex");
+    $("#endereco-evento").css("display", "flex");
+}
+
+function carregaCamposCorporativo() {
+    $("#ambiente-servico select").val("estúdio");
+    carregaCamposPadrao();
+    $("#campo-profissao").css("display", "flex");
+}
+
+function carregaCamposEnsaioFeminino() {
+    
 }
 

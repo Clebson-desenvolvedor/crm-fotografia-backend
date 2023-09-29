@@ -98,6 +98,7 @@
                         </select>
                     </div>
                     <form id="form-service-selected">
+                        <input type="text" hidden id="servico-tipo">
                         <h2>Cliente</h2>
                         <div class="servico-selecionado"></div>
                         <div class="campos-servicos form">
@@ -163,8 +164,8 @@
                                 <input type="text" name="nome-da-crianca" id="nome-da-crianca" value="">
                             </div>
                 
-                            <div id="dt-nasc-crianca">
-                                <label for="">Data de Nascimento da criança</label>
+                            <div id="dt-nasc-crianca" class="fechar-campo">
+                                <label for="">Data de Nascimento da Criança</label>
                                 <input type="text" name="dt-nasc-crianca" id="dt-nasc-crianca" value="">
                             </div>
 
@@ -199,6 +200,11 @@
                                 <input type="text" placeholder="Num" name="endereco-evento-numero" id="endereco-evento-numero" value="">
                                 <input type="text" placeholder="Bairro" name="endereco-evento-bairro" id="endereco-evento-bairro" value="">
                             </fieldset>
+
+                            <div id="campo-profissao" class="fechar-campo">
+                                <label for="">Profissão</label>
+                                <input type="text" name="" id="profissao" value="">
+                            </div>
                         </div>
                     </form>
                 </div>
