@@ -102,6 +102,17 @@ $(document).ready(() => {
             limpaFormulario("#form-service-selected");
             fechaCamposFormulario(carregaCamposCorporativo);
             $("#servico-tipo").text(10);
+        } else if (servico_selecionado == "Ensaio Feminino") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposEnsaioFeminino);
+            $("#servico-tipo").text(11);
+        } else if (servico_selecionado == "Ensaio Família") {
+            limpaFormulario("#form-service-selected");
+            fechaCamposFormulario(carregaCamposEnsaioFamilia);
+            $("#servico-tipo").text(12);
+        } else {
+            limpaFormulario("#form-service-selected");
+            $(".fechar-campo").slideUp(300);
         }
     });
 
@@ -196,6 +207,12 @@ function carregaCamposCorporativo() {
 }
 
 function carregaCamposEnsaioFeminino() {
-    
+    $("#ambiente-servico select").val("estúdio");
+    carregaCamposPadrao();
+}
+
+function carregaCamposEnsaioFamilia() {
+    $("#ambiente-servico select").val("estúdio");
+    carregaCamposPadrao();
 }
 

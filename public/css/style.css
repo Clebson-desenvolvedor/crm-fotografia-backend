@@ -582,6 +582,7 @@ form select,
 .modal-footer button#create-client-button,
 .modal-footer button#create-lead-button,
 .modal-footer button#update-client-button,
+.modal-footer button#create-service-client-button
 .modal-footer button#update-lead-button {
     background-color: #2e8b57;
     padding: 0 19px;
