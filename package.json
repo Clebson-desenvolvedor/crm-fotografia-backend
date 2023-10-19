@@ -19,7 +19,9 @@
     "redis": "^4.6.6"
   },
   "scripts": {
-    "start": "node server"
+    "start": "node server.js",
+    "dev": "nodemon",
+    "deploy": "vercel --prod"
   },
   "keywords": [],
   "author": "",
