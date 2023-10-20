@@ -19,7 +19,7 @@
     "redis": "^4.6.6"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "npm run vercel-build",
     "dev": "nodemon",
     "deploy": "vercel --prod"
   },
