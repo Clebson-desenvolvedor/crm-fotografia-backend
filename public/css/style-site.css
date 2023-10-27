@@ -6,6 +6,8 @@ html { overflow-x: hidden; }
 body > header > div > div.logo-site > a > img { width: 300px; }
 body > header > div > div.menu-site > ul li a:hover { color: #989; }
 
+.profile-about { padding: 10px; }
+
 div.contact h2 { margin-left: 20px; }
 div.profile-about p { font-size: 20px; }
 div.profile-photo { margin: 10px; }
@@ -154,6 +156,7 @@ body > main > div.cover {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    display: block;
     min-height: 500px; 
 }
 
@@ -229,18 +232,8 @@ div.form-phone {
     background: #111;
     margin: 8px;
 }
-/* de abaixo para 600px, execute o que tem dentro */
-@media screen and (max-width: 855px) {
-    /* .recent-works-photos {
-        flex-direction: column;
-    }
 
-    .recent-works img:hover {
-        transform: scale(1);
-    } */
-}
-
-@media screen and (max-width: 855px) {
+@media (max-width: 970px) {
     .nav-list {
         position: absolute;
         display: flex;
@@ -266,5 +259,19 @@ div.form-phone {
         z-index: 2;
     }
 
-    .cover { display: none; }
+    .cover { display: none !important; }
+
+    .recent-works-photos img { width: 800px !important; }
+
+    .recent-works-photos img:hover { transform: scale(1); }
+
+    .social-logos img { width: 45px; }
+}
+
+@media (max-width: 880px) {
+    .recent-works-photos img { width: 300px !important; }
+}
+
+@media (max-width: 600px) {
+    .profile { flex-direction: column; }
 }
