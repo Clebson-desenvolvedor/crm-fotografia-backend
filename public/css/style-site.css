@@ -3,7 +3,7 @@ html { overflow-x: hidden; }
 .social-logos img { width: 20%; }
 .social h2 { padding: 0 5px 5px 5px; }
 
-body > header > div > div.logo-site > a > img { width: 300px; }
+body > header > div > div.logo-site > a > img { width: 210px; }
 body > header > div > div.menu-site > ul li a:hover { color: #989; }
 
 .profile-about { padding: 10px; }
@@ -231,6 +231,66 @@ div.form-phone {
     height: 2px;
     background: #111;
     margin: 8px;
+}
+
+.presentation-works {
+    position: relative;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    width: 98%;
+    height: 100px;
+    justify-content: space-evenly;
+}
+
+.presentation-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 5px;
+}
+
+.presentation-item img {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.presentation-item-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    margin: 0 auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    align-items: center;
+}
+
+.presentation-item-image:hover {
+    border: 1px solid #1E90FF;
+}
+
+.depositions-body {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.depositions-header {
+    text-align: center;
+}
+
+.depositions-items {
+    margin: 10px;
+}
+
+.depositions-items  img {
+    width: 300px;
+    border-radius: 5px;
 }
 
 @media (max-width: 970px) {

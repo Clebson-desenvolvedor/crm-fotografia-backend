@@ -30,7 +30,6 @@
 
     /* salva as cores na base de dados */
     $(".colors button").click(function() {
-        console.log("clicou")
         $.ajax({
             url: '/admin/configurations/getColors',
             type: "POST",

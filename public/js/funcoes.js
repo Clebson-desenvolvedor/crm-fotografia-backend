@@ -42,11 +42,30 @@ function fechaMenu() {
 
 $(document).ready(() => {
     $(".mobile-menu").click((i, el) => {
-        console.log("this", $(el).hasClass("active"))
         if ($(".mobile-menu").hasClass("active")) {
             fechaMenu();
         } else {
             abreMenu();
         }
     });
+    // $(window).scrollTop(0);
+
+    $(window).on("load", () => {
+        setTimeout(() => {
+            $(window).scrollTop(0);
+        }, 1);
+    })
 });
+
+
+
+$(window).on('scroll', () => {
+    let header_fixo = {
+        height: "70px",
+        position: "fixed"
+    }
+    if ($(window).scrollTop() >= 136) {
+        $("header").css(header_fixo);
+
+    }
+})

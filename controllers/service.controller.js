@@ -1,4 +1,5 @@
 const serviceModel = require("../model/service.model.js");
+const config = require("../model/config.model.js");
 
 /**
  * @desc Cria um serviço e devolve uma mensagem de erro ou sucesso para o usuário
@@ -36,15 +37,19 @@ async function getServices(req, res, next) {
     // console.log('service.controller getServices');
     try {
         let services = await serviceModel.getServices();
+        let colors = await config.getColors();
         // console.log('service.controller getServices services', services);
         if (services.length == 0) {
             res.render('admin/servicesPage', {
-                mensagem: "Nenhum serviço encontrado. "
+                title: 'Meus Serviços',
+                mensagem: "Nenhum serviço encontrado. ",
+                colors: colors
             });
         } else {
             res.render('admin/servicesPage', {
                 title: 'Meus Serviços',
-                services: services
+                services: services,
+                colors: colors
             });
         }
     } catch (err) {
