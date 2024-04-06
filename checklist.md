@@ -9,31 +9,23 @@
 
 ### Entidade Leads
 
-() Criar um Lead
-() Ler todos os Leads
-() Ler um Lead
-() Atualizar um Lead
-() Apagar um Lead
+(x) Criar um Lead
+(x) Ler todos os Leads
+(x) Ler um Lead
+(x) Atualizar um Lead
+(x) Apagar um Lead
 () converter um lead para um cliente
 
 ### Entidade Serviços
 
-() Criar um serviço se já existir pelo menos 1 cliente
+() Criar um serviço na tela de serviço apenas se existir pelo menos 1 cliente
 () Ler todos os serviços
 () Ler um serviço
 () Atualizar um serviço
 () Apagar um serviço
 
 ### Dashboard
+a definir
 
 ### Configurações e preferências
-
-## Meu Blog
-
-() Criar um blog
-() Ler todos os blogs
-() Ler um blog
-() Atualizar um blog
-() Apagar um blog
-
-### Contato
+a definir

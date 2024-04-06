@@ -1,7 +1,7 @@
 <div class="card-client">
     <div class="content">
         <div class="modal-body">
-           <h3>Dados Pessoais | ID <%= clientData.idcliente %></h3>
+           <h3>Dados Pessoais | ID <span><%= clientData.idcliente %></span></h3>
             <div class="modal-body-form">
                 <form enctype="multipart/form-data">
                     <div class="data-form-client">
@@ -66,13 +66,13 @@
         </div>
         <div class="services-client">
             <h3>Serviços deste Cliente</h3>
-            <button id="create-service-client-button" class="modalBtnService">Criar Serviço</button>
+            <button id="add-service-client-button" class="modalBtnService">Adicionar</button>
         </div>
     </div>
 </div>
 
 <!-- modal pra criar um novo serviço -->
-<div class="modal modal-novoservico">
+<div class="modal">
     <div class="content">
         <div class="modal-header">
         </div>
@@ -103,70 +103,102 @@
                         <div class="servico-selecionado"></div>
                         <div class="campos-servicos form">
                             <div id="ambiente-servico" class="fechar-campo">
-                                <label for="">Ambiente do Serviço</label>
-                                <select name="ambiente-servico" id="ambiente-servico-id">
-                                    <option value="Estúdio">Estúdio</option>
-                                    <option value="Fora">Fora</option>
-                                </select>
+                                <input type="text" id="ambiente-servico-id" value="">
                             </div>
                 
                             <div id="dt-servico" class="fechar-campo">
-                                <label for="">Data do Evento</label>
-                                <input type="text" name="dt-servico" id="dt-servico" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Data do Evento *</label>
+                                    <input type="date" name="dt-servico" id="dt-servico" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="preco-total" class="fechar-campo">
-                                <label for="">Preço Original</label>
-                                <input type="text" name="preco-total" id="preco-total" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Preço Total</label>
+                                    <input type="text" name="preco-total" id="preco-total" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="status-servico" class="fechar-campo">
-                                <label for="">Status</label>
-                                <select name="status-servico" id="status-servico-id">'','',''
-                                    <option value="em andamento">em andamento</option>
-                                    <option value="cancelado">cancelado</option>
-                                    <option value="aguardando pagamento">aguardando pagamento</option>
-                                    <option value="aguardando resposta">aguardando resposta</option>
-                                    <option value="finalizado">finalizado</option>
-                                </select>
+                                <div class="campo-dentro">
+                                    <label for="">Status</label>
+                                    <select name="status-servico" id="status-servico-id">'','',''
+                                        <option value="em andamento">em andamento</option>
+                                        <option value="cancelado">cancelado</option>
+                                        <option value="aguardando pagamento">aguardando pagamento</option>
+                                        <option value="aguardando resposta">aguardando resposta</option>
+                                        <option value="finalizado">finalizado</option>
+                                    </select>
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="nome-bebe" class="fechar-campo">
-                                <label for="">Nome do Bebê</label>
-                                <input type="text" name="nome-bebe" id="nome-bebe" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Nome do Bebê</label>
+                                    <input type="text" name="nome-bebe" id="nome-bebe" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="dt-nasc-bebe" class="fechar-campo">
-                                <label for="">Data de Nascimento do Bebê</label>
-                                <input type="text" name="dt-nasc-bebe" id="dt-nasc-bebe" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Data de Nascimento do Bebê</label>
+                                    <input type="date" name="dt-nasc-bebe" id="dt-nasc-bebe" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="sexo-bebe" class="fechar-campo">
-                                <label for="">Sexo do Bebê</label>
-                                <select name="sexo-bebe" id="sexo-bebe-id">
-                                    <option value="M">M</option>
-                                    <option value="F">F</option>
-                                </select>
+                                <div class="campo-dentro">
+                                    <label for="">Sexo do Bebê</label>
+                                    <div id="sexo-bebe-radios">
+                                        <div id="sexo-bebe-radios-m">
+                                            <label for="sexo-bebe-m">M</label>
+                                            <input type="radio" name="sexo-bebe" id="sexo-bebe-m">
+                                        </div>
+                                        <div id="sexo-bebe-radios-f">
+                                            <label for="sexo-bebe-f">F</label>
+                                            <input type="radio" name="sexo-bebe" id="sexo-bebe-f">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="cenario" class="fechar-campo">
-                                <label for="">Cenário a ser usado</label>
-                                <input type="text" name="cenario" id="cenario" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Cenário a ser usado</label>
+                                    <input type="text" name="cenario" id="cenario" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="nomes-noivos" class="fechar-campo">
-                                <label for="">Nome dos Noivos</label>
-                                <input type="text" name="nomes-noivos" id="nomes-noivos" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Nome dos Noivos</label>
+                                    <input type="text" name="nomes-noivos" id="nomes-noivos" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="nome-da-crianca" class="fechar-campo">
-                                <label for="">Nome da Criança</label>
-                                <input type="text" name="nome-da-crianca" id="nome-da-crianca" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Nome da Criança</label>
+                                    <input type="text" name="nome-da-crianca" id="nome-da-crianca" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                 
                             <div id="dt-nasc-crianca" class="fechar-campo">
-                                <label for="">Data de Nascimento da Criança</label>
-                                <input type="text" name="dt-nasc-crianca" id="dt-nasc-crianca" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Data de Nascimento da Criança</label>
+                                    <input type="date" name="dt-nasc-crianca" id="dt-nasc-crianca" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
 
                             <fieldset id="endereco-evento" class="fechar-campo">
@@ -189,21 +221,24 @@
 
                             <fieldset id="endereco-recepcao" class="fechar-campo">
                                 <legend>Endereço da Recepção</legend>
-                                <input type="text" placeholder="Rua, Avenida, etc" name="endereco-evento-logradouro" id="endereco-evento-logradouro" value="">
-                                <input type="text" placeholder="Num" name="endereco-evento-numero" id="endereco-evento-numero" value="">
-                                <input type="text" placeholder="Bairro" name="endereco-evento-bairro" id="endereco-evento-bairro" value="">
+                                <input type="text" placeholder="Rua, Avenida, etc" name="endereco-recepcao-logradouro" id="endereco-recepcao-logradouro" value="">
+                                <input type="text" placeholder="Num" name="endereco-recepcao-numero" id="endereco-recepcao-numero" value="">
+                                <input type="text" placeholder="Bairro" name="endereco-recepcao-bairro" id="endereco-recepcao-bairro" value="">
                             </fieldset>
 
                             <fieldset id="endereco-dia-noiva" class="fechar-campo">
                                 <legend>Endereço do Dia da Noiva</legend>
-                                <input type="text" placeholder="Rua, Avenida, etc" name="endereco-evento-logradouro" id="endereco-evento-logradouro" value="">
-                                <input type="text" placeholder="Num" name="endereco-evento-numero" id="endereco-evento-numero" value="">
-                                <input type="text" placeholder="Bairro" name="endereco-evento-bairro" id="endereco-evento-bairro" value="">
+                                <input type="text" placeholder="Rua, Avenida, etc" name="endereco-dia-noiva-logradouro" id="endereco-dia-noiva-logradouro" value="">
+                                <input type="text" placeholder="Num" name="endereco-dia-noiva-numero" id="endereco-dia-noiva-numero" value="">
+                                <input type="text" placeholder="Bairro" name="endereco-dia-noiva-bairro" id="endereco-dia-noiva-bairro" value="">
                             </fieldset>
 
                             <div id="campo-profissao" class="fechar-campo">
-                                <label for="">Profissão</label>
-                                <input type="text" name="" id="profissao" value="">
+                                <div class="campo-dentro">
+                                    <label for="">Profissão</label>
+                                    <input type="text" name="" id="profissao" value="">
+                                </div>
+                                <div class="mensagem-erro"><span></span></div>
                             </div>
                         </div>
                     </form>

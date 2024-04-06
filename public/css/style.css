@@ -582,7 +582,8 @@ form select,
 .modal-footer button#create-client-button,
 .modal-footer button#create-lead-button,
 .modal-footer button#update-client-button,
-.modal-footer button#create-service-client-button
+.modal-footer button#create-service-client-button,
+.modal-footer button#add-service-client-button,
 .modal-footer button#update-lead-button {
     background-color: #2e8b57;
     padding: 0 19px;
@@ -603,7 +604,7 @@ form select,
 .campos-servicos > * {
     align-items: center;
     margin-top: 10px;
-    width: 500px;
+    width: 570px;
     display: none;
     justify-content: space-between;
 }
@@ -628,4 +629,41 @@ input#dia-noiva {
 #campos-casamento > * {
     align-items: center;
     display: flex;
+}
+
+#sexo-bebe-radios {
+    display: flex;
+    position: relative;
+}
+
+#sexo-bebe-radios-m { margin-right: 18px; }
+
+#sexo-bebe-radios-m,
+#sexo-bebe-radios-f {
+    align-items: center;
+    display: flex;
+    width: 40px;
+}
+
+.campo-dentro {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 400px;
+}
+
+.mensagem-erro {
+    height: 21px;
+    position: relative;
+    width: 162px;
+}
+
+.mensagem-erro span {
+    font-size: 10px;
+    color: #ff0000;
+}
+
+.input-erro {
+    border: 1px solid #ff0000 !important;
 }

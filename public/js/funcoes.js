@@ -16,8 +16,8 @@ window.onclick = function (event) {
 }
 
 /** Limpa o formulário através do Id do formulário */
-function limpaFormulario(form_id) {
-    $('form' + form_id).each (function() {
+function limpaFormulario() {
+    $('form').each (function() {
         this.reset();
     }); 
 }
