@@ -7,7 +7,7 @@ const mysql = require("./mysql").pool;
  * @returns {object}
  */
 function insertService(service) {
-    // console.log('service.model insertService service', service);
+    // console.log("service.model insertService service", service);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
@@ -31,11 +31,11 @@ function insertService(service) {
                 service.dtnasccrianca,
                 service.idcliente,
             ];
-            // console.log('service.model insertService values', values);
+            // console.log("service.model insertService values", values);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, values, (err, result) => {
-                    // console.log('service.model insertService result', result);
-                    console.log('service.model insertService conn.query err', err);
+                    // console.log("service.model insertService result", result);
+                    console.log("service.model insertService conn.query err", err);
                     if (err) {
                         result = err;
                     }
@@ -44,7 +44,7 @@ function insertService(service) {
                 });
             });
         } catch (err) {
-            console.log('client.model insertService catch err', err);
+            console.log("client.model insertService catch err", err);
         }
     });
 }
@@ -54,7 +54,7 @@ function insertService(service) {
  * @returns {object}
  */
 function getServices(id_client = null) {
-    // console.log('service.model getServices');
+    // console.log("service.model getServices");
     return new Promise((resolve, reject) => {
         try {
             let sql = `SELECT * FROM tb_servicos`;
@@ -63,9 +63,9 @@ function getServices(id_client = null) {
             }
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result) => {
-                    // console.log('service.model getServices result', result);
+                    // console.log("service.model getServices result", result);
                     if (err) {
-                        console.log('service.model getServices conn.query err', err);
+                        console.log("service.model getServices conn.query err", err);
                         reject(err);
                         return;
                     }
@@ -74,7 +74,7 @@ function getServices(id_client = null) {
                 });
             });
         } catch (err) {
-            console.log('client.model getServices catch err', err);
+            console.log("client.model getServices catch err", err);
         }
     });
 }
@@ -85,14 +85,14 @@ function getServices(id_client = null) {
  * @returns {object}
  */
 function getService(id) {
-    // console.log('service.model getService id', id);
+    // console.log("service.model getService id", id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `SELECT * FROM servicos WHERE idservico = ${id}`;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result) => {
-                    // console.log('service.model getService result', result);
-                    console.log('service.model getService conn.query err', err);
+                    // console.log("service.model getService result", result);
+                    console.log("service.model getService conn.query err", err);
                     conn.release();
                     if (err) {
                         reject(err);
@@ -102,7 +102,7 @@ function getService(id) {
                 });
             });
         } catch (err) {
-            console.log('client.model getService catch err', err);
+            console.log("client.model getService catch err", err);
         }
     });
 }
@@ -113,14 +113,14 @@ function getService(id) {
  * @returns {object}
  */
 function deleteService(id) {
-    // console.log('service.model deleteService id', id);
+    // console.log("service.model deleteService id", id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `DELETE FROM servicos WHERE idservico = ${id}`;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result) => {
-                    // console.log('service.model deleteService result', result);
-                    console.log('service.model deleteService conn.query err', err);
+                    // console.log("service.model deleteService result", result);
+                    console.log("service.model deleteService conn.query err", err);
                     conn.release();
                     if (err) {
                         reject(err);
@@ -130,7 +130,7 @@ function deleteService(id) {
                 });
             });
         } catch (err) {
-            console.log('client.model deleteService catch err', err);
+            console.log("client.model deleteService catch err", err);
         }
     });
 }
@@ -141,33 +141,33 @@ function deleteService(id) {
  * @returns {object}
  */
 function updateService(service) {
-    // console.log('service.model updateService service', service);
+    // console.log("service.model updateService service", service);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
             UPDATE servicos SET 
-            tiposervico = '${service.tiposervico}', 
-            ambienteservico = '${service.ambienteservico}', 
-            dtcadservico = '${service.dtcadservico}', 
-            dtevento = '${service.dtevento}', 
+            tiposervico = "${service.tiposervico}", 
+            ambienteservico = "${service.ambienteservico}", 
+            dtcadservico = "${service.dtcadservico}", 
+            dtevento = "${service.dtevento}", 
             preco = ${service.preco}, 
-            statusservico = '${service.statusservico}', 
-            enderecoevento = '${service.enderecoevento}', 
-            numeroendevento = '${service.numero}', 
-            bairroevento = '${service.bairro}',  
-            cidadeevento = '${service.cidade}', 
-            nomebebe = '${service.nomebebe}', 
-            dtnascbebe = '${service.dtnascbebe}', 
-            nomecrianca = '${service.nomecrianca}', 
-            dtnasccrianca = '${service.dtnasccrianca}', 
+            statusservico = "${service.statusservico}", 
+            enderecoevento = "${service.enderecoevento}", 
+            numeroendevento = "${service.numero}", 
+            bairroevento = "${service.bairro}",  
+            cidadeevento = "${service.cidade}", 
+            nomebebe = "${service.nomebebe}", 
+            dtnascbebe = "${service.dtnascbebe}", 
+            nomecrianca = "${service.nomecrianca}", 
+            dtnasccrianca = "${service.dtnasccrianca}", 
             idcliente = ${service.idcliente} 
             WHERE idservico = ${service.idservico}`;
 
-            // console.log('service.model updateService sql', sql);
+            // console.log("service.model updateService sql", sql);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    // console.log('service.model updateService result', result);
-                    console.log('service.model updateService conn.query err', err);
+                    // console.log("service.model updateService result", result);
+                    console.log("service.model updateService conn.query err", err);
                     conn.release();
                     if (err) {
                         reject(err);
@@ -177,7 +177,7 @@ function updateService(service) {
                 });
             });
         } catch (err) {
-            console.log('client.model updateService catch err', err);
+            console.log("client.model updateService catch err", err);
         }
     });
 }

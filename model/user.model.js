@@ -8,20 +8,20 @@ const jwt = require("jsonwebtoken");
  * @returns {object}
  */
 function insertUser(user) {
-    // console.log('user.model insertUser user', user);
+    // console.log("user.model insertUser user", user);
     return new Promise((resolve, reject) => {
         try {
             bcrypt.hash(user.senha, 10, (errBc, hash) => {
                 if (errBc) {
-                    console.log('user.model insertUser errBc', errBc);
+                    console.log("user.model insertUser errBc", errBc);
                     res.send(errBc);
                 }
                 let sql = `INSERT INTO tb_usuarios (email_usuario, senha_usuario) values (?,?)`;
                 let values = [user.email, hash];
                 mysql.getConnection((err, conn) => {
                     conn.query(sql, values, (err, result) => {
-                        // console.log('user.model insertUser result', result);
-                        console.log('user.model insertUser conn.query err', err);
+                        // console.log("user.model insertUser result", result);
+                        console.log("user.model insertUser conn.query err", err);
                         if (err) {
                             result = err;
                         }
@@ -31,7 +31,7 @@ function insertUser(user) {
                 });
             });
         } catch (err) {
-            console.log('client.model insertUser catch err', err);
+            console.log("client.model insertUser catch err", err);
         }
     });
 }
@@ -42,7 +42,7 @@ function insertUser(user) {
  * @returns {object}
  */
 function loginUser(user) {
-    // console.log('Model: loginUser: user', user);
+    // console.log("Model: loginUser: user", user);
     return new Promise((resolve, reject) => {
         try {
             let query = `SELECT * FROM tb_usuarios WHERE email_usuario = ?`;
@@ -51,7 +51,7 @@ function loginUser(user) {
                 conn.query(query, user.email, (err_user_email, result_get_user) => {
                     conn.release();
                     if (err_user_email) {
-                        console.log('user.model loginUser conn.query err_user_email', err_user_email);
+                        console.log("user.model loginUser conn.query err_user_email", err_user_email);
                         return err_user_email;
                     }
 
@@ -74,7 +74,7 @@ function loginUser(user) {
                 });
             });
         } catch (err_catch) {
-            console.log('client.model loginUser catch err', err_catch);
+            console.log("client.model loginUser catch err", err_catch);
         }
     });
 }

@@ -8,7 +8,7 @@ const configModel = require("../model/config.model.js");
 async function getConfig(req, res, next) {
     let colors = await getColors();
     try {
-        res.render('admin/configurationPage', {
+        res.render("admin/configurationPage", {
             colors: colors
         });
     } catch (err) {
@@ -31,10 +31,10 @@ async function updateColors(req, res, next) {
         try {
             let sql = `
             UPDATE tb_configuracoes_cores SET
-            cor_painel_lateral = '${req.body.cor_painel_lateral}',
-            cor_texto_painel_lateral = '${req.body.cor_texto_painel_lateral}',
-            cor_icone_painel_lateral = '${req.body.cor_icones_painel_lateral}',
-            cor_texto_painel_principal = '${req.body.cor_texto_painel_principal}'
+            cor_painel_lateral = "${req.body.cor_painel_lateral}",
+            cor_texto_painel_lateral = "${req.body.cor_texto_painel_lateral}",
+            cor_icone_painel_lateral = "${req.body.cor_icones_painel_lateral}",
+            cor_texto_painel_principal = "${req.body.cor_texto_painel_principal}"
             WHERE id_cor = 1 
             `;
             

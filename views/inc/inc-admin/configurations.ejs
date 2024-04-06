@@ -31,7 +31,7 @@
     /* salva as cores na base de dados */
     $(".colors button").click(function() {
         $.ajax({
-            url: '/admin/configurations/getColors',
+            url: "/admin/configurations/getColors",
             type: "POST",
             data: {
                 cor_painel_lateral: $(".colors #cor-painel-lateral").val(),

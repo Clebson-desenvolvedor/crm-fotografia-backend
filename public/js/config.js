@@ -6,7 +6,7 @@ $(document).ready(function() {
 
     //pegar cores da configuradas na base
     $.ajax({
-        url: '/admin/configurations/',
+        url: "/admin/configurations/",
         type: "GET",
         success: data => {
             // console.log(data)

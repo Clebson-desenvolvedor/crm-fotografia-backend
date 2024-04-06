@@ -9,24 +9,24 @@ const config = require("../model/config.model.js");
  */
 
 async function createOrUpdateLead(req, res, next) {
-    // console.log('lead.controler createOrUpdateLead req.body', req.body);
-    // console.log('lead.controler createOrUpdateLead req.file', req.file);
+    // console.log("lead.controler createOrUpdateLead req.body", req.body);
+    // console.log("lead.controler createOrUpdateLead req.file", req.file);
     try {
         let lead = req.body;
 
-        if (lead.nome_lead == '' || lead.origem_lead == '') {
+        if (lead.nome_lead == "" || lead.origem_lead == "") {
             res.send({
-                message: 'Alguns campos são obrigatórios',
-                status: 'error'
+                message: "Alguns campos são obrigatórios",
+                status: "error"
             });
         } else {
             if (req.file) {
                 lead.foto_lead = req.file.filename;
             } else {
-                lead.foto_lead = 'no-photo.jpg';
+                lead.foto_lead = "no-photo.jpg";
             }
             
-            if (lead.dtcad_lead == '') {
+            if (lead.dtcad_lead == "") {
                 lead.dtcad_lead = helper.convertToMySql();
             } else {
                 lead.dtcad_lead = helper.convertToMySql(lead.dtcad_lead);
@@ -35,18 +35,18 @@ async function createOrUpdateLead(req, res, next) {
             if (lead.id_lead) {
                 lead = await leadModel.updateLead(lead);
                 res.send({
-                    message: 'Lead atualizado com sucesso!',
-                    status: 'success'
+                    message: "Lead atualizado com sucesso!",
+                    status: "success"
                 });
             } else {
                 lead = await leadModel.insertLead(lead);
-                lead.message = 'Lead cadastrado com sucesso!';
-                lead.status = 'success';
+                lead.message = "Lead cadastrado com sucesso!";
+                lead.status = "success";
                 res.send(lead);
             }
         }
     } catch (err) {
-        console.log('lead.controller createOrUpdateLead catch err', err);
+        console.log("lead.controller createOrUpdateLead catch err", err);
         next(err);
     }
 }
@@ -60,13 +60,13 @@ async function getLeads(req, res, next) {
         leads = await leadModel.getLeads();
         let colors = await config.getColors();
 
-        res.render('admin/leadsPage', {
-            title: 'Leads',
+        res.render("admin/leadsPage", {
+            title: "Leads",
             leads: leads,
             colors: colors
         })
     } catch (err) {
-        console.log('lead.controller getleads catch err', err);
+        console.log("lead.controller getleads catch err", err);
         next(err);
     }
 }
@@ -77,18 +77,18 @@ async function getLeads(req, res, next) {
  * @return {Array}
  */
 async function getLead(req, res, next) {
-    // console.log('lead.controller getlead req.params.id', req.params.id);
+    // console.log("lead.controller getlead req.params.id", req.params.id);
     try {
         let lead = await leadModel.getLead(req.params.id);
         let colors = await config.getColors();
-        // console.log('lead.controller getLead lead', lead);
-        res.render('admin/leadPage', {
+        // console.log("lead.controller getLead lead", lead);
+        res.render("admin/leadPage", {
             title: lead.nome_lead,
             leadData: lead,
             colors: colors
         });
     } catch (err) {
-        console.log('lead.controller getlead catch err', err);
+        console.log("lead.controller getlead catch err", err);
         next(err);
     }
 }
@@ -101,13 +101,13 @@ async function getLead(req, res, next) {
 async function deleteLead(req, res, next) {
     try {
         let lead = await leadModel.deleteLead(req.params.id);
-        // console.log('lead.controller deleteLead lead', lead);
+        // console.log("lead.controller deleteLead lead", lead);
         res.send({  
             message: "Lead apagado com sucesso! ",
             status: "success"
         });
     } catch (err) {
-        console.log('lead.controller deleteLead catch err', err);
+        console.log("lead.controller deleteLead catch err", err);
         next(err);
     }
 }

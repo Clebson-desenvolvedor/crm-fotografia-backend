@@ -6,7 +6,7 @@ const mysql = require("./mysql.js").pool;
  * @returns {Array}
  */
 function insertLead(lead) {
-    // console.log('lead.model insertLead lead', lead);
+    // console.log("lead.model insertLead lead", lead);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
@@ -27,12 +27,12 @@ function insertLead(lead) {
                 lead.foto_lead,
                 lead.origem_lead
             ];
-            // console.log('lead.model insertLead values', values);
+            // console.log("lead.model insertLead values", values);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, values, (err, result) => {
-                    // console.log('lead.model insertLead result', result);
+                    // console.log("lead.model insertLead result", result);
                     if (err) {
-                        console.log('lead.model insertLead conn.query err', err);
+                        console.log("lead.model insertLead conn.query err", err);
                         reject(err);
                         return;
                     }
@@ -41,7 +41,7 @@ function insertLead(lead) {
                 });
             });
         } catch (err) {
-            console.log('lead.model insertLead catch err', err);
+            console.log("lead.model insertLead catch err", err);
         }
     });
 }
@@ -51,15 +51,15 @@ function insertLead(lead) {
  * @returns {Array}
  */
 function getLeads() {
-    // console.log('lead.model getLeads');
+    // console.log("lead.model getLeads");
     return new Promise((resolve, reject) => {
         try {
             let sql = "SELECT id_lead, nome_lead, whatsapp_lead, foto_lead, origem_lead FROM tb_leads";
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    // console.log('lead.model getLeads result', result);
+                    // console.log("lead.model getLeads result", result);
                     if (err) {
-                        console.log('lead.model getLeads conn.query err', err);
+                        console.log("lead.model getLeads conn.query err", err);
                         reject(err);
                         return;
                     }
@@ -67,7 +67,7 @@ function getLeads() {
                 });
             });
         } catch (err) {
-            console.log('lead.model getLeads catch err', err);
+            console.log("lead.model getLeads catch err", err);
             throw err;
         }
     });
@@ -79,14 +79,14 @@ function getLeads() {
  * @returns {object}
  */
 function getLead(id) {
-    // console.log('lead.model getLead');
-    // console.log('lead.model getLead id', id);
+    // console.log("lead.model getLead");
+    // console.log("lead.model getLead id", id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
             SELECT id_lead,
             nome_lead, 
-            DATE_FORMAT(dtcad_lead, '%d/%m/%y') as dtcad_lead, 
+            DATE_FORMAT(dtcad_lead, "%d/%m/%y") as dtcad_lead, 
             email_lead,
             whatsapp_lead,
             foto_lead,
@@ -96,16 +96,16 @@ function getLead(id) {
 
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    //   console.log('lead.model getLead result', result);
+                    //   console.log("lead.model getLead result", result);
                     if (err) {
-                        console.log('lead.model getLead conn.query err', err);
+                        console.log("lead.model getLead conn.query err", err);
                         reject(err);
                     }
                     resolve(result);
                 });
             });
         } catch (err) {
-            console.log('lead.model getLead catch err', err);
+            console.log("lead.model getLead catch err", err);
         }
     });
 }
@@ -117,16 +117,16 @@ function getLead(id) {
  * @returns {Array}
  */
 function deleteLead(id) {
-    // console.log('lead.model deleteLead id', id);
+    // console.log("lead.model deleteLead id", id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `DELETE FROM tb_leads WHERE id_lead = ${id}`;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    // console.log('lead.model deleteLead result', result);
+                    // console.log("lead.model deleteLead result", result);
                     if (err) {
-                        console.log('lead.model deleteLead conn.query err.sqlMessage: ', err.sqlMessage);
-                        console.log('lead.model deleteLead conn.query err.errno:', err.errno);
+                        console.log("lead.model deleteLead conn.query err.sqlMessage: ", err.sqlMessage);
+                        console.log("lead.model deleteLead conn.query err.errno:", err.errno);
                         return resolve(err)
                     }
                     resolve(result);
@@ -134,7 +134,7 @@ function deleteLead(id) {
                 });
             });
         } catch (err) {
-            console.log('lead.model deleteLead catch err', err);
+            console.log("lead.model deleteLead catch err", err);
         }
     });
 }
@@ -147,25 +147,25 @@ function deleteLead(id) {
  */
 
 function updateLead(lead) {
-    // console.log('lead.model updateLead');
-    // console.log('lead.model updatelead lead', lead);
+    // console.log("lead.model updateLead");
+    // console.log("lead.model updatelead lead", lead);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
             UPDATE tb_leads SET 
-            nome_lead = '${lead.nome_lead}', 
-            dtcad_lead = '${lead.dtcad_lead}', 
-            email_lead = '${lead.email_lead}', 
-            whatsapp_lead = '${lead.whatsapp_lead}',
-            foto_lead = '${lead.foto_lead}',
-            origem_lead = '${lead.origem_lead}'
+            nome_lead = "${lead.nome_lead}", 
+            dtcad_lead = "${lead.dtcad_lead}", 
+            email_lead = "${lead.email_lead}", 
+            whatsapp_lead = "${lead.whatsapp_lead}",
+            foto_lead = "${lead.foto_lead}",
+            origem_lead = "${lead.origem_lead}"
             WHERE id_lead = ${lead.id_lead}`;
-            // console.log('lead.model updateLead sql', sql);
+            // console.log("lead.model updateLead sql", sql);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    // console.log('lead.model updateLead result', result);
+                    // console.log("lead.model updateLead result", result);
                     if (err) {
-                        console.log('lead.model updateLead conn.query err', err);
+                        console.log("lead.model updateLead conn.query err", err);
                         reject(err);
                         return;
                     }
@@ -174,7 +174,7 @@ function updateLead(lead) {
                 });
             });
         } catch (err) {
-            console.log('lead.model updateLead catch err', err);
+            console.log("lead.model updateLead catch err", err);
         }
     });
 }

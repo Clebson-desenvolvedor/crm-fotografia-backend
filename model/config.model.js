@@ -3,10 +3,10 @@ const mysql = require("./mysql.js").pool;
 function getColors() {
     return new Promise((resolve, reject) => {
         try {
-            let sql = 'SELECT * FROM tb_configuracoes_cores LIMIT 1';
+            let sql = "SELECT * FROM tb_configuracoes_cores LIMIT 1";
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result) => {
-                    // console.log('result[0]', result[0]);
+                    // console.log("result[0]", result[0]);
                     if (err) {
                         reject(err);
                         return;

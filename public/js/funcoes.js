@@ -1,23 +1,23 @@
 /** Abre ou fecha modal */
  function abreOuFechaModal() {
-    if ($('.modal').css('display') == 'block') {
-        $('.modal').css('display', 'none');
+    if ($(".modal").css("display") == "block") {
+        $(".modal").css("display", "none");
         limpaFormulario();
     } else {
-        $('.modal').css('display', 'block');
+        $(".modal").css("display", "block");
     }
 }
 
 /** Chama a função de abrir ou fechar modal */
 window.onclick = function (event) {
-    if (event.target.className == 'modal') {
+    if (event.target.className == "modal") {
         abreOuFechaModal();
     }
 }
 
 /** Limpa o formulário através do Id do formulário */
 function limpaFormulario() {
-    $('form').each (function() {
+    $("form").each (function() {
         this.reset();
     }); 
 }
@@ -59,7 +59,7 @@ $(document).ready(() => {
 
 
 
-$(window).on('scroll', () => {
+$(window).on("scroll", () => {
     let header_fixo = {
         height: "70px",
         position: "fixed"

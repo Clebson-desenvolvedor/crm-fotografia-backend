@@ -6,7 +6,7 @@ const mysql = require("./mysql.js").pool;
  * @returns {Array}
  */
 function insertClient(client) {
-    // console.log('client.model insertClient client', client);
+    // console.log("client.model insertClient client", client);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
@@ -27,12 +27,12 @@ function insertClient(client) {
                 client.dtcad_cliente,
                 client.foto_cliente
             ];
-            // console.log('client.model insertClient values', values);
+            // console.log("client.model insertClient values", values);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, values, (err, result) => {
-                    // console.log('client.model insertClient result', result);
+                    // console.log("client.model insertClient result", result);
                     if (err) {
-                        console.log('client.model insertClient conn.query err', err);
+                        console.log("client.model insertClient conn.query err", err);
                         reject(err);
                         return;
                     }
@@ -52,10 +52,10 @@ function insertClient(client) {
                         result.insertId,
                         1
                     ]
-                    // console.log('client.model insertClient values2', values2)
+                    // console.log("client.model insertClient values2", values2)
                     conn.query(sql, values2, (err, result) => {
                         if (err) {
-                            console.log('client.model insertClient conn.query 2 err', err);
+                            console.log("client.model insertClient conn.query 2 err", err);
                             reject(err);
                             return;
                         }
@@ -65,7 +65,7 @@ function insertClient(client) {
                 });
             });
         } catch (err) {
-            console.log('client.model insertClient catch err', err);
+            console.log("client.model insertClient catch err", err);
         }
     });
 }
@@ -91,9 +91,9 @@ function getClients() {
             `;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    // console.log('client.model getClients result', result);
+                    // console.log("client.model getClients result", result);
                     if (err) {
-                        console.log('client.model getClients conn.query err', err);
+                        console.log("client.model getClients conn.query err", err);
                         reject(err);
                         return;
                     }
@@ -101,7 +101,7 @@ function getClients() {
                 });
             });
         } catch (err) {
-            console.log('client.model getClients catch err', err);
+            console.log("client.model getClients catch err", err);
             throw err;
         }
     });
@@ -113,14 +113,14 @@ function getClients() {
  * @returns {object}
  */
 function getClient(id) {
-    // console.log('client.model getClient');
-    // console.log('client.model getClient id', id);
+    // console.log("client.model getClient");
+    // console.log("client.model getClient id", id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
             SELECT id_cliente,
             nome_cliente, 
-            DATE_FORMAT(dtcad_cliente, '%d/%m/%y') as dtcad_cliente, 
+            DATE_FORMAT(dtcad_cliente, "%d/%m/%y") as dtcad_cliente, 
             email_cliente,
             whatsapp_cliente,
             cpf_cliente,
@@ -137,9 +137,9 @@ function getClient(id) {
             let objClient = {};
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    //   console.log('client.model getClient result', result);
+                    //   console.log("client.model getClient result", result);
                     if (err) {
-                        console.log('client.model getClient conn.query err', err);
+                        console.log("client.model getClient conn.query err", err);
                         reject(err);
                     } else if (result.length == 0) {
                         result = [];
@@ -157,7 +157,7 @@ function getClient(id) {
                             bairro: result[0].endereco_bairro,
                             foto: result[0].foto_cliente
                         };
-                        // console.log('client.model getClient objClient', objClient);
+                        // console.log("client.model getClient objClient", objClient);
                         resolve(objClient);
                         
                         //em breve aqui implementar a query que busca os serviços por cliente
@@ -167,7 +167,7 @@ function getClient(id) {
                 });
             });
         } catch (err) {
-            console.log('client.model getClient catch err', err);
+            console.log("client.model getClient catch err", err);
         }
     });
 }
@@ -179,26 +179,26 @@ function getClient(id) {
  * @returns {Array}
  */
 function deleteClient(id) {
-    // console.log('client.model deleteClient id', id);
+    // console.log("client.model deleteClient id", id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `DELETE FROM tb_endereco WHERE endereco_cliente_id = ${id}`;
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    // console.log('client.model deleteClient result', result);
+                    // console.log("client.model deleteClient result", result);
                     if (err) {
-                        console.log('client.model deleteClient conn.query err.sqlMessage: ', err.sqlMessage);
-                        console.log('client.model deleteClient conn.query err.errno:', err.errno);
+                        console.log("client.model deleteClient conn.query err.sqlMessage: ", err.sqlMessage);
+                        console.log("client.model deleteClient conn.query err.errno:", err.errno);
                         return resolve(err)
                     }
 
                     mysql.getConnection((err2, conn) => {
                         sql = `DELETE FROM tb_clientes WHERE id_cliente = ${id}`;
                         conn.query(sql, (err2, result2, field) => {
-                            // console.log('client.model deleteClient result2', result2);
+                            // console.log("client.model deleteClient result2", result2);
                             if (err2) {
-                                console.log('client.model deleteClient conn.query err2.sqlMessage: ', err2.sqlMessage);
-                                console.log('client.model deleteClient conn.query err2.errno:', err2.errno);
+                                console.log("client.model deleteClient conn.query err2.sqlMessage: ", err2.sqlMessage);
+                                console.log("client.model deleteClient conn.query err2.errno:", err2.errno);
                                 return resolve(err)
                             }
                             resolve(result2);
@@ -210,7 +210,7 @@ function deleteClient(id) {
                 });
             });
         } catch (err) {
-            console.log('client.model deleteClient catch err', err);
+            console.log("client.model deleteClient catch err", err);
         }
     });
 }
@@ -223,38 +223,38 @@ function deleteClient(id) {
  */
 
 function updateClient(client) {
-    // console.log('client.model updateClient');
+    // console.log("client.model updateClient");
     return new Promise((resolve, reject) => {
         try {
             let sql = `
             UPDATE tb_clientes SET 
-            nome_cliente = '${client.nome_cliente}', 
-            dtcad_cliente = '${client.dtcad_cliente}', 
-            email_cliente = '${client.email_cliente}', 
-            whatsapp_cliente = '${client.whatsapp_cliente}',
-            cpf_cliente = '${client.cpf_cliente}',
-            foto_cliente = '${client.foto_cliente}'
+            nome_cliente = "${client.nome_cliente}", 
+            dtcad_cliente = "${client.dtcad_cliente}", 
+            email_cliente = "${client.email_cliente}", 
+            whatsapp_cliente = "${client.whatsapp_cliente}",
+            cpf_cliente = "${client.cpf_cliente}",
+            foto_cliente = "${client.foto_cliente}"
             WHERE id_cliente = ${client.id_cliente}`;
-            // console.log('client.model updateClient sql', sql);
+            // console.log("client.model updateClient sql", sql);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
-                    // console.log('client.model updateClient result', result);
+                    // console.log("client.model updateClient result", result);
                     if (err) {
-                        console.log('client.model updateClient conn.query err', err);
+                        console.log("client.model updateClient conn.query err", err);
                         reject(err);
                         return;
                     }
                     sql = `
                     UPDATE tb_endereco SET
-                    endereco_logradouro = '${client.endereco_logradouro}',
-                    endereco_numero = '${client.endereco_numero}',
-                    endereco_bairro = '${client.endereco_bairro}'
+                    endereco_logradouro = "${client.endereco_logradouro}",
+                    endereco_numero = "${client.endereco_numero}",
+                    endereco_bairro = "${client.endereco_bairro}"
                     WHERE endereco_cliente_id = ${client.id_cliente}`;
 
                     mysql.getConnection((err, conn) => {
                         conn.query(sql, (err2, result2, field) => {
                             if (err2) {
-                                console.log('client.model updateClient conn.query err2', err2);
+                                console.log("client.model updateClient conn.query err2", err2);
                                 reject(err);
                                 return;
                             }
@@ -265,7 +265,7 @@ function updateClient(client) {
                 });
             });
         } catch (err) {
-            console.log('client.model updateClient catch err', err);
+            console.log("client.model updateClient catch err", err);
         }
     });
 }

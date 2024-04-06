@@ -12,7 +12,7 @@ const dashboardController = require("../controllers/dash.controller.js");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './public/img/uploads');
+        cb(null, "./public/img/uploads");
     },
     filename: function (req, file, cb) {
         cb(null, helper.createNameFile(file.originalname));
@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 //rotas para clientes: admin/clients
-router.post("/clients", upload.single('foto_cliente'), clientController.createOrUpdateClient);
+router.post("/clients", upload.single("foto_cliente"), clientController.createOrUpdateClient);
 router.get("/clients", clientController.getClients);
 router.get("/clients/:id", clientController.getClient);
 router.post("/clients/:id", clientController.deleteClient);
@@ -35,7 +35,7 @@ router.get("/services/:id", serviceController.getService);
 // router.put("/", clientController.updateClient);
 
 //rotas para leads: admin/leads
-router.post("/leads", upload.single('foto_lead'), leadController.createOrUpdateLead);
+router.post("/leads", upload.single("foto_lead"), leadController.createOrUpdateLead);
 router.get("/leads", leadController.getLeads);
 router.get("/leads/:id", leadController.getLead);
 router.post("/leads/:id", leadController.deleteLead);

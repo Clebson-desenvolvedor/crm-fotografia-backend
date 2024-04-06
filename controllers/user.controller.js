@@ -6,7 +6,7 @@ const userModel = require("../model/user.model.js");
  * @return {object}
  */
 async function createUser(req, res, next) {
-    // console.log('user.controller createUser req.body', req.body);
+    // console.log("user.controller createUser req.body", req.body);
     try {
         let user = req.body;
         if (!user.email || !user.senha) throw new Error("Os campos são obrigatórios! ");
@@ -18,7 +18,7 @@ async function createUser(req, res, next) {
             Id: user.insertId,
         });
     } catch (err) {
-        console.log('user.controller createUser catch err', err);
+        console.log("user.controller createUser catch err", err);
         next(err);
     }
 }
@@ -45,7 +45,7 @@ async function loginUser(req, res, next) {
             }
         }
     } catch (err) {
-        console.log('user.controller loginUser catch err', err);
+        console.log("user.controller loginUser catch err", err);
         next(err);
     }
 }

@@ -6,7 +6,7 @@ $(document).ready(() => {
 
     /** Valores padrões */
     if ($(".cards").children().length == 0) {
-        $(".cards").append('<p>Nenhum lead cadastrado ainda.</p>')
+        $(".cards").append("<p>Nenhum lead cadastrado ainda.</p>")
     }
 
      /** Criar um lead */
