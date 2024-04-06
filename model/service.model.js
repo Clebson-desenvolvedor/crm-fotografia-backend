@@ -11,8 +11,23 @@ function insertService(service) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            INSERT INTO servicos (tiposervico, ambienteservico, dtcadservico, dtevento, preco, statusservico, enderecoevento, numeroendevento, bairroevento, cidadeevento, nomebebe, dtnascbebe, nomecrianca, dtnasccrianca, idcliente) 
-            values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
+            INSERT INTO servicos (
+                tiposervico,
+                ambienteservico,
+                dtcadservico,
+                dtevento,
+                preco,
+                statusservico,
+                enderecoevento,
+                numeroendevento,
+                bairroevento,
+                cidadeevento,
+                nomebebe,
+                dtnascbebe,
+                nomecrianca,
+                dtnasccrianca,
+                idcliente
+            ) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
             let values = [
                 service.tiposervico,
@@ -145,23 +160,23 @@ function updateService(service) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            UPDATE servicos SET 
-            tiposervico = "${service.tiposervico}", 
-            ambienteservico = "${service.ambienteservico}", 
-            dtcadservico = "${service.dtcadservico}", 
-            dtevento = "${service.dtevento}", 
-            preco = ${service.preco}, 
-            statusservico = "${service.statusservico}", 
-            enderecoevento = "${service.enderecoevento}", 
-            numeroendevento = "${service.numero}", 
-            bairroevento = "${service.bairro}",  
-            cidadeevento = "${service.cidade}", 
-            nomebebe = "${service.nomebebe}", 
-            dtnascbebe = "${service.dtnascbebe}", 
-            nomecrianca = "${service.nomecrianca}", 
-            dtnasccrianca = "${service.dtnasccrianca}", 
-            idcliente = ${service.idcliente} 
-            WHERE idservico = ${service.idservico}`;
+                UPDATE servicos SET 
+                tiposervico = "${service.tiposervico}", 
+                ambienteservico = "${service.ambienteservico}", 
+                dtcadservico = "${service.dtcadservico}", 
+                dtevento = "${service.dtevento}", 
+                preco = ${service.preco}, 
+                statusservico = "${service.statusservico}", 
+                enderecoevento = "${service.enderecoevento}", 
+                numeroendevento = "${service.numero}", 
+                bairroevento = "${service.bairro}",  
+                cidadeevento = "${service.cidade}", 
+                nomebebe = "${service.nomebebe}", 
+                dtnascbebe = "${service.dtnascbebe}", 
+                nomecrianca = "${service.nomecrianca}", 
+                dtnasccrianca = "${service.dtnasccrianca}", 
+                idcliente = ${service.idcliente} 
+                WHERE idservico = ${service.idservico}`;
 
             // console.log("service.model updateService sql", sql);
             mysql.getConnection((err, conn) => {

@@ -84,13 +84,14 @@ function getLead(id) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            SELECT id_lead,
-            nome_lead, 
-            DATE_FORMAT(dtcad_lead, "%d/%m/%y") as dtcad_lead, 
-            email_lead,
-            whatsapp_lead,
-            foto_lead,
-            origem_lead
+            SELECT
+                id_lead,
+                nome_lead, 
+                DATE_FORMAT(dtcad_lead, "%d/%m/%y") as dtcad_lead, 
+                email_lead,
+                whatsapp_lead,
+                foto_lead,
+                origem_lead
             FROM tb_leads
             WHERE id_lead = ${id}`;
 
@@ -152,14 +153,14 @@ function updateLead(lead) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            UPDATE tb_leads SET 
-            nome_lead = "${lead.nome_lead}", 
-            dtcad_lead = "${lead.dtcad_lead}", 
-            email_lead = "${lead.email_lead}", 
-            whatsapp_lead = "${lead.whatsapp_lead}",
-            foto_lead = "${lead.foto_lead}",
-            origem_lead = "${lead.origem_lead}"
-            WHERE id_lead = ${lead.id_lead}`;
+                UPDATE tb_leads SET 
+                nome_lead = "${lead.nome_lead}", 
+                dtcad_lead = "${lead.dtcad_lead}", 
+                email_lead = "${lead.email_lead}", 
+                whatsapp_lead = "${lead.whatsapp_lead}",
+                foto_lead = "${lead.foto_lead}",
+                origem_lead = "${lead.origem_lead}"
+                WHERE id_lead = ${lead.id_lead}`;
             // console.log("lead.model updateLead sql", sql);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {

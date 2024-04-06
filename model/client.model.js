@@ -79,14 +79,13 @@ function getClients() {
         try {
             let sql = `
                 SELECT
-                id_cliente,
-                nome_cliente,
-                whatsapp_cliente,
-                foto_cliente,
-                COUNT(tb_servicos_id_cliente) as quantidade_servicos
+                    id_cliente,
+                    nome_cliente,
+                    whatsapp_cliente,
+                    foto_cliente,
+                    COUNT(tb_servicos_id_cliente) as quantidade_servicos
                 FROM tb_clientes
-                LEFT JOIN tb_servicos
-                ON id_cliente = tb_servicos_id_cliente
+                LEFT JOIN tb_servicos ON id_cliente = tb_servicos_id_cliente
                 GROUP BY id_cliente
             `;
             mysql.getConnection((err, conn) => {
@@ -119,19 +118,18 @@ function getClient(id) {
         try {
             let sql = `
             SELECT id_cliente,
-            nome_cliente, 
-            DATE_FORMAT(dtcad_cliente, "%d/%m/%y") as dtcad_cliente, 
-            email_cliente,
-            whatsapp_cliente,
-            cpf_cliente,
-            foto_cliente,
-            endereco_logradouro,
-            endereco_numero,
-            endereco_bairro,
-            endereco_cliente_id
+                nome_cliente, 
+                DATE_FORMAT(dtcad_cliente, "%d/%m/%y") as dtcad_cliente, 
+                email_cliente,
+                whatsapp_cliente,
+                cpf_cliente,
+                foto_cliente,
+                endereco_logradouro,
+                endereco_numero,
+                endereco_bairro,
+                endereco_cliente_id
             FROM tb_clientes
-            INNER JOIN tb_endereco
-            ON id_cliente = endereco_cliente_id
+            INNER JOIN tb_endereco ON id_cliente = endereco_cliente_id
             WHERE id_cliente = ${id}`;
 
             let objClient = {};
