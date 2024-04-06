@@ -1,50 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <%- include('../inc/inc-admin/head') -%>
+    <%- include("../inc/inc-admin/head") -%>
     <body>
-        <%- include('../inc/inc-admin/sidebar') -%>
-            <div class="main-content">
-                <%- include('../inc/inc-admin/header') -%>
-                <main>
-                    <%- include('../inc/inc-admin/clients') -%>
-                </main>
-            </div>
-        <script>
-            $(document).ready(() => {
-                if ($('.cards').children().length == 0) {
-                    $('.cards').append('<p>Nenhum Cliente cadastrado aidna.</p>')
-                }
-
-                //evento de criar um novo cliente
-                $('#create-client-button').click(function(ev) {
-                    $.ajax({
-                        url: `/admin/clients`,
-                        type: 'POST',
-                        data: { 
-                            nome_cliente: $('form input#name')[0].value,
-                            whatsapp_cliente: $('form input#whatsapp')[0].value,
-                            email_cliente: $('form input#email')[0].value,
-                            cpf_cliente: $('form input#cpf')[0].value,
-                            dtcad_cliente: $('form input#date')[0].value,
-                            endereco_logradouro: $('form input#street')[0].value,
-                            endereco_numero: $('form input#number')[0].value,
-                            endereco_bairro: $('form input#district')[0].value,
-                            foto_cliente: $('form input#image')[0].value//precisará consertar futuramente, pois não está salvando a imagem selecionada na base
-                         },
-                    }).done(function(data) {
-                        // console.log('data', data);
-                        abreOuFechaModal();
-                        $('p.alert').text(data.message).addClass('alert-success');
-                        setTimeout(() => {
-                            $('p.alert').fadeOut(500);
-                        }, 3000);
-                    }).fail(function(er) {
-                        console.log(er)
-                    })
-                });
-
-                $(".modalBtn").click(abreOuFechaModal);
-            });
-        </script>
+        <%- include("../inc/inc-admin/sidebar") -%>
+        <div class="main-content">
+            <%- include("../inc/inc-admin/header") -%>
+            <main>
+                <%- include("../inc/inc-admin/clients") -%>
+            </main>
+        </div>
     </body>
 </html>

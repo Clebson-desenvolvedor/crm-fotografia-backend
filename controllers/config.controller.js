@@ -21,7 +21,7 @@ async function getColors() {
         try {
             let colors = configModel.getColors();
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     })
 }

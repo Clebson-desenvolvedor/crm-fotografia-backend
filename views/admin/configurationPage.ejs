@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <%- include('../inc/inc-admin/head') -%>
+    <%- include("../inc/inc-admin/head") -%>
     <body>
-        <%- include('../inc/inc-admin/sidebar') -%>
-            <div class="main-content">
-                <%- include('../inc/inc-admin/header') -%>
-                <main>
-                    <%- include('../inc/inc-admin/configurations') -%>
-                </main>
-            </div>
-        <script>
-            $(document).ready(function() {
-                $('.color-input').on('change', function () {
-                    $(this).next('.pseudo-color-input').css('background-color', $(this).val());
-                });
-
-            });
-        </script>
+        <%- include("../inc/inc-admin/sidebar") -%>
+        <div class="main-content">
+            <%- include("../inc/inc-admin/header") -%>
+            <main>
+                <%- include("../inc/inc-admin/configurations") -%>
+            </main>
+        </div>
     </body>
 </html>

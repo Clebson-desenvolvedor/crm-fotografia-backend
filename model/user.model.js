@@ -95,7 +95,7 @@ function salvaTokenUsuario (usuario) {
                 conn.query(query, (err_atualiza_token_usuario, result_atualiza_token_usuario) => {
                     conn.release();
                     if (err_atualiza_token_usuario) {
-                        console.log("Model: user: salvaTokenUsuario err_atualiza_token_usuario", err_atualiza_token_usuario);
+                        // console.log("Model: user: salvaTokenUsuario err_atualiza_token_usuario", err_atualiza_token_usuario);
                         reject(err_atualiza_token_usuario);
                         return;
                     }

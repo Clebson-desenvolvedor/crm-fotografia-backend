@@ -1,60 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    <%- include('../inc/inc-admin/head') %>
+    <%- include("../inc/inc-admin/head") %>
     <body>
-        <%- include('../inc/inc-admin/sidebar') -%>
-            <div class="main-content">
-                <%- include('../inc/inc-admin/header') -%>
-                <main>
-                    <%- include('../inc/inc-admin/lead') -%>
-                </main>
-            </div>
-        <script>
-            $(document).ready(() => {
-
-                //evento para atualizar um lead
-                $('#update-lead-button').click(function(e) {
-                    e.preventDefault();
-                    $.ajax({
-                        url: '/admin/leads/',
-                        type: 'POST',
-                        data: {
-                            id_lead: $('form input#id')[0].value,
-                            nome_lead: $('form input#name')[0].value,
-                            whatsapp_lead: $('form input#whatsapp')[0].value,
-                            email_lead: $('form input#email')[0].value,
-                            dtcad_lead: $('form input#date')[0].value,
-                            foto_lead: $('form input#image')[0].value,//precisará consertar futuramente, pois não está salvando a imagem selecionada na base
-                            origem_lead: $('form select#origin option:selected').val()
-                         },
-                    }).done(function(data) {
-                        // console.log('data', data);
-                        $('p.alert').text(data.message).addClass('alert-success');
-                        setTimeout(() => {
-                            $('p.alert').fadeOut(500);
-                        }, 3000);
-                    }).fail(function(er) {
-                        console.log(er)
-                    });
-                });
-
-                //evento para deletar um lead
-                $('#delete-lead-button').click(function(e) {
-                    id =  $('form input#id')[0].value;
-                    $.ajax({
-                        url: `/admin/leads/${id}`,
-                        type: 'POST',
-                        data: { id: id },
-                    }).done(function(data) {
-                        $('p.alert').text(data.message).addClass('alert-success');
-                        setTimeout(() => {
-                            $('p.alert').fadeOut(500);
-                        }, 3000);
-                    }).fail(function(er) {
-                        console.log(er)
-                    })
-                });
-            });
-        </script>
+        <%- include("../inc/inc-admin/sidebar") -%>
+        <div class="main-content">
+            <%- include("../inc/inc-admin/header") -%>
+            <main>
+                <%- include("../inc/inc-admin/lead") -%>
+            </main>
+        </div>
     </body>
 </html>

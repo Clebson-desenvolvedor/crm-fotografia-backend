@@ -69,3 +69,6 @@ $(window).on('scroll', () => {
 
     }
 })
+
+
+// $(".modalBtn").click(abreOuFechaModal);

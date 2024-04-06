@@ -2,58 +2,89 @@
  * Arquivo para tratar todas as funções referente a página de clientes.
  */
 
-
-/** Eventos e valores padrões */
 $(document).ready(() => {
 
     /** Valores padrões */
     $("#servico-tipo").text(0);
     $("#create-service-client-button").attr("disabled", true).css("opacity", 0.5);
 
-    /* Evento para atualizar um cliente */
-    $('#update-client-button').click(function(e) {
-        e.preventDefault();
+    if ($(".cards").children().length == 0) {
+        $(".cards").append("<p>Nenhum Cliente cadastrado ainda.</p>")
+    }
+
+    /** Criar um cliente */
+    $("#create-client-button").click(function(ev) {
         $.ajax({
-            url: '/admin/clients/',
-            type: 'POST',
-            data: {
-                id_cliente: $('form input#id')[0].value,
-                nome_cliente: $('form input#name')[0].value,
-                whatsapp_cliente: $('form input#whatsapp')[0].value,
-                email_cliente: $('form input#email')[0].value,
-                cpf_cliente: $('form input#cpf')[0].value,
-                dtcad_cliente: $('form input#date')[0].value,
-                endereco_logradouro: $('form input#street')[0].value,
-                endereco_numero: $('form input#number')[0].value,
-                endereco_bairro: $('form input#district')[0].value,
-                foto_cliente: $('form input#image')[0].value//precisará consertar futuramente, pois não está salvando a imagem selecionada na base
-             },
+            url: `/admin/clients`,
+            type: "POST",
+            data: { 
+                nome_cliente: $("form input#name").val(),
+                whatsapp_cliente: $("form input#whatsapp").val(),
+                email_cliente: $("form input#email").val(),
+                cpf_cliente: $("form input#cpf").val(),
+                dtcad_cliente: $("form input#date").val(),
+                endereco_logradouro: $("form input#street").val(),
+                endereco_numero: $("form input#number").val(),
+                endereco_bairro: $("form input#district").val(),
+                foto_cliente: $("form input#image")[0].value//precisará consertar futuramente, pois não está salvando a imagem selecionada na base
+            },
         }).done(function(data) {
-            // console.log('data', data);
-            $('p.alert').text(data.message).addClass('alert-success');
+            // console.log("data", data);
+            abreOuFechaModal();
+            $("p.alert").text(data.message).addClass("alert-success");
             setTimeout(() => {
-                $('p.alert').fadeOut(500);
+                $("p.alert").fadeOut(500);
             }, 3000);
         }).fail(function(er) {
-            console.log(er)
+            console.log("client.js criar cliente er: ", er);
         });
     });
 
-    /* Evento para deletar um cliente */
-    $('#delete-client-button').click(function(e) {
-        id =  $('form input#id')[0].value;
+    /* Atualizar um cliente */
+    $("#update-client-button").click(function(e) {
+        e.preventDefault();
         $.ajax({
-            url: `/admin/clients/${id}`,
-            type: 'POST',
-            data: { id: id },
+            url: "/admin/clients/",
+            type: "POST",
+            data: {
+                id_cliente: $("form input#id").val(),
+                nome_cliente: $("form input#name").val(),
+                whatsapp_cliente: $("form input#whatsapp").val(),
+                email_cliente: $("form input#email").val(),
+                cpf_cliente: $("form input#cpf").val(),
+                dtcad_cliente: $("form input#date").val(),
+                endereco_logradouro: $("form input#street").val(),
+                endereco_numero: $("form input#number").val(),
+                endereco_bairro: $("form input#district").val(),
+                foto_cliente: $("form input#image").val() //precisará consertar futuramente, pois não está salvando a imagem selecionada na base
+             },
         }).done(function(data) {
-            // console.log('data', data);
-            $('p.alert').text(data.message).addClass('alert-success');
+            // console.log("data", data);
+            $("p.alert").text(data.message).addClass("alert-success");
             setTimeout(() => {
-                $('p.alert').fadeOut(500);
+                $("p.alert").fadeOut(500);
             }, 3000);
         }).fail(function(er) {
-            console.log(er)
+            console.log("client.js atualizar cliente er: ", er);
+        });
+    });
+
+    /* Deletar um cliente */
+    $("#delete-client-button").click(function(e) {
+        e.preventDefault();
+        id =  $("form input#id").val();
+        $.ajax({
+            url: `/admin/clients/${id}`,
+            type: "POST",
+            data: { id: id },
+        }).done(function(data) {
+            // console.log("data", data);
+            $("p.alert").text(data.message).addClass("alert-success");
+            setTimeout(() => {
+                $("p.alert").fadeOut(500);
+            }, 3000);
+        }).fail(function(er) {
+            console.log("client.js deletar cliente er: ", er);
         })
     });
 
@@ -64,9 +95,9 @@ $(document).ready(() => {
     });
 
     /* Carrega o formulário de um serviço de acordo com o tipo de serviço escolhido */
-    $('#select-service').on('change', function() {
+    $("#select-service").on("change", function() {
         removerAvisoErro();
-        let servico_selecionado = $('#select-service option:selected').val();
+        let servico_selecionado = $("#select-service option:selected").val();
         if (servico_selecionado == "Acompanhamento") {
             limpaFormulario("#form-service-selected");
             fechaCamposFormulario(carregaCamposServicoBebe);
@@ -136,7 +167,7 @@ $(document).ready(() => {
     });
 
     /** Habilita ou desabilita os campos do endereço da recepção. */
-    $('#recepcao').on("change", function() {
+    $("#recepcao").on("change", function() {
         if ($("#recepcao").is(":checked")) {
             $("#endereco-recepcao").css("display", "flex");
         } else {
@@ -145,7 +176,7 @@ $(document).ready(() => {
     });
 
     /** Habilita ou desabilita os campos do endereço do Dia da Noiva. */
-    $('#dia-noiva').on("change", function() {
+    $("#dia-noiva").on("change", function() {
         if ($("#dia-noiva").is(":checked")) {
             $("#endereco-dia-noiva").css("display", "flex");
         } else {
@@ -174,7 +205,7 @@ $(document).ready(() => {
             profissao: $("form#form-service-selected input#profissao").val(),
         }
 
-        if ($('#endereco-evento-logradouro').val().length > 0) {
+        if ($("#endereco-evento-logradouro").val().length > 0) {
             campos.enderecos.push({
                 endereco_tipo: "endereco_evento",
                 endereco_logradouro: $("#endereco-evento-logradouro").val(),
@@ -183,7 +214,7 @@ $(document).ready(() => {
             });
         }
 
-        if ($('input#recepcao:checked').val() == "on" && $("#endereco-recepcao-logradouro").val().length > 0) {
+        if ($("input#recepcao:checked").val() == "on" && $("#endereco-recepcao-logradouro").val().length > 0) {
             campos.enderecos.push({
                 endereco_tipo: "endereco_recepcao",
                 endereco_logradouro: $("#endereco-recepcao-logradouro").val(),
@@ -192,7 +223,7 @@ $(document).ready(() => {
             });
         }
 
-        if ($('input#dia-noiva:checked').val() == "on" && $("#endereco-dia-noiva-logradouro").val().length > 0) {
+        if ($("input#dia-noiva:checked").val() == "on" && $("#endereco-dia-noiva-logradouro").val().length > 0) {
             campos.enderecos.push({
                 endereco_tipo: "endereco_dia-noiva",
                 endereco_logradouro: $("#endereco-dia-noiva-logradouro").val(),
@@ -206,27 +237,25 @@ $(document).ready(() => {
             return;
         }
 
-       
-
-        console.log("data", data);
+        // console.log("data", data);
 
         // $.ajax({
-        //     url: '/admin/clients/',
-        //     type: 'POST',
+        //     url: "/admin/clients/",
+        //     type: "POST",
         //     data: { data },
         // }).done(function(data) {
-        //     // console.log('data', data);
-        //     $('p.alert').text(data.message).addClass('alert-success');
+        //     // console.log("data", data);
+        //     $("p.alert").text(data.message).addClass("alert-success");
         //     setTimeout(() => {
-        //         $('p.alert').fadeOut(500);
+        //         $("p.alert").fadeOut(500);
         //     }, 3000);
         // }).fail(function(er) {
         //     console.log(er)
         // });
     })
 
-    $('#clear-button').click(limpaFormulario);
-
+    $(".modalBtnCliente").click(abreOuFechaModal);
+    $("#clear-button").click(limpaFormulario);
 });
 
 /** Funções */

@@ -59,7 +59,7 @@ async function getLeads(req, res, next) {
     try {
         leads = await leadModel.getLeads();
         let colors = await config.getColors();
-        console.log('lead.controller getleads leads', leads);
+
         res.render('admin/leadsPage', {
             title: 'Leads',
             leads: leads,

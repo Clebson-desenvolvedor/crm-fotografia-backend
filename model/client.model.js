@@ -224,7 +224,6 @@ function deleteClient(id) {
 
 function updateClient(client) {
     // console.log('client.model updateClient');
-    console.log('client.model updateClient client', client);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
