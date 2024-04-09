@@ -3,54 +3,64 @@
         <div class="modal-body">
            <h3>Dados Pessoais | ID <span><%= clientData.idcliente %></span></h3>
             <div class="modal-body-form">
-                <form enctype="multipart/form-data">
-                    <div class="data-form-client">
-                        <div class="data-form-content">
-                            <div class="data-form-one">
-                                <input type="hidden" value="<%= clientData.idcliente %>" name="id" id="id">
-                                <div class="form-name">
-                                    <label for="">Nome</label><input type="text" name="nome_cliente" placeholder="Nome" id="name" value="<%= clientData.nomecliente %>" required>
-                                </div>
-                                <div class="form-whatsapp">
-                                    <label for="">WhatsApp</label><input type="text" name="whatsapp_cliente" id="whatsapp" value="<%= clientData.whatsapp %>">
-                                </div>
-                            </div>
-                            <div class="data-form-two">
-                                <div class="form-email">
-                                    <label for="">E-mail</label><input type="email" name="email_cliente" id="email" value="<%= clientData.email %>">
-                                </div>
-                                <div class="form-cpf">
-                                    <label for="">CPF</label><input type="text" name="cpf_cliente" id="cpf" value="<%= clientData.cpf %>">
-                                </div>
-                            </div>
-                            <div class="data-form-three">
-                                <div class="form-date">
-                                    <label for="">Data de Cadastro</label><input type="text" name="dtcad_cliente" id="date" value="<%= clientData.dtcadcliente %>">
-                                </div>
-                            </div>
-                            <div class="data-form-four">
-                                <div class="form-street">
-                                    <label for="">Logradouro</label><input type="text" name="endereco_logradouro" id="street" value="<%=  clientData.logradouro %>">
-                                </div>
-                                <div class="form-number">
-                                    <label for="">Nº</label><input type="text" name="endereco_numero" id="number" value="<%=  clientData.numero %>">
-                                </div>
-                            </div>
-                            <div class="data-form-five">
-                                <div class="form-district">
-                                    <label for="">Bairro</label><input type="text" name="endereco_bairro" id="district" value="<%=  clientData.bairro %>">
-                                </div>
-                            </div>
+                <div class="campos-cliente form">
+                    <input type="hidden" value="<%= clientData.idcliente %>" name="id" id="id">
+
+                    <div id="nome-cliente">
+                        <div class="campo-dentro">
+                            <label for="">Nome *</label>
+                            <input type="text" name="nome-cliente" id="nome-cliente" value="">
                         </div>
+                        <div class="mensagem-erro"><span></span></div>
+                    </div>
+
+                    <div id="whatsapp">
+                        <div class="campo-dentro">
+                            <label for="">WhatsApp *</label>
+                            <input type="text" name="whatsapp" id="whatsapp" value="">
+                        </div>
+                        <div class="mensagem-erro"><span></span></div>
+                    </div>
+
+                    <div id="email">
+                        <div class="campo-dentro">
+                            <label for="">E-mail</label>
+                            <input type="text" name="email" id="email" value="">
+                        </div>
+                        <div class="mensagem-erro"><span></span></div>
+                    </div>
+
+                    <div id="cpf">
+                        <div class="campo-dentro">
+                            <label for="">CPF</label>
+                            <input type="text" name="cpf" id="cpf" value="">
+                        </div>
+                        <div class="mensagem-erro"><span></span></div>
+                    </div>
+
+                    <div id="dtcad_cliente">
+                        <div class="campo-dentro">
+                            <label for="">Data de Cadastro</label>
+                            <input type="date" name="dtcad_cliente" id="dtcad_cliente" value="">
+                        </div>
+                        <div class="mensagem-erro"><span></span></div>
+                    </div>
+
+                    <fieldset id="endereco-cliente">
+                        <legend>Endereço</legend>
+                        <input type="text" placeholder="Rua, Avenida, etc" name="endereco-cliente-logradouro" id="endereco-cliente-logradouro" value="">
+                        <input type="text" placeholder="Num" name="endereco-cliente-numero" id="endereco-cliente-numero" value="">
+                        <input type="text" placeholder="Bairro" name="endereco-cliente-bairro" id="endereco-cliente-bairro" value="">
+                    </fieldset>
+
+                </div>
                         <div class="data-form-image-client">
                             <div class="data-image-upload">
-                                <img src="/img/uploads/<%= clientData.foto %>" alt="">
+                                <img src="/img/no-photo.jpg %>" alt="">
+                                <input type="file" name="foto_cliente" id="image">
                             </div>
-                            <input type="file" name="foto_cliente" id="image">
-                            <label for="">Foto do Cliente</label>
                         </div>
                     </div>
-                </form>
             </div>
         </div>
         <div class="modal-footer">
