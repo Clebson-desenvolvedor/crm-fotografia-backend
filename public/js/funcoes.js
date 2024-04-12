@@ -18,6 +18,23 @@ $(document).ready(() => {
             abreOuFechaModal();
         }
     }
+
+    /** busca as cores das configurações */
+
+    // $.ajax({
+    //     url: `/admin/clients`,
+    //     data: { }
+    // }).done(function(data) {
+        
+    // }).fail(function(er) {
+    //     console.log("funcoes.js buscar cores er: ", er);
+    // });
+
+
+
+    // .sidebar-menu i { color:<%=  colors.cor_icone_painel_lateral %> }
+    // a span { color: <%= colors.cor_texto_painel_lateral %> }
+
 });
 
 /** Funções */

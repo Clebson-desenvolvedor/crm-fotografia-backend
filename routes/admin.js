@@ -9,6 +9,7 @@ const configController = require("../controllers/config.controller.js");
 const user = require("../controllers/user.controller.js");
 const { e_admin } = require("../middleware/login.js"); /** Por enquanto não está em uso */
 const dashboardController = require("../controllers/dash.controller.js");
+const toolsController = require("../controllers/tool.controller.js");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -42,6 +43,9 @@ router.post("/leads/:id", leadController.deleteLead);
 
 //rotas para a configuração: admin/configurations
 router.get("/configurations", configController.getConfig);
+
+//rotas para a ferramentas: admin/tools
+router.get("/tools", toolsController.getTools);
 
 // rotas para login
 router.get("/login", user.login);

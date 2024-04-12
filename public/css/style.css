@@ -354,6 +354,7 @@ header label span {
 
 .sidebar {
     align-items: center;
+    background-color: blueviolet;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -467,6 +468,7 @@ header {
     height: 80px;
     justify-content: space-between;
     position: fixed;
+    top: 0;
     width: 100%;
     z-index: 1;
 }
@@ -666,6 +668,10 @@ input#dia-noiva {
     margin-top: 10px;
     width: 40px;
 }
+
+
+.sidebar-menu i { color: #fff }
+
 
 .painel-acoes-content {
     height: 80px;
