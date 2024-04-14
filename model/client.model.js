@@ -144,16 +144,16 @@ function getClient(id) {
                         resolve(result);
                     } else {
                         objClient = {
-                            idcliente: result[0].id_cliente,
-                            nomecliente: result[0].nome_cliente,
-                            dtcadcliente: result[0].dtcad_cliente,
-                            email: result[0].email_cliente,
-                            whatsapp: result[0].whatsapp_cliente,
-                            logradouro: result[0].endereco_logradouro,
-                            cpf: result[0].cpf_cliente,
-                            numero: result[0].endereco_numero,
-                            bairro: result[0].endereco_bairro,
-                            foto: result[0].foto_cliente
+                            id_cliente: result[0].id_cliente,
+                            nome_cliente: result[0].nome_cliente,
+                            dtcad_cliente: result[0].dtcad_cliente,
+                            email_cliente: result[0].email_cliente,
+                            whatsapp_cliente: result[0].whatsapp_cliente,
+                            endereco_logradouro: result[0].endereco_logradouro,
+                            cpf_cliente: result[0].cpf_cliente,
+                            endereco_numero: result[0].endereco_numero,
+                            endereco_bairro: result[0].endereco_bairro,
+                            foto_cliente: result[0].foto_cliente
                         };
                         // console.log("client.model getClient objClient", objClient);
                         resolve(objClient);

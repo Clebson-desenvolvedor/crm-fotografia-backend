@@ -90,8 +90,7 @@ $(document).ready(() => {
 
     /* Abre a modal de adicionar serviço a partir de um cliente específico e carregar o nome dele */
     $("#add-service-client-button").click(function() {
-        $(".modal").css("display", "block");
-        $("#form-service-selected h2").text($("input#name").val());
+        abreModalNovoServico()
     });
 
     /* Carrega o formulário de um serviço de acordo com o tipo de serviço escolhido */
@@ -256,6 +255,14 @@ $(document).ready(() => {
 
     $(".modalBtnCliente").click(abreOuFechaModal);
     $("#clear-button").click(limpaFormulario);
+
+    $("#td-acoes-deleta-cliente").click(() => {
+        console.log("clicou na lixeira");
+    });
+
+    $("#td-acoes-cria-servico-cliente").click(() => {
+        abreModalNovoServico();
+    });
 });
 
 /** Funções */
@@ -433,4 +440,9 @@ function notificaCampoErro(mensagem_erro, id) {
 function removerAvisoErro() {
     $(".mensagem-erro span").text("");
     $(".campos-servicos.form").find(".input-erro").removeClass("input-erro");
+}
+
+function abreModalNovoServico() {
+    $("#modal-novo-servico").css("display", "block");
+    $("#form-service-selected h2").text($("input#nome-cliente").val());
 }

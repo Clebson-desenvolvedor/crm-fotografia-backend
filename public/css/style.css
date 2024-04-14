@@ -210,7 +210,7 @@ header label span {
     justify-content: space-around;
     margin: 20px 0;
     padding: 20px;
-    width: 850px;
+    width: 1100px;
 }
 
 .painel-acoes button {
@@ -312,7 +312,7 @@ header label span {
     height: 60px;
     justify-content: center;
     margin-top: 20px;
-    width: 850px;
+    width: 1100px;
 }
 
 .login-inputs input {
@@ -366,7 +366,6 @@ header label span {
 button {
     border: 0;
     border-radius: 5px;
-    box-shadow: 0px 10px 2px rgba(0, 0, 0, 0.2);
     color: #fff;
     cursor: pointer;
     height: 30px;
@@ -674,20 +673,113 @@ input#dia-noiva {
 
 
 .painel-acoes-content {
-    height: 80px;
+    align-items: flex-start;
+    display: flex;
+    justify-content: space-between;
     position: relative;
-    width: 100%;
+    width: 97%;
 }
 
-.painel-acoes-header {
-    height: 20px;
-    padding: 5px;
-    position: relative;
-    width: 100%;
+.painel-acoes-content-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 240px;
 }
 
- .painel-acoes-header p {
-    font-size: 11px;
-    color: #333;
+.painel-acoes-content input {
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    height: 30px;
+    padding: 3px;
+    width: 240px;
+}
+
+.painel-acoes-content input:focus {
+    border: 1px solid #333;
+    outline: none;
+}
+
+.painel-acoes-content-buttons button {
+    transition: 0.2s;
+}
+
+.painel-acoes-content-buttons button:hover {
+    font-size: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    font-family: monospace;
+    width: 100%;
  }
 
+table, th, td {
+    padding: 10px;
+ }
+
+table img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+
+tr th {
+    text-align: left;
+ }
+
+td#td-qt-servicos,
+th#th-qt-servicos {
+    text-align: right;
+}
+
+td#td-acoes {
+    align-items: flex-end;
+    display: flex;
+    height: 50px;
+    justify-content: space-around;
+}
+
+th#th-acoes { text-align: center; }
+
+tbody td {
+    color: #666667;
+    font-size: 13px;
+}
+thead th {
+    color: #333;
+    font-size: 14px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+tbody tr:hover {
+    background-color: #f3f6f4;
+}
+
+#td-acoes-deleta-cliente i {
+    color: #ff0000;
+}
+
+#td-acoes-cria-servico-cliente i {
+    color: #8adf66;
+}
+
+#td-acoes-edita-cliente i {
+    color: #438c97;
+}
+
+#td-acoes-deleta-cliente i,
+#td-acoes-cria-servico-cliente i,
+#td-acoes-edita-cliente i {
+    transition: 0.1s;
+}
+
+#td-acoes-deleta-cliente i:hover,
+#td-acoes-cria-servico-cliente i:hover,
+#td-acoes-edita-cliente i:hover {
+    font-size: 15px;
+}

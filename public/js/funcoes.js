@@ -40,12 +40,13 @@ $(document).ready(() => {
 /** Funções */
 
 /** Abre ou fecha modal */
- function abreOuFechaModal() {
-    if ($(".modal").css("display") == "block") {
-        $(".modal").css("display", "none");
+ function abreOuFechaModal(id_modal = null) {
+    console.log("funcao abre ou fecha modal")
+    if ($(id_modal).css("display") == "block") {
+        $(id_modal).css("display", "none");
         limpaFormulario();
     } else {
-        $(".modal").css("display", "block");
+        $(id_modal).css("display", "block");
     }
 }
 

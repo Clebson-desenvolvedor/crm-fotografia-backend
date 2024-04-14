@@ -1,33 +1,55 @@
 <div class="cards">
-    <% clients.forEach(row=> { %>
-    <a href="/admin/clients/<%= row.id_cliente %>" class="card" client-id="<%= row.id_cliente %>">
-        <div class="card-img">
-            <div class="circle">
-                <img src="/img/uploads/<%= row.foto_cliente %>">
-            </div>
-        </div>
-        <div class="card-details">
-            <div class="card-details-content">
-                <h4><%= row.nome_cliente %></h4>
-                <% if (row.whatsapp_cliente) { %>
-                <div class="whatsapp">
-                    <div class="icon-whatsapp">
-                        <p><i class="fa-brands fa-whatsapp"></i></p>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Foto</th>
+                <th>Nome</th>
+                <th>WhatsApp</th>
+                <th>E-mail</th>
+                <th id="th-qt-servicos">Qtde Serviços</th>
+                <th id="th-acoes">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+        <% clients.forEach(row=> { %>
+            <tr>
+                <td id="td-id" id-cliente="<%= row.id_cliente %>">
+                    <%= row.id_cliente %>
+                </td>
+                <td id="td-foto">
+                    <img src="<%= row.foto_cliente %>" alt="">
+                </td>
+                <td id="td-nome">
+                    <%= row.nome_cliente %>
+                </td>
+                <td id="td-whatsapp">
+                    <%= row.whatsapp_cliente %>
+                </td>
+                <td id="td-email">
+                    emailmocado@gmail.com
+                </td>
+                <td id="td-qt-servicos">
+                    0
+                </td>
+                <td id="td-acoes">
+                    <div id="td-acoes-deleta-cliente" title="Apagar este cliente">
+                        <i class="fa-solid fa-trash"></i>
                     </div>
-                    <p><%= row.whatsapp_cliente %></p>
-                </div>
-                <% } %>
-            </div>
-        </div>
-        <div class="card-services">
-            <p><%= row.quantidade_servicos %></p>
-            <p>Serviços</p>
-        </div>
-    </a>
-    <% }) %>
+                    <div id="td-acoes-cria-servico-cliente" title="Criar um novo serviço para este cliente">
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </div>
+                    <div id="td-acoes-edita-cliente" title="Editar este cliente">
+                        <a href="/admin/clients/<%= row.id_cliente %>"><i class="fa-solid fa-user-pen"></i></a>
+                    </div>
+                </td>
+            </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </div>
 
-<div class="modal">
+<div class="modal" id="modal-novo-cliente">
     <div class="content">
         <div class="modal-header"></div>
         <div class="modal-body">
