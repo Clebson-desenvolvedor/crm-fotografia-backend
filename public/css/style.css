@@ -1,6 +1,6 @@
 * {
     box-sizing: border-box;
-    font-family: "Helvetica", sans-serif;
+    font-family: "monospace", sans-serif;
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -334,7 +334,7 @@ header label span {
 }
 
 .modal-header {
-    background-color: #2d3a48;
+    background-color: blueviolet;
     border-radius: 5px 5px 0 0;
     color: #fff;
     height: 50px;
@@ -565,7 +565,7 @@ form select,
 }
 
 .modal-footer button#cancel-button,
-.modal-footer button#delete-client-button,
+button#delete-client-button,
 .modal-footer button#delete-lead-button {
     background-color: #8b0000;
 }
@@ -783,3 +783,49 @@ tbody tr:hover {
 #td-acoes-edita-cliente i:hover {
     font-size: 15px;
 }
+
+.confirmacao-excluir {
+    background-color: #fefefe;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    font-family: monospace;
+    margin: 15% auto;
+    width: 40%;
+}
+
+.confirmacao-excluir-header {
+    background-color: blueviolet;
+    border-radius:  5px 5px 0 0;
+    padding: 10px;
+}
+
+.confirmacao-excluir-header h2 {
+    color: #fff;
+    font-family: monospace;
+}
+
+.confirmacao-excluir-body {
+    padding: 10px;
+    font-family: monospace;
+    border-bottom: 1px solid #ddd;
+}
+
+.confirmacao-excluir-body p {
+    margin-bottom: 20px;
+    font-family: monospace;
+}
+
+.confirmacao-excluir-acoes {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.confirmacao-excluir-acoes button {
+    float: right;
+    margin-right: 10px;
+    padding: 0 19px;
+}
+
+.confirmacao-excluir-acoes button#confirmacao-excluir-acoes-nao { background-color: #aaa; }

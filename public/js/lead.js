@@ -34,7 +34,7 @@ $(document).ready(() => {
                     return false;
                 }
             } else {
-                abreOuFechaModal();
+                // abreOuFechaModal();
                 $("p.alert").text(data.message).addClass("alert-success");
                 setTimeout(() => {
                     $("p.alert").fadeOut(500);
@@ -89,7 +89,7 @@ $(document).ready(() => {
         });
     });
 
-    $(".modalBtnLead").click(abreOuFechaModal);
+    // $(".modalBtnLead").click(abreOuFechaModal);
     $("#clear-button").click(limpaFormulario);
     $("select#origin").val($("input#origin-value").val());
 });

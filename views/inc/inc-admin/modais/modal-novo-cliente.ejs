@@ -1,13 +1,13 @@
-<div class="card-client">
+<div class="modal" id="modal-novo-cliente">
     <div class="content">
+        <div class="modal-header"></div>
         <div class="modal-body">
-           <h3>Dados Pessoais | ID <span id="id-cliente"><%= clientData.id_cliente %></span></h3>
             <div class="modal-body-form">
                 <div class="campos-cliente form">
                     <div id="nome-cliente">
                         <div class="campo-dentro">
                             <label for="">Nome *</label>
-                            <input type="text" name="nome-cliente" id="nome-cliente" value="<%= clientData.nome_cliente %>">
+                            <input type="text" name="nome-cliente" id="nome-cliente" value="">
                         </div>
                         <div class="mensagem-erro"><span></span></div>
                     </div>
@@ -15,7 +15,7 @@
                     <div id="whatsapp">
                         <div class="campo-dentro">
                             <label for="">WhatsApp *</label>
-                            <input type="text" name="whatsapp" id="whatsapp" value="<%= clientData.whatsapp_cliente %>">
+                            <input type="text" name="whatsapp" id="whatsapp" value="">
                         </div>
                         <div class="mensagem-erro"><span></span></div>
                     </div>
@@ -23,7 +23,7 @@
                     <div id="email">
                         <div class="campo-dentro">
                             <label for="">E-mail</label>
-                            <input type="text" name="email" id="email" value="<%= clientData.email_cliente %>">
+                            <input type="text" name="email" id="email" value="">
                         </div>
                         <div class="mensagem-erro"><span></span></div>
                     </div>
@@ -31,7 +31,7 @@
                     <div id="cpf">
                         <div class="campo-dentro">
                             <label for="">CPF</label>
-                            <input type="text" name="cpf" id="cpf" value="<%= clientData.cpf_cliente %>">
+                            <input type="text" name="cpf" id="cpf" value="">
                         </div>
                         <div class="mensagem-erro"><span></span></div>
                     </div>
@@ -39,22 +39,21 @@
                     <div id="dtcad_cliente">
                         <div class="campo-dentro">
                             <label for="">Data de Cadastro</label>
-                            <input type="text" name="dtcad_cliente" id="dtcad_cliente" value="<%= clientData.dtcad_cliente %>">
+                            <input type="date" name="dtcad_cliente" id="dtcad_cliente" value="">
                         </div>
                         <div class="mensagem-erro"><span></span></div>
                     </div>
 
                     <fieldset id="endereco-cliente">
                         <legend>Endereço</legend>
-                        <input type="text" placeholder="Rua, Avenida, etc" name="endereco-cliente-logradouro" id="endereco-cliente-logradouro" value="<%= clientData.endereco_logradouro %>">
-                        <input type="text" placeholder="Num" name="endereco-cliente-numero" id="endereco-cliente-numero" value="<%= clientData.endereco_numero %>">
-                        <input type="text" placeholder="Bairro" name="endereco-cliente-bairro" id="endereco-cliente-bairro" value="<%= clientData.endereco_bairro %>">
+                        <input type="text" placeholder="Rua, Avenida, etc" name="endereco-cliente-logradouro" id="endereco-cliente-logradouro" value="">
+                        <input type="text" placeholder="Num" name="endereco-cliente-numero" id="endereco-cliente-numero" value="">
+                        <input type="text" placeholder="Bairro" name="endereco-cliente-bairro" id="endereco-cliente-bairro" value="">
                     </fieldset>
 
-                </div>
                     <div class="data-form-image-client">
                         <div class="data-image-upload">
-                            <img src="<%= clientData.foto_cliente %>" alt="">
+                            <img src="/img/no-photo.jpg %>" alt="">
                             <input type="file" name="foto_cliente" id="image">
                         </div>
                     </div>
@@ -62,19 +61,14 @@
             </div>
         </div>
         <div class="modal-footer">
-            <hr>
             <div class="modal-footer-buttons">
-                <div>
-                    <button id="delete-client-button">Apagar</button>
+                <div class="clear-cancel">
+                    <button id="clear-button">Limpar formulário</button>
                 </div>
-                <div>
-                    <button id="update-client-button">Atualizar</button>
+                <div class="save">
+                    <button id="create-client-button">Criar</button>
                 </div>
             </div>
-        </div>
-        <div class="services-client">
-            <h3>Serviços deste Cliente</h3>
-            <button id="add-service-client-button" class="modalBtnService">Adicionar</button>
         </div>
     </div>
 </div>

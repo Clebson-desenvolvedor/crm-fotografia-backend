@@ -12,6 +12,21 @@ $(document).ready(() => {
         $(".cards").append("<p>Nenhum Cliente cadastrado ainda.</p>")
     }
 
+    /** Abre modal para criar um novo cliente */
+    $("#abre-modal-novo-cliente").click(() => {
+        $("#modal-novo-cliente").css("display", "block");
+    });
+
+    /** Abre modal para criar um novo serviço */
+    $("#abre-modal-novo-servico").click(() => {
+        abreModalNovoServico()
+    });
+
+    /** Abre modal para criar um novo lead */
+    $("#abre-modal-novo-lead").click(() => {
+        abreModalNovoLead()
+    });
+
     /** Criar um cliente */
     $("#create-client-button").click(function(ev) {
         $.ajax({
@@ -30,7 +45,6 @@ $(document).ready(() => {
             },
         }).done(function(data) {
             // console.log("data", data);
-            abreOuFechaModal();
             $("p.alert").text(data.message).addClass("alert-success");
             setTimeout(() => {
                 $("p.alert").fadeOut(500);
@@ -71,26 +85,12 @@ $(document).ready(() => {
 
     /* Deletar um cliente */
     $("#delete-client-button").click(function(e) {
-        e.preventDefault();
-        id =  $("form input#id").val();
-        $.ajax({
-            url: `/admin/clients/${id}`,
-            type: "POST",
-            data: { id: id },
-        }).done(function(data) {
-            // console.log("data", data);
-            $("p.alert").text(data.message).addClass("alert-success");
-            setTimeout(() => {
-                $("p.alert").fadeOut(500);
-            }, 3000);
-        }).fail(function(er) {
-            console.log("client.js deletar cliente er: ", er);
-        })
+        deletaCliente(parseInt($("#id-cliente")[0].innerText));
     });
 
     /* Abre a modal de adicionar serviço a partir de um cliente específico e carregar o nome dele */
     $("#add-service-client-button").click(function() {
-        abreModalNovoServico()
+        abreModalNovoServico();
     });
 
     /* Carrega o formulário de um serviço de acordo com o tipo de serviço escolhido */
@@ -253,16 +253,20 @@ $(document).ready(() => {
         // });
     })
 
-    $(".modalBtnCliente").click(abreOuFechaModal);
     $("#clear-button").click(limpaFormulario);
 
     $("#td-acoes-deleta-cliente").click(() => {
-        console.log("clicou na lixeira");
+        abreModalConfirmacaoExcluirCliente();
     });
 
     $("#td-acoes-cria-servico-cliente").click(() => {
-        abreModalNovoServico();
+        let nome_cliente = $('#nome-cliente')[0].innerText
+        abreModalNovoServico(nome_cliente);
     });
+
+    $("#confirmacao-excluir-acoes-sim").click(() => {
+
+    })
 });
 
 /** Funções */
@@ -431,10 +435,18 @@ function validaCampos(data) {
     return true;
 }
 
+function abreModalNovoCliente() {
+    $("#modal-novo-cliente").css("display", "block");
+}
+
 function notificaCampoErro(mensagem_erro, id) {
     // $(`input#${id}`).css("border", "1px solid red");
     $(`input#${id}`).addClass("input-erro");
     $(`div#${id} .mensagem-erro span`).text(mensagem_erro);
+}
+
+function abreModalNovoLead() {
+    $("#modal-novo-lead").css("display", "block");
 }
 
 function removerAvisoErro() {
@@ -442,7 +454,30 @@ function removerAvisoErro() {
     $(".campos-servicos.form").find(".input-erro").removeClass("input-erro");
 }
 
-function abreModalNovoServico() {
+function abreModalNovoServico(nome_cliente) {
     $("#modal-novo-servico").css("display", "block");
-    $("#form-service-selected h2").text($("input#nome-cliente").val());
+    $("#form-service-selected h2").text(nome_cliente);
+}
+
+function abreModalConfirmacaoExcluirCliente() {
+    $("#modal-confirmacao-excluir-cliente").css("display", "block");
+}
+
+function deletaCliente(id) {
+    // e.preventDefault();
+    console.log('id ', id)
+    // id =  $("form input#id").val();
+    // $.ajax({
+    //     url: `/admin/clients/${id}`,
+    //     type: "POST",
+    //     data: { id: id },
+    // }).done(function(data) {
+    //     // console.log("data", data);
+    //     $("p.alert").text(data.message).addClass("alert-success");
+    //     setTimeout(() => {
+    //         $("p.alert").fadeOut(500);
+    //     }, 3000);
+    // }).fail(function(er) {
+    //     console.log("client.js deletar cliente er: ", er);
+    // });
 }

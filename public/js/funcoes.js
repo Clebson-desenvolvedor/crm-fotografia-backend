@@ -12,12 +12,22 @@ $(document).ready(() => {
         }, 1);
     });
 
-    /** Chama a função de abrir ou fechar modal */
+    /** Verifica se existe alguma modal aberta e a fecha */
     window.onclick = function (event) {
         if (event.target.className == "modal") {
-            abreOuFechaModal();
+            $(".modal").css("display", "none");
         }
     }
+
+    /** Cancela alguma ação na modal, botão Não */
+    $("#confirmacao-excluir-acoes-nao").click(() => {
+        fechaModal();
+    });
+
+    $("span.logout").click(function() {
+        sessionStorage.clear();
+        window.location.assign("/admin/login");
+    });
 
     /** busca as cores das configurações */
 
@@ -39,15 +49,9 @@ $(document).ready(() => {
 
 /** Funções */
 
-/** Abre ou fecha modal */
- function abreOuFechaModal(id_modal = null) {
-    console.log("funcao abre ou fecha modal")
-    if ($(id_modal).css("display") == "block") {
-        $(id_modal).css("display", "none");
-        limpaFormulario();
-    } else {
-        $(id_modal).css("display", "block");
-    }
+/** Fecha a modal */
+function fechaModal() {
+    $(".modal").css("display", "none");
 }
 
 /** Limpa o formulário */
