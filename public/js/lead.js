@@ -34,7 +34,6 @@ $(document).ready(() => {
                     return false;
                 }
             } else {
-                // abreOuFechaModal();
                 $("p.alert").text(data.message).addClass("alert-success");
                 setTimeout(() => {
                     $("p.alert").fadeOut(500);

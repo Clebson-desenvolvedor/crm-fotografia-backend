@@ -1,12 +1,13 @@
 <!-- modal pra criar um novo serviço -->
 <div class="modal" id="modal-novo-servico">
     <div class="content">
-        <div class="modal-header">
+        <div class="modal-header primaria">
         </div>
         <div class="modal-body">
             <div class="modal-body-form modal-servicos">
                 <div id="form-servicos">
-                    <div>
+                    <div class="select-cliente"></div>
+                    <div class="select-service">
                         <label for="">Selecione o tipo de serviço</label>
                         <select name="select-service" id="select-service" required>
                             <option value="">Selecione</option>
@@ -26,7 +27,8 @@
                     </div>
                     <form id="form-service-selected">
                         <input type="text" hidden id="servico-tipo">
-                        <h2>Cliente</h2>
+                        <input type="text" hidden id="servico-id-cliente">
+                        <h2 id="servico-nome-cliente"></h2>
                         <div class="servico-selecionado"></div>
                         <div class="campos-servicos form">
                             <div id="ambiente-servico" class="fechar-campo">

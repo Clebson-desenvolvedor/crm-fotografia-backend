@@ -81,6 +81,7 @@ function getClients() {
                 SELECT
                     id_cliente,
                     nome_cliente,
+                    email_cliente,
                     whatsapp_cliente,
                     foto_cliente,
                     COUNT(tb_servicos_id_cliente) as quantidade_servicos
@@ -92,7 +93,7 @@ function getClients() {
                 conn.query(sql, (err, result, field) => {
                     // console.log("client.model getClients result", result);
                     if (err) {
-                        console.log("client.model getClients conn.query err", err);
+                        console.log("Model getClients conn.query error", err);
                         reject(err);
                         return;
                     }
@@ -103,6 +104,22 @@ function getClients() {
             console.log("client.model getClients catch err", err);
             throw err;
         }
+    });
+}
+
+function getClientsName() {
+    return new Promise((resolve, reject) => {
+        let sql = `SELECT id_cliente, nome_cliente FROM tb_clientes`;
+        mysql.getConnection((err, conn) => {
+            conn.query(sql, (err, result, field) => {
+                if (err) {
+                    console.log("Model getClientsName conn.query error", err);
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
     });
 }
 
@@ -274,4 +291,5 @@ module.exports = {
     getClient,
     deleteClient,
     updateClient,
+    getClientsName
 };

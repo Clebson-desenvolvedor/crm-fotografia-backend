@@ -10,6 +10,7 @@ const user = require("../controllers/user.controller.js");
 const { e_admin } = require("../middleware/login.js"); /** Por enquanto não está em uso */
 const dashboardController = require("../controllers/dash.controller.js");
 const toolsController = require("../controllers/tool.controller.js");
+const dataController = require("../controllers/data.controller.js");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -27,6 +28,7 @@ router.post("/clients", upload.single("foto_cliente"), clientController.createOr
 router.get("/clients", clientController.getClients);
 router.get("/clients/:id", clientController.getClient);
 router.post("/clients/:id", clientController.deleteClient);
+router.get("/nomesclientes", clientController.getClientsName);
 
 //rotas para serviços: admin/services
 router.post("/services", serviceController.createService);
@@ -54,5 +56,8 @@ router.post("/login", user.loginUser);
 // rotas para o dashboard
 router.get("/", dashboardController.getData);
 router.get("/dashboard", dashboardController.getData);
+
+/** Rota para buscar cores preferenciais */
+router.get("/colors", dataController.getColors);
 
 module.exports = router;

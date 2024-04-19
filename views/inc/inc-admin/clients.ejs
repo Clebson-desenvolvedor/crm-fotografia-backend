@@ -11,32 +11,20 @@
                 <th id="th-acoes">Ações</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody-clientes">
         <% clients.forEach(row=> { %>
             <tr>
-                <td id="id-cliente" id-cliente="<%= row.id_cliente %>">
-                    <%= row.id_cliente %>
-                </td>
-                <td id="td-foto">
-                    <img src="<%= row.foto_cliente %>" alt="">
-                </td>
-                <td id="nome-cliente">
-                    <%= row.nome_cliente %>
-                </td>
-                <td id="td-whatsapp">
-                    <%= row.whatsapp_cliente %>
-                </td>
-                <td id="td-email">
-                    emailmocado@gmail.com
-                </td>
-                <td id="td-qt-servicos">
-                    0
-                </td>
+                <td id="id-cliente" id-cliente="<%= row.id_cliente %>"><%= row.id_cliente %></td>
+                <td id="td-foto"><img src="<%= row.foto_cliente %>" alt=""></td>
+                <td id="nome-cliente"><%= row.nome_cliente %></td>
+                <td id="td-whatsapp"><%= row.whatsapp_cliente %></td>
+                <td id="td-email"><%= row.email_cliente %></td>
+                <td id="td-qt-servicos"><%= row.quantidade_servicos %></td>
                 <td id="td-acoes">
-                    <div id="td-acoes-deleta-cliente" title="Apagar este cliente">
+                    <div class="td-acoes-deleta-cliente" title="Apagar este cliente">
                         <i class="fa-solid fa-trash"></i>
                     </div>
-                    <div id="td-acoes-cria-servico-cliente" title="Criar um novo serviço para este cliente">
+                    <div class="td-acoes-cria-servico-cliente" title="Criar um novo serviço para este cliente">
                         <i class="fa-solid fa-circle-plus"></i>
                     </div>
                     <div id="td-acoes-edita-cliente" title="Editar este cliente">

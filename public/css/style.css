@@ -528,11 +528,17 @@ form input,
 form select,
 .form input,
 .form select,
-#select-service {
+#select-service,
+#select-cliente {
     background-color: #eee;
     border: 0;
     border-radius: 3px;
+    margin-bottom: 15px;
     padding: 5px;
+}
+
+.select-service {
+    margin-top: 10px;
 }
 
 .painel-lateral,
@@ -760,11 +766,11 @@ tbody tr:hover {
     background-color: #f3f6f4;
 }
 
-#td-acoes-deleta-cliente i {
+.td-acoes-deleta-cliente i {
     color: #ff0000;
 }
 
-#td-acoes-cria-servico-cliente i {
+.td-acoes-cria-servico-cliente i {
     color: #8adf66;
 }
 
@@ -772,19 +778,20 @@ tbody tr:hover {
     color: #438c97;
 }
 
-#td-acoes-deleta-cliente i,
-#td-acoes-cria-servico-cliente i,
+.td-acoes-deleta-cliente i,
+.td-acoes-cria-servico-cliente i,
 #td-acoes-edita-cliente i {
     transition: 0.1s;
 }
 
-#td-acoes-deleta-cliente i:hover,
-#td-acoes-cria-servico-cliente i:hover,
+.td-acoes-deleta-cliente i:hover,
+.td-acoes-cria-servico-cliente i:hover,
 #td-acoes-edita-cliente i:hover {
     font-size: 15px;
 }
 
-.confirmacao-excluir {
+.confirmacao-excluir,
+.modal-aviso {
     background-color: #fefefe;
     border-radius: 10px;
     display: flex;
@@ -794,18 +801,21 @@ tbody tr:hover {
     width: 40%;
 }
 
-.confirmacao-excluir-header {
+.confirmacao-excluir-header,
+.modal-aviso-header {
     background-color: blueviolet;
     border-radius:  5px 5px 0 0;
     padding: 10px;
 }
 
-.confirmacao-excluir-header h2 {
+.confirmacao-excluir-header h2,
+.modal-aviso-header h2 {
     color: #fff;
     font-family: monospace;
 }
 
-.confirmacao-excluir-body {
+.confirmacao-excluir-body,
+.modal-aviso-texto {
     padding: 10px;
     font-family: monospace;
     border-bottom: 1px solid #ddd;
@@ -816,16 +826,20 @@ tbody tr:hover {
     font-family: monospace;
 }
 
-.confirmacao-excluir-acoes {
+.confirmacao-excluir-acoes,
+.botao-modal-aviso {
     display: flex;
     justify-content: flex-end;
     padding: 5px;
 }
 
-.confirmacao-excluir-acoes button {
+.confirmacao-excluir-acoes button,
+.botao-modal-aviso button {
     float: right;
     margin-right: 10px;
     padding: 0 19px;
 }
 
 .confirmacao-excluir-acoes button#confirmacao-excluir-acoes-nao { background-color: #aaa; }
+
+.botao-modal-aviso button { background-color: #17761e; }

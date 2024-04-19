@@ -17,7 +17,7 @@ $(document).ready(() => {
         $("#modal-novo-cliente").css("display", "block");
     });
 
-    /** Abre modal para criar um novo serviço */
+    /** Abre modal para criar um novo serviço a partir do painel de ações */
     $("#abre-modal-novo-servico").click(() => {
         abreModalNovoServico()
     });
@@ -202,6 +202,7 @@ $(document).ready(() => {
             dt_nasc_crianca: $("form#form-service-selected input#dt-nasc-crianca").val(),
             enderecos: [],
             profissao: $("form#form-service-selected input#profissao").val(),
+            id_cliente: parseInt($("#servico-id-cliente").text())
         }
 
         if ($("#endereco-evento-logradouro").val().length > 0) {
@@ -255,18 +256,23 @@ $(document).ready(() => {
 
     $("#clear-button").click(limpaFormulario);
 
-    $("#td-acoes-deleta-cliente").click(() => {
+    $(".td-acoes-deleta-cliente").click(() => {
         abreModalConfirmacaoExcluirCliente();
     });
 
-    $("#td-acoes-cria-servico-cliente").click(() => {
-        let nome_cliente = $('#nome-cliente')[0].innerText
-        abreModalNovoServico(nome_cliente);
+    /** Abre a modal de criar novo cliente a partir de um cliente específico */
+    $(".td-acoes-cria-servico-cliente").click((e) => {
+        let tr = e.target.closest("tr");
+        let cliente = {
+            nome: $(tr).find("td#nome-cliente")[0].innerText,
+            id: $(tr).find("td#id-cliente")[0].innerText
+        }
+        abreModalNovoServico(cliente);
     });
 
     $("#confirmacao-excluir-acoes-sim").click(() => {
 
-    })
+    });
 });
 
 /** Funções */
@@ -356,6 +362,7 @@ function criaDataServico(campos) {
         dt_servico: campos.dt_servico,
         preco_total: campos.preco_total,
         status_servico: campos.status_servico,
+        id_cliente: campos.id_cliente
     }
     switch (campos.servico_tipo) {
         case 1: // Acompanhamento
@@ -454,9 +461,38 @@ function removerAvisoErro() {
     $(".campos-servicos.form").find(".input-erro").removeClass("input-erro");
 }
 
-function abreModalNovoServico(nome_cliente) {
-    $("#modal-novo-servico").css("display", "block");
-    $("#form-service-selected h2").text(nome_cliente);
+async function abreModalNovoServico(cliente = {}) {
+    $("div.select-cliente").empty();
+    if (cliente.nome) {
+        $("#modal-novo-servico").css("display", "block");
+        $("#servico-nome-cliente").text(cliente.nome);
+        $("#servico-id-cliente").text(cliente.id);
+        $("div.select-cliente").empty();
+    } else {
+        $("#servico-nome-cliente").text("");
+        $("#servico-id-cliente").text("");
+        const clientes = await buscaNomesClientes()
+        
+        if (clientes.length > 0) {
+            $("#modal-novo-servico").css("display", "block");
+            $("div.select-cliente").append(`
+                <label for="">Atribuir este serviço para </label>
+                <select name="select-cliente" id="select-cliente" required>
+                    <option value="">Selecione</option>
+                </select>
+            `);
+
+            for (const ct in clientes) {
+                let id = clientes[ct].id_cliente;
+                let nome = clientes[ct].nome_cliente
+                $("select#select-cliente").append(`<option value="${id}">${nome}</option>`);
+            }
+            
+        } else {
+            abreModalAviso("Aviso", "Voce só pode criar serviço se ter ao menos um cliente");
+        }
+        
+    }
 }
 
 function abreModalConfirmacaoExcluirCliente() {

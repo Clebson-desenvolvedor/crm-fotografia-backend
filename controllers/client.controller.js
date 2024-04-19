@@ -50,15 +50,13 @@ async function createOrUpdateClient(req, res, next) {
 async function getClients(req, res, next) {
     try {
         let clients = await clientModel.getClients();
-        let colors = await config.getColors();
-        // console.log("client.controller getClients clients", clients);
+
         res.render("admin/clientsPage", {
             title: "Clientes",
-            clients: clients,
-            colors: colors
+            clients: clients
         });
     } catch (err) {
-        console.log("Controller: clients: getClients catch err", err);
+        console.log("Controller getClients catch error", err);
         next(err);
     }
 }
@@ -72,7 +70,6 @@ async function getClient(req, res, next) {
     try {
         let client = await clientModel.getClient(req.params.id);
         let servicesClient = await serviceModel.getServices(req.params.id);
-        let colors = await config.getColors();
         // console.log("client.controller getClient client", client);
         res.render("admin/clientPage", {
             title: client.nome_cliente,
@@ -80,10 +77,9 @@ async function getClient(req, res, next) {
             message: "",
             typeMessage: undefined,
             moment: moment,
-            colors: colors
         })
     } catch (err) {
-        console.log("client.controller getClient catch err", err);
+        console.log("Controller getClient catch error", err);
         next(err);
     }
 }
@@ -115,9 +111,21 @@ async function deleteClient(req, res, next) {
     }
 }
 
+async function getClientsName(req, res, next) {
+    try {
+        let nomes_clientes = await clientModel.getClientsName();
+
+        res.send(nomes_clientes)
+    } catch (err) {
+        console.log("Controller getClientsName catch error", err);
+        next(err);
+    }
+}
+
 module.exports = {
     createOrUpdateClient,
     getClients,
     getClient,
     deleteClient,
+    getClientsName
 };
