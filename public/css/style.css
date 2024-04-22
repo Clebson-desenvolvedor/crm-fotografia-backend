@@ -7,12 +7,27 @@
     text-decoration: none;
 }
 
+.alert {
+    align-items: center;
+    border-radius: 5px;
+    display: none;
+    height: 45px;
+    justify-content: center;
+    left: 50%;
+    margin: 0 auto;
+    max-width: 260px;
+    padding: 5px;
+    position: absolute;
+    top: 17px;
+    transform: translate(-52%, 0%);
+}
 
+.alert p {
+    color: #fff;
+    text-align: center;
+}
 
-.alert { display: block; }
 .card-details p { font-size: 10px; }
-.card-services > p:nth-child(2) { color: #c98989; }
-.email p { font-size: 12px; }
 .input-error { border: 1px solid #ff0000; }
 .modal-body { width: 100%; }
 .modal-footer button#clear-button { background-color: #cd853f; }
@@ -282,25 +297,11 @@ header label span {
 
 .data-form-image-client {
     width: 70px;
+    height: 135px;
 }
 
-.alert-error {
-    background-color: #e02821;
-    border-radius: 5px;
-    color: #ffffff;
-    left: 40%;
-    padding: 8px;
-    position: absolute;
-}
-
-.alert-success {
-    background-color: #a9f1b5;
-    border-radius: 5px;
-    color: #17761e;
-    left: 40%;
-    padding: 8px;
-    position: absolute;
-}
+.alert-error { background-color: #e02821; }
+.alert-success { background-color: #17761e; }
 
 .painel-acoes {
     align-items: center;
@@ -465,7 +466,7 @@ header {
     box-shadow: 0 0 9px 4px rgba(0, 0, 0, 0.2);
     display: flex;
     height: 80px;
-    justify-content: space-between;
+    justify-content: flex-end;
     position: fixed;
     top: 0;
     width: 100%;
@@ -652,6 +653,7 @@ input#dia-noiva {
 
 .mensagem-erro {
     height: 21px;
+    margin-left: 10px;
     position: relative;
     width: 162px;
 }
@@ -710,7 +712,7 @@ input#dia-noiva {
 }
 
 .painel-acoes-content-buttons button:hover {
-    font-size: 20px;
+    font-size: 15px;
 }
 
 table {
@@ -843,3 +845,15 @@ tbody tr:hover {
 .confirmacao-excluir-acoes button#confirmacao-excluir-acoes-nao { background-color: #aaa; }
 
 .botao-modal-aviso button { background-color: #17761e; }
+
+.campos-cliente > div {
+    display: flex;
+}
+
+.input-logradouro {
+    width: 300px;
+}
+
+.input-numero {
+    width: 50px;
+}

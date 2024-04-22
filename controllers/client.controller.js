@@ -35,6 +35,7 @@ async function createOrUpdateClient(req, res, next) {
         } else {
             client = await clientModel.insertClient(client);
             client.message = "Cliente cadastrado com sucesso!";
+            // console.log("status", res)
             res.send(client);
         }
     } catch (err) {

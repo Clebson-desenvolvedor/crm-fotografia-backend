@@ -14,17 +14,20 @@ $(document).ready(() => {
 
     /** Abre modal para criar um novo cliente */
     $("#abre-modal-novo-cliente").click(() => {
+        limpaFormulario();
         $("#modal-novo-cliente").css("display", "block");
     });
 
     /** Abre modal para criar um novo serviço a partir do painel de ações */
     $("#abre-modal-novo-servico").click(() => {
-        abreModalNovoServico()
+        limpaFormulario();
+        abreModalNovoServico();
     });
 
     /** Abre modal para criar um novo lead */
     $("#abre-modal-novo-lead").click(() => {
-        abreModalNovoLead()
+        limpaFormulario();
+        abreModalNovoLead();
     });
 
     /** Criar um cliente */
@@ -33,22 +36,23 @@ $(document).ready(() => {
             url: `/admin/clients`,
             type: "POST",
             data: { 
-                nome_cliente: $("form input#name").val(),
-                whatsapp_cliente: $("form input#whatsapp").val(),
-                email_cliente: $("form input#email").val(),
-                cpf_cliente: $("form input#cpf").val(),
-                dtcad_cliente: $("form input#date").val(),
-                endereco_logradouro: $("form input#street").val(),
-                endereco_numero: $("form input#number").val(),
-                endereco_bairro: $("form input#district").val(),
-                foto_cliente: $("form input#image")[0].value//precisará consertar futuramente, pois não está salvando a imagem selecionada na base
+                nome_cliente: $("input#nome-cliente").val(),
+                whatsapp_cliente: $("input#whatsapp").val(),
+                email_cliente: $("input#email").val(),
+                cpf_cliente: $("input#cpf").val(),
+                dtcad_cliente: $("input#dtcar_cliente").val(),
+                endereco_logradouro: $("input#endereco-cliente-logradouro").val(),
+                endereco_numero: $("input#endereco-cliente-numero").val(),
+                endereco_bairro: $("input#endereco-cliente-bairro").val(),
+                foto_cliente: $("input#image")[0].value
             },
+            
         }).done(function(data) {
             // console.log("data", data);
-            $("p.alert").text(data.message).addClass("alert-success");
-            setTimeout(() => {
-                $("p.alert").fadeOut(500);
-            }, 3000);
+            if (data.serverStatus == 2) {
+                fechaModal();
+                mensagemSucessoOuErro("alert-success", data);
+            }
         }).fail(function(er) {
             console.log("client.js criar cliente er: ", er);
         });
@@ -254,7 +258,7 @@ $(document).ready(() => {
         // });
     })
 
-    $("#clear-button").click(limpaFormulario);
+    $(".clear-cancel").click(limpaFormulario);
 
     $(".td-acoes-deleta-cliente").click(() => {
         abreModalConfirmacaoExcluirCliente();

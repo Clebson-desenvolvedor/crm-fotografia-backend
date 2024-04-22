@@ -53,11 +53,12 @@ function abreModalAviso(titulo, aviso) {
     $(".modal-aviso-texto p").text(aviso);
 }
 
-/** Limpa o formulário */
+/** Limpa o formulário atual */
 function limpaFormulario() {
-    $("form").each (function() {
-        this.reset();
-    }); 
+    console.log('limpa fomulario')
+    $(".form input").each((i, el) => {
+        $(el).val("");
+    })
 }
 
 async function buscaNomesClientes() {
@@ -73,4 +74,15 @@ async function buscaNomesClientes() {
             reject(er);
         });
     });
+}
+
+function mensagemSucessoOuErro(tipo_classe, data) {
+    if (tipo_classe == "alert-success" || tipo_classe == "alert-error") {
+        $(".alert").addClass(tipo_classe).fadeIn(600).find("p").text(data.message);
+        setTimeout(() => {
+            $(".alert").fadeOut(300);
+        }, 3000);
+    } else {
+        console.error("A classe recebida como parâmetro para a função mensagemSucessoOuErro é inválida. ");
+    }
 }

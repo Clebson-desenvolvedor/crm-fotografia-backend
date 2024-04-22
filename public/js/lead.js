@@ -89,6 +89,6 @@ $(document).ready(() => {
     });
 
     // $(".modalBtnLead").click(abreOuFechaModal);
-    $("#clear-button").click(limpaFormulario);
+    $(".clear-cancel").click(limpaFormulario);
     $("select#origin").val($("input#origin-value").val());
 });
