@@ -20,6 +20,7 @@
     position: absolute;
     top: 17px;
     transform: translate(-52%, 0%);
+    word-wrap: break-word;
 }
 
 .alert p {

@@ -15,6 +15,7 @@ $(document).ready(() => {
     /** Abre modal para criar um novo cliente */
     $("#abre-modal-novo-cliente").click(() => {
         limpaFormulario();
+        removerAvisoErro();
         $("#modal-novo-cliente").css("display", "block");
     });
 
@@ -32,24 +33,32 @@ $(document).ready(() => {
 
     /** Criar um cliente */
     $("#create-client-button").click(function(ev) {
+        const data = {
+            nome_cliente: $("input#nome-cliente").val(),
+            whatsapp_cliente: $("input#whatsapp").val(),
+            email_cliente: $("input#email").val(),
+            cpf_cliente: $("input#cpf").val(),
+            dtcad_cliente: $("input#dtcar_cliente").val(),
+            endereco_logradouro: $("input#endereco-cliente-logradouro").val(),
+            endereco_numero: $("input#endereco-cliente-numero").val(),
+            endereco_bairro: $("input#endereco-cliente-bairro").val(),
+            foto_cliente: $("input#image")[0].value
+        }
+
+        if (validaCamposCliente(data) == false) {
+            return;
+        }
+
+        $("#create-client-button").css("cursor", "progress");
+
         $.ajax({
             url: `/admin/clients`,
             type: "POST",
-            data: { 
-                nome_cliente: $("input#nome-cliente").val(),
-                whatsapp_cliente: $("input#whatsapp").val(),
-                email_cliente: $("input#email").val(),
-                cpf_cliente: $("input#cpf").val(),
-                dtcad_cliente: $("input#dtcar_cliente").val(),
-                endereco_logradouro: $("input#endereco-cliente-logradouro").val(),
-                endereco_numero: $("input#endereco-cliente-numero").val(),
-                endereco_bairro: $("input#endereco-cliente-bairro").val(),
-                foto_cliente: $("input#image")[0].value
-            },
-            
+            data: data
         }).done(function(data) {
             // console.log("data", data);
-            if (data.serverStatus == 2) {
+            if (data.status == 200) {
+                $("#create-client-button").css("cursor", "pointer");
                 fechaModal();
                 mensagemSucessoOuErro("alert-success", data);
             }
@@ -237,7 +246,7 @@ $(document).ready(() => {
         }
 
         let data = criaDataServico(campos);
-        if (validaCampos(data) == false) {
+        if (validaCamposServicos(data) == false) {
             return;
         }
 
@@ -416,7 +425,7 @@ function criaDataServico(campos) {
     return data;
 }
 
-function validaCampos(data) {
+function validaCamposServicos(data) {
     removerAvisoErro();
     const validacao_nome_e_sexo_bebe = [1, 6, 9];
     const validacao_nomes_noivos = [2, 3, 7];
@@ -445,6 +454,20 @@ function validaCampos(data) {
     if (tem_erro) return false;
     return true;
 }
+function validaCamposCliente(data) {
+    removerAvisoErro();
+    let tem_erro = false;
+    if (data.nome_cliente == "") {
+        tem_erro = true;
+        notificaCampoErro("O nome do cliente é obrigatório. ", "nome-cliente");
+    }
+    if (data.whatsapp_cliente == "") {
+        notificaCampoErro("O WhatsApp do cliente é obrigatório", "whatsapp");
+        tem_erro = true;
+    }
+    if (tem_erro) return false;
+    return true;
+}
 
 function abreModalNovoCliente() {
     $("#modal-novo-cliente").css("display", "block");
@@ -462,7 +485,7 @@ function abreModalNovoLead() {
 
 function removerAvisoErro() {
     $(".mensagem-erro span").text("");
-    $(".campos-servicos.form").find(".input-erro").removeClass("input-erro");
+    $(".form").find(".input-erro").removeClass("input-erro");
 }
 
 async function abreModalNovoServico(cliente = {}) {

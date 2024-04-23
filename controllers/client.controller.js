@@ -15,6 +15,12 @@ async function createOrUpdateClient(req, res, next) {
     // console.log("client.controler createOrUpdateClient req.file", req.file);
     try {
         let client = req.body;
+
+        if (client.nome_cliente == "" || client.whatsapp_cliente == "") {
+            client.message = "Existe campos obrigatórios que não foram preenchidos. ";
+            client.status = 500 // trocar futuramente
+            res.send(client);
+        }
         
         if (req.file) {
             client.foto_cliente = req.file.filename;
@@ -35,7 +41,7 @@ async function createOrUpdateClient(req, res, next) {
         } else {
             client = await clientModel.insertClient(client);
             client.message = "Cliente cadastrado com sucesso!";
-            // console.log("status", res)
+            client.status = 200;
             res.send(client);
         }
     } catch (err) {

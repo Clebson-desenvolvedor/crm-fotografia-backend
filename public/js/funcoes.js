@@ -55,7 +55,6 @@ function abreModalAviso(titulo, aviso) {
 
 /** Limpa o formulário atual */
 function limpaFormulario() {
-    console.log('limpa fomulario')
     $(".form input").each((i, el) => {
         $(el).val("");
     })
