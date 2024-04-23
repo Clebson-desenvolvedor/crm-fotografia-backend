@@ -286,6 +286,45 @@ $(document).ready(() => {
     $("#confirmacao-excluir-acoes-sim").click(() => {
 
     });
+
+    $("#whatsapp input").on("input", (ent) => {
+        let valor = ent.target.value.replace(/\D/g, "");
+        let valor_formatado = '';
+
+        if (valor.length > 0) {
+            valor_formatado = '(' + valor.substring(0, 2); // Adiciona (XX)
+            if (valor.length > 2) {
+                valor_formatado += ') ' + valor.substring(2, 7); // Adiciona XXXX
+            }
+            if (valor.length > 7) {
+                valor_formatado += '-' + valor.substring(7, 11); // Adiciona XXXX
+            }
+        }
+
+        $("#whatsapp input").val(valor_formatado); // Atualiza o valor do input com a máscara
+    });
+
+    $("#cpf input").on("input", (ent) => {
+        let valor = ent.target.value.replace(/\D/g, "");
+        let valor_formatado = '';
+
+        if (valor.length > 0) {
+            valor_formatado = valor.substring(0, 3);
+
+        if (valor.length > 3) {
+            valor_formatado += '.' + valor.substring(3, 6);
+        }
+
+        if (valor.length > 6) {
+            valor_formatado += '.' + valor.substring(6, 9);
+        }
+
+        if (valor.length > 9) {
+            valor_formatado += '-' + valor.substring(9, 11);
+        }
+        }
+        $("#cpf input").val(valor_formatado);
+    });
 });
 
 /** Funções */
@@ -454,6 +493,7 @@ function validaCamposServicos(data) {
     if (tem_erro) return false;
     return true;
 }
+
 function validaCamposCliente(data) {
     removerAvisoErro();
     let tem_erro = false;
@@ -461,10 +501,20 @@ function validaCamposCliente(data) {
         tem_erro = true;
         notificaCampoErro("O nome do cliente é obrigatório. ", "nome-cliente");
     }
+
+    console.log(data.whatsapp_cliente.length)
+    if (data.whatsapp_cliente.length < 15) {
+        notificaCampoErro("Parece que falta algum dígito para o Whatsapp ...", "whatsapp");
+        tem_erro = true;
+    }
+
     if (data.whatsapp_cliente == "") {
         notificaCampoErro("O WhatsApp do cliente é obrigatório", "whatsapp");
         tem_erro = true;
     }
+
+    console.log("tem erro", tem_erro)
+    return
     if (tem_erro) return false;
     return true;
 }
