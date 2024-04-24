@@ -85,3 +85,21 @@ function mensagemSucessoOuErro(tipo_classe, data) {
         console.error("A classe recebida como parâmetro para a função mensagemSucessoOuErro é inválida. ");
     }
 }
+
+function preparaFoto(input) {
+    return input[0].files[0];
+}
+
+function verificaImagemInvalida() {
+    $('tr img').each((i, img) => {
+        fetch(img.src).then(function(response) {
+            if (response.ok == false) {
+                $(img).attr("src", "/img/no-photo.jpg");
+            }
+        }).catch(function(error) {
+            console.log('URL de imagem inválida. error:', error);
+        });
+    });
+}
+
+

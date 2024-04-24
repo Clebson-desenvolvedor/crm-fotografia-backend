@@ -2,7 +2,6 @@ const clientModel = require("../model/client.model.js");
 const helper = require("../lib/helper");
 const moment = require("moment");
 const serviceModel = require("../model/service.model");
-const config = require("../model/config.model.js");
 
 /**
  * @desc Cria um cliente, ou atualiza-o se existir um id como parâmetro no corpo da requisição
@@ -27,8 +26,8 @@ async function createOrUpdateClient(req, res, next) {
         } else {
             client.foto_cliente = "no-photo.jpg";
         }
-        
-        if (client.dtcad_cliente == "") {
+
+        if (client.dtcad_cliente == "" || client.dtcad_cliente == undefined) {
             client.dtcad_cliente = helper.convertToMySql();
         } else {
             client.dtcad_cliente = helper.convertToMySql(client.dtcad_cliente);

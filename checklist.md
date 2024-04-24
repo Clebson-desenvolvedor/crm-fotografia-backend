@@ -1,3 +1,12 @@
+### Tarefas por tela
+- Tela de Clientes
+    criar lógica pra salvar foto do cliente no drive na criação de um novo cliente
+    criar campo no form de novo cliente para salvar a origem do cliente (indicação, facebook, instagram, etc)
+
+
+
+
+
 ### Entidade Clientes
 
 (x) Criar um cliente

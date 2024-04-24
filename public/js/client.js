@@ -33,34 +33,37 @@ $(document).ready(() => {
 
     /** Criar um cliente */
     $("#create-client-button").click(function(ev) {
-        const data = {
-            nome_cliente: $("input#nome-cliente").val(),
-            whatsapp_cliente: $("input#whatsapp").val(),
-            email_cliente: $("input#email").val(),
-            cpf_cliente: $("input#cpf").val(),
-            dtcad_cliente: $("input#dtcar_cliente").val(),
-            endereco_logradouro: $("input#endereco-cliente-logradouro").val(),
-            endereco_numero: $("input#endereco-cliente-numero").val(),
-            endereco_bairro: $("input#endereco-cliente-bairro").val(),
-            foto_cliente: $("input#image")[0].value
-        }
+        const formData = new FormData();
+        formData.append("nome_cliente", $("input#nome-cliente").val());
+        formData.append("whatsapp_cliente", $("input#whatsapp").val());
+        formData.append("email_cliente", $("input#email").val());
+        formData.append("cpf_cliente", $("input#cpf").val());
+        formData.append("dtcad_cliente", $("input#dtcad_cliente").val());
+        formData.append("endereco_logradouro", $("input#endereco-cliente-logradouro").val());
+        formData.append("endereco_numero", $("input#endereco-cliente-numero").val());
+        formData.append("endereco_bairro", $("input#endereco-cliente-bairro").val());
 
-        if (validaCamposCliente(data) == false) {
+        const fotoFile = preparaFoto($("input#foto-cliente"));
+        formData.append('foto_cliente', fotoFile);
+
+        if (validaCamposCliente(formData) == false) {
             return;
         }
 
         $("#create-client-button").css("cursor", "progress");
 
         $.ajax({
-            url: `/admin/clients`,
-            type: "POST",
-            data: data
-        }).done(function(data) {
-            // console.log("data", data);
-            if (data.status == 200) {
+            url: "/admin/clients/",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+        }).done(function(response) {
+            // console.log("response", response);
+            if (response.status == 200) {
                 $("#create-client-button").css("cursor", "pointer");
                 fechaModal();
-                mensagemSucessoOuErro("alert-success", data);
+                mensagemSucessoOuErro("alert-success", response);
             }
         }).fail(function(er) {
             console.log("client.js criar cliente er: ", er);
@@ -494,30 +497,32 @@ function validaCamposServicos(data) {
     return true;
 }
 
-function validaCamposCliente(data) {
+function validaCamposCliente(formData) {
     removerAvisoErro();
     let tem_erro = false;
-    if (data.nome_cliente == "") {
+
+    const nome_cliente = formData.get("nome_cliente");
+    const whatsapp_cliente = formData.get("whatsapp_cliente");
+
+    if (nome_cliente.trim() === "") {
         tem_erro = true;
         notificaCampoErro("O nome do cliente é obrigatório. ", "nome-cliente");
     }
 
-    console.log(data.whatsapp_cliente.length)
-    if (data.whatsapp_cliente.length < 15) {
-        notificaCampoErro("Parece que falta algum dígito para o Whatsapp ...", "whatsapp");
+    if (whatsapp_cliente.trim().length < 15) {
+        notificaCampoErro("Parece que falta algum dígito para o WhatsApp.", "whatsapp");
         tem_erro = true;
     }
 
-    if (data.whatsapp_cliente == "") {
-        notificaCampoErro("O WhatsApp do cliente é obrigatório", "whatsapp");
+    if (whatsapp_cliente.trim() === "") {
+        notificaCampoErro("O WhatsApp do cliente é obrigatório.", "whatsapp");
         tem_erro = true;
     }
 
-    console.log("tem erro", tem_erro)
-    return
     if (tem_erro) return false;
     return true;
 }
+
 
 function abreModalNovoCliente() {
     $("#modal-novo-cliente").css("display", "block");
@@ -594,3 +599,7 @@ function deletaCliente(id) {
     //     console.log("client.js deletar cliente er: ", er);
     // });
 }
+
+window.addEventListener('load', function() {
+    verificaImagemInvalida();
+});
