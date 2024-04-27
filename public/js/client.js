@@ -54,7 +54,7 @@ $(document).ready(() => {
         formData.append('foto_cliente', fotoFile);
 
         $("#create-client-button").prop("disabled", true);
-
+        $("#create-client-button").css("opacity", "0.5");
         $.ajax({
             url: "/admin/clients/",
             type: 'POST',
@@ -69,12 +69,14 @@ $(document).ready(() => {
                     }).then(response_photo => {
                         // console.log("response foto", response_photo);
                         $("#create-client-button").prop("disabled", false);
+                        $("#create-client-button").css("opacity", "1");
                         fechaModal();
                         mensagemSucessoOuErro("alert-success", response);
                     });
                 }
             } else {
                 $("#create-client-button").prop("disabled", false);
+                $("#create-client-button").css("opacity", "1");
                 mensagemSucessoOuErro("alert-error", response);
             }
         }).fail(function(er) {
