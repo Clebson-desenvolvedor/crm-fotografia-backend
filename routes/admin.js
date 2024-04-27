@@ -24,11 +24,12 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 //rotas para clientes: admin/clients
-router.post("/clients", upload.single("foto_cliente"), clientController.createOrUpdateClient);
+router.post("/clients", clientController.createOrUpdateClient);
 router.get("/clients", clientController.getClients);
 router.get("/clients/:id", clientController.getClient);
 router.post("/clients/:id", clientController.deleteClient);
 router.get("/nomesclientes", clientController.getClientsName);
+router.post("/photoclient/:id", upload.single("foto_cliente"), clientController.uploadPhotoClient);
 
 //rotas para serviços: admin/services
 router.post("/services", serviceController.createService);

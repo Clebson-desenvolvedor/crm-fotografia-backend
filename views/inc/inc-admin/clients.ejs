@@ -15,7 +15,7 @@
         <% clients.forEach(row=> { %>
             <tr>
                 <td id="id-cliente" id-cliente="<%= row.id_cliente %>"><%= row.id_cliente %></td>
-                <td id="td-foto"><img src="/img/uploads/<%= row.foto_cliente %>" alt=""></td>
+                <td id="td-foto"><img src="<%= row.foto_cliente %>" alt=""></td>
                 <td id="nome-cliente"><%= row.nome_cliente %></td>
                 <td id="td-whatsapp"><%= row.whatsapp_cliente %></td>
                 <td id="td-email"><%= row.email_cliente %></td>

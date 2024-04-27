@@ -33,37 +33,49 @@ $(document).ready(() => {
 
     /** Criar um cliente */
     $("#create-client-button").click(function(ev) {
-        const formData = new FormData();
-        formData.append("nome_cliente", $("input#nome-cliente").val());
-        formData.append("whatsapp_cliente", $("input#whatsapp").val());
-        formData.append("email_cliente", $("input#email").val());
-        formData.append("cpf_cliente", $("input#cpf").val());
-        formData.append("dtcad_cliente", $("input#dtcad_cliente").val());
-        formData.append("endereco_logradouro", $("input#endereco-cliente-logradouro").val());
-        formData.append("endereco_numero", $("input#endereco-cliente-numero").val());
-        formData.append("endereco_bairro", $("input#endereco-cliente-bairro").val());
+        const data = {
+            nome_cliente: $("input#nome-cliente").val(),
+            whatsapp_cliente: $("input#whatsapp").val(),
+            email_cliente: $("input#email").val(),
+            cpf_cliente: $("input#cpf").val(),
+            dtcad_cliente: $("input#dtcad_cliente").val(),
+            endereco_logradouro: $("input#endereco-cliente-logradouro").val(),
+            endereco_numero: $("input#endereco-cliente-numero").val(),
+            endereco_bairro: $("input#endereco-cliente-bairro").val()
+        }
+
+        if (validaCamposCliente(data) == false) {
+            return;
+        }
+
+        const formData = new FormData();     
 
         const fotoFile = preparaFoto($("input#foto-cliente"));
         formData.append('foto_cliente', fotoFile);
 
-        if (validaCamposCliente(formData) == false) {
-            return;
-        }
-
-        $("#create-client-button").css("cursor", "progress");
+        $("#create-client-button").prop("disabled", true);
 
         $.ajax({
             url: "/admin/clients/",
             type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
+            data: data,
         }).done(function(response) {
             // console.log("response", response);
             if (response.status == 200) {
-                $("#create-client-button").css("cursor", "pointer");
-                fechaModal();
-                mensagemSucessoOuErro("alert-success", response);
+                if (response.id) {
+                    fetch(`/admin/photoclient/${response.id}`, {
+                        method: "POST",
+                        body: formData
+                    }).then(response_photo => {
+                        // console.log("response foto", response_photo);
+                        $("#create-client-button").prop("disabled", false);
+                        fechaModal();
+                        mensagemSucessoOuErro("alert-success", response);
+                    });
+                }
+            } else {
+                $("#create-client-button").prop("disabled", false);
+                mensagemSucessoOuErro("alert-error", response);
             }
         }).fail(function(er) {
             console.log("client.js criar cliente er: ", er);
@@ -497,12 +509,12 @@ function validaCamposServicos(data) {
     return true;
 }
 
-function validaCamposCliente(formData) {
+function validaCamposCliente(data) {
     removerAvisoErro();
     let tem_erro = false;
 
-    const nome_cliente = formData.get("nome_cliente");
-    const whatsapp_cliente = formData.get("whatsapp_cliente");
+    const nome_cliente = data.nome_cliente
+    const whatsapp_cliente = data.whatsapp_cliente
 
     if (nome_cliente.trim() === "") {
         tem_erro = true;

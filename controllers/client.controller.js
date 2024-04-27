@@ -11,7 +11,6 @@ const serviceModel = require("../model/service.model");
 
 async function createOrUpdateClient(req, res, next) {
     // console.log("client.controler createOrUpdateClient req.body", req.body);
-    // console.log("client.controler createOrUpdateClient req.file", req.file);
     try {
         let client = req.body;
 
@@ -19,12 +18,6 @@ async function createOrUpdateClient(req, res, next) {
             client.message = "Existe campos obrigatórios que não foram preenchidos. ";
             client.status = 500 // trocar futuramente
             res.send(client);
-        }
-        
-        if (req.file) {
-            client.foto_cliente = req.file.filename;
-        } else {
-            client.foto_cliente = "no-photo.jpg";
         }
 
         if (client.dtcad_cliente == "" || client.dtcad_cliente == undefined) {
@@ -35,13 +28,10 @@ async function createOrUpdateClient(req, res, next) {
 
         if (client.id_cliente) {
             client = await clientModel.updateClient(client);
-            client.message = "Cliente atualizado com sucesso!";
-            res.send(client);
+            res.send({ message: "Cliente atualizado com sucesso!", status: 200 });
         } else {
             client = await clientModel.insertClient(client);
-            client.message = "Cliente cadastrado com sucesso!";
-            client.status = 200;
-            res.send(client);
+            res.send({ message: "Cliente cadastrado com sucesso!", status: 200, id: client.insertId });
         }
     } catch (err) {
         console.log("client.controller createClient catch err", err);
@@ -128,10 +118,25 @@ async function getClientsName(req, res, next) {
     }
 }
 
+async function uploadPhotoClient(req, res, next) {
+    // console.log("Controler createOrUpdateClient req.file", req.file);
+    // console.log("Controler createOrUpdateClient req.params", req.params);
+    try {
+        let photo = { name: "/img/no-photo.jpg", id: req.params.id };
+        if (req.file) {
+            photo.name = `/img/uploads/${req.file.filename}`;
+        }
+        photo = await clientModel.insertPhotoClient(photo);
+    } catch (error) {
+        console.log("Controller uploadPhotoClient error: ", error);
+    }
+}
+
 module.exports = {
     createOrUpdateClient,
     getClients,
     getClient,
     deleteClient,
-    getClientsName
+    getClientsName,
+    uploadPhotoClient
 };

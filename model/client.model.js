@@ -5,34 +5,32 @@ const mysql = require("./mysql.js").pool;
  * @param {object} client 
  * @returns {Array}
  */
-function insertClient(client) {
+async function insertClient(client) {
     // console.log("client.model insertClient client", client);
     return new Promise((resolve, reject) => {
         try {
             let sql = `
             INSERT INTO tb_clientes (
-                nome_cliente, 
-                whatsapp_cliente, 
-                email_cliente, 
-                cpf_cliente, 
-                dtcad_cliente, 
-                foto_cliente
-            ) VALUES (?,?,?,?,?,?)`;
+                nome_cliente,
+                whatsapp_cliente,
+                email_cliente,
+                cpf_cliente,
+                dtcad_cliente
+            ) VALUES (?,?,?,?,?)`;
 
             let values = [
                 client.nome_cliente,
                 client.whatsapp_cliente,
                 client.email_cliente,
                 client.cpf_cliente,
-                client.dtcad_cliente,
-                client.foto_cliente
+                client.dtcad_cliente
             ];
             // console.log("client.model insertClient values", values);
             mysql.getConnection((err, conn) => {
-                conn.query(sql, values, (err, result) => {
-                    // console.log("client.model insertClient result", result);
+                conn.query(sql, values, (err, result_client) => {
+                    // console.log("client.model insertClient result_client", result_client);
                     if (err) {
-                        console.log("client.model insertClient conn.query err", err);
+                        console.log("Model insertClient conn.query err", err);
                         reject(err);
                         return;
                     }
@@ -49,7 +47,7 @@ function insertClient(client) {
                         client.endereco_logradouro,
                         client.endereco_numero,
                         client.endereco_bairro,
-                        result.insertId,
+                        result_client.insertId,
                         1
                     ]
                     // console.log("client.model insertClient values2", values2)
@@ -59,7 +57,7 @@ function insertClient(client) {
                             reject(err);
                             return;
                         }
-                        resolve(result);
+                        resolve(result_client);
                         conn.release();
                     })
                 });
@@ -247,8 +245,7 @@ function updateClient(client) {
             dtcad_cliente = "${client.dtcad_cliente}", 
             email_cliente = "${client.email_cliente}", 
             whatsapp_cliente = "${client.whatsapp_cliente}",
-            cpf_cliente = "${client.cpf_cliente}",
-            foto_cliente = "${client.foto_cliente}"
+            cpf_cliente = "${client.cpf_cliente}"
             WHERE id_cliente = ${client.id_cliente}`;
             // console.log("client.model updateClient sql", sql);
             mysql.getConnection((err, conn) => {
@@ -285,11 +282,32 @@ function updateClient(client) {
     });
 }
 
+async function insertPhotoClient(photo) {
+    // console.log("Model insertPhotoClient photo: ", photo);
+    return new Promise((resolve, reject) => {
+        let sql = `UPDATE tb_clientes SET foto_cliente = "${photo.name}" WHERE id_cliente = ${photo.id}`;
+        mysql.getConnection((err, conn) => {
+            conn.query(sql, (err, result) => {
+                // console.log("Model insertPhotoClient result", result);
+                if (err) {
+                    console.log("Model insertPhotoClient conn.query err", err);
+                    reject(err);
+                    conn.release();
+                    return;
+                }
+                resolve(result);
+                conn.release();
+            });
+        });
+    });
+}
+
 module.exports = {
     insertClient,
     getClients,
     getClient,
     deleteClient,
     updateClient,
-    getClientsName
+    getClientsName,
+    insertPhotoClient
 };
