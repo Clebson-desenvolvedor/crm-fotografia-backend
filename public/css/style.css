@@ -627,7 +627,6 @@ input#dia-noiva {
 }
 
 #campos-casamento > * {
-    align-items: center;
     display: flex;
 }
 
@@ -640,7 +639,6 @@ input#dia-noiva {
 
 #sexo-bebe-radios-m,
 #sexo-bebe-radios-f {
-    align-items: center;
     display: flex;
     width: 40px;
 }

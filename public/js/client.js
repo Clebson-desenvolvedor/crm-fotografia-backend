@@ -7,6 +7,7 @@ $(document).ready(() => {
     /** Valores padrões */
     $("#servico-tipo").text(0);
     $("#create-service-client-button").attr("disabled", true).css("opacity", 0.5);
+    var id_cliente_atual = $("#servico-id-cliente").val();
 
     if ($(".cards").children().length == 0) {
         $(".cards").append("<p>Nenhum Cliente cadastrado ainda.</p>")
@@ -226,14 +227,14 @@ $(document).ready(() => {
             status_servico: $("form#form-service-selected select#status-servico-id").val(),
             nome_bebe: $("form#form-service-selected input#nome-bebe").val(),
             dt_nasc_bebe: $("form#form-service-selected input#dt-nasc-bebe").val(),
-            sexo_bebe: $("input#sexo-bebe-m:checked").val() == "on" ? "M" : $("input#sexo-bebe-f:checked").val() == "on" ? "F" : "",
+            sexo_bebe: $("input#sexo-bebe-m:checked").length == 1 ? "M" : $("input#sexo-bebe-f:checked").length == 1 ? "F" : "",
             cenario: $("form#form-service-selected input#cenario").val(),
             nomes_noivos: $("form#form-service-selected input#nomes-noivos").val(),
             nome_crianca: $("form#form-service-selected input#nome-da-crianca").val(),
             dt_nasc_crianca: $("form#form-service-selected input#dt-nasc-crianca").val(),
             enderecos: [],
             profissao: $("form#form-service-selected input#profissao").val(),
-            id_cliente: parseInt($("#servico-id-cliente").text())
+            id_cliente: parseInt(id_cliente_atual)
         }
 
         if ($("#endereco-evento-logradouro").val().length > 0) {
@@ -268,7 +269,7 @@ $(document).ready(() => {
             return;
         }
 
-        // console.log("data", data);
+        console.log("data", data);
 
         // $.ajax({
         //     url: "/admin/clients/",
@@ -298,6 +299,7 @@ $(document).ready(() => {
             nome: $(tr).find("td#nome-cliente")[0].innerText,
             id: $(tr).find("td#id-cliente")[0].innerText
         }
+        id_cliente_atual = cliente.id
         abreModalNovoServico(cliente);
     });
 
@@ -351,6 +353,12 @@ $(document).ready(() => {
             $("#image-preview").attr("src", reader.result);
         }
         reader.readAsDataURL(img);
+    });
+
+    $(document).on("change", "select#select-cliente", () => {
+        const nome_cliente = $("select#select-cliente option:selected").text();
+        id_cliente_atual = $("select#select-cliente option:selected").val();
+        $("#servico-nome-cliente").text(nome_cliente);
     });
 });
 
@@ -578,7 +586,7 @@ async function abreModalNovoServico(cliente = {}) {
     } else {
         $("#servico-nome-cliente").text("");
         $("#servico-id-cliente").text("");
-        const clientes = await buscaNomesClientes()
+        const clientes = await buscaNomesClientes();
         
         if (clientes.length > 0) {
             $("#modal-novo-servico").css("display", "block");
