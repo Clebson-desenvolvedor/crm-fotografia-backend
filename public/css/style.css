@@ -596,9 +596,10 @@ button#delete-client-button,
 .form-name,
 .form-number,
 .form-street,
-.form-origin,
+#form-origin,
 .form-whatsapp{
     margin: 10px 0;
+    align-items: center;
 }
 
 .campos-servicos > * {

@@ -15,15 +15,17 @@ async function insertClient(client) {
                 whatsapp_cliente,
                 email_cliente,
                 cpf_cliente,
-                dtcad_cliente
-            ) VALUES (?,?,?,?,?)`;
+                dtcad_cliente,
+                origem_cliente
+            ) VALUES (?,?,?,?,?,?)`;
 
             let values = [
                 client.nome_cliente,
                 client.whatsapp_cliente,
                 client.email_cliente,
                 client.cpf_cliente,
-                client.dtcad_cliente
+                client.dtcad_cliente,
+                client.origem_cliente
             ];
             // console.log("client.model insertClient values", values);
             mysql.getConnection((err, conn) => {

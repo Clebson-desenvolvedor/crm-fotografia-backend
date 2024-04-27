@@ -41,6 +41,7 @@ $(document).ready(() => {
             email_cliente: $("input#email").val(),
             cpf_cliente: $("input#cpf").val(),
             dtcad_cliente: $("input#dtcad_cliente").val(),
+            origem_cliente: $("select#origem-cliente option:selected").val(),
             endereco_logradouro: $("input#endereco-cliente-logradouro").val(),
             endereco_numero: $("input#endereco-cliente-numero").val(),
             endereco_bairro: $("input#endereco-cliente-bairro").val()
@@ -533,8 +534,9 @@ function validaCamposCliente(data) {
     removerAvisoErro();
     let tem_erro = false;
 
-    const nome_cliente = data.nome_cliente
-    const whatsapp_cliente = data.whatsapp_cliente
+    const nome_cliente = data.nome_cliente;
+    const whatsapp_cliente = data.whatsapp_cliente;
+    const origem_cliente = data.origem_cliente;
 
     if (nome_cliente.trim() === "") {
         tem_erro = true;
@@ -548,6 +550,11 @@ function validaCamposCliente(data) {
 
     if (whatsapp_cliente.trim() === "") {
         notificaCampoErro("O WhatsApp do cliente é obrigatório.", "whatsapp");
+        tem_erro = true;
+    }
+
+    if (origem_cliente == "" || origem_cliente == "Selecione") {
+        notificaCampoErro("Por favor, responda como este cliente chegou a você. ", "form-origin");
         tem_erro = true;
     }
 

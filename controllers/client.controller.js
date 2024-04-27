@@ -16,10 +16,8 @@ async function createOrUpdateClient(req, res, next) {
     try {
         let client = req.body;
 
-        if (client.nome_cliente == "" || client.whatsapp_cliente == "") {
-            client.message = "Existe campos obrigatórios que não foram preenchidos. ";
-            client.status = 500 // trocar futuramente
-            res.send(client);
+        if (client.nome_cliente == "" || client.whatsapp_cliente == "" || client.origem_cliente == "") {
+            res.send({ message: "Existe campos obrigatórios que não foram preenchidos. ", status: 500 });
         }
 
         if (client.dtcad_cliente == "" || client.dtcad_cliente == undefined) {
