@@ -16,7 +16,7 @@ $(document).ready(() => {
     $("#abre-modal-novo-cliente").click(() => {
         limpaFormulario();
         removerAvisoErro();
-        $("#modal-novo-cliente").css("display", "block");
+        abreModalNovoCliente();
     });
 
     /** Abre modal para criar um novo serviço a partir do painel de ações */
@@ -29,6 +29,7 @@ $(document).ready(() => {
     $("#abre-modal-novo-lead").click(() => {
         limpaFormulario();
         abreModalNovoLead();
+        $(".modal .data-image-upload img").attr("src", "/img/no-photo.jpg");
     });
 
     /** Criar um cliente */
@@ -342,6 +343,15 @@ $(document).ready(() => {
         }
         $("#cpf input").val(valor_formatado);
     });
+
+    $("#foto-cliente").on("change", (ev) => {
+        let img = ev.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () =>{
+            $("#image-preview").attr("src", reader.result);
+        }
+        reader.readAsDataURL(img);
+    });
 });
 
 /** Funções */
@@ -540,6 +550,7 @@ function validaCamposCliente(data) {
 
 function abreModalNovoCliente() {
     $("#modal-novo-cliente").css("display", "block");
+    $(".modal .data-image-upload img").attr("src", "/img/no-photo.jpg");
 }
 
 function notificaCampoErro(mensagem_erro, id) {

@@ -161,6 +161,7 @@ header label span {
 }
 
 .data-image-upload img {
+    border-radius:  5px;
     height: 100px;
     position: relative;
     width: 100px;
@@ -254,9 +255,9 @@ header label span {
 
 .data-image-upload {
     border-radius: 50%;
-    height: 222px;
+    height: 140px;
     margin: 5px;
-    width: 222px;
+    width: 140px;
 }
 
 .login-screen p {
