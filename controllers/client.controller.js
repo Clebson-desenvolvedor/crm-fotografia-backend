@@ -129,17 +129,16 @@ async function uploadPhotoClient(req, res, next) {
             photo.name = `/img/uploads/${req.file.filename}`;
         }
 
-        // const temp_image = req.file.path;
-
-        // const resize_image = await sharp(temp_image)
-            // .resize({ width: 40 }) // Redimensiona para largura de 40 pixels
-            // .jpeg({ quality: 80 }) // Define a qualidade JPEG para 80%
-            // .toBuffer(); // Converte a imagem redimensionada para um buffer em memória
-
-        // Salva a imagem redimensionada de volta no mesmo caminho
-        // await fs.writeFile(temp_image, resize_image);
-
         photo = await clientModel.insertPhotoClient(photo);
+
+        // const temp_image = req.file.path;
+        // const resize_image = await sharp(temp_image).resize(40).toBuffer();
+            
+        // // Salva a imagem redimensionada de volta no mesmo caminho
+        // setTimeout(() => {
+        //     fs.writeFile(temp_image, resize_image);
+        // }, 1000);
+
         res.send({ status: 200 });
     } catch (error) {
         console.log("Controller uploadPhotoClient error: ", error);
