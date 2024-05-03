@@ -7,20 +7,11 @@ const config = require("../model/config.model.js");
  * @return {object}
  */
 async function createService(req, res, next) {
-    // console.log("service.controller createService req.body ", req.body);
+    // console.log("Controller createService req.body ", req.body);
     try {
         let service = req.body;
-        if (
-            !service.tiposervico ||
-            !service.dtcadservico ||
-            !service.preco ||
-            !service.statusservico ||
-            !service.idcliente
-        ) {
-            throw new Error("Alguns campos são obrigatórios");
-        }
         service = await serviceModel.insertService(service);
-        // console.log("service.controller createService service ", service);
+        // console.log("Controller createService service ", service['enderecos']);return;
         if (service.errno == 1452) throw new Error("Atenção: Você está tentando criar um serviço para um cliente que não existe. ");
         res.send({ mensagem: "Serviço criado com sucesso!", id: service.insertId });
     } catch (err) {

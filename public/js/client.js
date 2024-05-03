@@ -42,9 +42,9 @@ $(document).ready(() => {
             cpf_cliente: $("input#cpf").val(),
             dtcad_cliente: $("input#dtcad_cliente").val(),
             origem_cliente: $("select#origem-cliente option:selected").val(),
-            endereco_logradouro: $("input#endereco-cliente-logradouro").val(),
-            endereco_numero: $("input#endereco-cliente-numero").val(),
-            endereco_bairro: $("input#endereco-cliente-bairro").val()
+            endereco_logradouro_cliente: $("input#endereco-cliente-logradouro").val(),
+            endereco_numero_cliente: $("input#endereco-cliente-numero").val(),
+            endereco_bairro_cliente: $("input#endereco-cliente-bairro").val()
         }
 
         if (validaCamposCliente(data) == false) {
@@ -224,41 +224,42 @@ $(document).ready(() => {
             servico_tipo: parseInt($("form#form-service-selected input#servico-tipo").text()),
             ambiente_servico: $("form#form-service-selected input#ambiente-servico-id").val(),
             dt_servico: $("form#form-service-selected input#dt-servico").val(),
-            preco_total: $("form#form-service-selected input#preco-total").val(),
+            preco_total: parseFloat($("form#form-service-selected input#preco-total").val()).toFixed(2) != NaN ? parseFloat($("form#form-service-selected input#preco-total").val()).toFixed(2) : 0,
+            preco_entrada: parseFloat($("form#form-service-selected input#preco-entrada").val()).toFixed(2) != NaN ? parseFloat($("form#form-service-selected input#preco-entrada").val()).toFixed(2) : 0,
             status_servico: $("form#form-service-selected select#status-servico-id").val(),
             nome_bebe: $("form#form-service-selected input#nome-bebe").val(),
             dt_nasc_bebe: $("form#form-service-selected input#dt-nasc-bebe").val(),
             sexo_bebe: $("input#sexo-bebe-m:checked").length == 1 ? "M" : $("input#sexo-bebe-f:checked").length == 1 ? "F" : "",
             cenario: $("form#form-service-selected input#cenario").val(),
-            nomes_noivos: $("form#form-service-selected input#nomes-noivos").val(),
+            nome_noivos: $("form#form-service-selected input#nomes-noivos").val(),
             nome_crianca: $("form#form-service-selected input#nome-da-crianca").val(),
             dt_nasc_crianca: $("form#form-service-selected input#dt-nasc-crianca").val(),
             enderecos: [],
             profissao: $("form#form-service-selected input#profissao").val(),
-            id_cliente: parseInt(id_cliente_atual)
+            tb_servicos_id_cliente: parseInt(id_cliente_atual)
         }
 
         if ($("#endereco-evento-logradouro").val().length > 0) {
             campos.enderecos.push({
-                endereco_tipo: "endereco_evento",
+                endereco_tipo: "evento",
                 endereco_logradouro: $("#endereco-evento-logradouro").val(),
                 endereco_numero: $("#endereco-evento-numero").val(),
                 endereco_bairro: $("#endereco-evento-bairro").val()
             });
         }
 
-        if ($("input#recepcao:checked").val() == "on" && $("#endereco-recepcao-logradouro").val().length > 0) {
+        if ($("input#recepcao:checked").length == 1 && $("#endereco-recepcao-logradouro").val().length > 0) {
             campos.enderecos.push({
-                endereco_tipo: "endereco_recepcao",
+                endereco_tipo: "recepcao",
                 endereco_logradouro: $("#endereco-recepcao-logradouro").val(),
                 endereco_numero: $("#endereco-recepcao-numero").val(),
                 endereco_bairro: $("#endereco-recepcao-bairro").val()
             });
         }
 
-        if ($("input#dia-noiva:checked").val() == "on" && $("#endereco-dia-noiva-logradouro").val().length > 0) {
+        if ($("input#dia-noiva:checked").length == 1 && $("#endereco-dia-noiva-logradouro").val().length > 0) {
             campos.enderecos.push({
-                endereco_tipo: "endereco_dia-noiva",
+                endereco_tipo: "dia_noiva",
                 endereco_logradouro: $("#endereco-dia-noiva-logradouro").val(),
                 endereco_numero: $("#endereco-dia-noiva-numero").val(),
                 endereco_bairro: $("#endereco-dia-noiva-bairro").val()
@@ -266,25 +267,25 @@ $(document).ready(() => {
         }
 
         let data = criaDataServico(campos);
+
         if (validaCamposServicos(data) == false) {
             return;
         }
 
-        console.log("data", data);
-
-        // $.ajax({
-        //     url: "/admin/clients/",
-        //     type: "POST",
-        //     data: { data },
-        // }).done(function(data) {
-        //     // console.log("data", data);
-        //     $("p.alert").text(data.message).addClass("alert-success");
-        //     setTimeout(() => {
-        //         $("p.alert").fadeOut(500);
-        //     }, 3000);
-        // }).fail(function(er) {
-        //     console.log(er)
-        // });
+        $.ajax({
+            url: "/admin/services/",
+            type: "POST",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+        }).done(function(data) {
+            // console.log("data", data);
+            // $("p.alert").text(data.message).addClass("alert-success");
+            // setTimeout(() => {
+            //     $("p.alert").fadeOut(500);
+            // }, 3000);
+        }).fail(function(er) {
+            console.log(er)
+        });
     })
 
     $(".clear-cancel").click(limpaFormulario);
@@ -376,6 +377,7 @@ function fechaCamposFormulario(callback) {
 function carregaCamposPadrao() {
     $("#dt-servico").css("display", "flex");
     $("#preco-total").css("display", "flex");
+    $("#preco-entrada").css("display", "flex");
     $("#status-servico").css("display", "flex");
 }
 
@@ -449,8 +451,9 @@ function criaDataServico(campos) {
         ambiente_servico: campos.ambiente_servico,
         dt_servico: campos.dt_servico,
         preco_total: campos.preco_total,
+        preco_entrada: campos.preco_entrada,
         status_servico: campos.status_servico,
-        id_cliente: campos.id_cliente
+        tb_servicos_id_cliente: campos.tb_servicos_id_cliente
     }
     switch (campos.servico_tipo) {
         case 1: // Acompanhamento
@@ -460,11 +463,11 @@ function criaDataServico(campos) {
             data.cenario = campos.cenario;
             break;
         case 2: // Casamento Civil
-            data.nomes_noivos = campos.nomes_noivos;
+            data.nome_noivos = campos.nome_noivos;
             data.enderecos = campos.enderecos;
             break;
         case 3: // Casamento na Igreja
-            data.nomes_noivos = campos.nomes_noivos;
+            data.nome_noivos = campos.nome_noivos;
             data.enderecos = campos.enderecos;
             break;
         case 5: // Ensaio Infantil
@@ -477,7 +480,7 @@ function criaDataServico(campos) {
             data.cenario = campos.cenario;
             break;
         case 7: // Prewedding
-            data.nomes_noivos = campos.nomes_noivos;
+            data.nome_noivos = campos.nome_noivos;
             data.enderecos = campos.enderecos;
             break;
         case 8: // Festa Infantil
@@ -517,7 +520,7 @@ function validaCamposServicos(data) {
             notificaCampoErro("O sexo do bebê é obrigarório. ", "sexo-bebe");
         }
     } else if (validacao_nomes_noivos.includes(data.servico_tipo)) {
-        if (data.nomes_noivos == "") {
+        if (data.nome_noivos == "") {
             notificaCampoErro("O nome dos noivos é obrigatório. ", "nomes-noivos");
         }
     } else if (validacao_nome_crianca.includes(data.servico_tipo)) {
@@ -526,6 +529,12 @@ function validaCamposServicos(data) {
             notificaCampoErro("O nome da criança é obrigatório. ", "nome-da-crianca");
         }
     }
+
+    if (data.dt_servico == "") {
+        tem_erro = true;
+        notificaCampoErro("A data do evento precisa ser definida. ", "dt-servico");
+    }
+
     if (tem_erro) return false;
     return true;
 }

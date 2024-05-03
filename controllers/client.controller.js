@@ -31,7 +31,7 @@ async function createOrUpdateClient(req, res, next) {
             res.send({ message: "Cliente atualizado com sucesso!", status: 200 });
         } else {
             client = await clientModel.insertClient(client);
-            res.send({ message: "Cliente cadastrado com sucesso!", status: 200, id: client.insertId });
+            res.send({ message: "Cliente cadastrado com sucesso!", status: 200, id: client.id_cliente });
         }
     } catch (err) {
         console.log("client.controller createClient catch err", err);

@@ -10,62 +10,32 @@ async function insertClient(client) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            INSERT INTO tb_clientes (
-                nome_cliente,
-                whatsapp_cliente,
-                email_cliente,
-                cpf_cliente,
-                dtcad_cliente,
-                origem_cliente
-            ) VALUES (?,?,?,?,?,?)`;
-
-            let values = [
-                client.nome_cliente,
-                client.whatsapp_cliente,
-                client.email_cliente,
-                client.cpf_cliente,
-                client.dtcad_cliente,
-                client.origem_cliente
-            ];
-            // console.log("client.model insertClient values", values);
+            INSERT INTO tb_clientes SET
+                nome_cliente = '${client.nome_cliente}',
+                whatsapp_cliente = '${client.whatsapp_cliente}',
+                email_cliente = '${client.email_cliente}',
+                cpf_cliente = '${client.cpf_cliente}',
+                dtcad_cliente = '${client.dtcad_cliente}',
+                endereco_logradouro_cliente = '${client.endereco_logradouro_cliente}',
+                endereco_numero_cliente = '${client.endereco_numero_cliente}',
+                endereco_bairro_cliente = '${client.endereco_bairro_cliente}',
+                origem_cliente = '${client.origem_cliente}'`;
             mysql.getConnection((err, conn) => {
-                conn.query(sql, values, (err, result_client) => {
-                    // console.log("client.model insertClient result_client", result_client);
+                conn.query(sql, (err, result_client) => {
+                    // console.log("Model insertClient result_client", result_client);
                     if (err) {
                         console.log("Model insertClient conn.query err", err);
                         reject(err);
+                        conn.release();
                         return;
                     }
-                    sql = `
-                    INSERT INTO tb_endereco (
-                        endereco_logradouro, 
-                        endereco_numero, 
-                        endereco_bairro, 
-                        endereco_cliente_id,
-                        endereco_tipo
-                    ) VALUES (?,?,?,?,?)`;
-
-                    let values2 = [
-                        client.endereco_logradouro,
-                        client.endereco_numero,
-                        client.endereco_bairro,
-                        result_client.insertId,
-                        1
-                    ]
-                    // console.log("client.model insertClient values2", values2)
-                    conn.query(sql, values2, (err, result) => {
-                        if (err) {
-                            console.log("client.model insertClient conn.query 2 err", err);
-                            reject(err);
-                            return;
-                        }
-                        resolve(result_client);
-                        conn.release();
-                    })
+                    resolve({ status: 200, id_cliente: result_client.insertId });
+                    conn.release();
+                    return;
                 });
             });
         } catch (err) {
-            console.log("client.model insertClient catch err", err);
+            console.log("Model insertClient catch err", err);
         }
     });
 }
@@ -84,9 +54,9 @@ function getClients() {
                     email_cliente,
                     whatsapp_cliente,
                     foto_cliente,
-                    COUNT(tb_servicos_id_cliente) as quantidade_servicos
+                    COUNT(servico_id_cliente) as quantidade_servicos
                 FROM tb_clientes
-                LEFT JOIN tb_servicos ON id_cliente = tb_servicos_id_cliente
+                LEFT JOIN tb_servicos ON id_cliente = servico_id_cliente
                 GROUP BY id_cliente
             `;
             mysql.getConnection((err, conn) => {
@@ -141,12 +111,11 @@ function getClient(id) {
                 whatsapp_cliente,
                 cpf_cliente,
                 foto_cliente,
-                endereco_logradouro,
-                endereco_numero,
-                endereco_bairro,
-                endereco_cliente_id
+                cep_cliente,
+                endereco_logradouro_cliente,
+                endereco_numero_cliente,
+                endereco_bairro_cliente,
             FROM tb_clientes
-            INNER JOIN tb_endereco ON id_cliente = endereco_cliente_id
             WHERE id_cliente = ${id}`;
 
             let objClient = {};
@@ -154,11 +123,10 @@ function getClient(id) {
                 conn.query(sql, (err, result, field) => {
                     //   console.log("client.model getClient result", result);
                     if (err) {
-                        console.log("client.model getClient conn.query err", err);
+                        console.log("Model getClient conn.query err", err);
                         reject(err);
                     } else if (result.length == 0) {
-                        result = [];
-                        resolve(result);
+                        resolve({status: 400, message: "Nenhum cliente encontrado. "});
                     } else {
                         objClient = {
                             id_cliente: result[0].id_cliente,
@@ -166,10 +134,11 @@ function getClient(id) {
                             dtcad_cliente: result[0].dtcad_cliente,
                             email_cliente: result[0].email_cliente,
                             whatsapp_cliente: result[0].whatsapp_cliente,
-                            endereco_logradouro: result[0].endereco_logradouro,
                             cpf_cliente: result[0].cpf_cliente,
-                            endereco_numero: result[0].endereco_numero,
-                            endereco_bairro: result[0].endereco_bairro,
+                            endereco_logradouro_cliente: result[0].endereco_logradouro_cliente,
+                            endereco_numero_cliente: result[0].endereco_numero_cliente,
+                            endereco_bairro_cliente: result[0].endereco_bairro_cliente,
+                            cep_cliente: result[0].cep_cliente,
                             foto_cliente: result[0].foto_cliente
                         };
                         // console.log("client.model getClient objClient", objClient);
@@ -197,8 +166,8 @@ function deleteClient(id) {
     // console.log("client.model deleteClient id", id);
     return new Promise((resolve, reject) => {
         try {
-            let sql = `DELETE FROM tb_endereco WHERE endereco_cliente_id = ${id}`;
             mysql.getConnection((err, conn) => {
+                sql = `DELETE FROM tb_clientes WHERE id_cliente = ${id}`;
                 conn.query(sql, (err, result, field) => {
                     // console.log("client.model deleteClient result", result);
                     if (err) {
@@ -206,24 +175,12 @@ function deleteClient(id) {
                         console.log("client.model deleteClient conn.query err.errno:", err.errno);
                         return resolve(err)
                     }
-
-                    mysql.getConnection((err2, conn) => {
-                        sql = `DELETE FROM tb_clientes WHERE id_cliente = ${id}`;
-                        conn.query(sql, (err2, result2, field) => {
-                            // console.log("client.model deleteClient result2", result2);
-                            if (err2) {
-                                console.log("client.model deleteClient conn.query err2.sqlMessage: ", err2.sqlMessage);
-                                console.log("client.model deleteClient conn.query err2.errno:", err2.errno);
-                                return resolve(err)
-                            }
-                            resolve(result2);
-                            conn.release();
-                        });
-                    });
                     resolve(result);
                     conn.release();
                 });
             });
+            resolve(result);
+            conn.release();
         } catch (err) {
             console.log("client.model deleteClient catch err", err);
         }
@@ -242,44 +199,28 @@ function updateClient(client) {
     return new Promise((resolve, reject) => {
         try {
             let sql = `
-            UPDATE tb_clientes SET 
-            nome_cliente = "${client.nome_cliente}", 
-            dtcad_cliente = "${client.dtcad_cliente}", 
-            email_cliente = "${client.email_cliente}", 
+            UPDATE tb_clientes SET
+            nome_cliente = "${client.nome_cliente}",
+            dtcad_cliente = "${client.dtcad_cliente}",
+            email_cliente = "${client.email_cliente}",
             whatsapp_cliente = "${client.whatsapp_cliente}",
             cpf_cliente = "${client.cpf_cliente}"
             WHERE id_cliente = ${client.id_cliente}`;
-            // console.log("client.model updateClient sql", sql);
+            // console.log("Model updateClient sql", sql);
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result, field) => {
                     // console.log("client.model updateClient result", result);
                     if (err) {
-                        console.log("client.model updateClient conn.query err", err);
+                        console.log("Model updateClient conn.query err", err);
                         reject(err);
                         return;
                     }
-                    sql = `
-                    UPDATE tb_endereco SET
-                    endereco_logradouro = "${client.endereco_logradouro}",
-                    endereco_numero = "${client.endereco_numero}",
-                    endereco_bairro = "${client.endereco_bairro}"
-                    WHERE endereco_cliente_id = ${client.id_cliente}`;
-
-                    mysql.getConnection((err, conn) => {
-                        conn.query(sql, (err2, result2, field) => {
-                            if (err2) {
-                                console.log("client.model updateClient conn.query err2", err2);
-                                reject(err);
-                                return;
-                            }
-                            resolve(result2);
-                        });
-                    })
+                    resolve(result);
                     conn.release();
                 });
             });
         } catch (err) {
-            console.log("client.model updateClient catch err", err);
+            console.log("Model updateClient catch err", err);
         }
     });
 }
