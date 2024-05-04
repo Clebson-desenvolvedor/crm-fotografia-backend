@@ -4,11 +4,6 @@
 
 $(document).ready(() => {
 
-    /** Valores padrões */
-    if ($(".cards").children().length == 0) {
-        $(".cards").append("<p>Nenhum lead cadastrado ainda.</p>")
-    }
-
      /** Criar um lead */
      $("#create-lead-button").click(function(ev) {
         $.ajax({
@@ -88,7 +83,18 @@ $(document).ready(() => {
         });
     });
 
-    // $(".modalBtnLead").click(abreOuFechaModal);
-    $(".clear-cancel").click(limpaFormulario);
     $("select#origin").val($("input#origin-value").val());
+
+     /** Abre modal para criar um novo lead */
+     $("#abre-modal-novo-lead").click(() => {
+        limpaFormulario();
+        abreModalNovoLead();
+        $(".modal .data-image-upload img").attr("src", "/img/no-photo.jpg");
+    });
 });
+
+/** Funções */
+
+function abreModalNovoLead() {
+    $("#modal-novo-lead").css("display", "block");
+}

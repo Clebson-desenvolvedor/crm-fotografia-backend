@@ -27,7 +27,6 @@ $(document).ready(() => {
         window.location.assign("/admin/login");
     });
 
-    
     /** Busca as cores das preferências */
     $.ajax({
         url: `/admin/colors`,
@@ -37,6 +36,12 @@ $(document).ready(() => {
         $(".primaria").css("background-color", cores.cor_primaria);
     }).fail(function(er) {
         console.log("funcoes.js buscar cores error: ", er);
+    });
+
+    $(".clear-cancel").click(limpaFormulario);
+
+    $("#confirmacao-excluir-acoes-sim").click(() => {
+
     });
 });
 
@@ -58,21 +63,6 @@ function limpaFormulario() {
     $(".form input").each((i, el) => {
         $(el).val("");
     })
-}
-
-async function buscaNomesClientes() {
-    return new Promise((resolve, reject) => {
-        $.ajax({
-            url: `/admin/nomesclientes`,
-            type: "GET"
-        }).done(function(clientes) {
-            // console.log("clientes", clientes);
-            resolve(clientes);
-        }).fail(function(er) {
-            console.log("funcoes.js buscar nome dos clientes fail: ", er);
-            reject(er);
-        });
-    });
 }
 
 function mensagemSucessoOuErro(tipo_classe, data) {
@@ -102,4 +92,17 @@ function verificaImagemInvalida() {
     });
 }
 
+function notificaCampoErro(mensagem_erro, id) {
+    $(`input#${id}`).addClass("input-erro");
+    $(`div#${id} .mensagem-erro span`).text(mensagem_erro);
+}
+
+function removerAvisoErro() {
+    $(".mensagem-erro span").text("");
+    $(".form").find(".input-erro").removeClass("input-erro");
+}
+
+window.addEventListener('load', function() {
+    verificaImagemInvalida();
+});
 
