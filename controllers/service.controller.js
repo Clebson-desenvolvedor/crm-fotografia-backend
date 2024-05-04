@@ -11,11 +11,9 @@ async function createService(req, res, next) {
     try {
         let service = req.body;
         service = await serviceModel.insertService(service);
-        // console.log("Controller createService service ", service['enderecos']);return;
-        if (service.errno == 1452) throw new Error("Atenção: Você está tentando criar um serviço para um cliente que não existe. ");
-        res.send({ mensagem: "Serviço criado com sucesso!", id: service.insertId });
+        res.send(service);
     } catch (err) {
-        console.log("service.controller createService catch err", err);
+        console.log("Controller createService catch err", err);
         next(err);
     }
 }

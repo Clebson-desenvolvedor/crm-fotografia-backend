@@ -7,7 +7,7 @@ const mysql = require("./mysql").pool;
  * @returns {object}
  */
 function insertService(service) {
-    console.log("Model insertService service", service);
+    // console.log("Model insertService service", service);
     return new Promise((resolve, reject) => {
         try {
             let sql = "INSERT INTO tb_servicos SET"
@@ -20,24 +20,23 @@ function insertService(service) {
                 } else {
                     sql += `, ${field} = '${service[field]}'`
                 }
-                ct++
+                ct++;
             }
 
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result) => {
                     // console.log("Model insertService result", result);
                     if (err) {
-                        console.log("service.model insertService conn.query err", err);
+                        console.log("Model insertService conn.query err", err);
                         reject(err);
                         return;
                     }
 
-                    const id_service = result.insertId;
                     if (service.enderecos?.length > 0) {
                         const addresses = service.enderecos;
-                        const id_cliente = service.tb_servicos_id_cliente;
+                        const id_service = result.insertId;
                         let sql_address =   `INSERT INTO tb_endereco (
-                                                endereco_cliente_id,
+                                                endereco_id_servico,
                                                 endereco_logradouro,
                                                 endereco_numero,
                                                 endereco_bairro,
@@ -47,7 +46,7 @@ function insertService(service) {
                         addresses.forEach((address, i) => {
                             if (i == 0) {
                                 sql_address += ` (
-                                    ${id_cliente},
+                                    ${id_service},
                                     '${address.endereco_logradouro}',
                                     '${address.endereco_numero}',
                                     '${address.endereco_bairro}',
@@ -55,7 +54,7 @@ function insertService(service) {
                                 )`;
                             } else {
                                 sql_address += `, (
-                                    ${id_cliente},
+                                    ${id_service},
                                     '${address.endereco_logradouro}',
                                     '${address.endereco_numero}',
                                     '${address.endereco_bairro}',
@@ -63,20 +62,22 @@ function insertService(service) {
                                 )`;
                             }
                         });
-                        console.log("sql", sql_address);
+
                         conn.query(sql_address, (err, result_address) => {
                             if (err) {
                                 console.log("service.model insertService conn.query err", err);
                                 reject(err);
                                 return;
                             }
-                            resolve(result_address);
+                            // resolve(result_address);
                         });
                     }
+
+                    resolve({status: 200, message: "Serviço cadastrado com sucesso!"});
                 });
             });
         } catch (err) {
-            console.log("client.model insertService catch err", err);
+            console.log("Model insertService catch err", err);
         }
     });
 }
@@ -106,7 +107,7 @@ function getServices(id_client = null) {
                 });
             });
         } catch (err) {
-            console.log("client.model getServices catch err", err);
+            console.log("Model getServices catch err", err);
         }
     });
 }

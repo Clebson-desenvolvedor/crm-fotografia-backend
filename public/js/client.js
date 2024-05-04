@@ -236,7 +236,7 @@ $(document).ready(() => {
             dt_nasc_crianca: $("form#form-service-selected input#dt-nasc-crianca").val(),
             enderecos: [],
             profissao: $("form#form-service-selected input#profissao").val(),
-            tb_servicos_id_cliente: parseInt(id_cliente_atual)
+            servico_id_cliente: parseInt(id_cliente_atual)
         }
 
         if ($("#endereco-evento-logradouro").val().length > 0) {
@@ -272,17 +272,25 @@ $(document).ready(() => {
             return;
         }
 
+        $("#create-service-client-button").prop("disabled", true);
+        $("#create-service-client-button").css("opacity", "0.5");
+
         $.ajax({
             url: "/admin/services/",
             type: "POST",
             contentType: 'application/json',
             data: JSON.stringify(data),
-        }).done(function(data) {
-            // console.log("data", data);
-            // $("p.alert").text(data.message).addClass("alert-success");
-            // setTimeout(() => {
-            //     $("p.alert").fadeOut(500);
-            // }, 3000);
+        }).done(function(response) {
+            if (response.status == 200) {
+                $("#create-service-client-button").prop("disabled", false);
+                $("#create-service-client-button").css("opacity", "1");
+                fechaModal();
+                mensagemSucessoOuErro("alert-success", response);
+            } else {
+                $("#create-service-client-button").prop("disabled", false);
+                $("#create-service-client-button").css("opacity", "1");
+                mensagemSucessoOuErro("alert-error", response);
+            }
         }).fail(function(er) {
             console.log(er)
         });
@@ -453,7 +461,7 @@ function criaDataServico(campos) {
         preco_total: campos.preco_total,
         preco_entrada: campos.preco_entrada,
         status_servico: campos.status_servico,
-        tb_servicos_id_cliente: campos.tb_servicos_id_cliente
+        servico_id_cliente: campos.servico_id_cliente
     }
     switch (campos.servico_tipo) {
         case 1: // Acompanhamento
