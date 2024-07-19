@@ -847,7 +847,8 @@ tbody tr:hover {
 
 .botao-modal-aviso button { background-color: #17761e; }
 
-.campos-cliente > div {
+.campos-cliente > div,
+.campos-lead > div {
     display: flex;
 }
 

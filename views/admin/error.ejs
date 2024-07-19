@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <%- include("../inc/inc-admin/head") -%>
+    <body>
+        <%- include("../inc/inc-admin/header") -%>
+        <%- include("../inc/inc-admin/sidebar") -%>
+        <div class="main-content">
+            <h2>Erro: <%= clientData.status%></h2>
+            <h3><%= clientData.message %></h3>
+        </div>
+    </body>
+</html>

@@ -65,15 +65,24 @@ async function getClients(req, res, next) {
 async function getClient(req, res, next) {
     try {
         let client = await clientModel.getClient(req.params.id);
-        let servicesClient = await serviceModel.getServices(req.params.id);
-        // console.log("client.controller getClient client", client);
-        res.render("admin/clientPage", {
-            title: client.nome_cliente,
-            clientData: client,
-            message: "",
-            typeMessage: undefined,
-            moment: moment,
-        })
+        // let servicesClient = await serviceModel.getServices(req.params.id);
+
+        if (client.error) {
+            res.render("admin/error" , {
+                title: "Erro",
+                clientData: client
+            });
+        } else {
+            res.render("admin/clientPage", {
+                title: client.nome_cliente,
+                clientData: client,
+                message: "",
+                typeMessage: undefined,
+                moment: moment,
+            });
+        }
+
+        
     } catch (err) {
         console.log("Controller getClient catch error", err);
         next(err);

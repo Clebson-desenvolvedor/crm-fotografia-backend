@@ -92,7 +92,7 @@ function getServices(id_client = null) {
         try {
             let sql = `SELECT * FROM tb_servicos`;
             if (id_client) {
-                sql += ` WHERE tb_servicos_id_cliente = ${id_client}`;
+                sql += ` WHERE servico_id_cliente = ${id_client}`;
             }
             mysql.getConnection((err, conn) => {
                 conn.query(sql, (err, result) => {

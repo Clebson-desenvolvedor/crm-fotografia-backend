@@ -114,7 +114,7 @@ function getClient(id) {
                 cep_cliente,
                 endereco_logradouro_cliente,
                 endereco_numero_cliente,
-                endereco_bairro_cliente,
+                endereco_bairro_cliente
             FROM tb_clientes
             WHERE id_cliente = ${id}`;
 
@@ -126,7 +126,7 @@ function getClient(id) {
                         console.log("Model getClient conn.query err", err);
                         reject(err);
                     } else if (result.length == 0) {
-                        resolve({status: 400, message: "Nenhum cliente encontrado. "});
+                        resolve({status: 404, message: "Cliente não encontrado. ", error: true });
                     } else {
                         objClient = {
                             id_cliente: result[0].id_cliente,
