@@ -23,47 +23,45 @@ $(document).ready(() => {
             email_cliente: $("input#email").val(),
             cpf_cliente: $("input#cpf").val(),
             dtcad_cliente: $("input#dtcad_cliente").val(),
-            origem_cliente: $("select#origem-cliente option:selected").val(),
+            origem_cliente: $("#origem-cliente option:selected").text(),
             endereco_logradouro_cliente: $("input#endereco-cliente-logradouro").val(),
             endereco_numero_cliente: $("input#endereco-cliente-numero").val(),
             endereco_bairro_cliente: $("input#endereco-cliente-bairro").val()
         }
 
-        if (validaCamposCliente(data) == false) {
-            return;
-        }
+        if (validaCamposCliente(data) == false) return;
 
         const formData = new FormData();     
-
         const fotoFile = preparaFoto($("input#foto-cliente"));
+
         formData.append('foto_cliente', fotoFile);
 
         $("#create-client-button").prop("disabled", true);
         $("#create-client-button").css("opacity", "0.5");
-        $.ajax({
-            url: "/admin/clients/",
-            type: 'POST',
-            data: data,
-        }).done(function(response) {
+
+        $.ajax({ url: "/admin/clients/", type: 'POST', data })
+        .done(function(response) {
             // console.log("response", response);
+            let classe_alerta = "";
+
             if (response.status == 200) {
                 if (response.id) {
-                    fetch(`/admin/photoclient/${response.id}`, {
-                        method: "POST",
-                        body: formData
-                    }).then(response_photo => {
+                    fetch(`/admin/photoclient/${response.id}`, { method: "POST", body: formData })
+                    .then(response_photo => {
                         // console.log("response foto", response_photo);
-                        $("#create-client-button").prop("disabled", false);
-                        $("#create-client-button").css("opacity", "1");
                         fechaModal();
-                        mensagemSucessoOuErro("alert-success", response);
                     });
                 }
+
+                classe_alerta = "alert-success";
             } else {
-                $("#create-client-button").prop("disabled", false);
-                $("#create-client-button").css("opacity", "1");
-                mensagemSucessoOuErro("alert-error", response);
+                classe_alerta = "alert-error";
             }
+
+            $("#create-client-button").prop("disabled", false);
+            $("#create-client-button").css("opacity", "1");
+
+            mensagemSucessoOuErro(classe_alerta, response);
         }).fail(function(er) {
             console.log("client.js criar cliente er: ", er);
         });
@@ -72,27 +70,53 @@ $(document).ready(() => {
     /* Atualizar um cliente */
     $("#update-client-button").click(function(e) {
         e.preventDefault();
-        $.ajax({
-            url: "/admin/clients/",
-            type: "POST",
-            data: {
-                id_cliente: $("form input#id").val(),
-                nome_cliente: $("form input#name").val(),
-                whatsapp_cliente: $("form input#whatsapp").val(),
-                email_cliente: $("form input#email").val(),
-                cpf_cliente: $("form input#cpf").val(),
-                dtcad_cliente: $("form input#date").val(),
-                endereco_logradouro: $("form input#street").val(),
-                endereco_numero: $("form input#number").val(),
-                endereco_bairro: $("form input#district").val(),
-                foto_cliente: $("form input#image").val() //precisará consertar futuramente, pois não está salvando a imagem selecionada na base
-             },
-        }).done(function(data) {
-            // console.log("data", data);
-            $("p.alert").text(data.message).addClass("alert-success");
-            setTimeout(() => {
-                $("p.alert").fadeOut(500);
-            }, 3000);
+
+        const data = {
+            id_cliente: parseInt($("#id-cliente").text()),
+            nome_cliente: $("input#nome-cliente").val(),
+            whatsapp_cliente: $("input#whatsapp").val(),
+            email_cliente: $("input#email").val(),
+            cpf_cliente: $("input#cpf").val(),
+            dtcad_cliente: $("input#dtcad_cliente").val(),
+            origem_cliente: $("#origem-cliente option:selected").text(),
+            endereco_logradouro_cliente: $("input#endereco-cliente-logradouro").val(),
+            endereco_numero_cliente: $("input#endereco-cliente-numero").val(),
+            endereco_bairro_cliente: $("input#endereco-cliente-bairro").val()
+        }
+
+        if (validaCamposCliente(data) == false) return;
+
+        const formData = new FormData();     
+        const fotoFile = preparaFoto($("input#foto-cliente"));
+
+        formData.append('foto_cliente', fotoFile);
+
+        $("#update-client-button").prop("disabled", true);
+        $("#update-client-button").css("opacity", "0.5");
+
+        $.ajax({ url: "/admin/clients/", type: "POST", data })
+        .done(function(response) {
+            // console.log("response", response);
+            let classe_alerta = "";
+
+            if (response.status == 200) {
+                if (response.id) {
+                    fetch(`/admin/photoclient/${response.id}`, { method: "POST", body: formData })
+                    .then(response_photo => {
+                        // console.log("response foto", response_photo);
+                        fechaModal();
+                    });
+                }
+
+                classe_alerta = "alert-success";
+            } else {
+                classe_alerta = "alert-error";
+            }
+
+            $("#update-client-button").prop("disabled", false);
+            $("#update-client-button").css("opacity", "1");
+
+            mensagemSucessoOuErro(classe_alerta, response);
         }).fail(function(er) {
             console.log("client.js atualizar cliente er: ", er);
         });

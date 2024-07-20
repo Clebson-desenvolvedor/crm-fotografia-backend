@@ -47,13 +47,16 @@
                     <div id="form-origin">
                         <div class="campo-dentro">
                             <label for="">Origem do Cliente</label>
-                            <select name="origin_lead" id="origin" required>
+                            <% const origens = ["Indicação", "Facebook", "Status do WhatsApp", "Instagram", "Site"]; %>
+                            <select name="origem-cliente" id="origem-cliente" required>
                                 <option value="">Selecione</option>
-                                <option value="Indicação">Indicação</option>
-                                <option value="Facebook">Facebook</option>
-                                <option value="Status do WhatsApp">Status do WhatsApp</option>
-                                <option value="Instagram">Instagram</option>
-                                <option value="Site">Site</option>
+                        <% origens.forEach(origem => { %>
+                            <% if (clientData.origem_cliente == origem) {%>
+                                <option selected value="<%= origem %>"><%= origem %></option>
+                            <% } else {%>
+                                <option value="<%= origem %>"><%= origem %></option>
+                            <% } %>
+                        <% }) %>
                             </select>
                         </div>
                         <div class="mensagem-erro"><span></span></div>
@@ -61,9 +64,9 @@
 
                     <fieldset id="endereco-cliente">
                         <legend>Endereço</legend>
-                        <input type="text" class="input-logradouro" placeholder="Rua, Avenida, etc" name="endereco-cliente-logradouro" id="endereco-cliente-logradouro" value="<%= clientData.endereco_logradouro %>">
-                        <input type="text" class="input-numero" placeholder="Num" name="endereco-cliente-numero" id="endereco-cliente-numero" value="<%= clientData.endereco_numero %>">
-                        <input type="text" placeholder="Bairro" name="endereco-cliente-bairro" id="endereco-cliente-bairro" value="<%= clientData.endereco_bairro %>">
+                        <input type="text" class="input-logradouro" placeholder="Rua, Avenida, etc" name="endereco-cliente-logradouro" id="endereco-cliente-logradouro" value="<%= clientData.endereco_logradouro_cliente %>">
+                        <input type="text" class="input-numero" placeholder="Num" name="endereco-cliente-numero" id="endereco-cliente-numero" value="<%= clientData.endereco_numero_cliente %>">
+                        <input type="text" placeholder="Bairro" name="endereco-cliente-bairro" id="endereco-cliente-bairro" value="<%= clientData.endereco_bairro_cliente %>">
                     </fieldset>
 
                 </div>

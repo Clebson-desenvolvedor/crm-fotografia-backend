@@ -28,7 +28,7 @@ async function createOrUpdateClient(req, res, next) {
 
         if (client.id_cliente) {
             client = await clientModel.updateClient(client);
-            res.send({ message: "Cliente atualizado com sucesso!", status: 200 });
+            res.send({ message: "Cliente atualizado com sucesso!", status: 200, id: client.id_cliente });
         } else {
             client = await clientModel.insertClient(client);
             res.send({ message: "Cliente cadastrado com sucesso!", status: 200, id: client.id_cliente });

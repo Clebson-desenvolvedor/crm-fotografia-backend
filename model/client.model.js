@@ -29,7 +29,7 @@ async function insertClient(client) {
                         conn.release();
                         return;
                     }
-                    resolve({ status: 200, id_cliente: result_client.insertId });
+                    resolve({ id_cliente: result_client.insertId });
                     conn.release();
                     return;
                 });
@@ -105,16 +105,16 @@ function getClient(id) {
         try {
             let sql = `
             SELECT id_cliente,
-                nome_cliente, 
-                DATE_FORMAT(dtcad_cliente, "%d/%m/%y") as dtcad_cliente, 
-                email_cliente,
+                nome_cliente,
                 whatsapp_cliente,
+                email_cliente,
                 cpf_cliente,
-                foto_cliente,
-                cep_cliente,
+                DATE_FORMAT(dtcad_cliente, "%d/%m/%y") AS dtcad_cliente,
+                origem_cliente,
                 endereco_logradouro_cliente,
                 endereco_numero_cliente,
-                endereco_bairro_cliente
+                endereco_bairro_cliente,
+                foto_cliente
             FROM tb_clientes
             WHERE id_cliente = ${id}`;
 
@@ -128,18 +128,20 @@ function getClient(id) {
                     } else if (result.length == 0) {
                         resolve({status: 404, message: "Cliente não encontrado. ", error: true });
                     } else {
+                        let client = result[0];
+
                         objClient = {
-                            id_cliente: result[0].id_cliente,
-                            nome_cliente: result[0].nome_cliente,
-                            dtcad_cliente: result[0].dtcad_cliente,
-                            email_cliente: result[0].email_cliente,
-                            whatsapp_cliente: result[0].whatsapp_cliente,
-                            cpf_cliente: result[0].cpf_cliente,
-                            endereco_logradouro_cliente: result[0].endereco_logradouro_cliente,
-                            endereco_numero_cliente: result[0].endereco_numero_cliente,
-                            endereco_bairro_cliente: result[0].endereco_bairro_cliente,
-                            cep_cliente: result[0].cep_cliente,
-                            foto_cliente: result[0].foto_cliente
+                            id_cliente: client.id_cliente,
+                            nome_cliente: client.nome_cliente,
+                            whatsapp_cliente: client.whatsapp_cliente,
+                            email_cliente: client.email_cliente,
+                            cpf_cliente: client.cpf_cliente,
+                            dtcad_cliente: client.dtcad_cliente,
+                            origem_cliente: client.origem_cliente,
+                            endereco_logradouro_cliente: client.endereco_logradouro_cliente,
+                            endereco_numero_cliente: client.endereco_numero_cliente,
+                            endereco_bairro_cliente: client.endereco_bairro_cliente,
+                            foto_cliente: client.foto_cliente
                         };
                         // console.log("client.model getClient objClient", objClient);
                         resolve(objClient);
@@ -200,11 +202,15 @@ function updateClient(client) {
         try {
             let sql = `
             UPDATE tb_clientes SET
-            nome_cliente = "${client.nome_cliente}",
-            dtcad_cliente = "${client.dtcad_cliente}",
-            email_cliente = "${client.email_cliente}",
-            whatsapp_cliente = "${client.whatsapp_cliente}",
-            cpf_cliente = "${client.cpf_cliente}"
+                nome_cliente = "${client.nome_cliente}",
+                whatsapp_cliente = "${client.whatsapp_cliente}",
+                email_cliente = "${client.email_cliente}",
+                cpf_cliente = "${client.cpf_cliente}",
+                dtcad_cliente = "${client.dtcad_cliente}",
+                origem_cliente = "${client.origem_cliente}",
+                endereco_logradouro_cliente = "${client.endereco_logradouro_cliente}",
+                endereco_numero_cliente = "${client.endereco_numero_cliente}",
+                endereco_bairro_cliente = "${client.endereco_bairro_cliente}"
             WHERE id_cliente = ${client.id_cliente}`;
             // console.log("Model updateClient sql", sql);
             mysql.getConnection((err, conn) => {
@@ -215,7 +221,8 @@ function updateClient(client) {
                         reject(err);
                         return;
                     }
-                    resolve(result);
+
+                    resolve({ id_cliente: client.id_cliente });
                     conn.release();
                 });
             });
