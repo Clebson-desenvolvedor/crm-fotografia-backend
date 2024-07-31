@@ -103,12 +103,9 @@ async function deleteClient(req, res, next) {
                 message: "Não pode apagar um cliente com serviços em seu nome. Por favor, apague primeiro os serviços. ",
                 typeMessage: "error", 
                 title: "Clientes",
-            })
-        } else {
-            res.send({  
-                message: "Cliente apagado com sucesso! ",
-                status: "success"
             });
+        } else {
+            res.send({ message: "Cliente apagado com sucesso! ", status: 200 });
         }  
     } catch (err) {
         console.log("client.controller deleteClient catch err", err);

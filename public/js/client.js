@@ -39,7 +39,7 @@ $(document).ready(() => {
         $("#create-client-button").prop("disabled", true);
         $("#create-client-button").css("opacity", "0.5");
 
-        $.ajax({ url: "/admin/clients/", type: 'POST', data })
+        $.ajax({ url: "/admin/clients/", type: "POST", data })
         .done(function(response) {
             // console.log("response", response);
             let classe_alerta = "";
@@ -123,12 +123,14 @@ $(document).ready(() => {
     });
 
     /* Deletar um cliente */
-    $("#delete-client-button").click(function(e) {
-        deletaCliente(parseInt($("#id-cliente")[0].innerText));
+    $("#delete-client-button").click(function() {
+        const id = $(this).closest("#modal-confirmacao-excluir-cliente").attr("id-cliente");
+        deletaCliente(id);
     });
 
-    $(".td-acoes-deleta-cliente").click(() => {
-        abreModalConfirmacaoExcluirCliente();
+    $(".td-acoes-deleta-cliente").click(function() {
+        const id_cliente = parseInt($(this).closest("tr").find("td#id-cliente").text());
+        abreModalConfirmacaoExcluirCliente(id_cliente);
     });
 
     /** Cria máscara para o campo do WhatsApp */
@@ -222,27 +224,33 @@ function abreModalNovoCliente() {
     $(".modal .data-image-upload img").attr("src", "/img/no-photo.jpg");
 }
 
-function abreModalConfirmacaoExcluirCliente() {
-    $("#modal-confirmacao-excluir-cliente").css("display", "block");
+function abreModalConfirmacaoExcluirCliente(id) {
+    $("#modal-confirmacao-excluir-cliente").css("display", "block").attr("id-cliente", id);
 }
 
 function deletaCliente(id) {
-    // e.preventDefault();
-    console.log('id ', id)
-    // id =  $("form input#id").val();
-    // $.ajax({
-    //     url: `/admin/clients/${id}`,
-    //     type: "POST",
-    //     data: { id: id },
-    // }).done(function(data) {
-    //     // console.log("data", data);
-    //     $("p.alert").text(data.message).addClass("alert-success");
-    //     setTimeout(() => {
-    //         $("p.alert").fadeOut(500);
-    //     }, 3000);
-    // }).fail(function(er) {
-    //     console.log("client.js deletar cliente er: ", er);
-    // });
+    $("#delete-client-button").prop("disabled", true);
+    $("#delete-client-button").css("opacity", "0.5");
+
+    $.ajax({ url: `/admin/clients/${id}`, type: "POST", data: { id },
+    }).done(function(response) {
+        // console.log("deletaCliente response", response);
+        let classe_alerta = "";
+
+        if (response.status == 200) {
+            classe_alerta = "alert-success";
+        } else {
+            classe_alerta = "alert-error";
+        }
+
+        $("#delete-client-button").prop("disabled", false);
+        $("#delete-client-button").css("opacity", "1");
+
+        fechaModal();
+        mensagemSucessoOuErro(classe_alerta, response);
+    }).fail(function(er) {
+        console.log("client.js deletar cliente er: ", er);
+    });
 }
 
 async function buscaNomesClientes() {
