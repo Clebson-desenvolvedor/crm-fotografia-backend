@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `tb_clientes` (
   `endereco_numero_cliente` varchar(6) DEFAULT NULL,
   `endereco_bairro_cliente` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id_cliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=192 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Copiando dados para a tabela fotografia-crm.tb_clientes: ~0 rows (aproximadamente)
 
@@ -44,12 +44,12 @@ CREATE TABLE IF NOT EXISTS `tb_configuracoes_cores` (
   `cor_primaria` varchar(10) DEFAULT '#c9cfe8',
   `cor_secundaria` varchar(10) DEFAULT '#f1f5f9',
   PRIMARY KEY (`id_cor`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Copiando dados para a tabela fotografia-crm.tb_configuracoes_cores: 1 rows
 /*!40000 ALTER TABLE `tb_configuracoes_cores` DISABLE KEYS */;
 INSERT INTO `tb_configuracoes_cores` (`id_cor`, `cor_primaria`, `cor_secundaria`) VALUES
-	(1, 'green', '#ffffff');
+	(1, 'black', '#ffffff');
 /*!40000 ALTER TABLE `tb_configuracoes_cores` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela fotografia-crm.tb_endereco
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS `tb_endereco` (
   `endereco_id_servico` int(11) NOT NULL,
   PRIMARY KEY (`endereco_id`),
   KEY `FK_endereco_servico` (`endereco_id_servico`)
-) ENGINE=MyISAM AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Copiando dados para a tabela fotografia-crm.tb_endereco: 0 rows
 /*!40000 ALTER TABLE `tb_endereco` DISABLE KEYS */;
@@ -108,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `tb_leads` (
   `origem_lead` enum('Facebook','Status do WhatsApp','Instagram','Indicação','Site') DEFAULT 'Indicação',
   `ainda_lead` tinyint(4) DEFAULT '0',
   PRIMARY KEY (`id_lead`)
-) ENGINE=MyISAM AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- Copiando dados para a tabela fotografia-crm.tb_leads: 0 rows
 /*!40000 ALTER TABLE `tb_leads` DISABLE KEYS */;
@@ -169,11 +169,9 @@ CREATE TABLE IF NOT EXISTS `tb_usuarios` (
   `duracao_token_usuario` datetime DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
   UNIQUE KEY `email_usuario_UNIQUE` (`email_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela fotografia-crm.tb_usuarios: ~1 rows (aproximadamente)
-INSERT INTO `tb_usuarios` (`id_usuario`, `email_usuario`, `senha_usuario`, `token_auth_usuario`, `duracao_token_usuario`) VALUES
-	(2, 'alice_teste@gmail.com', '$2b$10$t282k1LXUGvtdxq.lbXrrOA5ILTVKPhWz4al.2o2v9IttTJySr8tK', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzEzMjY3ODU2LCJleHAiOjE3MTMyNzE0NTZ9.YlPO6sVVl1Or3McSAg5g5hqEe6aZIEcH2XSoSBX1zNY', '2023-05-20 00:00:00');
+-- Copiando dados para a tabela fotografia-crm.tb_usuarios: ~0 rows (aproximadamente)
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
