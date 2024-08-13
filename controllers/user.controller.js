@@ -29,6 +29,7 @@ async function createUser(req, res, next) {
  * @return {object}
  */
 async function loginUser(req, res, next) {
+    console.log("controllers: user: loginUser");
     // console.log("Controller: loginUser: req.body", req.body);
     try {
         let user = req.body;
@@ -41,6 +42,7 @@ async function loginUser(req, res, next) {
             } else if (!user[0].senha_usuario) {
                 res.status(401).send({mensagem: "Falha na autenticação!"});
             } else {
+                req.session.userId = user.token;
                 res.status(200).send({mensagem: "Usuário autenticado com Sucesso!", token: user["token"]});
             }
         }

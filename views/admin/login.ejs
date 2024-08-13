@@ -1,6 +1,6 @@
 <%- include("../inc/inc-admin/head") %>
 <div class="login-screen">
-    <p><a href="/">Voltar para Home</a></p>
+    <!-- <p><a href="/">Voltar para Home</a></p> -->
     <div class="login-img">
         <img src="/img/logo-byemotion.png" width="200px">
     </div>
@@ -29,24 +29,14 @@
             let senha = $("input#pass").val();
 
             if (usuario == "" || senha == "") {
-                alert("Campos usuário ou senha está vazio. ");
+                alert("Há campos vazios. ");
                 return;
             }
 
-            $.ajax({
-                url: "/admin/login/",
-                type: "POST",
-                data: {
-                    email: usuario,
-                    senha: senha
-                },
-            }).done(function(data) {
-                // console.log(data)
+            $.ajax({ url: "/admin/login/", type: "POST", data: { email: usuario, senha } })
+            .done(function(data) {
                 alert(data.mensagem);
-                sessionStorage.setItem("token", data.token);
-                setTimeout(() => {
-                    window.location.assign("/admin/clients");
-                }, 2000);
+                window.location.assign("/admin/clients");
             }).fail(function(er) {
                 alert(er.responseJSON.mensagem);
             });

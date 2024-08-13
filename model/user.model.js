@@ -14,10 +14,12 @@ function insertUser(user) {
             bcrypt.hash(user.senha, 10, (errBc, hash) => {
                 if (errBc) {
                     console.log("user.model insertUser errBc", errBc);
-                    res.send(errBc);
+                    res.send({ status: 500, erro: errBc });
                 }
+
                 let sql = `INSERT INTO tb_usuarios (email_usuario, senha_usuario) values (?,?)`;
                 let values = [user.email, hash];
+
                 mysql.getConnection((err, conn) => {
                     conn.query(sql, values, (err, result) => {
                         // console.log("user.model insertUser result", result);
@@ -42,7 +44,8 @@ function insertUser(user) {
  * @returns {object}
  */
 function loginUser(user) {
-    // console.log("Model: loginUser: user", user);
+    console.log("model: user: loginUser");
+    // console.log("model: user: loginUser: user", user);
     return new Promise((resolve, reject) => {
         try {
             let query = `SELECT * FROM tb_usuarios WHERE email_usuario = ?`;
@@ -51,7 +54,7 @@ function loginUser(user) {
                 conn.query(query, user.email, (err_user_email, result_get_user) => {
                     conn.release();
                     if (err_user_email) {
-                        console.log("user.model loginUser conn.query err_user_email", err_user_email);
+                        console.log("model: user: loginUser conn.query err_user_email", err_user_email);
                         return err_user_email;
                     }
 
@@ -66,7 +69,7 @@ function loginUser(user) {
                             if (result_bcrypt) {
                                 const TOKEN = jwt.sign({id: result_get_user[0].id_usuario}, "segredo", { expiresIn: "1h"});
                                 result_get_user.token = TOKEN;
-                                salvaTokenUsuario(result_get_user);
+                                // salvaTokenUsuario(result_get_user);
                             }
                             resolve(result_get_user);
                         });
@@ -82,7 +85,8 @@ function loginUser(user) {
 function salvaTokenUsuario (usuario) {
     return new Promise((resolve, reject) => {
         try {
-            // console.log("Model: user: salvaTokenUsuario usuario", usuario);
+            console.log("Model: user: salvaTokenUsuario usuario", usuario);
+
             let query = `
                 UPDATE tb_usuarios
                 SET token_auth_usuario = "${usuario.token}",
