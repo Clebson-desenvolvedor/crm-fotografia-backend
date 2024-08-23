@@ -42,14 +42,26 @@ async function loginUser(req, res, next) {
             } else if (!user[0].senha_usuario) {
                 res.status(401).send({mensagem: "Falha na autenticação!"});
             } else {
-                req.session.userId = user.token;
-                res.status(200).send({mensagem: "Usuário autenticado com Sucesso!", token: user["token"]});
+                req.session.userId = user[0].id_usuario;
+                res.status(200).send({ mensagem: "Usuário autenticado com Sucesso!" });
             }
         }
     } catch (err) {
         console.log("user.controller loginUser catch err", err);
         next(err);
     }
+}
+
+/**
+ * Responsável pelo logout e destruir a sessão
+ */
+function logout(req, res, next) {
+    console.log("controllers: user: logout");
+    req.session.destroy((err) => {
+        if (err) return res.status(500).send({ message: "Erro ao destruir a sessão. " });
+    });
+
+    res.send({ message: "Sessão destruída com sucesso. "});
 }
 
 /**
@@ -62,7 +74,8 @@ function login(req, res, next) {
 }
 
 module.exports = {
-    createUser,
+    // createUser,
     loginUser,
-    login
+    login,
+    logout
 };

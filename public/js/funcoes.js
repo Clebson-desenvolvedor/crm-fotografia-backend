@@ -23,8 +23,14 @@ $(document).ready(() => {
     });
 
     $("span.logout").click(function() {
-        sessionStorage.clear();
-        window.location.assign("/admin/login");
+        $.ajax({
+            url: `/admin/logout`,
+            type: "POST"
+        }).done(function(response) {
+            window.location.assign("/admin/login");
+        }).fail(function(er) {
+            console.log("funcoes.js logout error: ", er);
+        });
     });
 
     /** Busca as cores das preferências */

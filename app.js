@@ -6,6 +6,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const session = require("express-session");
 
+const maxAge = 21600000; // valores em milisegundos: 6 horas.
+
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
@@ -18,7 +20,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "/public")));
-app.use(session({ secret: process.env.JWT_KEY, resave: true, saveUninitialized: true, cookie: { maxAge: 3600000 } }));
+app.use(session({ secret: process.env.JWT_KEY, resave: true, saveUninitialized: true, cookie: { maxAge } }));
 
 app.set("view engine", "ejs");
 app.set("views", "./views");

@@ -44,6 +44,7 @@ async function createOrUpdateClient(req, res, next) {
  * @return {Array}
  */
 async function getClients(req, res, next) {
+    console.log("controllers: client.controller: getClients");
     try {
         let clients = await clientModel.getClients();
 

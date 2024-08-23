@@ -113,6 +113,6 @@ function salvaTokenUsuario (usuario) {
 }
 
 module.exports = {
-    insertUser,
+    // insertUser,
     loginUser,
 };

@@ -24,9 +24,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-// rotas para login
+// rotas para login e logout
 router.get("/login", user.login);
 router.post("/login", user.loginUser);
+router.post("/logout", user.logout);
 
 // rotas para clientes: admin/clients
 router.post("/clients", login, clientController.createOrUpdateClient);
