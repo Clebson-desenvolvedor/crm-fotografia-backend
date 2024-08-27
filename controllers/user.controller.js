@@ -37,13 +37,12 @@ async function loginUser(req, res, next) {
             res.send({ mensagem: "Os campos são obrigatórios. "});
         } else {
             user = await userModel.loginUser(user);
-            if (user.length == 0) {
-                res.status(401).send({mensagem: "Falha na autenticação!"});
-            } else if (!user[0].senha_usuario) {
+            console.log("controller user", user)
+            if (!user) {
                 res.status(401).send({mensagem: "Falha na autenticação!"});
             } else {
-                req.session.userId = user[0].id_usuario;
-                res.status(200).send({ mensagem: "Usuário autenticado com Sucesso!" });
+                req.session.user = user;
+                res.status(200).send({ mensagem: "Usuário autenticado com Sucesso!", user });
             }
         }
     } catch (err) {

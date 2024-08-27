@@ -27,6 +27,7 @@ $(document).ready(() => {
             url: `/admin/logout`,
             type: "POST"
         }).done(function(response) {
+            sessionStorage.clear();
             window.location.assign("/admin/login");
         }).fail(function(er) {
             console.log("funcoes.js logout error: ", er);
@@ -49,6 +50,8 @@ $(document).ready(() => {
     $("#confirmacao-excluir-acoes-sim").click(() => {
 
     });
+
+    $("h4#nome_usuario").text(sessionStorage.getItem("nome_usuario"));
 });
 
 /** Funções */

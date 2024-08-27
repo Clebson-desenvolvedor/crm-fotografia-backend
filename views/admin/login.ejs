@@ -35,6 +35,8 @@
 
             $.ajax({ url: "/admin/login/", type: "POST", data: { email: usuario, senha } })
             .done(function(data) {
+                // console.log(data.user)
+                sessionStorage.setItem("nome_usuario", data.user.nome_usuario);
                 alert(data.mensagem);
                 window.location.assign("/admin/clients");
             }).fail(function(er) {

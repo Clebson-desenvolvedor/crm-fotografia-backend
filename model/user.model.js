@@ -59,19 +59,25 @@ function loginUser(user) {
                     }
 
                     if (result_get_user.length < 1) {
-                        resolve(result_get_user);
+                        resolve(false);
                     } else {
                         bcrypt.compare(user.senha, result_get_user[0].senha_usuario, (err_bcrypt, result_bcrypt) => {
                             if (err_bcrypt || !result_bcrypt) {
-                                resolve([]);
+                                resolve(false);
                             }
 
                             if (result_bcrypt) {
-                                const TOKEN = jwt.sign({id: result_get_user[0].id_usuario}, "segredo", { expiresIn: "1h"});
-                                result_get_user.token = TOKEN;
+                                const TOKEN = jwt.sign({id: result_get_user[0].id_usuario}, "segredo", { expiresIn: "6h"});
+
+                                let user = {
+                                    id_usuario: result_get_user[0].id_usuario,
+                                    nome_usuario: result_get_user[0].nome_usuario,
+                                    token: TOKEN
+                                }
+
+                                resolve(user);
                                 // salvaTokenUsuario(result_get_user);
                             }
-                            resolve(result_get_user);
                         });
                     }
                 });
