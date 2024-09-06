@@ -2,3 +2,4 @@ node_modules
 pedidos
 uploads
 checklist
+.env
