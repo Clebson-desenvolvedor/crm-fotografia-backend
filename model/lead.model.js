@@ -1,4 +1,4 @@
-const mysql = require("./mysql.js").pool;
+const mysql = require("./mysql.js");
 
 /**
  * @desc Insere um lead na base e devolve para controller

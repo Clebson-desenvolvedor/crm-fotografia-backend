@@ -1,5 +1,5 @@
 /** Arquivo de configuração com a base de dados */
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 const password = process.env.PASSWORD || "";
 const host = process.env.HOST || "localhost";
@@ -9,9 +9,15 @@ const pool = mysql.createPool({
     "password": password,
     "database": "fotografia-crm",
     "host": host,
-    "port": "3306"
+    "port": 3306
 });
 
-console.log("Banco de dados rodando... ");
+pool.getConnection((err, conn) => {
+    if (err) {
+        console.error("Erro ao conectar ao banco de dados: ", err);
+    } else {
+        console.log("Banco de dados conectado com sucesso no host", host);
+    }
+});
 
-exports.pool = pool;
+module.exports = pool;

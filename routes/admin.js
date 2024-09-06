@@ -7,10 +7,10 @@ const multer = require("multer");
 const helper = require("../lib/helper");
 const configController = require("../controllers/config.controller.js");
 const user = require("../controllers/user.controller.js");
-const login = require("../middleware/login.js");
+// const login = require("../middleware/login.js");
 const auth = require("../middleware/auth.js");
-const dashboardController = require("../controllers/dash.controller.js");
-const toolsController = require("../controllers/tool.controller.js");
+// const dashboardController = require("../controllers/dash.controller.js");
+// const toolsController = require("../controllers/tool.controller.js");
 const dataController = require("../controllers/data.controller.js");
 
 const storage = multer.diskStorage({
@@ -30,7 +30,7 @@ router.post("/login", user.loginUser);
 router.post("/logout", user.logout);
 
 // rotas para clientes: admin/clients
-router.post("/clients", login, clientController.createOrUpdateClient);
+router.post("/clients", auth, clientController.createOrUpdateClient);
 router.get("/clients", auth, clientController.getClients);
 router.get("/clients/:id", auth, clientController.getClient);
 router.post("/clients/:id", auth, clientController.deleteClient);
