@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "/public")));
-app.use(session({ secret: process.env.KEY || 'segredo', resave: true, saveUninitialized: true, cookie: { maxAge } }));
+app.use(session({ secret, resave: true, saveUninitialized: true, cookie: { maxAge } }));
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
