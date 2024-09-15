@@ -1,11 +1,10 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-    console.log('req.session ........................', req.session)
     console.log("middleware: login");
     try {
         const token = req.headers.authorization?.split(" ")[1] || ""; 
-        const decode = jwt.verify(token, process.env.JWT_KEY);
+        const decode = jwt.verify(token, "segredo");
         req.user = decode;
 
         next();

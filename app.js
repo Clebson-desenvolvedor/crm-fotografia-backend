@@ -6,10 +6,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const session = require("express-session");
 
-require("dotenv").config();
-
 const maxAge = 21600000; // valores em milisegundos: 6 horas.
-const secret = process.env.SECRET || "segredo";
+const secret = "segredo"
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
