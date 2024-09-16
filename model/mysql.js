@@ -1,4 +1,4 @@
-/** Arquivo de configuração com a base de dados */
+/** Arquivo de configuração com a base de dados */ 
 const mysql = require("mysql2");
 
 const password = process.env.PASSWORD;
