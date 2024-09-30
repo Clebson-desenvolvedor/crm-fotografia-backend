@@ -1,4 +1,4 @@
-const mysql = require("./mysql");
+const pool = require("./mysql");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -43,49 +43,36 @@ function insertUser(user) {
  * @param {*} user 
  * @returns {object}
  */
-function loginUser(user) {
+async function loginUser(user) {
     console.log("model: user: loginUser");
-    // console.log("model: user: loginUser: user", user);
-    return new Promise((resolve, reject) => {
-        try {
-            let query = `SELECT * FROM tb_usuarios WHERE email_usuario = ?`;
-            mysql.getConnection((err_get_users, conn) => {
-                if (err_get_users) return err_get_users;
-                conn.query(query, user.email, (err_user_email, result_get_user) => {
-                    conn.release();
-                    if (err_user_email) {
-                        console.log("model: user: loginUser conn.query err_user_email", err_user_email);
-                        return err_user_email;
-                    }
 
-                    if (result_get_user.length < 1) {
-                        resolve(false);
-                    } else {
-                        bcrypt.compare(user.senha, result_get_user[0].senha_usuario, (err_bcrypt, result_bcrypt) => {
-                            if (err_bcrypt || !result_bcrypt) {
-                                resolve(false);
-                            }
+    let query = `SELECT * FROM tb_usuarios WHERE email_usuario = ?`;
+    try {
+        const conn = await pool.getConnection();
+        const [ result_get_user ] = await conn.query(query, [user.email]);
 
-                            if (result_bcrypt) {
-                                const TOKEN = jwt.sign({id: result_get_user[0].id_usuario}, "segredo", { expiresIn: "6h"});
+        conn.release();
 
-                                let user = {
-                                    id_usuario: result_get_user[0].id_usuario,
-                                    nome_usuario: result_get_user[0].nome_usuario,
-                                    token: TOKEN
-                                }
-
-                                resolve(user);
-                                // salvaTokenUsuario(result_get_user);
-                            }
-                        });
-                    }
-                });
-            });
-        } catch (err_catch) {
-            console.log("client.model loginUser catch err", err_catch);
+        if (result_get_user.length < 1) {
+            return false;
         }
-    });
+
+        const isMatch = await bcrypt.compare(user.senha, result_get_user[0].senha_usuario);
+
+        if (!isMatch) return false;
+
+        const TOKEN = jwt.sign({ id: result_get_user[0].id_usuario }, "segredo", { expiresIn: "6h" });
+
+        return {
+            id_usuario: result_get_user[0].id_usuario,
+            nome_usuario: result_get_user[0].nome_usuario,
+            token: TOKEN
+        };
+
+    } catch (err) {
+        console.error("model: user: loginUser error", err);
+        throw err;
+    }
 }
 
 function salvaTokenUsuario (usuario) {

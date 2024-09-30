@@ -11,8 +11,11 @@ const pool = mysql.createPool({
     password: password,
     database: "fotografia-crm",
     host: host,
-    port: 3306
-});
+    port: 3306,
+    waitForConnections: true,
+    connectionLimit: 20,
+    queueLimit: 0
+}).promise();
 
 pool.getConnection((err, conn) => {
     if (err) {

@@ -2,7 +2,7 @@ const clientModel = require("../model/client.model.js");
 const helper = require("../lib/helper");
 const moment = require("moment");
 const serviceModel = require("../model/service.model");
-const sharp = require("sharp");
+// const sharp = require("sharp");
 const fs = require('fs').promises;
 
 /**
@@ -27,11 +27,13 @@ async function createOrUpdateClient(req, res, next) {
         }
 
         if (client.id_cliente) {
+            const id_client = client.id_cliente;
+
             client = await clientModel.updateClient(client);
-            res.send({ message: "Cliente atualizado com sucesso!", status: 200, id: client.id_cliente });
+            res.send({ message: "Cliente atualizado com sucesso!", status: 200, id: id_client });
         } else {
             client = await clientModel.insertClient(client);
-            res.send({ message: "Cliente cadastrado com sucesso!", status: 200, id: client.id_cliente });
+            res.send({ message: "Cliente cadastrado com sucesso!", status: 200, id: client.insertId });
         }
     } catch (err) {
         console.log("client.controller createClient catch err", err);
@@ -68,10 +70,10 @@ async function getClient(req, res, next) {
         let client = await clientModel.getClient(req.params.id);
         // let servicesClient = await serviceModel.getServices(req.params.id);
 
-        if (client.error) {
-            res.render("admin/error" , {
+        if (client == 0) {
+            res.render("admin/error", {
                 title: "Erro",
-                clientData: client
+                clientData: { status: 404, message: "Cliente não encontrado!" }
             });
         } else {
             res.render("admin/clientPage", {
@@ -82,8 +84,6 @@ async function getClient(req, res, next) {
                 moment: moment,
             });
         }
-
-        
     } catch (err) {
         console.log("Controller getClient catch error", err);
         next(err);
@@ -126,7 +126,7 @@ async function getClientsName(req, res, next) {
 }
 
 async function uploadPhotoClient(req, res, next) {
-    // console.log("Controler createOrUpdateClient req.file", req.file);
+    console.log("Controler createOrUpdateClient req.file", req.file);
     // console.log("Controler createOrUpdateClient req.params", req.params);
     try {
         let photo = { name: "/img/no-photo.jpg", id: req.params.id };

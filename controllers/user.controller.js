@@ -30,23 +30,23 @@ async function createUser(req, res, next) {
  */
 async function loginUser(req, res, next) {
     console.log("controllers: user: loginUser");
-    // console.log("Controller: loginUser: req.body", req.body);
     try {
         let user = req.body;
+
         if (!user.email || !user.senha) {
             res.send({ mensagem: "Os campos são obrigatórios. "});
         } else {
             user = await userModel.loginUser(user);
-            console.log("controller user", user)
+
             if (!user) {
-                res.status(401).send({mensagem: "Falha na autenticação!"});
+                res.status(401).send({ mensagem: "Falha na autenticação!" });
             } else {
-                req.session.user = user;
+                req.session.user = user; // Armazene o usuário na sessão
                 res.status(200).send({ mensagem: "Usuário autenticado com Sucesso!", user });
             }
         }
     } catch (err) {
-        console.log("user.controller loginUser catch err", err);
+        console.error("user.controller loginUser catch err", err);
         next(err);
     }
 }
