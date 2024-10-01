@@ -29,6 +29,10 @@ app.set("views", "./views");
 app.use("/", indexRoute);
 app.use("/admin", adminRouter);
 
+app.use((req, res) => {
+    res.redirect("/admin/login");
+});
+
 app.use((err, req, res, next) => {
     res.status(400).send({ error: err.message });
 });
