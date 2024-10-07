@@ -4,7 +4,7 @@ function authMiddleware(req, res, next) {
     if (req.session && req.session.user) {
         next();
     } else {
-        console.log("middlwware: authMiddleware userId inexistente", req.session);
+        console.log("middlwware: authMiddleware userId inexistente", req.session ? req.session : "Sessão não encontrada");
         res.redirect("/admin/login");
     }
 }
