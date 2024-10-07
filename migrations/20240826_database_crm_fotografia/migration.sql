@@ -36,8 +36,6 @@ CREATE TABLE IF NOT EXISTS `tb_clientes` (
   PRIMARY KEY (`id_cliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Copiando dados para a tabela fotografia-crm.tb_clientes: ~0 rows (aproximadamente)
-
 -- Copiando estrutura para tabela fotografia-crm.tb_configuracoes_cores
 CREATE TABLE IF NOT EXISTS `tb_configuracoes_cores` (
   `id_cor` int(11) NOT NULL AUTO_INCREMENT,
@@ -174,8 +172,8 @@ CREATE TABLE IF NOT EXISTS `tb_usuarios` (
 
 -- Copiando dados para a tabela fotografia-crm.tb_usuarios: ~2 rows (aproximadamente)
 INSERT INTO `tb_usuarios` (`id_usuario`, `email_usuario`, `senha_usuario`, `token_auth_usuario`, `duracao_token_usuario`, `nome_usuario`) VALUES
-	(1, 'alice_teste@gmail.com', '$2a$10$mN1BXrhHhN8SYAGbmocE2eMgjJR7mKxKmfgv6dIg9kWzmlFyqut2O', NULL, NULL, 'Alice'),
-	(2, 'administrador@byemotion.com.br', '$2a$10$WrxnA9fAC19oAqz0OY5UE.19.EHu2ocQGgbvdMry4/VlNuBpx4Bme', NULL, NULL, 'Clebson Araújo');
+	(1, 'administrador@byemotion.com.br', '$2a$12$tAUxVwInEZMsZOjxN.99CO4lie/nX8DT7qpVHLN4HTAWp3JsXQ0dK', NULL, NULL, 'Clebson Araújo'),
+	(2, 'jornalista.aliceandrade@gmail.com', '$2a$12$LL6Ad/j9bGrBk3HrOi8Ygu9kCQHN23G7PrMNGaB9aV9.KjB7D1EZC', NULL, NULL, 'Alice Andrade');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
