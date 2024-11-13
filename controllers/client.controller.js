@@ -50,10 +50,11 @@ async function getClients(req, res, next) {
     try {
         let clients = await clientModel.getClients();
 
-        res.render("admin/clientsPage", {
-            title: "Clientes",
-            clients: clients
-        });
+        if (clients.length == 0) {
+            return res.status(404).send({ data: null, status: 404, message: "Nenhum cliente encontrado. " });
+        }
+
+        return res.status(200).json({ data: clients, status: 200, message: "Busca de clientes bem sucedida! " });
     } catch (err) {
         console.log("Controller getClients catch error", err);
         next(err);

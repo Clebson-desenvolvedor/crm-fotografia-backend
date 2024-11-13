@@ -31,7 +31,7 @@ router.post("/logout", user.logout);
 
 // rotas para clientes: admin/clients
 router.post("/clients", auth, clientController.createOrUpdateClient);
-router.get("/clients", auth, clientController.getClients);
+router.get("/clients", clientController.getClients);
 router.get("/clients/:id", auth, clientController.getClient);
 router.post("/clients/:id", auth, clientController.deleteClient);
 router.get("/nomesclientes", auth, clientController.getClientsName);
