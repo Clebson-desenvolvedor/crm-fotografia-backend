@@ -1,8 +1,0 @@
-### Retora todos os clientes
-GET http://localhost:3001/admin/clients  HTTP/1.1
-content-type: application/json
-Accept: application/json
-
-{
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZHVzdWFyaW8iOjIsImVtYWlsIjoiYWxpY2VfdGVzdGVAZ21haWwuY29tIiwiaWF0IjoxNjgzMDY1NTI2LCJleHAiOjE2ODMwNjkxMjZ9.3WfOWTx5VRgU6uXN1McYss55siMr2Jg9q9KJ7ut3Qkg"
-}

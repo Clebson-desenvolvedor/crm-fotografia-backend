@@ -1,9 +1,0 @@
-### valida e autentica um usuário
-POST http://localhost:3001/admin/login  HTTP/1.1
-content-type: application/json
-Accept: application/json
-
-{
-    "email": "alice_teste@gmail.com",
-    "senha": "123"
-}
