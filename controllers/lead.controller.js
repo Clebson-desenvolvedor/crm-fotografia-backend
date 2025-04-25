@@ -59,12 +59,6 @@ async function getLeads(req, res, next) {
     try {
         leads = await leadModel.getLeads();
         let colors = await config.getColors();
-
-        res.render("admin/leadsPage", {
-            title: "Leads",
-            leads: leads,
-            colors: colors
-        })
     } catch (err) {
         console.log("lead.controller getleads catch err", err);
         next(err);
@@ -81,12 +75,6 @@ async function getLead(req, res, next) {
     try {
         let lead = await leadModel.getLead(req.params.id);
         let colors = await config.getColors();
-        // console.log("lead.controller getLead lead", lead);
-        res.render("admin/leadPage", {
-            title: lead.nome_lead,
-            leadData: lead,
-            colors: colors
-        });
     } catch (err) {
         console.log("lead.controller getlead catch err", err);
         next(err);

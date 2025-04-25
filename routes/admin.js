@@ -7,10 +7,7 @@ const multer = require("multer");
 const helper = require("../lib/helper");
 const configController = require("../controllers/config.controller.js");
 const user = require("../controllers/user.controller.js");
-// const login = require("../middleware/login.js");
 const auth = require("../middleware/auth.js");
-// const dashboardController = require("../controllers/dash.controller.js");
-// const toolsController = require("../controllers/tool.controller.js");
 const dataController = require("../controllers/data.controller.js");
 
 const storage = multer.diskStorage({

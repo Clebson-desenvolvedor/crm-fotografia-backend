@@ -1,17 +1,12 @@
 const mysql = require("../model/mysql.js").pool;
-const configModel = require("../model/config.model.js");
 
 /**
  * @desc Rota para configuração
  * @param {object} req 
  */
 async function getConfig(req, res, next) {
-    // let colors = await getColors();
     try {
-        res.render("admin/configurationPage", {
-            // colors: colors
-            title: "Tela de configurações"
-        });
+
     } catch (err) {
         next(err);
     }
@@ -20,8 +15,7 @@ async function getConfig(req, res, next) {
 async function getColors(req, res, next) {
     return new Promise((resolve, reject) => {
         try {
-            let colors = configModel.getColors();
-            // res.send("ok cores");
+
         } catch (error) {
             console.log(error);
         }

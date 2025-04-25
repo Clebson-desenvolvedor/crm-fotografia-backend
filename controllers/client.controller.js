@@ -2,7 +2,6 @@ const clientModel = require("../model/client.model.js");
 const helper = require("../lib/helper");
 const moment = require("moment");
 const serviceModel = require("../model/service.model");
-// const sharp = require("sharp");
 const fs = require('fs').promises;
 
 /**
@@ -69,22 +68,6 @@ async function getClients(req, res, next) {
 async function getClient(req, res, next) {
     try {
         let client = await clientModel.getClient(req.params.id);
-        // let servicesClient = await serviceModel.getServices(req.params.id);
-
-        if (client == 0) {
-            res.render("admin/error", {
-                title: "Erro",
-                clientData: { status: 404, message: "Cliente não encontrado!" }
-            });
-        } else {
-            res.render("admin/clientPage", {
-                title: client.nome_cliente,
-                clientData: client,
-                message: "",
-                typeMessage: undefined,
-                moment: moment,
-            });
-        }
     } catch (err) {
         console.log("Controller getClient catch error", err);
         next(err);
@@ -136,14 +119,6 @@ async function uploadPhotoClient(req, res, next) {
         }
 
         photo = await clientModel.insertPhotoClient(photo);
-
-        // const temp_image = req.file.path;
-        // const resize_image = await sharp(temp_image).resize(40).toBuffer();
-            
-        // // Salva a imagem redimensionada de volta no mesmo caminho
-        // setTimeout(() => {
-        //     fs.writeFile(temp_image, resize_image);
-        // }, 1000);
 
         res.send({ status: 200 });
     } catch (error) {

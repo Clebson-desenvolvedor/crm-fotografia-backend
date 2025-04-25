@@ -36,11 +36,6 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "/public")));
 // app.use(session({ secret, resave: true, saveUninitialized: true, cookie: { maxAge } }));
 app.use(session({ store, secret, resave: false, saveUninitialized: true, cookie: { maxAge } }));
-
-app.set("view engine", "ejs");
-app.set("views", "./views");
-
-app.use("/", indexRoute);
 app.use("/admin", adminRouter);
 
 app.use((req, res) => {
