@@ -6,7 +6,7 @@ const mysql = require("../model/mysql.js").pool;
  */
 async function getConfig(req, res, next) {
     try {
-
+        res.send("get config construction");
     } catch (err) {
         next(err);
     }

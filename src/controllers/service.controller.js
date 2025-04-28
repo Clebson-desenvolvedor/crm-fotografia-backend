@@ -9,8 +9,8 @@ async function createService(req, res, next) {
     // console.log("Controller createService req.body ", req.body);
     try {
         let service = req.body;
-        service = await serviceModel.insertService(service);
-        res.send(service);
+        // service = await serviceModel.insertService(service);
+        res.send("post service construction");
     } catch (err) {
         console.log("Controller createService catch err", err);
         next(err);
@@ -24,7 +24,7 @@ async function createService(req, res, next) {
 async function getServices(req, res, next) {
     // console.log("service.controller getServices");
     try {
-        
+        res.send("get services construction");
     } catch (err) {
         console.log("service.controller getServices catch err", err);
         next();
@@ -39,6 +39,7 @@ async function getServices(req, res, next) {
 async function getService(req, res, next) {
     // console.log("service.controller getService req.params.id", req.params.id);
     try {
+        res.send("get services/id construction");
         let service = await serviceModel.getService(req.params.id);
         // console.log("service.controller getService service", service);
         if (service.length == 0) {

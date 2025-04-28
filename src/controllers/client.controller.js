@@ -67,6 +67,7 @@ async function getClients(req, res, next) {
 async function getClient(req, res, next) {
     try {
         let client = await clientModel.getClient(req.params.id);
+        res.send("get client/id construção");
     } catch (err) {
         console.log("Controller getClient catch error", err);
         next(err);
@@ -97,17 +98,6 @@ async function deleteClient(req, res, next) {
     }
 }
 
-async function getClientsName(req, res, next) {
-    try {
-        let nomes_clientes = await clientModel.getClientsName();
-
-        res.send(nomes_clientes)
-    } catch (err) {
-        console.log("Controller getClientsName catch error", err);
-        next(err);
-    }
-}
-
 async function uploadPhotoClient(req, res, next) {
     console.log("Controler createOrUpdateClient req.file", req.file);
     // console.log("Controler createOrUpdateClient req.params", req.params);
@@ -130,6 +120,5 @@ module.exports = {
     getClients,
     getClient,
     deleteClient,
-    getClientsName,
     uploadPhotoClient
 };

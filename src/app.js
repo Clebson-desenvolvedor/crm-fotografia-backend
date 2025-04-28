@@ -1,14 +1,8 @@
 const express = require("express");
 const app = express();
-const adminRouter = require("./routes/admin");
+const router = require("./routes/route");
 const bodyParser = require("body-parser");
 const path = require("path");
-const session = require("express-session");
-
-
-const maxAge = 21600000; // valores em milisegundos: 6 horas.
-const secret = "segredo";
-
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -23,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "/public")));
 
-app.use("/admin", adminRouter);
+app.use("/", router);
 
 app.use((req, res) => {
     res.redirect("/admin/login");

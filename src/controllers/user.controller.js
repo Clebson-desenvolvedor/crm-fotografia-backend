@@ -63,11 +63,9 @@ function logout(req, res, next) {
     res.send({ message: "Sessão destruída com sucesso. "});
 }
 
-/**
- * @desc Renderiza a tela de login
- */
-function login(req, res, next) {
 
+function login(req, res, next) {
+    res.send("get login construção");
 }
 
 module.exports = {

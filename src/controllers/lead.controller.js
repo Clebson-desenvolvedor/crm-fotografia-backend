@@ -12,6 +12,7 @@ async function createOrUpdateLead(req, res, next) {
     // console.log("lead.controler createOrUpdateLead req.body", req.body);
     // console.log("lead.controler createOrUpdateLead req.file", req.file);
     try {
+        res.send("post lead construction");
         let lead = req.body;
 
         if (lead.nome_lead == "" || lead.origem_lead == "") {
@@ -57,6 +58,7 @@ async function createOrUpdateLead(req, res, next) {
  */
 async function getLeads(req, res, next) {
     try {
+        res.send("get leads construction");
         leads = await leadModel.getLeads();
         let colors = await config.getColors();
     } catch (err) {
@@ -73,6 +75,7 @@ async function getLeads(req, res, next) {
 async function getLead(req, res, next) {
     // console.log("lead.controller getlead req.params.id", req.params.id);
     try {
+        res.send("get lead/id construction");
         let lead = await leadModel.getLead(req.params.id);
         let colors = await config.getColors();
     } catch (err) {
@@ -88,6 +91,7 @@ async function getLead(req, res, next) {
  */
 async function deleteLead(req, res, next) {
     try {
+        res.send("post lead/id construction");
         let lead = await leadModel.deleteLead(req.params.id);
         // console.log("lead.controller deleteLead lead", lead);
         res.send({  
