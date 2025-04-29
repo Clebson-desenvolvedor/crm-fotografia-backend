@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3001
+
+@id = 1
+
+### é necessário refatorar a rota de criar um cliente e atualizar um cliente, pois existe uma rota com ambas responsabilidades.
+
+### criar um cliente
+
+### ler um cliente pelo id
+GET {{baseUrl}}/clients/{{id}}
+
+### buscar todos os clientes
+GET {{baseUrl}}/clients
+
+### atualizar um cliente pelo id
+
+## deletar um cliente pelo id

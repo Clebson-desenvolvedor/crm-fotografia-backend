@@ -1,0 +1,17 @@
+@baseUrl = http://localhost:3001
+
+@id = 1
+
+### é necessário refatorar a rota de criar um lead e atualizar um lead, pois existe uma rota com ambas responsabilidades.
+
+### criar um lead
+
+### ler um lead pelo id
+GET {{baseUrl}}/leads/{{id}}
+
+### buscar todos os leads
+GET {{baseUrl}}/leads
+
+### atualizar um lead pelo id
+
+## deletar um lead pelo id

@@ -1,0 +1,16 @@
+@baseUrl = http://localhost:3001
+
+@id = 1
+
+### criar um serviço
+POST {{baseUrl}}/services
+
+### ler um serviço pelo id
+GET {{baseUrl}}/services/{{id}}
+
+### buscar todos os clientes
+GET {{baseUrl}}/services
+
+### atualizar um cliente pelo id
+
+## deletar um cliente pelo id

@@ -26,7 +26,7 @@ router.post("/login", user.loginUser);
 router.post("/logout", user.logout);
 
 // rotas para clientes: admin/clients
-router.post("/clients", clientController.createOrUpdateClient);
+router.post("/clients", clientController.createOrUpdateClient); // precisa refatorar para ter uma rota de criar e outra pr aatualizar.
 router.get("/clients", clientController.getClients);
 router.get("/clients/:id", clientController.getClient);
 router.post("/clients/:id", clientController.deleteClient);
