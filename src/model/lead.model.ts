@@ -1,11 +1,11 @@
-const mysql = require("./mysql.js");
+import pool from "./mysql";
 
 /**
  * @desc Insere um lead na base e devolve para controller
  * @param {object} client 
  * @returns {Array}
  */
-function insertLead(lead) {
+async function insertLead(lead: any) {
     // console.log("lead.model insertLead lead", lead);
     return new Promise((resolve, reject) => {
         try {
@@ -28,18 +28,9 @@ function insertLead(lead) {
                 lead.origem_lead
             ];
             // console.log("lead.model insertLead values", values);
-            mysql.getConnection((err, conn) => {
-                conn.query(sql, values, (err, result) => {
-                    // console.log("lead.model insertLead result", result);
-                    if (err) {
-                        console.log("lead.model insertLead conn.query err", err);
-                        reject(err);
-                        return;
-                    }
-                    resolve(result);
-                    conn.release();
-                });
-            });
+            // mysql.getConnection((err, conn) => {
+                const resultado = pool.query(sql, values);
+            // });
         } catch (err) {
             console.log("lead.model insertLead catch err", err);
         }
@@ -55,17 +46,10 @@ function getLeads() {
     return new Promise((resolve, reject) => {
         try {
             let sql = "SELECT id_lead, nome_lead, whatsapp_lead, foto_lead, origem_lead FROM tb_leads";
-            mysql.getConnection((err, conn) => {
-                conn.query(sql, (err, result, field) => {
-                    // console.log("lead.model getLeads result", result);
-                    if (err) {
-                        console.log("lead.model getLeads conn.query err", err);
-                        reject(err);
-                        return;
-                    }
-                    resolve(result);
-                });
-            });
+            // mysql.getConnection((err, conn) => {
+            const resultado = pool.query(sql);
+                
+            // });
         } catch (err) {
             console.log("lead.model getLeads catch err", err);
             throw err;
@@ -78,7 +62,7 @@ function getLeads() {
  * @param {number} id 
  * @returns {object}
  */
-function getLead(id) {
+function getLead(id: number) {
     // console.log("lead.model getLead");
     // console.log("lead.model getLead id", id);
     return new Promise((resolve, reject) => {
@@ -95,16 +79,7 @@ function getLead(id) {
             FROM tb_leads
             WHERE id_lead = ${id}`;
 
-            mysql.getConnection((err, conn) => {
-                conn.query(sql, (err, result, field) => {
-                    //   console.log("lead.model getLead result", result);
-                    if (err) {
-                        console.log("lead.model getLead conn.query err", err);
-                        reject(err);
-                    }
-                    resolve(result);
-                });
-            });
+           const resultado = pool.query(sql);
         } catch (err) {
             console.log("lead.model getLead catch err", err);
         }
@@ -117,23 +92,12 @@ function getLead(id) {
  * @param {number} id 
  * @returns {Array}
  */
-function deleteLead(id) {
+function deleteLead(id: number) {
     // console.log("lead.model deleteLead id", id);
     return new Promise((resolve, reject) => {
         try {
             let sql = `DELETE FROM tb_leads WHERE id_lead = ${id}`;
-            mysql.getConnection((err, conn) => {
-                conn.query(sql, (err, result, field) => {
-                    // console.log("lead.model deleteLead result", result);
-                    if (err) {
-                        console.log("lead.model deleteLead conn.query err.sqlMessage: ", err.sqlMessage);
-                        console.log("lead.model deleteLead conn.query err.errno:", err.errno);
-                        return resolve(err)
-                    }
-                    resolve(result);
-                    conn.release();
-                });
-            });
+            const resultado = pool.query(sql);
         } catch (err) {
             console.log("lead.model deleteLead catch err", err);
         }
@@ -147,7 +111,7 @@ function deleteLead(id) {
  * @returns {object}
  */
 
-function updateLead(lead) {
+function updateLead(lead: any) {
     // console.log("lead.model updateLead");
     // console.log("lead.model updatelead lead", lead);
     return new Promise((resolve, reject) => {
@@ -162,18 +126,7 @@ function updateLead(lead) {
                 origem_lead = "${lead.origem_lead}"
                 WHERE id_lead = ${lead.id_lead}`;
             // console.log("lead.model updateLead sql", sql);
-            mysql.getConnection((err, conn) => {
-                conn.query(sql, (err, result, field) => {
-                    // console.log("lead.model updateLead result", result);
-                    if (err) {
-                        console.log("lead.model updateLead conn.query err", err);
-                        reject(err);
-                        return;
-                    }
-                    resolve(result);
-                    conn.release();
-                });
-            });
+            const resultado = pool.query(sql);
         } catch (err) {
             console.log("lead.model updateLead catch err", err);
         }

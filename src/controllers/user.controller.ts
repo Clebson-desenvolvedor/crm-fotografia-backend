@@ -1,3 +1,5 @@
+import { Request, Response, NextFunction } from "express";
+
 const userModel = require("../model/user.model.js");
 
 /**
@@ -5,7 +7,7 @@ const userModel = require("../model/user.model.js");
  * @param {object} req
  * @return {object}
  */
-async function createUser(req, res, next) {
+async function createUser(req: Request, res: Response, next: NextFunction) {
     // console.log("user.controller createUser req.body", req.body);
     try {
         let user = req.body;
@@ -28,7 +30,7 @@ async function createUser(req, res, next) {
  * @param {object} req 
  * @return {object}
  */
-async function loginUser(req, res, next) {
+async function loginUser(req: Request, res: Response, next: NextFunction) {
     console.log("controllers: user: loginUser");
     try {
         let user = req.body;
@@ -41,7 +43,6 @@ async function loginUser(req, res, next) {
             if (!user) {
                 res.status(401).send({ mensagem: "Falha na autenticação!" });
             } else {
-                req.session.user = user; // Armazene o usuário na sessão
                 res.status(200).send({ mensagem: "Usuário autenticado com Sucesso!", user });
             }
         }
@@ -54,17 +55,17 @@ async function loginUser(req, res, next) {
 /**
  * Responsável pelo logout e destruir a sessão
  */
-function logout(req, res, next) {
-    console.log("controllers: user: logout");
-    req.session.destroy((err) => {
-        if (err) return res.status(500).send({ message: "Erro ao destruir a sessão. " });
-    });
+function logout(req: Request, res: Response, next: NextFunction) {
+    // console.log("controllers: user: logout");
+    // req.session.destroy((err) => {
+    //     if (err) return res.status(500).send({ message: "Erro ao destruir a sessão. " });
+    // });
 
     res.send({ message: "Sessão destruída com sucesso. "});
 }
 
 
-function login(req, res, next) {
+function login(req: Request, res: Response, next: NextFunction) {
     res.send("get login construção");
 }
 

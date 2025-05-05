@@ -1,6 +1,5 @@
-const clientModel = require("../model/client.model.js");
-const helper = require("../lib/helper");
-const serviceModel = require("../model/service.model");
+import { Request, Response, NextFunction } from "express";
+// import { updateClient } from "../model/client.model"
 const fs = require('fs').promises;
 
 /**
@@ -9,7 +8,7 @@ const fs = require('fs').promises;
  * @return {Number}
  */
 
-async function createOrUpdateClient(req, res, next) {
+async function createOrUpdateClient(req: Request, res: Response, next: NextFunction) {
     // console.log("client.controler createOrUpdateClient req.body", req.body);
     try {
         let client = req.body;
@@ -19,18 +18,18 @@ async function createOrUpdateClient(req, res, next) {
         }
 
         if (client.dtcad_cliente == "" || client.dtcad_cliente == undefined) {
-            client.dtcad_cliente = helper.convertToMySql();
+            
         } else {
-            client.dtcad_cliente = helper.convertToMySql(client.dtcad_cliente);
+            
         }
 
         if (client.id_cliente) {
             const id_client = client.id_cliente;
 
-            client = await clientModel.updateClient(client);
+            // client = await updateClient(client);
             res.send({ message: "Cliente atualizado com sucesso!", status: 200, id: id_client });
         } else {
-            client = await clientModel.insertClient(client);
+            // client = await insertClient(client);
             res.send({ message: "Cliente cadastrado com sucesso!", status: 200, id: client.insertId });
         }
     } catch (err) {
@@ -43,16 +42,16 @@ async function createOrUpdateClient(req, res, next) {
  * @desc Pega os clientes e devolve para o usuário
  * @return {Array}
  */
-async function getClients(req, res, next) {
+async function getClients(req: Request, res: Response, next: NextFunction) {
     console.log("controllers: client.controller: getClients");
     try {
-        let clients = await clientModel.getClients();
+        // let clients = await getClients();
 
-        if (clients.length == 0) {
-            return res.status(404).send({ data: null, status: 404, message: "Nenhum cliente encontrado. " });
-        }
+        // if (clients.length == 0) {
+        //     return res.status(404).send({ data: null, status: 404, message: "Nenhum cliente encontrado. " });
+        // }
 
-        return res.status(200).json({ data: clients, status: 200, message: "Busca de clientes bem sucedida! " });
+        // return res.status(200).json({ data: clients, status: 200, message: "Busca de clientes bem sucedida! " });
     } catch (err) {
         console.log("Controller getClients catch error", err);
         next(err);
@@ -64,9 +63,9 @@ async function getClients(req, res, next) {
  * @param {Number} id
  * @return {Array}
  */
-async function getClient(req, res, next) {
+async function getClient(req: Request, res: Response, next: NextFunction) {
     try {
-        let client = await clientModel.getClient(req.params.id);
+        // let client = await clientModel.getClient(req.params.id);
         res.send("get client/id construção");
     } catch (err) {
         console.log("Controller getClient catch error", err);
@@ -79,35 +78,35 @@ async function getClient(req, res, next) {
  * @param {Number} req
  * @return {object}
  */
-async function deleteClient(req, res, next) {
+async function deleteClient(req: Request, res: Response, next: NextFunction) {
     try {
-        let client = await clientModel.deleteClient(req.params.id);
+        // let client = await clientModel.deleteClient(req.params.id);
         // console.log("client.controller createClient client", client);
-        if (client.errno == 1451) {
-            res.send({
-                message: "Não pode apagar um cliente com serviços em seu nome. Por favor, apague primeiro os serviços. ",
-                typeMessage: "error", 
-                title: "Clientes",
-            });
-        } else {
-            res.send({ message: "Cliente apagado com sucesso! ", status: 200 });
-        }  
+        // if (client.errno == 1451) {
+        //     res.send({
+        //         message: "Não pode apagar um cliente com serviços em seu nome. Por favor, apague primeiro os serviços. ",
+        //         typeMessage: "error", 
+        //         title: "Clientes",
+        //     });
+        // } else {
+        //     res.send({ message: "Cliente apagado com sucesso! ", status: 200 });
+        // }  
     } catch (err) {
         console.log("client.controller deleteClient catch err", err);
         next(err);
     }
 }
 
-async function uploadPhotoClient(req, res, next) {
-    console.log("Controler createOrUpdateClient req.file", req.file);
+async function uploadPhotoClient(req: Request, res: Response, next: NextFunction) {
+    // console.log("Controler createOrUpdateClient req.file", req.file);
     // console.log("Controler createOrUpdateClient req.params", req.params);
     try {
         let photo = { name: "/img/no-photo.jpg", id: req.params.id };
-        if (req.file) {
-            photo.name = `/img/uploads/${req.file.filename}`;
-        }
+        // if (req.file) {
+        //     photo.name = `/img/uploads/${req.file.filename}`;
+        // }
 
-        photo = await clientModel.insertPhotoClient(photo);
+        // photo = await clientModel.insertPhotoClient(photo);
 
         res.send({ status: 200 });
     } catch (error) {
@@ -115,7 +114,7 @@ async function uploadPhotoClient(req, res, next) {
     }
 }
 
-module.exports = {
+export default {
     createOrUpdateClient,
     getClients,
     getClient,

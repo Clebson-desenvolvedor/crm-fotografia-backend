@@ -3,3 +3,4 @@ pedidos
 uploads
 checklist
 .env
+dist/

@@ -1,3 +1,5 @@
+import { Request, Response, NextFunction } from "express";
+
 const leadModel = require("../model/lead.model.js");
 const helper = require("../lib/helper");
 const config = require("../model/config.model.js");
@@ -8,7 +10,7 @@ const config = require("../model/config.model.js");
  * @return {Number}
  */
 
-async function createOrUpdateLead(req, res, next) {
+async function createOrUpdateLead(req: Request, res: Response, next: NextFunction): Promise<any> {
     // console.log("lead.controler createOrUpdateLead req.body", req.body);
     // console.log("lead.controler createOrUpdateLead req.file", req.file);
     try {
@@ -21,11 +23,11 @@ async function createOrUpdateLead(req, res, next) {
                 status: "error"
             });
         } else {
-            if (req.file) {
-                lead.foto_lead = req.file.filename;
-            } else {
-                lead.foto_lead = "no-photo.jpg";
-            }
+            // if (req.file) {
+            //     lead.foto_lead = req.file.filename;
+            // } else {
+            //     lead.foto_lead = "no-photo.jpg";
+            // }
             
             if (lead.dtcad_lead == "") {
                 lead.dtcad_lead = helper.convertToMySql();
@@ -56,11 +58,10 @@ async function createOrUpdateLead(req, res, next) {
  * @desc Pega os leads e devolve para o usuário
  * @return {Array}
  */
-async function getLeads(req, res, next) {
+async function getLeads(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
         res.send("get leads construction");
-        leads = await leadModel.getLeads();
-        let colors = await config.getColors();
+        // leads = await leadModel.getLeads();
     } catch (err) {
         console.log("lead.controller getleads catch err", err);
         next(err);
@@ -72,7 +73,7 @@ async function getLeads(req, res, next) {
  * @param {Number} id
  * @return {Array}
  */
-async function getLead(req, res, next) {
+async function getLead(req: Request, res: Response, next: NextFunction): Promise<any> {
     // console.log("lead.controller getlead req.params.id", req.params.id);
     try {
         res.send("get lead/id construction");
@@ -89,7 +90,7 @@ async function getLead(req, res, next) {
  * @param {Number} req
  * @return {object}
  */
-async function deleteLead(req, res, next) {
+async function deleteLead(req: Request, res: Response, next: NextFunction): Promise<any> {
     try {
         res.send("post lead/id construction");
         let lead = await leadModel.deleteLead(req.params.id);

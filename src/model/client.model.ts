@@ -1,11 +1,25 @@
-const pool = require("./mysql.js");
+// const pool = require("./mysql.js");
+import pool from "./mysql";
 
 /**
  * @desc Insere um cliente na base e devolve para controller
  * @param {object} client 
  * @returns {Array}
  */
-async function insertClient(client) {
+interface Client {
+    id_cliente: number;
+    nome_cliente: string;
+    whatsapp_cliente: string;
+    email_cliente: string;
+    cpf_cliente: string;
+    dtcad_cliente: string;
+    endereco_logradouro_cliente: string;
+    endereco_numero_cliente: string;
+    endereco_bairro_cliente: string;
+    origem_cliente: string;
+}
+
+async function insertClient(client: Client) {
     // console.log("client.model insertClient client", client);
     let sql = `
         INSERT INTO tb_clientes SET
@@ -66,29 +80,12 @@ async function getClients() {
     }
 }
 
-async function getClientsName() {
-    console.log("client.model getClientsName");
-    let sql = `SELECT id_cliente, nome_cliente FROM tb_clientes`;
-    let conn;
-
-    try {
-        conn = await pool.getConnection();
-        const [ results ] = conn.query(sql);
-
-        return results;
-    } catch(err) {
-        console.log("client.model getClientsName err", err);
-    } finally {
-        if (conn) conn.release();
-    }
-}
-
 /**
  * @desc Pega um cliente da base pelo id
  * @param {number} id 
  * @returns {object}
  */
-async function getClient(id) {
+async function getClient(id: number): Promise<any> {
     // console.log("client.model getClient");
     let sql = `
         SELECT id_cliente,
@@ -109,11 +106,7 @@ async function getClient(id) {
 
     try {
         conn = await pool.getConnection();
-        const [ result ] = await conn.query(sql);
-        
-        if (result.length == 0) {
-            return 0;
-        } 
+        const [ result ]: any = await conn.query(sql);
 
         let objClient = {
             id_cliente: result[0].id_cliente,
@@ -144,9 +137,9 @@ async function getClient(id) {
  * @param {number} id 
  * @returns {Array}
  */
-async function deleteClient(id) {
+async function deleteClient(id: number): Promise<any> {
     // console.log("client.model deleteClient id", id);
-    sql = `DELETE FROM tb_clientes WHERE id_cliente = ${id}`;
+    let sql = `DELETE FROM tb_clientes WHERE id_cliente = ${id}`;
     let conn;
 
     try {
@@ -168,7 +161,7 @@ async function deleteClient(id) {
  * @returns {object}
  */
 
-async function updateClient(client) {
+async function updateClient(client: Client): Promise<any> {
     // console.log("client.model updateClient");
     let sql = `
         UPDATE tb_clientes SET
@@ -197,7 +190,7 @@ async function updateClient(client) {
     }
 }
 
-async function insertPhotoClient(photo) {
+async function insertPhotoClient(photo: any): Promise<any> {
     // console.log("Model insertPhotoClient photo: ", photo);
     let sql = `UPDATE tb_clientes SET foto_cliente = "${photo.name}" WHERE id_cliente = ${photo.id}`;
     let conn;
@@ -220,6 +213,5 @@ module.exports = {
     getClient,
     deleteClient,
     updateClient,
-    getClientsName,
     insertPhotoClient
 };

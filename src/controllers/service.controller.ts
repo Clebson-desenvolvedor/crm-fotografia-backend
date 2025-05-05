@@ -1,3 +1,5 @@
+import { Request, Response, NextFunction } from "express";
+
 const serviceModel = require("../model/service.model.js");
 
 /**
@@ -5,7 +7,7 @@ const serviceModel = require("../model/service.model.js");
  * @param {object} req 
  * @return {object}
  */
-async function createService(req, res, next) {
+async function createService(req: Request, res: Response, next: NextFunction): Promise<any> {
     // console.log("Controller createService req.body ", req.body);
     try {
         let service = req.body;
@@ -21,7 +23,7 @@ async function createService(req, res, next) {
  * @desc Pega os serviços e devolve para o usuário
  * @return {object}
  */
-async function getServices(req, res, next) {
+async function getServices(req: Request, res: Response, next: NextFunction) {
     // console.log("service.controller getServices");
     try {
         res.send("get services construction");
@@ -36,7 +38,7 @@ async function getServices(req, res, next) {
  * @param {number} req
  * @return {object}
  */
-async function getService(req, res, next) {
+async function getService(req: Request, res: Response, next: NextFunction) {
     // console.log("service.controller getService req.params.id", req.params.id);
     try {
         res.send("get services/id construction");
@@ -58,7 +60,7 @@ async function getService(req, res, next) {
  * @param {Number} req
  * @return {object}
  */
-async function deleteService(req, res, next) {
+async function deleteService(req: Request, res: Response, next: NextFunction) {
     // console.log("service.controller deleteService req.params.id", req.params.id);
     try {
         let service = await serviceModel.deleteService(req.params.id);
@@ -80,7 +82,7 @@ async function deleteService(req, res, next) {
  * @param {object} req 
  * @return {object}
  */
-async function updateService(req, res, next) {
+async function updateService(req: Request, res: Response, next: NextFunction) {
     // console.log("service.controller updateService req.body", req.body);
     try {
         let service = req.body;
