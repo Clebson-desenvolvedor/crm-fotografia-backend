@@ -1,5 +1,5 @@
 // const pool = require("./mysql.js");
-import pool from "./mysql";
+import pool from "../infra/db/mysql";
 
 /**
  * @desc Insere um cliente na base e devolve para controller

@@ -30,27 +30,7 @@ async function createUser(req: Request, res: Response, next: NextFunction) {
  * @param {object} req 
  * @return {object}
  */
-async function loginUser(req: Request, res: Response, next: NextFunction) {
-    console.log("controllers: user: loginUser");
-    try {
-        let user = req.body;
 
-        if (!user.email || !user.senha) {
-            res.send({ mensagem: "Os campos são obrigatórios. "});
-        } else {
-            user = await userModel.loginUser(user);
-
-            if (!user) {
-                res.status(401).send({ mensagem: "Falha na autenticação!" });
-            } else {
-                res.status(200).send({ mensagem: "Usuário autenticado com Sucesso!", user });
-            }
-        }
-    } catch (err) {
-        console.error("user.controller loginUser catch err", err);
-        next(err);
-    }
-}
 
 /**
  * Responsável pelo logout e destruir a sessão

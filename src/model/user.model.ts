@@ -1,4 +1,4 @@
-import pool from "./mysql";
+import pool from "../infra/db/mysql";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
