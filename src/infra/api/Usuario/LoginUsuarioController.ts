@@ -8,13 +8,11 @@ export default class LoginUsuarioController {
             try {
                 const { email, senha } = req.body;
                 const usuario = await casoDeUso.executar({ email , senha });
-
                 const jwt = new ProvedorJWT(process.env.JWT_CHAVE!);
-                console.log("usuario", usuario);
 
                 res.status(200).send(jwt.gerar(usuario));
-            } catch (erro) {
-                res.status(400).send(erro);
+            } catch (erro: any) {
+                res.status(401).json({ mensagem: erro.message || "Erro ao realizar login." });
             }
         });
     }

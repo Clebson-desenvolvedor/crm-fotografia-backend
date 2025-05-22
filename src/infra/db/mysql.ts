@@ -1,19 +1,21 @@
-import mysql from "mysql2";
+import { createPool } from "mysql2/promise";
+import "dotenv/config";
 
 const password = process.env.PASSWORD;
 const host = process.env.HOST;
 const user = process.env.USER;
 
-const pool = mysql.createPool({
-    user,
-    password,
+
+const pool = createPool({
+    connectionLimit: 20,
     database: "fotografia-crm",
     host: host,
+    password,
     port: 3306,
-    waitForConnections: true,
-    connectionLimit: 20,
-    queueLimit: 0
-}).promise();
+    queueLimit: 0,
+    user,
+    waitForConnections: true
+});
 
 export default pool;
 
