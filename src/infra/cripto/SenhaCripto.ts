@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import provedorCriptografia from "../../core/usuario/usecases/ProvedorCriptografia";
+import provedorCriptografia from "../../core/cripo/ProvedorCriptografia";
 
 export default class SenhaCripto implements provedorCriptografia {
     criptografar(texto: string): string {

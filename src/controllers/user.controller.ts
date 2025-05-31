@@ -26,13 +26,6 @@ async function createUser(req: Request, res: Response, next: NextFunction) {
 }
 
 /**
- * @desc Faz login com o usuário e devolve uma mensagem de erro ou sucesso
- * @param {object} req 
- * @return {object}
- */
-
-
-/**
  * Responsável pelo logout e destruir a sessão
  */
 function logout(req: Request, res: Response, next: NextFunction) {
@@ -50,8 +43,6 @@ function login(req: Request, res: Response, next: NextFunction) {
 }
 
 module.exports = {
-    // createUser,
-    loginUser,
     login,
     logout
 };

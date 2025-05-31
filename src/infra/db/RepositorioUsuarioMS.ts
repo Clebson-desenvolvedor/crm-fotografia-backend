@@ -5,7 +5,7 @@ import pool from "./mysql";
 export default class RepositorioUsuarioMS implements RepositorioUsuario {
     async inserir(usuario: Usuario) {
         await pool.query(
-            "INSERT INTO tb_clientes (nome_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)",
+            "INSERT INTO tb_usuarios (nome_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)",
             [usuario.nome, usuario.email, usuario.senha]
         );
     }

@@ -10,9 +10,16 @@ export default class LoginUsuarioController {
                 const usuario = await casoDeUso.executar({ email , senha });
                 const jwt = new ProvedorJWT(process.env.JWT_CHAVE!);
 
-                res.status(200).send(jwt.gerar(usuario));
+                res.status(200).json({
+                    "mensagem": "Usuário autenticado com sucesso!",
+                    "token": jwt.gerar(usuario)
+                });
             } catch (erro: any) {
-                res.status(401).json({ mensagem: erro.message || "Erro ao realizar login." });
+                res.status(401).json({
+                    title: "Unauthorized",
+                    status: 401,
+                    detail: erro.message || "Erro ao realizar login."
+                });
             }
         });
     }

@@ -1,6 +1,6 @@
 import Erros from "../../../shared/Erros";
 import ICasoDeUso from "../../../shared/ICasoDeUso";
-import provedorCriptografia from "./ProvedorCriptografia";
+import provedorCriptografia from "../../cripo/ProvedorCriptografia";
 import RepositorioUsuario from "../repository/RepositorioUsuario";
 import Usuario from "../entitie/Usuario";
 
