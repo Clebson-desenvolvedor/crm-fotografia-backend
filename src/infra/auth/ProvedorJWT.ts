@@ -1,7 +1,7 @@
 import Jwt from "jsonwebtoken";
-import ProvedorToken from "../../core/auth/ProvedorToken";
+import IProvedorToken from "../../core/auth/IProvedorToken";
 
-export default class ProvedorJWT implements ProvedorToken {
+export default class ProvedorJWT implements IProvedorToken {
     constructor(private chave: string) {};
 
     gerar(usuario: string | object): string {

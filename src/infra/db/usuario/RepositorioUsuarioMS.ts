@@ -1,16 +1,16 @@
-import Usuario from "../../core/usuario/entitie/Usuario";
-import RepositorioUsuario from "../../core/usuario/repository/RepositorioUsuario";
-import pool from "./mysql";
+import IUsuario from "../../../core/usuario/entitie/Usuario";
+import IRepositorioUsuario from "../../../core/usuario/repository/RepositorioUsuario";
+import pool from "../mysql";
 
-export default class RepositorioUsuarioMS implements RepositorioUsuario {
-    async inserir(usuario: Usuario) {
+export default class RepositorioUsuarioMS implements IRepositorioUsuario {
+    async inserir(usuario: IUsuario) {
         await pool.query(
             "INSERT INTO tb_usuarios (nome_usuario, email_usuario, senha_usuario) VALUES (?, ?, ?)",
             [usuario.nome, usuario.email, usuario.senha]
         );
     }
 
-    async buscarPorEmail(email: string): Promise<Usuario|null> {
+    async buscarPorEmail(email: string): Promise<IUsuario|null> {
         try {
             const [rows]: any = await pool.query("SELECT * FROM tb_usuarios WHERE email_usuario = ?", [email]);
 

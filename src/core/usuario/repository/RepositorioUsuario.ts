@@ -1,6 +1,6 @@
-import Usuario from "../entitie/Usuario";
+import IUsuario from "../entitie/Usuario";
 
-export default interface RepositorioUsuario {
-    inserir(usuario: Usuario): Promise<void>;
-    buscarPorEmail(email: string): Promise<Usuario | null>;
+export default interface IRepositorioUsuario {
+    inserir(usuario: IUsuario): Promise<void>;
+    buscarPorEmail(email: string): Promise<IUsuario | null>;
 }

@@ -1,6 +1,6 @@
 import express from "express";
 import LoginUsuario from "./core/usuario/usecases/LoginUsuario";
-import RepositorioUsuarioMS from "./infra/db/RepositorioUsuarioMS";
+import RepositorioUsuarioMS from "./infra/db/usuario/RepositorioUsuarioMS";
 import SenhaCripto from "./infra/cripto/SenhaCripto";
 
 import dotenv from "dotenv";

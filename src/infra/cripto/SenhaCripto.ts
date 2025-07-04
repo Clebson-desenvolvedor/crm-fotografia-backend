@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
-import provedorCriptografia from "../../core/cripo/ProvedorCriptografia";
+import IProvedorCriptografia from "../../core/cripo/IProvedorCriptografia";
 
-export default class SenhaCripto implements provedorCriptografia {
+export default class SenhaCripto implements IProvedorCriptografia {
     criptografar(texto: string): string {
         const salt = bcrypt.genSaltSync(10);
         return bcrypt.hashSync(texto, salt);
