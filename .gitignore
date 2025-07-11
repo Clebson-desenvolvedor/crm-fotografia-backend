@@ -4,3 +4,4 @@ uploads
 checklist
 .env
 dist/
+.vscode
