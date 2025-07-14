@@ -7,7 +7,7 @@ import RegistrarUsuario from "./core/usuario/usecases/RegistrarUsuario";
 
 import RepositorioUsuarioMS from "./infra/db/usuario/RepositorioUsuarioMS";
 import SenhaCripto from "./infra/cripto/SenhaCripto";
-import UsuarioController from "./adapters/controllers/usuarioController";
+import UsuarioController from "./adapters/controllers/UsuarioController";
 
 
 const app = express();

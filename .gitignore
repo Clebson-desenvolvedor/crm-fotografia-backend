@@ -1,7 +1,8 @@
+.env
+.vscode
+checklist
+dist/
+migration
 node_modules
 pedidos
 uploads
-checklist
-.env
-dist/
-.vscode
