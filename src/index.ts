@@ -2,11 +2,11 @@ import express from "express";
 import dotenv from "dotenv";
 dotenv.config();
 
-import LoginUsuario from "./core/usuario/usecases/LoginUsuario";
-import RegistrarUsuario from "./core/usuario/usecases/RegistrarUsuario";
+import LoginUsuario from "./core/entities/usuario/usecases/LoginUsuario";
+import RegistrarUsuario from "./core/entities/usuario/usecases/RegistrarUsuario";
 
+import Bcrypt from "./infra/cripto/Bcrypt";
 import RepositorioUsuarioMS from "./infra/db/usuario/RepositorioUsuarioMS";
-import SenhaCripto from "./infra/cripto/SenhaCripto";
 import UsuarioController from "./adapters/controllers/UsuarioController";
 
 
@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(port, () => console.log("Servidor rodando na porta " + port));
 
 const repositorioUsuario = new RepositorioUsuarioMS();
-const provedorCripto = new SenhaCripto();
+const provedorCripto = new Bcrypt();
 
 const loginUsuario = new LoginUsuario(repositorioUsuario, provedorCripto);
 const registrarUsuario = new RegistrarUsuario(repositorioUsuario, provedorCripto);

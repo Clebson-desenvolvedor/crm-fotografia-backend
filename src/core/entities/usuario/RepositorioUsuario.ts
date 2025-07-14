@@ -1,4 +1,4 @@
-import IUsuario from "../entitie/Usuario";
+import IUsuario from "../Usuario";
 
 export default interface IRepositorioUsuario {
     inserir(usuario: IUsuario): Promise<void>;

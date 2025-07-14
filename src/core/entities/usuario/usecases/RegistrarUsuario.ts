@@ -1,5 +1,5 @@
 import ICasoDeUso from "../../../shared/ICasoDeUso";
-import IUsuario from "../entitie/Usuario";
+import IUsuario from "../Usuario";
 import provedorCriptografia from "../../cripo/IProvedorCriptografia";
 import IRepositorioUsuario from "../repository/RepositorioUsuario";
 

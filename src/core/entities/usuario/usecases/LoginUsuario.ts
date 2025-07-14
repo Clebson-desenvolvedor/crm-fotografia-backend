@@ -2,7 +2,7 @@ import Erros from "../../../shared/Erros";
 import ICasoDeUso from "../../../shared/ICasoDeUso";
 import provedorCriptografia from "../../cripo/IProvedorCriptografia";
 import IRepositorioUsuario from "../repository/RepositorioUsuario";
-import IUsuario from "../entitie/Usuario";
+import IUsuario from "../Usuario";
 
 export type Entrada = {
     email: string;

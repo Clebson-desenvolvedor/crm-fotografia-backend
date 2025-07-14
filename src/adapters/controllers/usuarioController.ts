@@ -1,7 +1,7 @@
 import { Express, Request, Response} from "express";
-import LoginUsuario from "../../core/usuario/usecases/LoginUsuario";
-import ProvedorJWT from "../../infra/auth/ProvedorJWT";
-import RegistrarUsuario from "../../core/usuario/usecases/RegistrarUsuario";
+import LoginUsuario from "../../core/entities/usuario/usecases/LoginUsuario";
+import ProvedorJWT from "../../infra/auth/JsonWebToken";
+import RegistrarUsuario from "../../core/entities/usuario/usecases/RegistrarUsuario";
 
 export default class UsuarioController {
     constructor(app: Express, private loginUsuario: LoginUsuario, private registrarUsuario: RegistrarUsuario) {
