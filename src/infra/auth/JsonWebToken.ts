@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import IProvedorToken from "../../core/auth/IProvedorToken";
+import jwt from "jsonwebtoken";
 
 export default class JsonWebToken implements IProvedorToken {
     constructor(private chave: string) {};

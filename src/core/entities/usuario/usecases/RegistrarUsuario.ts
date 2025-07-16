@@ -1,7 +1,7 @@
-import ICasoDeUso from "../../../shared/ICasoDeUso";
-import IUsuario from "../Usuario";
-import provedorCriptografia from "../../cripo/IProvedorCriptografia";
-import IRepositorioUsuario from "../repository/RepositorioUsuario";
+import ICasoDeUso from "../../../../shared/ICasoDeUso";
+import IRepositorioUsuario from "../IRepositorioUsuario";
+import IUsuario from "../IUsuario";
+import IProvedorCriptografia from "../../../cripto/IProvedorCriptografia";
 
 type DadosRegistrarUsuario = {
     nome: string;
@@ -10,7 +10,7 @@ type DadosRegistrarUsuario = {
 };
 
 export default class RegistrarUsuario implements ICasoDeUso<DadosRegistrarUsuario, void> {
-    constructor(private repositorio: IRepositorioUsuario, private provedorCripto: provedorCriptografia) {};
+    constructor(private repositorio: IRepositorioUsuario, private provedorCripto: IProvedorCriptografia) {};
 
     async executar(dados: DadosRegistrarUsuario): Promise<void> {
         const senhaCripto = this.provedorCripto.criptografar(dados.senha);
