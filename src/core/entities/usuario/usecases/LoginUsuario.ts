@@ -1,8 +1,8 @@
-import Erros from "../../../../shared/Erros";
+import AppError from "../../../../shared/Erros";
 import ICasoDeUso from "../../../../shared/ICasoDeUso";
+import IProvedorCriptografia from "../../../cripto/IProvedorCriptografia";
 import IRepositorioUsuario from "../IRepositorioUsuario";
 import IUsuario from "../IUsuario";
-import IProvedorCriptografia from "../../../cripto/IProvedorCriptografia";
 
 export type Entrada = {
     email: string;
@@ -15,11 +15,11 @@ export default class LoginUsuario implements ICasoDeUso<Entrada, IUsuario> {
     async executar(entrada: Entrada): Promise<IUsuario> {
         const usuarioExistente = await this.repositorio.buscarPorEmail(entrada.email);
 
-        if (!usuarioExistente) throw new Error(Erros.FALHA_AUTENTICACAO);
+        if (!usuarioExistente) throw new AppError(401, "Unauthorized", "Credenciais inválidas!");
 
         const senhaCorreta = this.cripto.comparar(entrada.senha, usuarioExistente.senha!);
 
-        if (!senhaCorreta) throw new Error(Erros.FALHA_AUTENTICACAO);
+        if (!senhaCorreta) throw new AppError(401, "Unauthorized", "Credenciais inválidas!");
 
         return { ...usuarioExistente, senha: undefined } as IUsuario;
     }

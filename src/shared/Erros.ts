@@ -1,5 +1,10 @@
-const Erros = {
-    FALHA_AUTENTICACAO: 'Falha na autenticação'
-}
+export default class AppError extends Error {
+    statusCode: number;
+    title: string;
 
-export default Erros;
+    constructor(statusCode: number, title: string, message: string) {
+        super(message);
+        this.statusCode = statusCode;
+        this.title = title
+    }
+}

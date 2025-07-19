@@ -3,12 +3,14 @@ import dotenv from "dotenv";
 dotenv.config();
 
 import LoginUsuario from "./core/entities/usuario/usecases/LoginUsuario";
+import RegistrarCliente from "./core/entities/cliente/usecases/RegistrarCliente";
 import RegistrarUsuario from "./core/entities/usuario/usecases/RegistrarUsuario";
 
 import Bcrypt from "./infra/cripto/Bcrypt";
 import RepositorioUsuarioMS from "./infra/db/usuario/RepositorioUsuarioMS";
 import UsuarioController from "./adapters/controllers/UsuarioController";
-
+import RepositorioClienteMS from "./infra/db/cliente/RepositorioClienteMS";
+import ClienteController from "./adapters/controllers/ClienteController";
 
 const app = express();
 const port = process.env.PORT || 3001;
@@ -24,4 +26,8 @@ const provedorCripto = new Bcrypt();
 const loginUsuario = new LoginUsuario(repositorioUsuario, provedorCripto);
 const registrarUsuario = new RegistrarUsuario(repositorioUsuario, provedorCripto);
 
+const repositorioCliente = new RepositorioClienteMS();
+const registrarCliente = new RegistrarCliente(repositorioCliente);
+
 new UsuarioController(app, loginUsuario, registrarUsuario);
+new ClienteController(app, registrarCliente);
