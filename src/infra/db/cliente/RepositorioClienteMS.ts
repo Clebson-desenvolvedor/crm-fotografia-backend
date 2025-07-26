@@ -1,3 +1,4 @@
+import AppError from "../../../shared/Erros";
 import ICliente from "../../../core/entities/cliente/ICliente";
 import IRepositorioCliente, { type retornoCamposvalidar } from "../../../core/entities/cliente/IRepositorioCliente";
 import pool from "../mysql";
@@ -37,7 +38,8 @@ export default class RepositorioClienteMS implements IRepositorioCliente {
                 ]
             );
         } catch (error: any) {
-            throw new Error(error.message)
+            console.log("Erro ao tentar inserir um cliente: ", error)
+            throw new AppError(500, "Erro", "Erro inesperado no servidor!")
         }
     }
 }

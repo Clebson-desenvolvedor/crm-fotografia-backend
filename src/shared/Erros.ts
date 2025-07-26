@@ -5,6 +5,6 @@ export default class AppError extends Error {
     constructor(statusCode: number, title: string, message: string) {
         super(message);
         this.statusCode = statusCode;
-        this.title = title
+        this.title = title;
     }
 }

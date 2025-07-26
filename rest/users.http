@@ -1,0 +1,14 @@
+### JWT login 
+
+# @name jwt_login
+POST http://localhost:3001/api/usuarios/login
+Content-Type: application/json
+
+{
+	"email": "administrador@byemotion.com.br",
+	"senha": "384240@Jesus"
+}
+
+###
+
+@token = {{ jwt_login.response.body.token }}
