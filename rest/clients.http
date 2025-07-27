@@ -13,3 +13,7 @@ Content-Type: application/json
     "origem": "facebook",
     "whatsapp": "11934875087"
 }
+
+### Listar Clientes
+Get {{ baseUrl }}/api/clientes
+Content-Type: application/json

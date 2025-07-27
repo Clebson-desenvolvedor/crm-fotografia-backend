@@ -42,4 +42,14 @@ export default class RepositorioClienteMS implements IRepositorioCliente {
             throw new AppError(500, "Erro", "Erro inesperado no servidor!")
         }
     }
+
+    async listar(): Promise<ICliente[] | null> {
+        try {
+            const [rows] = await pool.query("SELECT * FROM tb_clientes");
+            return rows as ICliente[];
+        } catch (error) {
+            console.log("Erro ao tentar listar os clientes: ", error);
+            throw new AppError(500, "Erro", "Erro inesperado no servidor!");
+        }
+    }
 }
